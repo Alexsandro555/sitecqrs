@@ -36,7 +36,7 @@
         <v-content>
             <v-container fluid fill-height class="gery lighten-4">
                 <v-layout justify-center align-center>
-
+                    <table-products></table-products>
                 </v-layout>
             </v-container>
         </v-content>

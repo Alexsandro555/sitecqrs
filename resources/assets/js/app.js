@@ -20,6 +20,7 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('app', require('./components/app/Index.vue'));
+Vue.component('table-products', require('./components/table-products'));
 
 const app = new Vue({
     el: '#app',

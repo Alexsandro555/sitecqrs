@@ -1107,6 +1107,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vuetify___default.a);
 
 Vue.component('example-component', __webpack_require__(45));
 Vue.component('app', __webpack_require__(48));
+Vue.component('table-products', __webpack_require__(53));
 
 var app = new Vue({
     el: '#app',
@@ -61781,9 +61782,12 @@ var render = function() {
               attrs: { fluid: "", "fill-height": "" }
             },
             [
-              _c("v-layout", {
-                attrs: { "justify-center": "", "align-center": "" }
-              })
+              _c(
+                "v-layout",
+                { attrs: { "justify-center": "", "align-center": "" } },
+                [_c("table-products")],
+                1
+              )
             ],
             1
           )
@@ -61809,6 +61813,228 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 52 */,
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(54)
+/* template */
+var __vue_template__ = __webpack_require__(55)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/table-products/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-26ae8bdd", Component.options)
+  } else {
+    hotAPI.reload("data-v-26ae8bdd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {},
+    data: function data() {
+        return {
+            headers: [{
+                text: 'Dessert (100g serving)',
+                align: 'left',
+                sortable: false,
+                value: 'name'
+            }, { text: 'Calories', value: 'calories' }, { text: 'Fat (g)', value: 'fat' }, { text: 'Carbs (g)', value: 'carbs' }, { text: 'Protein (g)', value: 'protein' }, { text: 'Iron (%)', value: 'iron' }],
+            items: [{
+                value: false,
+                name: 'Frozen Yogurt',
+                calories: 159,
+                fat: 6.0,
+                carbs: 24,
+                protein: 4.0,
+                iron: '1%'
+            }, {
+                value: false,
+                name: 'Ice cream sandwich',
+                calories: 237,
+                fat: 9.0,
+                carbs: 37,
+                protein: 4.3,
+                iron: '1%'
+            }, {
+                value: false,
+                name: 'Eclair',
+                calories: 262,
+                fat: 16.0,
+                carbs: 23,
+                protein: 6.0,
+                iron: '7%'
+            }, {
+                value: false,
+                name: 'Cupcake',
+                calories: 305,
+                fat: 3.7,
+                carbs: 67,
+                protein: 4.3,
+                iron: '8%'
+            }, {
+                value: false,
+                name: 'Gingerbread',
+                calories: 356,
+                fat: 16.0,
+                carbs: 49,
+                protein: 3.9,
+                iron: '16%'
+            }, {
+                value: false,
+                name: 'Jelly bean',
+                calories: 375,
+                fat: 0.0,
+                carbs: 94,
+                protein: 0.0,
+                iron: '0%'
+            }, {
+                value: false,
+                name: 'Lollipop',
+                calories: 392,
+                fat: 0.2,
+                carbs: 98,
+                protein: 0,
+                iron: '2%'
+            }, {
+                value: false,
+                name: 'Honeycomb',
+                calories: 408,
+                fat: 3.2,
+                carbs: 87,
+                protein: 6.5,
+                iron: '45%'
+            }, {
+                value: false,
+                name: 'Donut',
+                calories: 452,
+                fat: 25.0,
+                carbs: 51,
+                protein: 4.9,
+                iron: '22%'
+            }, {
+                value: false,
+                name: 'KitKat',
+                calories: 518,
+                fat: 26.0,
+                carbs: 65,
+                protein: 7,
+                iron: '6%'
+            }]
+        };
+    },
+    mounted: function mounted() {},
+    methods: {}
+});
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-data-table", {
+    staticClass: "elevation-1",
+    attrs: { headers: _vm.headers, items: _vm.items, "hide-actions": "" },
+    scopedSlots: _vm._u([
+      {
+        key: "items",
+        fn: function(props) {
+          return [
+            _c("td", [_vm._v(_vm._s(props.item.name))]),
+            _vm._v(" "),
+            _c("td", { staticClass: "text-xs-right" }, [
+              _vm._v(_vm._s(props.item.calories))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "text-xs-right" }, [
+              _vm._v(_vm._s(props.item.fat))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "text-xs-right" }, [
+              _vm._v(_vm._s(props.item.carbs))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "text-xs-right" }, [
+              _vm._v(_vm._s(props.item.protein))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "text-xs-right" }, [
+              _vm._v(_vm._s(props.item.iron))
+            ])
+          ]
+        }
+      }
+    ])
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-26ae8bdd", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
