@@ -1,0 +1,5 @@
+@import 'variables';
+body {
+  background: url('#{$path}/body-layer.png') top center no-repeat;
+}
+@import 'header';

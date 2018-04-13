@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="/css/app.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="app">
         @yield('content')
     </div>
-    <script> window.Laravel = {{json_encode(['csrfToken' => csrf_token()])}} </script>
     <script src="/js/app.js" type="application/javascript"></script>
 @yield('view.scripts')
 </body>

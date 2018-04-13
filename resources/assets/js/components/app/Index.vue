@@ -1,6 +1,6 @@
 <template>
     <v-app id="inspire">
-        <v-navigation-drawer clipped class="gray lighten-4" app v-model="drawer">
+        <v-navigation-drawer clipped class="gray lighten-4" app v-model="drawer" >
             <v-list dense class="gray lighten-4">
                 <template v-for="(item, i) in items">
                     <v-layout row v-if="item.heading" align-center :key="i">
@@ -14,7 +14,7 @@
                         </v-flex>
                     </v-layout>
                     <v-divider dark v-else-if="item.divider" class="my-3" :key="i"></v-divider>
-                    <v-list-tile v-else :key="i" @click="">
+                    <v-list-tile v-else :key="i" @click="select(item.path)" >
                         <v-list-tile-action>
                             <v-icon>{{ item.icon }}</v-icon>
                         </v-list-tile-action>
@@ -36,7 +36,7 @@
         <v-content>
             <v-container fluid fill-height class="gery lighten-4">
                 <v-layout justify-center align-center>
-                    <table-products></table-products>
+                    <router-view></router-view>
                 </v-layout>
             </v-container>
         </v-content>
@@ -53,7 +53,26 @@
                     { icon: 'touch_app', text: 'Reminders' },
                     { divider: true },
                     { heading: 'Labels' },
-                    { icon: 'add', text: 'Create new label' },
+                    {
+                        text: 'Типы продуктов',
+                        path: '/list-type-products'
+                    },
+                    {
+                        text: 'Производители',
+                        path: '/list-producers'
+                    },
+                    {
+                        text: 'Линейки продукции',
+                        path: '/list-line-products'
+                    },
+                    {
+                        text: 'Аттрибуты',
+                        path: '/list-attributes'
+                    },
+                    {
+                        text: 'Привязка атрибутов',
+                        path: '/bind-attributes'
+                    },
                     { divider: true },
                     { icon: 'archive', text: 'Archive' },
                     { icon: 'delete', text: 'Trash' },
@@ -66,9 +85,10 @@
                 ]
             }
         },
-        mounted: function() {
-        },
         methods: {
+            select(path) {
+                this.$router.push(path);
+            }
         }
-     }
+    }
 </script>

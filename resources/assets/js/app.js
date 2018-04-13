@@ -18,12 +18,46 @@ import Vuetify from 'vuetify';
 Vue.use(Vuetify);
 import 'vuetify/dist/vuetify.min.css'
 
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('app', require('./components/app/Index.vue'));
-Vue.component('table-products', require('./components/table-products'));
+//Vue.component('tableProducts', require('./components/table-products'));
+
+import tableProducts from './components/product/table-products';
+import updateProduct from './components/product/create';
+import createTypeProduct from './components/product/type-product/create';
+import createProducer from './components/product/producer/create';
+import createLineProduct from './components/product/line-product/create';
+import listLineProducts from './components/product/line-product/list';
+import listTypeProducts from './components/product/type-product/list';
+import listProducers from './components/product/producer/list';
+import listAttributes from './components/product/attribute/list';
+import bindAttributes from './components/product/attribute/binding';
+
+const routes = [
+    {path: '/', name: 'table-products', component: tableProducts},
+    {path: '/update-product/:id', name: 'update-product', component: updateProduct},
+    {path: '/create-type-product', name: 'create-type-product', component: createTypeProduct},
+    {path: '/create-producer', name: 'create-producer', component: createProducer},
+    {path: '/create-line-product', name: 'create-line-product', component: createLineProduct},
+    {path: '/list-line-products', name: 'list-line-products', component: listLineProducts},
+    {path: '/list-type-products', name: 'list-type-products', component: listTypeProducts},
+    {path: '/list-producers', name: 'list-producers', component: listProducers},
+    {path: '/list-attributes', name: 'list-attributes', component: listAttributes},
+    {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes}
+];
+//import routes from './routes';
+
+const router = new VueRouter({
+    routes,
+    base: "/admin/"
+})
 
 const app = new Vue({
     el: '#app',
+    router,
     data: {
         items: [
             {
