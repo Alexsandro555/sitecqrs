@@ -42,7 +42,7 @@ class LineProductController extends Controller
      */
     public function store(lineProductRequest $lineProductRequest)
     {
-      $request = $lineProductRequest->except('_token');
+      $request = $lineProductRequest->except('_token','id');
       return ['message' => 'Успешно сохранено!', 'model' => ProducerTypeProduct::create($request)];
     }
 

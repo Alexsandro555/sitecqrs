@@ -15,7 +15,7 @@
                     <v-btn icon class="mx-0" @click="$router.push('/update-product/'+props.item.id)">
                         <v-icon color="teal">edit</v-icon>
                     </v-btn>
-                    <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                    <v-btn :disabled="props.item.url_key === 'po-umolchaniyu'" icon class="mx-0" @click="deleteItem(props.item)">
                         <v-icon color="pink">delete</v-icon>
                     </v-btn>
                 </td>
@@ -43,7 +43,7 @@
                     {
                         text: '#',
                         align: 'left',
-                        sortable: false,
+                        sortable: true,
                         value: 'id'
                     },
                     { text: 'Название', value: 'title' },

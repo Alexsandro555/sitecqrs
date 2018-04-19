@@ -1,0 +1,29 @@
+.main-slogan {
+  position: absolute;
+  width: 400px;
+  height: 151px;
+  margin-top: 50px;
+  margin-left: 70px;
+  color: white;
+  background: url('#{$path}/slogan-ln.png') left center no-repeat;
+  padding-left: 10px;
+}
+
+.main-slogan__one {
+  font-family: $font-os-condenced-bold;
+  font-size: 2.8em;
+  text-transform: uppercase;
+  text-align: left;
+  //text-shadow: 1px 1px 2px black, 0 0 1em black;
+}
+
+.sub-slogan {
+  font-size: 0.8em;
+}
+
+.main-slogan__from {
+  font-size: 0.8em;
+  width: 300px;
+  padding: 3px 8px;
+  background: #2A6319;
+}

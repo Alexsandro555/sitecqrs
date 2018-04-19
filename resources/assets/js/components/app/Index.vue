@@ -10,7 +10,7 @@
                             </v-subheader>
                         </v-flex>
                         <v-flex xs6 class="text-xs-right">
-                            <v-btn small flat>edit</v-btn>
+                            <!--<v-btn small flat>edit</v-btn>-->
                         </v-flex>
                     </v-layout>
                     <v-divider dark v-else-if="item.divider" class="my-3" :key="i"></v-divider>
@@ -29,7 +29,7 @@
         </v-navigation-drawer>
         <v-toolbar dark color="#1A237E" app absolute clipped-left>
             <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-            <span class="title ml-3 mr-5">Wam</span>
+            <span class="title ml-3 mr-5" @click="goMainPage()">Лидер</span>
             <v-text-field solo-inverted flat label="Поиск" prepend-icon="search"></v-text-field>
             <v-spacer></v-spacer>
         </v-toolbar>
@@ -49,10 +49,8 @@
             return {
                 drawer: null,
                 items: [
-                    { icon: 'lightbulb_outline', text: 'Notes' },
-                    { icon: 'touch_app', text: 'Reminders' },
                     { divider: true },
-                    { heading: 'Labels' },
+                    { heading: 'Действия' },
                     {
                         text: 'Типы продуктов',
                         path: '/list-type-products'
@@ -74,20 +72,15 @@
                         path: '/bind-attributes'
                     },
                     { divider: true },
-                    { icon: 'archive', text: 'Archive' },
-                    { icon: 'delete', text: 'Trash' },
-                    { divider: true },
-                    { icon: 'settings', text: 'Settings' },
-                    { icon: 'chat_bubble', text: 'Trash' },
-                    { icon: 'help', text: 'Help' },
-                    { icon: 'phonelink', text: 'App downloads' },
-                    { icon: 'keyboard', text: 'Keyboard shortcuts' }
                 ]
             }
         },
         methods: {
             select(path) {
                 this.$router.push(path);
+            },
+            goMainPage() {
+                this.$router.push({name: 'table-products'})
             }
         }
     }

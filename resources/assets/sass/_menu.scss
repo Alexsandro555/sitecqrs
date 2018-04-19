@@ -1,0 +1,36 @@
+.menu ul {
+  margin: 0;
+  height: inherit;
+  vertical-align: middle;
+}
+
+.menu ul li {
+  width: 300px;
+  font-family: $font-os-semibold;
+  font-size: 0.9em;
+  display: inline;
+  padding: 20px 20px;
+  color: white;
+  height: inherit;
+  vertical-align: middle;
+  line-height: 57px;
+  text-transform: uppercase;
+  background: url('#{$path}/menu-devider.png') left center no-repeat;
+}
+
+.menu ul li.menu__first {
+  background: none;
+}
+
+.menu ul li:hover{
+  //background: url('#{$path}/hr-line.png') bottom 4px center repeat-x, url('#{$path}/menu-nav-active.png') center center repeat-x;
+  height: inherit;
+}
+
+.menu ul li a {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+

@@ -1,4 +1,313 @@
-body {
-  background: url("/images/body-layer.png") top center no-repeat;
+@font-face {
+  font-family: 'OpenSans-Semibold';
+  src: url("/fonts/OpenSans-Semibold/OpenSans-Semibold.eot");
+  src: local("OpenSans-Semibold"), url("/fonts/OpenSans-Semiboldy/OpenSans-Semibold.woff") format("woff"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.ttf") format("truetype"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans-Lisght';
+  src: url("/fonts/OpenSans-Lisght/OpenSans-Lisght.eot");
+  src: local("OpenSans-Lisght"), url("/fonts/OpenSans-Lisght/OpenSans-Lisght.woff") format("woff"), url("/fonts/OpenSans-Lisght/OpenSans-Lisght.ttf") format("truetype"), url("/fonts/OpenSans-Lisght/OpenSans-Lisght.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans-CondensedBold';
+  src: url("/fonts/OpenSans-CondensedBold/OpenSans-CondensedBold.eot");
+  src: local("OpenSans-CondensedBold"), url("/fonts/OpenSans-CondensedBold/OpenSans-CondensedBold.woff") format("woff"), url("/fonts/OpenSans-CondensedBold/OpenSans-CondensedBold.ttf") format("truetype"), url("/fonts/OpenSans-CondensedBold/OpenSans-CondensedBold.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.logo {
+  height: 198px;
+  width: 178px;
+  float: right;
+}
+
+.header {
+  height: 707px;
+  background: url("/images/header-shadow-top.png") top center repeat-x, url("/images/header-layer.png") top center no-repeat;
+}
+
+.header__layout {
+  height: 57px;
+  background: rgba(62, 115, 32, 0.8);
+  width: 100%;
+}
+
+.header__main {
+  margin: auto;
+  position: relative;
+  width: 1400px;
+}
+
+.header-center {
+  display: inline-block;
+  vertical-align: middle;
+  vertical-align: top;
+  height: 57px;
+}
+
+.header-right {
+  float: right;
+}
+
+.menu ul {
+  margin: 0;
+  height: inherit;
+  vertical-align: middle;
+}
+
+.menu ul li {
+  width: 300px;
+  font-family: "OpenSans-Semibold", sans-serif;
+  font-size: 0.9em;
+  display: inline;
+  padding: 20px 20px;
+  color: white;
+  height: inherit;
+  vertical-align: middle;
+  line-height: 57px;
+  text-transform: uppercase;
+  background: url("/images/menu-devider.png") left center no-repeat;
+}
+
+.menu ul li.menu__first {
+  background: none;
+}
+
+.menu ul li:hover {
+  height: inherit;
+}
+
+.menu ul li a {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.cart {
+  width: 156px;
+  height: 57px;
+  background: #306b1c;
+}
+
+.cart table {
+  font-family: "OpenSans-Lisght", sans-serif;
+  padding-top: 5px;
+  color: white;
+  font-size: 0.8em;
+}
+
+.cart__col-yell {
+  color: #F3C042;
+}
+
+.find {
+  width: 50px;
+  height: 57px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 57px;
+  text-align: center;
+  margin-right: 55px;
+}
+
+.main-slogan {
+  position: absolute;
+  width: 400px;
+  height: 151px;
+  margin-top: 50px;
+  margin-left: 70px;
+  color: white;
+  background: url("/images/slogan-ln.png") left center no-repeat;
+  padding-left: 10px;
+}
+
+.main-slogan__one {
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  font-size: 2.8em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.sub-slogan {
+  font-size: 0.8em;
+}
+
+.main-slogan__from {
+  font-size: 0.8em;
+  width: 300px;
+  padding: 3px 8px;
+  background: #2A6319;
+}
+
+.phone {
+  position: absolute;
+  width: 400px;
+  height: 151px;
+  margin-top: 20px;
+  margin-left: 800px;
+  color: white;
+  padding-left: 10px;
+  text-align: right;
+}
+
+.phone__sun {
+  font-size: 0.8em;
+  width: 300px;
+  padding: 3px 8px;
+  background: #3e7320;
+}
+
+.phone__number {
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  font-size: 2em;
+  text-transform: uppercase;
+}
+
+.phone__callback {
+  font-size: 0.9em;
+  margin-top: 20px;
+  display: inline-block;
+  background: none;
+  border: 2px solid #F6D349;
+  -mox-border-radius: 6px;
+  border-radius: 6px;
+  padding: 7px;
+  font-weight: bold;
+  color: #F6D349;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  background: url("/images/phone-img.png") left 4px center no-repeat;
+  padding-left: 30px;
+}
+
+.animal-panel {
+  position: absolute;
+  width: 1200px;
+  height: 151px;
+  margin-top: 450px;
+  margin-left: 230px;
+  color: black;
+  padding-left: 10px;
+}
+
+.animal-panel img {
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.menu-left-wrapper {
+  position: absolute;
+  margin-left: 45px;
+  width: 280px;
+  z-index: 1000;
+  overflow: visible;
+  background: url("/images/menu-left-wrapper.png") repeat right top;
+  -mox-border-radius: 10px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.menu-left {
+  /*margin: 5px;
+
+  border-width: 1px;
+  border-color: black;
+  border-style: dashed;
+  @include border-radius(10px);*/
+}
+
+.menu-left__header {
+  font-size: 1.4em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 58px;
+  text-transform: uppercase;
+  color: #ffff;
+  height: 58px;
+  background: url("/images/menu-left-header.png") no-repeat center center, #F6D349;
+  vertical-align: middle;
+}
+
+.menu-left ul {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.menu-left-item {
+  background: url("/images/menu-left-item-lay.png") repeat-x center center;
+  font-size: 1em;
+  line-height: 1.5;
+  padding: 10px;
+  padding-left: 25px;
+  margin: 0;
+  display: block;
+}
+
+.menu-left-item img {
+  float: right;
+}
+
+.menu-left-item a {
+  text-decoration: none;
+  color: #ffff;
+  font-size: 1.2em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  text-transform: uppercase;
+}
+
+.menu-left span ul li {
+  list-style: none;
+  padding-left: 20px;
+  padding: 5px;
+}
+
+.menu-left span ul li a {
+  text-decoration: none;
+  color: #346e1d;
+  font-family: "OpenSans-Lisght", sans-serif;
+  padding-left: 5px;
+}
+
+.menu-left__main-menu {
+  position: relative;
+}
+
+.menu-left__main-menu .menu-left__sub-menu {
+  position: absolute;
+  left: 280px;
+  z-index: 10;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fcf8e3;
+}
+
+.content-wrapper {
+  min-height: 1000px;
+  width: 100%;
+  background: url("/images/tree-layer.png") top center no-repeat;
+  overflow: hidden;
+  padding-bottom: 20px;
+  height: 1000px;
+}
+
+.content {
+  margin: auto;
+  padding-top: 70px;
+  font-size: 0.9em;
+  width: 1400px;
 }
 

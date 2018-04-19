@@ -2,6 +2,7 @@
 
 namespace Modules\Catalog\Http\Controllers;
 
+use Modules\Catalog\Entities\ProducerTypeProduct;
 use Modules\Catalog\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -86,5 +87,48 @@ class CatalogController extends Controller
       return ['message' => 'Успешно удалено!'];
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
+    public function attributes($id) {
+      $product = Product::find($id);
+      if($product->producer_type_product_id) {
+        return ProducerTypeProduct::find($product->producer_type_product_id)->attributes;
+      }
+      else {
+        if($product->type_product_id){
+          return TypeProduct::find($product->type_product_id)->attributes;
+        }
+        else {
+          return [];
+        }
+      }
+    }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function attributeValues($id) {
+      return Product::find($id)->attributes;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function saveAttributes(Request $request) {
+      $items = $request->data;
+      $productId = $request->productId;
+      $arr = [];
+      $attributes = json_decode($items, true);
+      foreach ($attributes as $attribute) {
+        $val['value'] = $attribute["value"];
+        $arr[$attribute["attribute_id"]] = $val;
+      }
+      $product = Product::find($productId);
+      $product->attributes()->sync($arr);
+      return ['message' => 'Успешно сохранено!'];
+    }
 }

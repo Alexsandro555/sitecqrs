@@ -1,0 +1,15 @@
+.content-wrapper {
+  min-height: 1000px;
+  width: 100%;
+  background: url('#{$path}/tree-layer.png') top center no-repeat;
+  overflow: hidden;
+  padding-bottom: 20px;
+  height: 1000px;
+}
+
+.content {
+  margin: auto;
+  padding-top: 70px;
+  font-size: 0.9em;
+  width: $main-width;
+}

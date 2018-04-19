@@ -14,9 +14,9 @@
                     <v-btn icon class="mx-0" @click="editItem(props.item)">
                         <v-icon color="teal">edit</v-icon>
                     </v-btn>
-                    <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                    <!--<v-btn icon class="mx-0" @click="deleteItem(props.item)">
                         <v-icon color="pink">delete</v-icon>
-                    </v-btn>
+                    </v-btn>-->
                 </td>
             </template>
             <template slot="no-data">
@@ -27,7 +27,7 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn color="primary" dark slot="activator" @click="$router.push(path)" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-btn color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline">{{ formTitle }}</span>

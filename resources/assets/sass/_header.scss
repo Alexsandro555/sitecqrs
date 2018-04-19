@@ -1,0 +1,27 @@
+.header {
+  height: 707px;
+  background: url('#{$path}/header-shadow-top.png') top center repeat-x, url('#{$path}/header-layer.png') top center no-repeat;
+}
+
+.header__layout {
+  height: 57px;
+  background:  rgba(62,115,32,0.8);
+  width: 100%;
+}
+
+.header__main {
+  margin: auto;
+  position: relative;
+  width: $main-width;
+}
+
+.header-center {
+  display: inline-block;
+  vertical-align: middle;
+  vertical-align: top;
+  height: 57px;
+}
+
+.header-right {
+  float: right;
+}

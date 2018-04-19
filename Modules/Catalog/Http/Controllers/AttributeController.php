@@ -36,7 +36,7 @@ class AttributeController extends Controller
    */
     public function store(AttributeRequest $attributeRequest)
     {
-      $request = $attributeRequest->except('_token');
+      $request = $attributeRequest->except('_token','id');
       return ['message' => 'Успешно сохранено!', 'model' => Attribute::create($request)];
     }
 

@@ -35,7 +35,7 @@ class ProducerController extends Controller
      */
     public function store(ProducerRequest $producerRequest)
     {
-      $request = $producerRequest->except('_token');
+      $request = $producerRequest->except('_token','id');
       return ['message' => 'Успешно сохранено!', 'model' => Producer::create($request)];
     }
 

@@ -37,7 +37,7 @@ class TypeProductController extends Controller
      */
     public function store(TypeProductRequest $typeProductRequest)
     {
-      $request = $typeProductRequest->except('_token');
+      $request = $typeProductRequest->except('_token','id');
       return ['message' => 'Успешно сохранено!', 'model' => TypeProduct::create($request)];
     }
 

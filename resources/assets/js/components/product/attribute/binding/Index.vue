@@ -244,20 +244,25 @@
             onSave() {
                 axios.post('/catalog/attribute/save', {attr: this.attrResp, typeProductId: this.typeProductId, lineProductId: this.lineProductId}).then(response => {
                     this.attrResp = [];
+                    location.reload();
                 }).catch(error => {
                     console.log(error);
                 });
             },
             onRemoveTypeProductAttribute() {
                 axios.post("/catalog/attribute/remAttrTypeProd", {attr: this.selectedAttrTypeProduct}).then(function (response)
-                {}).catch(function (error)
+                {
+                    location.reload();
+                }).catch(function (error)
                 {
                     console.log(error);
                 });
             },
             onRemoveLineProductAttribute() {
-                this.axios.post("/catalog/attribute/remAttrLineProd", {attr: this.selectedAttrLineProduct}).then(function (response)
-                {}).catch(function (error)
+                axios.post("/catalog/attribute/remAttrLineProd", {attr: this.selAttrLineProduct}).then(function (response)
+                {
+                    location.reload();
+                }).catch(function (error)
                 {
                     console.log(error);
                 });
