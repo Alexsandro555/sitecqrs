@@ -8,7 +8,8 @@ use Modules\Files\Entities\UploadInfo;
 
 class FilesServiceProvider extends ServiceProvider
 {
-    /**
+
+  /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
@@ -39,6 +40,7 @@ class FilesServiceProvider extends ServiceProvider
         $this->app->singleton(UploadInfo::class, function() {
           return new UploadInfo();
         });
+        $this->app->bind('Modules\Files\Contracts\Uploader', 'Modules\Files\Entities\FileUploader');
     }
 
     /**

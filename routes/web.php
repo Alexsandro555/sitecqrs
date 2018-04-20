@@ -13,4 +13,4 @@
 
 Route::get('/', ['uses' => 'main\MainController@index', 'as' => 'main']);
 Route::get('/admin/', ['uses' => 'Admin\AdminController@index', 'as' => 'admin']);
-
+Route::get('/demo', 'main\MainController@mas');

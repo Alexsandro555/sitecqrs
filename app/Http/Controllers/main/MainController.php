@@ -10,4 +10,8 @@ class MainController extends Controller
   public function index() {
     return view('main.index');
   }
+
+  public function mas() {
+    return view('welcome');
+  }
 }

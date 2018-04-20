@@ -6,7 +6,7 @@
  * Time: 11:20
  */
 
-namespace Leader\UploadFile\Models;
+namespace Modules\Files\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

@@ -5,12 +5,13 @@ namespace Modules\Files\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Leader\UploadFile\Models\UploadInfo;
+use Modules\Files\Entities\UploadInfo;
 use Modules\Files\Services\UploadService;
+use Modules\Files\Entities\File;
 
 class FilesController extends Controller
 {
-    /**
+  /**
      * Display a listing of the resource.
      * @return Response
      */
@@ -29,16 +30,29 @@ class FilesController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param UploadInfo $info
+     * @param UploadService $uploadService
      * @return array
+     * @throws \Exception
      */
-    public function store(Request $request, UploadInfo $info, UploadService $uploadService)
+    public function store(UploadService $uploadService)
     {
-      $info->id = $request->elementId;
-      $info->typefile = $request->typefile;
-      $uploadService->upload();
-      return [];
+      if($uploadService->upload()) {
+        return ['message' => 'Успешно загружено!'];
+      }
+      else {
+        throw new \Exception('Загрузка не удалась');
+      }
+    }
+
+    /**
+     *  Get Files
+     * @param int $id
+     * @return \Illuminate\Http\Response:json
+     */
+    public function getFiles($id)
+    {
+      $files = File::where('fileable_id',$id)->where('fileable_type','Modules\Catalog\Entities\Product')->get();
+      return response()->json($files,200);
     }
 
     /**

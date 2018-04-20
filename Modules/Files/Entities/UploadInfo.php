@@ -6,7 +6,7 @@
  * Time: 10:07
  */
 
-namespace Leader\UploadFile\Models;
+namespace Modules\Files\Entities;
 
 class UploadInfo {
   /*
@@ -31,5 +31,6 @@ class UploadInfo {
   public $validator;
   public $types;
   public $currentFileId;
+  public $model;
 
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Leader\UploadFile\Models;
+namespace Modules\Files\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;

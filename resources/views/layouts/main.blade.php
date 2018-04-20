@@ -40,7 +40,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                         <div class="header-right">
@@ -74,6 +73,7 @@
             <div class="content-wrapper">
                 <div class="content">
                     <div class="menu-left-wrapper">
+                        <img class="menu-left__hr-img" src="{{asset('images/menu-left-hr.png')}}"/>
                         <div class="menu-left">
                             <div class="menu-left__header">КАТАЛОГ ПРОДУКЦИИ</div>
                             <span class="menu-left__main-menu">
@@ -92,16 +92,56 @@
                                     <li><a href="#"><img src="{{asset('images/menu-left-item-sub-arr.png')}}"/>&nbsp;&nbsp;Поение</a></li>
                                     <li><a href="#"><img src="{{asset('images/menu-left-item-sub-arr.png')}}"/>&nbsp;&nbsp;Сбор</a></li>
                                 </ul>
-                                <ul class="menu-left__sub-menu">
-                                    <li>Проектирование</li>
-                                    <li>Разработка</li>
-                                </ul>
+
                             </span>
                             <span class="menu-left__main-menu">
                                 <span class="menu-left-item">
                                     <a href="#">Скотоводство</a>
                                     <img src="{{asset('images/menu-left-item-arrow.png')}}"/>
                                 </span>
+                                <div class="sub-menu">
+                                    <div class="sub-menu__block">
+                                        <ul>
+                                             <li>
+                                                 <span><a href="#">Кормление</a></span>
+                                                <ul class="sub-menu__items">
+                                                    <li><a href="#">Проектирование</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span><a href="#">Обогрев</a></span>
+                                                <ul class="sub-menu__items">
+                                                    <li><a href="#">Проектирование</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="sub-menu__block">
+                                        <ul>
+                                             <li>
+                                                 <span><a href="#">Кормление</a></span>
+                                                <ul class="sub-menu__items">
+                                                    <li><a href="#">Проектирование</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span><a href="#">Обогрев</a></span>
+                                                <ul class="sub-menu__items">
+                                                    <li><a href="#">Проектирование</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                    <li><a href="#">Разработка</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </span>
                             <span class="menu-left__main-menu">
                                 <span class="menu-left-item">

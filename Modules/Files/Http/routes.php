@@ -8,4 +8,5 @@ Route::group(['middleware' => 'web', 'prefix' => 'files', 'namespace' => 'Module
         'before' => 'csrf',
         'uses' => 'FilesController@store'
       ]);
+    Route::get('/get/{id}', 'FilesController@getFiles');
 });

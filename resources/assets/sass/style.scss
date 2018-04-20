@@ -13,14 +13,9 @@ body {
 @import 'menu';
 @import 'cart';
 
+
 .find {
-  width: 50px;
-  height: 57px;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 57px;
-  text-align:center;
-  margin-right: 55px;
+  padding-top: 19px;
 }
 
 @import 'slogan';
@@ -31,8 +26,8 @@ body {
   position: absolute;
   width: 1200px;
   height: 151px;
-  margin-top: 450px;
-  margin-left: 230px;
+  margin-top: 313px;
+  margin-left: 70px;
   color: black;
   padding-left: 10px;
 }

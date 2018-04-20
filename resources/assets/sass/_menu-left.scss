@@ -1,23 +1,28 @@
 .menu-left-wrapper {
   position: absolute;
-  margin-left: 45px;
-  width: 280px;
+  margin-left: 0px;
+  width: 250px;
   z-index: 1000;
   //margin-top: -12px;
   overflow: visible;
   //background: url('#{$path}/header-layer.png') top center no-repeat;
+
+}
+
+.menu-left {
+  margin: -5px;
+
+  /*border-width: 1px;
+  border-color: black;
+  border-style: dashed;
+  @include border-radius(10px);*/
   background: url('#{$path}/menu-left-wrapper.png') repeat right top;
   @include border-radius(10px);
   padding-bottom: 10px;
 }
 
-.menu-left {
-  /*margin: 5px;
-
-  border-width: 1px;
-  border-color: black;
-  border-style: dashed;
-  @include border-radius(10px);*/
+.menu-left__hr-img {
+  margin-left: -7px;
 }
 
 .menu-left__header {
@@ -81,13 +86,42 @@
   position: relative;
 }
 
-.menu-left__main-menu .menu-left__sub-menu {
+.menu-left__main-menu .sub-menu {
   position: absolute;
   left: 280px;
   z-index: 10;
-  width: 250px;
+  width: 450px;
   margin: 0;
   padding: 0;
   list-style: none;
-  background: #fcf8e3;
+  //background: #fcf8e3;
+  background: url('#{$path}/menu-left-wrapper.png') repeat right top;
+  @include border-radius(0px 0px 10px 10px);
+  border: 3px solid $color-green-light;
+}
+
+.sub-menu__block {
+  float: left;
+  margin-right: 40px;
+}
+
+.sub-menu__block  {
+  text-decoration: underline;
+  font-size: 0.8em;
+}
+
+.sub-menu__block ul li span {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.sub-menu__block ul li span a{
+  color: $color-green-light;
+  text-decoration: underline;
+  font-size: 1.1em;
+  //font-family: $font-size-base;
+}
+
+.sub-menu__items li {
+  line-height: 0.5;
 }

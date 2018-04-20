@@ -10,18 +10,6 @@
 }
 
 .header__main {
-  margin: auto;
-  position: relative;
   width: $main-width;
-}
-
-.header-center {
-  display: inline-block;
-  vertical-align: middle;
-  vertical-align: top;
-  height: 57px;
-}
-
-.header-right {
-  float: right;
+  margin: auto;
 }

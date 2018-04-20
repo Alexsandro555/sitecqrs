@@ -106,7 +106,13 @@
                                                     single-line
                                             ></v-select>
                                             <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
+                                            <br>
+                                            <br>
+                                            <v-divider></v-divider>
+                                            <!--<uploader url="/files/upload" :element-id="Number(form.id)" :type-files="['image-product']"></uploader>-->
+                                            <mas url="/files/upload" :fileable-id="Number(form.id)" :type-files="['image-product']" model="Modules\Catalog\Entities\Product"></mas>
                                         </v-form>
+
                                     </div>
                                 </v-flex>
                             </v-layout>
@@ -122,6 +128,8 @@
 <script>
     import {Form} from '../../form/Form.js'
     import productAttributes from '../attribute';
+    import uploader from '../../files';
+    import mas from '../../files/mas.vue';
 
     export default {
         props: { },
@@ -176,7 +184,9 @@
             }
         },
         components: {
-            'product-attributes': productAttributes
+            'product-attributes': productAttributes,
+            'uploader': uploader,
+            mas
         },
         watch: {
           '$route' (to, from) {
