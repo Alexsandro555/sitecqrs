@@ -1,15 +1,15 @@
 @font-face {
   font-family: 'OpenSans-Semibold';
   src: url("/fonts/OpenSans-Semibold/OpenSans-Semibold.eot");
-  src: local("OpenSans-Semibold"), url("/fonts/OpenSans-Semiboldy/OpenSans-Semibold.woff") format("woff"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.ttf") format("truetype"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.svg") format("svg");
+  src: local("OpenSans-Semibold"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.woff") format("woff"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.ttf") format("truetype"), url("/fonts/OpenSans-Semibold/OpenSans-Semibold.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'OpenSans-Lisght';
-  src: url("/fonts/OpenSans-Lisght/OpenSans-Lisght.eot");
-  src: local("OpenSans-Lisght"), url("/fonts/OpenSans-Lisght/OpenSans-Lisght.woff") format("woff"), url("/fonts/OpenSans-Lisght/OpenSans-Lisght.ttf") format("truetype"), url("/fonts/OpenSans-Lisght/OpenSans-Lisght.svg") format("svg");
+  src: url("/fonts/OpenSans-Light/OpenSans-Light.eot");
+  src: local("OpenSans-Lisght"), url("/fonts/OpenSans-Light/OpenSans-Light.woff") format("woff"), url("/fonts/OpenSans-Light/OpenSans-Light.ttf") format("truetype"), url("/fonts/OpenSans-Light/OpenSans-Light.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -22,18 +22,26 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Open-Sans';
+  src: url("/fonts/OpenSans/OpenSans.eot");
+  src: local("Open-Sans"), url("/fonts/OpenSans/OpenSans.woff") format("woff"), url("/fonts/OpenSans/OpenSans.ttf") format("truetype"), url("/fonts/OpenSans/OpenSans.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .logo {
   height: 198px;
   width: 178px;
   float: right;
 }
 
-.header {
+.header-layout {
   height: 707px;
   background: url("/images/header-shadow-top.png") top center repeat-x, url("/images/header-layer.png") top center no-repeat;
 }
 
-.header__layout {
+.header__menu {
   height: 57px;
   background: rgba(62, 115, 32, 0.8);
   width: 100%;
@@ -102,21 +110,16 @@
 }
 
 .main-slogan {
-  position: absolute;
-  padding-left: 10px;
-  height: 151px;
-  margin-top: -80px;
-  margin-left: -560px;
+  height: 121px;
+  margin-top: -60px;
   color: white;
   background: url("/images/slogan-ln.png") left center repeat-y;
   line-height: 40px;
-}
-
-.main-slogan__one {
   font-family: "OpenSans-CondensedBold", sans-serif;
   font-size: 3.2em;
   text-transform: uppercase;
   text-align: left;
+  padding-left: 30px;
 }
 
 .sub-slogan {
@@ -124,21 +127,17 @@
 }
 
 .main-slogan__from {
-  font-size: 0.8em;
+  font-size: 0.2em;
   padding: 3px 8px;
   margin-left: 5px;
   background: #2A6319;
 }
 
 .phone {
-  position: absolute;
   width: 400px;
   height: 151px;
-  margin-top: -110px;
-  margin-left: 10px;
+  margin-top: -120px;
   color: white;
-  padding-left: 10px;
-  text-align: right;
 }
 
 .phone__sun {
@@ -172,6 +171,11 @@
   padding-left: 30px;
 }
 
+.footer__address {
+  color: #ffff;
+  font-size: 1.2em;
+}
+
 .animal-panel {
   position: absolute;
   width: 1200px;
@@ -187,10 +191,45 @@
   margin-left: 30px;
 }
 
+.menu-left-img {
+  position: absolute;
+  z-index: 1000;
+  margin-top: -41px;
+}
+
+.menu-left-wrappers {
+  position: absolute;
+  margin-left: 0px;
+  width: 262px;
+  z-index: 1000;
+  margin-top: -30px;
+  overflow: visible;
+  -mox-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+.theme--light .menu-left-wrappers .list {
+  background: url("/images/menu-left-wrapper.png") repeat right top;
+}
+
+.menu-left-wrappers .list__group__items--no-action .list__tile {
+  padding-left: 20px;
+}
+
+.menu-left-wrappers .list__group__items .list__tile:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.menu-left-item-el {
+  font-size: 0.9em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  color: #B16C3D;
+}
+
 .menu-left-wrapper {
   position: absolute;
   margin-left: 0px;
-  width: 250px;
+  width: 262px;
   z-index: 1000;
   overflow: visible;
 }
@@ -212,27 +251,22 @@
 }
 
 .menu-left__header {
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-family: "OpenSans-CondensedBold", sans-serif;
-  text-align: center;
-  font-weight: bold;
-  vertical-align: middle;
-  line-height: 58px;
   text-transform: uppercase;
   color: #ffff;
-  height: 58px;
   background: url("/images/menu-left-header.png") no-repeat center center, #F6D349;
-  vertical-align: middle;
+  text-transform: uppercase;
 }
 
-.menu-left ul {
+/*.menu-left ul {
   margin: 0;
   padding: 0;
   vertical-align: middle;
 }
 
 .menu-left-item {
-  background: url("/images/menu-left-item-lay.png") repeat-x center center;
+  background: url('/images/menu-left-item-lay.png') repeat-x center center;
   font-size: 1em;
   line-height: 1.5;
   padding: 10px;
@@ -245,11 +279,11 @@
   float: right;
 }
 
-.menu-left-item a {
+.menu-left-item a  {
   text-decoration: none;
-  color: #ffff;
+  color: $color-white;
   font-size: 1.2em;
-  font-family: "OpenSans-CondensedBold", sans-serif;
+  font-family: $font-os-condenced-bold;
   text-transform: uppercase;
 }
 
@@ -257,12 +291,13 @@
   list-style: none;
   padding-left: 20px;
   padding: 5px;
+  //display: none;
 }
 
 .menu-left span ul li a {
   text-decoration: none;
-  color: #346e1d;
-  font-family: "OpenSans-Lisght", sans-serif;
+  color: $color-green;
+  font-family: $font-os-light;
   padding-left: 5px;
 }
 
@@ -278,18 +313,19 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  background: url("/images/menu-left-wrapper.png") repeat right top;
-  -mox-border-radius: 0px 0px 10px 10px;
-  border-radius: 0px 0px 10px 10px;
-  border: 3px solid #B16C3D;
+  //background: #fcf8e3;
+  background: url('/images/menu-left-wrapper.png') repeat right top;
+  @include border-radius(0px 0px 10px 10px);
+  border: 3px solid $color-green-light;
 }
+
 
 .sub-menu__block {
   float: left;
   margin-right: 40px;
 }
 
-.sub-menu__block {
+.sub-menu__block  {
   text-decoration: underline;
   font-size: 0.8em;
 }
@@ -299,14 +335,91 @@
   margin-bottom: 10px;
 }
 
-.sub-menu__block ul li span a {
-  color: #B16C3D;
+.sub-menu__block ul li span a{
+  color: $color-green-light;
   text-decoration: underline;
   font-size: 1.1em;
+  //font-family: $font-size-base;
+}*/
+
+.menu-left-wrappers .list__group__header {
+  background: url("/images/menu-left-item-lay.png") repeat-x center center;
+  color: #ffff;
+  font-size: 1.2em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  text-transform: uppercase;
+  /*line-height: 1.5;
+  padding: 10px;
+  padding-left: 25px;
+  margin: 0;
+  display: block;*/
 }
 
-.sub-menu__items li {
-  line-height: 0.5;
+.theme--light .menu-left-wrappers .list .list__group__header:hover {
+  background: url("/images/menu-left-item-lay.png") repeat-x center center;
+}
+
+.list-menu-left {
+  padding-top: 0px;
+  -mox-border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.menu-left-h {
+  width: 262px;
+}
+
+.sub-menu {
+  background: url("/images/menu-left-wrapper.png") repeat right top;
+  padding: 10px;
+  border: 3px solid #B16C3D;
+  -mox-border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
+  max-height: 252px;
+}
+
+.sub-menu__head > li {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.sub-menu__head li {
+  list-style: none;
+}
+
+.sub-menu__head a {
+  margin-left: 10px;
+  margin-top: 5px;
+  color: #B16C3D;
+  text-decoration: underline;
+  font-family: "OpenSans-Semibold", sans-serif;
+}
+
+.sub-menu__item a {
+  font-size: 0.8em;
+  color: #56331d;
+}
+
+.application .theme--light.footer__menu.list,
+.theme--light .sub-menu .list {
+  background: none;
+}
+
+.sub-menu .list__tile {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 0.9em;
+  height: 22px;
+}
+
+.sub-menu .list__tile > a {
+  color: #56331d;
+}
+
+.sub-menu__header {
+  padding-left: 15px;
+  color: #346e1d;
 }
 
 .content-wrapper {
@@ -314,14 +427,223 @@
   width: 100%;
   background: url("/images/tree-layer.png") top center no-repeat;
   overflow: hidden;
-  padding-bottom: 20px;
-  height: 1000px;
 }
 
 .content {
   margin: auto;
-  padding-top: 70px;
   font-size: 0.9em;
   width: 1200px;
+}
+
+.content__header {
+  text-transform: uppercase;
+  font-size: 2em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  color: #ffff;
+  background: url("/images/banner-header.png") left center no-repeat;
+  height: 100px;
+  line-height: 100px;
+  padding-left: 30px;
+  margin-left: 50px;
+}
+
+.content__subheader {
+  color: #F6D349;
+}
+
+.content__buttom {
+  margin-top: 30px;
+  display: inline-block;
+  background: none;
+  border: 2px solid #F6D349;
+  padding: 7px;
+  font-size: 1.3em;
+  color: #F6D349;
+  text-transform: uppercase;
+  -mox-border-radius: 6px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  padding: 5px 20px;
+}
+
+.special-product {
+  width: 263px;
+  height: 390px;
+  -mox-border-radius: 0px 0px 6px 6px;
+  border-radius: 0px 0px 6px 6px;
+  display: inline-block;
+  background: url("/images/special-product__item-head-lay.png") top center no-repeat;
+  background-color: #ffff;
+  margin-right: 10px;
+  padding: 15px 0px 10px 0px;
+}
+
+.special-product > a {
+  color: #346e1d;
+  font-size: 1.1em;
+  font-family: "Open-Sans", sans-serif;
+  padding: 5px;
+}
+
+.special-product__img {
+  margin-top: 20px;
+  padding: 10px;
+  height: 180px;
+  line-height: 180px;
+}
+
+.special-product__img > img {
+  vertical-align: middle;
+}
+
+.special-product__desc {
+  font-size: 1.1em;
+  font-family: sans-serif, "Open-Sans", sans-serif;
+  border-bottom: 1px dashed #346e1d;
+  padding-bottom: 10px;
+}
+
+.special-product__price {
+  margin-top: 10px;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  font-size: 1.3em;
+}
+
+.special-product__price > span {
+  color: #72ab32;
+  font-size: 1.6em;
+}
+
+.special-product__cart {
+  margin-top: 5px;
+}
+
+.about-wrapper {
+  background: url("/images/about-layout.png") top center no-repeat;
+  min-height: 500px;
+}
+
+.delivery {
+  margin: auto;
+  width: 1200px;
+}
+
+.delivery-wrapper {
+  margin-top: 100px;
+  background: url("/images/light-tree.png") center center repeat;
+  padding-bottom: 30px;
+}
+
+.delivery__header {
+  text-transform: uppercase;
+  font-size: 2em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  color: #56331d;
+  background: url("/images/banner-header.png") left center no-repeat;
+  height: 100px;
+  line-height: 100px;
+  padding-left: 30px;
+  margin-left: 10px;
+}
+
+.delivery__subheader {
+  color: #55982d;
+}
+
+.delivery__buttom {
+  margin-right: 30px;
+  margin-top: 30px;
+  display: inline-block;
+  background: none;
+  border: 2px solid #55982d;
+  padding: 7px;
+  font-size: 1.3em;
+  color: #55982d;
+  text-transform: uppercase;
+  -mox-border-radius: 6px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  padding: 5px 20px;
+}
+
+.delivery__desc {
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.delivery__tel {
+  color: #55982d;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+}
+
+.deliverty_tabl {
+  font-size: 1.1em;
+}
+
+.application .theme--light.footer,
+.theme--light .footer {
+  background: url("/images/footer-top-lay.png") top left repeat-x, url("/images/footer.png") top left repeat-x, url("/images/footer-layout.png") bottom center repeat-x;
+}
+
+.footer-wrapper {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.footer-top-menu {
+  padding-top: 15px;
+  height: 57px;
+}
+
+.footer-top-menu > li {
+  font-size: 1.2em;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  text-transform: uppercase;
+  display: inline-block;
+  list-style-type: disc;
+  margin: 0px 20px 0px 20px;
+  color: #ffff;
+}
+
+.footer__sicial-icons {
+  padding-top: 15px;
+}
+
+.footer__chicken {
+  margin-top: -40px;
+}
+
+.footer__phone {
+  color: #ffff;
+  padding-top: 50px;
+}
+
+.footer__mail {
+  font-size: 1.2em;
+  font-family: "Open-Sans", sans-serif;
+  color: #F6D349;
+}
+
+.footer__address {
+  font-size: 1.1em;
+}
+
+.application .theme--light.footer__menu.list,
+.theme--light .footer__menu .list {
+  background: none;
+}
+
+.footer__menu .list__tile {
+  color: #ffff;
+  font-family: "Open-Sans", sans-serif;
+  font-size: 0.9em;
+  height: 42px;
+}
+
+.footer-menu-ava {
+  margin-right: 10px;
 }
 

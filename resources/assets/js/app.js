@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 import Vuetify from 'vuetify';
 Vue.use(Vuetify);
+import 'material-design-icons/iconfont/material-icons.css'
 import 'vuetify/dist/vuetify.min.css'
 
 import VueRouter from 'vue-router';
@@ -32,6 +33,7 @@ import listTypeProducts from './components/product/type-product/list';
 import listProducers from './components/product/producer/list';
 import listAttributes from './components/product/attribute/list';
 import bindAttributes from './components/product/attribute/binding';
+import typeFiles from './components/files/type-file';
 
 const routes = [
     {path: '/', name: 'table-products', component: tableProducts},
@@ -40,7 +42,8 @@ const routes = [
     {path: '/list-type-products', name: 'list-type-products', component: listTypeProducts},
     {path: '/list-producers', name: 'list-producers', component: listProducers},
     {path: '/list-attributes', name: 'list-attributes', component: listAttributes},
-    {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes}
+    {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes},
+    {path: '/type-files', name: 'type-files', component: typeFiles}
 ];
 //import routes from './routes';
 
@@ -105,6 +108,45 @@ const app = new Vue({
                 ],
                 active: true
             },
+        ],
+        menus: [
+            {
+                title: 'Птицеводство',
+                active: true,
+                submenu: [
+                    {
+                        title: 'Кормление',
+                        active: true,
+                        items: [
+                            {
+                                title: 'Подпункт меню 1',
+                            },
+                            {
+                                title: 'Подпункт меню 2',
+                            },
+                            {
+                                title: 'Подпункт меню 3',
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Обогрев',
+                        active: true
+                    }
+                ],
+            },
+            {
+                title: 'Свиноводство',
+                active: true
+            },
+            {
+                title: 'Скотоводство',
+                active: true
+            },
+            {
+                title: 'Прочее',
+                active: true
+            }
         ]
     }
 });

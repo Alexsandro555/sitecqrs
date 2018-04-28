@@ -1,9 +1,42 @@
+.menu-left-img {
+  position: absolute;
+  z-index: 1000;
+  margin-top: -41px;
+}
+.menu-left-wrappers {
+  position: absolute;
+  margin-left: 0px;
+  width: 262px;
+  z-index: 1000;
+  margin-top: -30px;
+  overflow: visible;
+  @include border-radius(0 0 10px 10px);
+}
+
+.theme--light .menu-left-wrappers .list {
+  background: url('#{$path}/menu-left-wrapper.png') repeat right top;
+}
+
+.menu-left-wrappers .list__group__items--no-action .list__tile {
+  padding-left: 20px;
+}
+
+.menu-left-wrappers .list__group__items .list__tile:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+.menu-left-item-el {
+  font-size: 0.9em;
+  font-family: $font-os-condenced-bold;
+  color: $color-green-light;
+}
+
 .menu-left-wrapper {
   position: absolute;
   margin-left: 0px;
-  width: 250px;
+  width: 262px;
   z-index: 1000;
-  //margin-top: -12px;
+  //margin-top: -442px;
   overflow: visible;
   //background: url('#{$path}/header-layer.png') top center no-repeat;
 
@@ -26,21 +59,17 @@
 }
 
 .menu-left__header {
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-family: $font-os-condenced-bold;
-  text-align: center;
-  //padding-left: 25px;
-  font-weight: bold;
-  vertical-align: middle;
-  line-height: 58px;
   text-transform: uppercase;
   color: $color-white;
-  height: 58px;
   background: url('#{$path}/menu-left-header.png') no-repeat center center, $color-yell;
-  vertical-align: middle;
+  text-transform: uppercase;
 }
 
-.menu-left ul {
+
+
+/*.menu-left ul {
   margin: 0;
   padding: 0;
   vertical-align: middle;
@@ -100,6 +129,7 @@
   border: 3px solid $color-green-light;
 }
 
+
 .sub-menu__block {
   float: left;
   margin-right: 40px;
@@ -120,8 +150,92 @@
   text-decoration: underline;
   font-size: 1.1em;
   //font-family: $font-size-base;
+}*/
+
+
+
+.menu-left-wrappers .list__group__header {
+  background: url('#{$path}/menu-left-item-lay.png') repeat-x center center;
+  color: $color-white;
+  font-size: 1.2em;
+  font-family: $font-os-condenced-bold;
+  text-transform: uppercase;
+
+  /*line-height: 1.5;
+  padding: 10px;
+  padding-left: 25px;
+  margin: 0;
+  display: block;*/
 }
 
-.sub-menu__items li {
-  line-height: 0.5;
+.theme--light .menu-left-wrappers  .list .list__group__header--active{
+  //background:  url('#{$path}/menu-left-item-lay-active.png') no-repeat right -20px center, url('#{$path}/menu-left-item-lay.png') repeat-x center center;
+  //background: url('#{$path}/menu-left-item-lay.png') repeat-x center center;
+}
+
+.theme--light .menu-left-wrappers  .list .list__group__header:hover {
+  background: url('#{$path}/menu-left-item-lay.png') repeat-x center center;
+}
+
+
+.list-menu-left {
+  padding-top: 0px;
+  @include border-radius(0px 0px 10px 10px);
+}
+
+.menu-left-h {
+  width: 262px;
+}
+
+
+.sub-menu {
+  background: url('#{$path}/menu-left-wrapper.png') repeat right top;
+  padding: 10px;
+  border: 3px solid $color-green-light;
+  @include border-radius(0px 0px 10px 10px);
+  max-height: 252px;
+}
+
+.sub-menu__head>li {
+  margin-top:10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  display:inline-block;
+}
+
+.sub-menu__head li {
+  list-style: none;
+}
+
+.sub-menu__head a{
+  margin-left: 10px;
+  margin-top:5px;
+  color: $color-green-light;
+  text-decoration: underline;
+  font-family: $font-os-semibold;
+}
+
+.sub-menu__item a{
+  font-size: 0.8em;
+  color: $color-green-dark;
+}
+
+.application .theme--light.footer__menu.list, .theme--light .sub-menu .list {
+  background: none;
+}
+
+.sub-menu .list__tile {
+  font-family: $font-os;
+  font-size: 0.9em;
+  height:22px;
+}
+
+.sub-menu .list__tile>a {
+  color: $color-green-dark;
+}
+
+.sub-menu__header {
+  padding-left: 15px;
+  color: $color-green;
+
 }

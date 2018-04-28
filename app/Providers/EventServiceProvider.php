@@ -16,6 +16,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        'Modules\Files\Events\FileFormatAdded' => [
+          'Modules\Files\Listeners\AddFormat'
+        ],
+        'Modules\Files\Events\FileFormatDeleted' => [
+          'Modules\Files\Listeners\DelFormat'
+        ],
     ];
 
     /**

@@ -1,9 +1,9 @@
-.header {
+.header-layout {
   height: 707px;
   background: url('#{$path}/header-shadow-top.png') top center repeat-x, url('#{$path}/header-layer.png') top center no-repeat;
 }
 
-.header__layout {
+.header__menu {
   height: 57px;
   background:  rgba(62,115,32,0.8);
   width: 100%;

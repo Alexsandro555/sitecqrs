@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">-->
     <style>
         .first {
             display: inline-block;
             width: 10%;
         }
         .second {
-            display: inline-block;
-            width:89%;
+            //display: inline-block;
+            //width:89%;
         }
         .sub-menu {
             list-style: none;
@@ -43,7 +43,7 @@
 <body>
 <div id="app">
     <v-app id="inspire">
-        <div class="first">
+        <!--<div class="first">
             <v-list>
                 <v-list-group v-model="item.active" v-for="item in items" :key="item.title" no-action>
                     <v-list-tile slot="activator">
@@ -51,7 +51,7 @@
                             <v-list-tile-title>@{{ item.title }}</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <template v-for="subItem in item.submenu" :key="subItem.title">
+                    <template v-for="subItem in item.submenu">
                         <v-menu  class="fd" offset-x open-on-hover>
                             <v-list-tile  @click="" slot="activator">
                                 <v-list-tile-content>
@@ -79,9 +79,24 @@
                     </template>
                 </v-list-group>
             </v-list>
-        </div>
+        </div>-->
         <div class="second">
-            <div class="text-xs-top">
+            <v-container fluid grid-list-xs>
+                <v-layout row wrap>
+                    <div style="width: 1200px; margin: 0 auto;">
+                            <v-layout row wrap>
+                                <v-flex md5>
+                                    Содержимое 1
+                                </v-flex>
+                                <v-flex md2 class="hidden-md-and-down">
+                                    Содержимое 2
+                                </v-flex>
+                                <v-flex md5>Содержимое 3</v-flex>
+                            </v-layout>
+                    </div>
+                </v-layout>
+            </v-container>
+            <!--<div class="text-xs-top">
                 <template>
                     <v-layout row>
                         <v-flex xs12 sm6 offset-sm3>
@@ -114,7 +129,7 @@
                         </v-flex>
                     </v-layout>
                 </template>
-            </div>
+            </div>-->
         </div>
     </v-app>
 </div>

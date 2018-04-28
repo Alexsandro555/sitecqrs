@@ -4,7 +4,7 @@ namespace Modules\Files\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Modules\Files\Entities\UploadInfo;
+use Modules\Files\Classes\UploadInfo;
 
 class FilesServiceProvider extends ServiceProvider
 {
@@ -40,7 +40,7 @@ class FilesServiceProvider extends ServiceProvider
         $this->app->singleton(UploadInfo::class, function() {
           return new UploadInfo();
         });
-        $this->app->bind('Modules\Files\Contracts\Uploader', 'Modules\Files\Entities\FileUploader');
+        $this->app->bind('Modules\Files\Contracts\Uploader', 'Modules\Files\Classes\FileUploader');
     }
 
     /**

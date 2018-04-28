@@ -1,0 +1,61 @@
+.application .theme--light.footer, .theme--light .footer {
+  background: url('#{$path}/footer-top-lay.png') top left repeat-x, url('#{$path}/footer.png') top left repeat-x, url('#{$path}/footer-layout.png') bottom center repeat-x;
+}
+
+.footer-wrapper {
+  margin: 0 auto;
+  width: $main-width;
+}
+
+.footer-top-menu {
+  padding-top: 15px;
+  height: 57px;
+}
+
+.footer-top-menu>li {
+  font-size: 1.2em;
+  font-family: $font-os-condenced-bold;
+  text-transform: uppercase;
+  display:inline-block;
+  list-style-type: disc;
+  margin: 0px 20px 0px 20px;
+  color: $color-white;
+}
+
+.footer__sicial-icons {
+  padding-top: 15px;
+}
+
+.footer__chicken {
+  margin-top: -40px;
+}
+
+.footer__phone {
+  color: $color-white;
+  padding-top: 50px;
+}
+
+.footer__mail {
+  font-size: 1.2em;
+  font-family: $font-os;
+  color: $color-yell;
+}
+
+.footer__address {
+  font-size: 1.1em;
+}
+
+.application .theme--light.footer__menu.list, .theme--light .footer__menu .list {
+  background: none;
+}
+
+.footer__menu .list__tile {
+  color: $color-white;
+  font-family: $font-os;
+  font-size: 0.9em;
+  height:42px;
+}
+
+.footer-menu-ava {
+  margin-right: 10px;
+}

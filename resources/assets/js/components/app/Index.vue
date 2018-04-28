@@ -27,7 +27,7 @@
                 </template>
             </v-list>
         </v-navigation-drawer>
-        <v-toolbar dark color="#1A237E" app absolute clipped-left>
+        <v-toolbar dark color="indigo darken-1" app absolute clipped-left>
             <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
             <span class="title ml-3 mr-5" @click="goMainPage()">Лидер</span>
             <v-text-field solo-inverted flat label="Поиск" prepend-icon="search"></v-text-field>
@@ -70,6 +70,10 @@
                     {
                         text: 'Привязка атрибутов',
                         path: '/bind-attributes'
+                    },
+                    {
+                      text: 'Типы файлов',
+                      path: '/type-files'
                     },
                     { divider: true },
                 ]

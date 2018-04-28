@@ -6,18 +6,18 @@
  * Time: 14:52
  */
 
-namespace Modules\Files\Entities;
+namespace Modules\Files\Classes;
 
 use Illuminate\Http\Request;
 use Modules\Files\Contracts\Uploader;
 use Modules\Files\Entities\File;
 use Intervention\Image\ImageManager;
-use Illuminate\Support\Facades\Storage;
 
-class FileUploader implements Uploader {
 
+class FileUploader extends AbstractFileUploader implements Uploader
+{
   // путь для сохраняемых файлов
-  private $path = "app/public/";
+  protected $path = "app/public/";
   protected $file;
   protected $uploadFile;
   protected $filename;
@@ -43,7 +43,7 @@ class FileUploader implements Uploader {
       $this->file = new File;
       $this->file->fileable_id = $request->fileableId;
       $this->file->fileable_type = $request->model;
-      $this->file->original_name = $originalName;
+      //$this->file->original_name = $originalName;
     }
     else {
       throw new \Exception('Файла не существует');
@@ -107,6 +107,8 @@ class FileUploader implements Uploader {
     // конец построения структуры коллекции
     $this->file->config = $fileCollect;
     $this->file->type_file_id = $typeFile->id;
+    if($name === 'original')
+      $this->file->original_name = $allowed_filename;
     $this->file->save();
     // конец сохранения в базе
     $this->uploadInfo->currentFileId = $this->file->id;
@@ -115,60 +117,7 @@ class FileUploader implements Uploader {
 
 
 
-  private function sanitize($string, $force_lowercase = true, $anal = false)
-  {
-    $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
-      "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
-      "â€”", "â€“", ",", "<", ".", ">", "/", "?");
-    $clean = trim(str_replace($strip, "", strip_tags($string)));
-    $clean = preg_replace('/\s+/', "-", $clean);
-    $clean = ($anal) ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean ;
 
-    return ($force_lowercase) ?
-      (function_exists('mb_strtolower')) ?
-        mb_strtolower($clean, 'UTF-8') :
-        strtolower($clean) :
-      $clean;
-  }
-
-
-
-  private function createUniqueFilename( $filename, $extension )
-  {
-    // Generate token for image
-    $imageToken = substr(sha1(mt_rand()), 0, 5);
-    return $filename . '-' . $imageToken . '.' . $extension;
-  }
-
-
-  private function size( $photo )
-  {
-    $image = $this->manager->make( $photo );
-    $size = $image->filesize();
-    return $size;
-  }
-
-  private function move( $photo, $filename )
-  {
-    Storage::putFileAs('public',$photo,$filename);
-    return $filename;
-  }
-
-  private function resizeAbsolute( $photo, $filename, $width, $height, $path )
-  {
-    $image = $this->manager->make( $photo )->resize($width,$height)->save(storage_path($this->path) . $filename );
-    return $image;
-  }
-
-  private function resizeRelative( $photo, $filename, $width, $height, $path )
-  {
-    $image = $this->manager->make( $photo );
-    $image = $image->resize($width,$height,function($constraing) {
-      $constraing->aspectRatio();
-      $constraing->upsize();
-    })->save(storage_path($this->path) . $filename );
-    return $image;
-  }
 
 
 }

@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration
           $table->increments('id');
           $table->integer('fileable_id')->unsigned()->nullable();
           $table->string('fileable_type',255)->nullable();
-          $table->string('original_name',255);
+          $table->string('original_name',255)->nullable();
           $table->integer('type_file_id')->unsigned();
           $table->json('config');
           $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

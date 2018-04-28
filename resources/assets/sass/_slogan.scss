@@ -1,20 +1,14 @@
 .main-slogan {
-  position: absolute;
-  padding-left: 10px;
-  height: 151px;
-  margin-top: -80px;
-  margin-left: -560px;
+  height: 121px;
+  margin-top: -60px;
   color: white;
   background: url('#{$path}/slogan-ln.png') left center repeat-y;
   line-height: 40px;
-}
-
-.main-slogan__one {
   font-family: $font-os-condenced-bold;
   font-size: 3.2em;
   text-transform: uppercase;
   text-align: left;
-  //text-shadow: 1px 1px 2px black, 0 0 1em black;
+  padding-left: 30px;
 }
 
 .sub-slogan {
@@ -22,8 +16,7 @@
 }
 
 .main-slogan__from {
-  font-size: 0.8em;
-  //width: 300px;
+  font-size: 0.2em;
   padding: 3px 8px;
   margin-left: 5px;
   background: #2A6319;

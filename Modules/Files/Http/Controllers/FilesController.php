@@ -5,7 +5,7 @@ namespace Modules\Files\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Files\Entities\UploadInfo;
+use Modules\Files\Classes\UploadInfo;
 use Modules\Files\Services\UploadService;
 use Modules\Files\Entities\File;
 
@@ -34,13 +34,13 @@ class FilesController extends Controller
      * @return array
      * @throws \Exception
      */
-    public function store(UploadService $uploadService)
+    public function store(UploadService $uploadService, UploadInfo $uploadInfo)
     {
       if($uploadService->upload()) {
-        return ['message' => 'Успешно загружено!'];
+        return ['id'=> $uploadInfo->currentFileId, 'message' => 'Успешно загружено!'];
       }
       else {
-        throw new \Exception('Загрузка не удалась');
+        throw new \Exception('Загрузка не удалась - не должно возникать');
       }
     }
 
@@ -49,10 +49,27 @@ class FilesController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response:json
      */
-    public function getFiles($id)
+    public function getImages($id)
     {
       $files = File::where('fileable_id',$id)->where('fileable_type','Modules\Catalog\Entities\Product')->get();
       return response()->json($files,200);
+    }
+
+    /**
+     *  Delete Image
+     * @param int $id
+     * @return \Illuminate\Http\Response:json
+     */
+    public function deleteFile($id)
+    {
+      $file = File::find($id);
+      if($file) {
+        $file->delete();
+        return response()->json(['message' => 'Успешно удалено'],200);
+      }
+      else {
+        return response()->json(['message' => 'Не существующий идентефикатор'],422);
+      }
     }
 
     /**

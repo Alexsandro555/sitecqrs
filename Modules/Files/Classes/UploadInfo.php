@@ -6,7 +6,7 @@
  * Time: 10:07
  */
 
-namespace Modules\Files\Entities;
+namespace Modules\Files\Classes;
 
 class UploadInfo {
   /*

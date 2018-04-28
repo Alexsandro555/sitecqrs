@@ -1,7 +1,20 @@
 <template>
     <div>
         <h2>Область загрузки файлов</h2>
-        <vue-dropzone ref="productDropzone"
+        <vue-dropzone
+                ref="productDropzone"
+                :options="dropzoneOptions"
+                :include-styling="false"
+                @vdropzone-thumbnail="thumbnail"
+                @vdropzone-success="showSuccess"
+                @vdropzone-error="showError"
+                @vdropzone-mounted="dropzoneMounted"
+                @vdropzone-removed-file="fileRemoved"
+                @vdropzone-sending="vsending"
+                id="customdropzone"
+                :destroyDropzone="false">
+        </vue-dropzone>
+        <!--<vue-dropzone ref="productDropzone"
                       id="customdropzone"
                       :options="dropzoneOptions"
                       :include-styling="false"
@@ -10,7 +23,8 @@
                       @vdropzone-mounted="dropzoneMounted"
                       @vdropzone-removed-file="fileRemoved"
                       @vdropzone-sending="vsending"
-        ></vue-dropzone>
+                      @dropzone-thumbnail="thumbnail"
+        ></vue-dropzone>-->
     </div>
 </template>
 
@@ -45,12 +59,18 @@
                     previewTemplate: this.template(),
                     addRemoveLinks: true,
                     headers: { 'X-CSRF-TOKEN': window.token },
+                    maxFiles: 5,
                 },
                 errorMessage: ''
             }
         },
         components: {
             vueDropzone
+        },
+        watch: {
+            fileableId: function (val) {
+                this.getImages()
+            }
         },
         methods: {
             template() {
@@ -67,6 +87,7 @@
                         <div class="dz-error-message"><span data-dz-errormessage></span></div>
                         <div class="dz-success-mark"><i class="fa fa-check"></i></div>
                         <div class="dz-error-mark"><i class="fa fa-close"></i></div>
+                        <a class="dz-remove ms" href="javascript:undefined;" data-dz-remove="">Удалить</a>
                     </div>
             `;
             },
@@ -93,6 +114,7 @@
                 formData.append('model', this.model);
             },
             showSuccess(file,data) {
+                //this.getImages()
                 /*var $element = document.getElementById("files-id");
                 var ids = JSON.parse($element.value);
                 //console.log('Data:'+data);
@@ -111,9 +133,16 @@
                 //console.log(message.message)
             },
             fileRemoved(file)  {
-                let id = file.id;
+                let id = undefined;
+                if(file.xhr) {
+                    let resp = JSON.parse(file.xhr.response)
+                    id = resp.id;
+                }
+                else {
+                    id = file.id;
+                }
                 if(id) {
-                    this.axios.get('/files/deleteFile/'+id, {}).then(function (response) {
+                    axios.get('/files/delete-file/'+id, {}).then(function (response) {
                     }).catch(function (error)
                     {
                         console.log(error);
@@ -124,16 +153,34 @@
                 }
             },
             dropzoneMounted() {
-                let that = this;
-                let dropzone = this.$refs.productDropzone;
-                axios.get('/files/get/'+that.fileableId, {}).then(function (response)
+                /*let dropzone = this.$refs.productDropzone;
+                axios.get('/files/get-images/'+this.fileableId, {}).then(function (response)
                 {
+                    console.log("Images: ",response.data)
                     response.data.forEach(function(item) {
                         if(item.config.files["small"]) {
                             let id = item.id;
                             let filename = item.config.files["small"].filename;
                             let size = item.config.files["small"].size;
                             let mockFile = {id: id, name: filename, size: size};
+                            dropzone.manuallyAddFile(mockFile,"/storage/"+filename,null,null,{dontSubstractMaxFiles: false, addToFiles: true});
+                        }
+                    });
+                }).catch(function (error)
+                {
+                    console.log(error);
+                });*/
+            },
+            getImages() {
+                let dropzone = this.$refs.productDropzone;
+                axios.get('/files/get-images/'+this.fileableId, {}).then(function (response)
+                {
+                    response.data.forEach(function(item) {
+                        if(item.config.files["small"]) {
+                            let id = item.id;
+                            let filename = item.config.files["main"].filename;
+                            let size = item.config.files["main"].size;
+                            let mockFile = {id: id, name: filename.slice(0,19), size: size};
                             dropzone.manuallyAddFile(mockFile,"/storage/"+filename,null,null,{dontSubstractMaxFiles: false, addToFiles: true});
                         }
                     });
@@ -169,7 +216,7 @@
     width: inherit;
     height: inherit;
     border-radius: 50%;
-    background-size: contain;
+    background-size: cover;
   }
   #customdropzone .dz-preview .dz-image > img {
     width: 100%;
@@ -185,4 +232,12 @@
   #customdropzone .dz-error-message {
       color: red;
   }
+  #customdropzone .dz-preview .dz-remove {
+      color: white;
+  }
+    .ms {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
 </style>

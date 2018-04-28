@@ -1,0 +1,58 @@
+.delivery {
+  margin: auto;
+  width: $main-width;
+}
+
+.delivery-wrapper {
+  margin-top: 100px;
+  background: url('#{$path}/light-tree.png') center center repeat;
+  padding-bottom: 30px;
+}
+
+
+.delivery__header {
+  text-transform: uppercase;
+  font-size: 2em;
+  font-family: $font-os-condenced-bold;
+  color: $color-green-dark;
+  background: url('#{$path}/banner-header.png') left center no-repeat;
+  height: 100px;
+  line-height: 100px;
+  padding-left: 30px;
+  margin-left: 10px;
+}
+
+.delivery__subheader {
+  color: $color-green-md-dark;
+}
+
+.delivery__buttom {
+  margin-right: 30px;
+  margin-top: 30px;
+  display: inline-block;
+  background: none;
+  border: 2px solid $color-green-md-dark;
+  padding: 7px;
+  font-size: 1.3em;
+  color: $color-green-md-dark;
+  text-transform: uppercase;
+  @include border-radius(6px);
+  text-decoration: none;
+  font-family: $font-os-condenced-bold;
+  padding: 5px 20px;
+}
+
+.delivery__desc {
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.delivery__tel {
+  color: $color-green-md-dark;
+  font-family: $font-os-condenced-bold;
+}
+
+.deliverty_tabl {
+  font-size: 1.1em;
+}

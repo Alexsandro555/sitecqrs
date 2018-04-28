@@ -3,11 +3,12 @@
         <v-card>
             <v-container fluid grid-list-md>
                 <v-layout row wrap>
-                    <v-flex xs8 offset-sm1 align-end flexbox v-if="attributes.lenght !== 0">
-                        <h2>Атрибуты</h2>
+                    <v-flex xs2></v-flex>
+                    <v-flex xs8 align-end flexbox v-if="attributes.lenght !== 0">
                         <br>
                         <div>
                             <v-form ref="form">
+                                <p></p>
                                 <template v-for="attribute in attributes">
                                     <v-text-field
                                             :name="attribute.attribute_id"
@@ -15,7 +16,7 @@
                                             :label="attribute.title"
                                             ></v-text-field>
                                 </template>
-                                <v-btn :disabled="this.id === '-1'" large color="primary" @click.prevent="onSave()">Сохранить</v-btn>
+                                <v-btn :disabled="!attributes.length>0" large color="primary" @click.prevent="onSave()">Сохранить</v-btn>
                             </v-form>
                         </div>
                     </v-flex>

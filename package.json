@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "material-design-icons": "^3.0.1",
         "vue-router": "^3.0.1",
         "vue2-dropzone": "^3.1.0",
         "vuetify": "^1.0.8"
