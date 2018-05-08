@@ -1,7 +1,8 @@
 @extends('layouts.root')
 
 @section('content')
-   <div class="content">
+   <div class="content-wrapper text-xs-center">
+      <div class="content">
       @include('main.menu')
       <v-flex xs12>
          <v-layout row wrap>
@@ -31,11 +32,10 @@
                      <v-flex xs8 class="special-product__price">
                         <span>145 800 </span> руб.
                      </v-flex>
-                     <v-felx xs4 class="special-product__cart">
+                     <v-flex xs4 class="special-product__cart">
                         <img src="{{asset('images/product-cart.png')}}"/>
-                     </v-felx>
+                     </v-flex>
                   </v-layout>
-
                </div>
                <div class="special-product">
                   <a href="#">Вентилятор стеновой Munters EM36 36 дюймов</a>
@@ -47,9 +47,9 @@
                      <v-flex xs8 class="special-product__price">
                         <span>145 800 </span> руб.
                      </v-flex>
-                     <v-felx xs4 class="special-product__cart">
+                     <v-flex xs4 class="special-product__cart">
                         <img src="{{asset('images/product-cart.png')}}"/>
-                     </v-felx>
+                     </v-flex>
                   </v-layout>
                </div>
                <div class="special-product">
@@ -62,17 +62,21 @@
                      <v-flex xs8 class="special-product__price">
                         <span>145 800 </span> руб.
                      </v-flex>
-                     <v-felx xs4 class="special-product__cart">
+                     <v-flex xs4 class="special-product__cart">
                         <img src="{{asset('images/product-cart.png')}}"/>
-                     </v-felx>
+                     </v-flex>
                   </v-layout>
                </div>
             </v-flex>
          </v-layout>
       </v-flex>
    </div>
-   <!--<div class="about-wrapper">
-   </div>-->
+   </div>
+   <div class="about-wrapper">
+      <div class="about">
+
+      </div>
+   </div>
    <div class="delivery-wrapper">
       <div class="delivery">
          <v-flex xs12>
@@ -96,9 +100,9 @@
                               <v-flex xs8 class="special-product__price">
                                  <span>145 800 </span> руб.
                               </v-flex>
-                              <v-felx xs4 class="special-product__cart">
+                              <v-flex xs4 class="special-product__cart">
                                  <img src="{{asset('images/product-cart.png')}}"/>
-                              </v-felx>
+                              </v-flex>
                            </v-layout>
 
                         </div>
@@ -112,9 +116,9 @@
                               <v-flex xs8 class="special-product__price">
                                  <span>145 800 </span> руб.
                               </v-flex>
-                              <v-felx xs4 class="special-product__cart">
+                              <v-flex xs4 class="special-product__cart">
                                  <img src="{{asset('images/product-cart.png')}}"/>
-                              </v-felx>
+                              </v-flex>
                            </v-layout>
                         </div>
                      </v-flex>

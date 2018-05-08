@@ -1,6 +1,6 @@
 <!-- Новое меню -->
-<img class="menu-left-img" src="{{asset('images/menu-left-hr.png')}}"/>
-<v-card class="menu-left-wrappers">
+<img class="menu-left-img hidden-sm-and-down" src="{{asset('images/menu-left-hr.png')}}"/>
+<v-card class="menu-left-wrappers hidden-sm-and-down">
     <v-list class="list-menu-left">
         <v-list-tile class="menu-left__header">
             <v-list-tile-content>

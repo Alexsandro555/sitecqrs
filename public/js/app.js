@@ -1936,6 +1936,7 @@ var app = new Vue({
     el: '#app',
     router: router,
     data: {
+        drawer: null,
         items: [{
             title: 'Attractions',
             submenu: [{
@@ -69962,7 +69963,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var dropzone = this.$refs.productDropzone;
             axios.get('/files/get-images/' + this.fileableId, {}).then(function (response) {
                 response.data.forEach(function (item) {
-                    if (item.config.files["small"]) {
+                    if (item.config.files["main"]) {
                         var id = item.id;
                         var filename = item.config.files["main"].filename;
                         var size = item.config.files["main"].size;
@@ -73808,7 +73809,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     typeFile.config.resize.splice(index, 1);
                 }
             });
-            axios.post('/admin/type-file/del-format', { name: name, id: id }).then(function (response) {
+            axios.post('/files/type-files/del-format', { name: name, id: id }).then(function (response) {
                 _this3.isSaveSuccessful = true;
                 _this3.message = response.data.message;
                 setTimeout(function (res) {
@@ -73821,19 +73822,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         save: function save(scope, typeFile) {
             var _this4 = this;
 
-            if (this.$refs['form-type-file-' + typeFile.id][0].validate()) {
-                axios.post('/files/type-files/update', { typefile: typeFile }).then(function (response) {
-                    _this4.isSaveSuccessful = true;
-                    _this4.message = response.data.message;
-                    setTimeout(function (res) {
-                        _this4.isSaveSuccessful = false;
-                    }, 2000);
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            } else {
-                alert('Заполните поля');
-            }
+            //if(this.$refs['form-type-file-'+typeFile.id][0].validate()) {
+            axios.post('/files/type-files/update', { typefile: typeFile }).then(function (response) {
+                _this4.isSaveSuccessful = true;
+                _this4.message = response.data.message;
+                setTimeout(function (res) {
+                    _this4.isSaveSuccessful = false;
+                }, 2000);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            /*}
+            else {
+                alert('Заполните поля')
+            }*/
         },
         isEmptyObject: function isEmptyObject(obj) {
             if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== undefined && obj) {

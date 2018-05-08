@@ -5,6 +5,7 @@ namespace Modules\Files\Listeners;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Files\Events\FileFormatDeleted;
+use Modules\Files\Entities\File;
 
 class DelFormat
 {

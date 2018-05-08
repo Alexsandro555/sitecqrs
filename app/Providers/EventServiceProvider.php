@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'Modules\Files\Events\FileFormatDeleted' => [
           'Modules\Files\Listeners\DelFormat'
         ],
+        'Modules\Files\Events\TypeFilesModdified' => [
+          'Modules\Files\Listeners\ResizeImages'
+        ],
     ];
 
     /**

@@ -30,4 +30,9 @@ Route::group(['middleware' => 'web', 'prefix' => 'files', 'namespace' => 'Module
         'before' => 'csrf',
         'uses' => 'TypeFileController@delFormat'
       ]);
+    Route::post('/type-files/update',
+      [
+        'before' => 'csrf',
+        'uses' => 'TypeFileController@update'
+      ]);
 });

@@ -56,6 +56,7 @@ const app = new Vue({
     el: '#app',
     router,
     data: {
+        drawer: null,
         items: [
             {
                 title: 'Attractions',

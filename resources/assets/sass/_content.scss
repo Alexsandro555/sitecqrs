@@ -1,8 +1,9 @@
 .content-wrapper {
+  position:relative;
   min-height: 1000px;
   width: 100%;
-  background: url('#{$path}/tree-layer.png') top center no-repeat;
-  overflow: hidden;
+  background: url('#{$path}/tree-layer.png') top center repeat-y;
+  z-index:100;
 }
 
 .content {

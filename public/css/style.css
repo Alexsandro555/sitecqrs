@@ -36,20 +36,25 @@
   float: right;
 }
 
-.header-layout {
+.header {
   height: 707px;
   background: url("/images/header-shadow-top.png") top center repeat-x, url("/images/header-layer.png") top center no-repeat;
 }
 
-.header__menu {
-  height: 57px;
-  background: rgba(62, 115, 32, 0.8);
-  width: 100%;
-}
-
-.header__main {
+.wrapper {
   width: 1200px;
   margin: auto;
+}
+
+.header--wrapper {
+  width: 1200px;
+  margin: auto;
+}
+
+.header-menu {
+  height: 57px;
+  background: rgba(121, 154, 50, 0.8);
+  width: 100%;
 }
 
 .menu ul {
@@ -87,6 +92,26 @@
   font-size: 0.9em;
 }
 
+.application .theme--light.list.top-menu,
+.theme--light .list.top-menu {
+  background: none;
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.top-menu__item {
+  display: inline-block;
+  background: url("/images/menu-devider.png") left center no-repeat;
+}
+
+.top-menu__item .list__tile {
+  height: 57px;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.99em;
+}
+
 .cart {
   width: 156px;
   height: 57px;
@@ -111,7 +136,7 @@
 
 .main-slogan {
   height: 121px;
-  margin-top: -60px;
+  margin-top: 60px;
   color: white;
   background: url("/images/slogan-ln.png") left center repeat-y;
   line-height: 40px;
@@ -119,7 +144,7 @@
   font-size: 3.2em;
   text-transform: uppercase;
   text-align: left;
-  padding-left: 30px;
+  padding-left: 10px;
 }
 
 .sub-slogan {
@@ -127,7 +152,7 @@
 }
 
 .main-slogan__from {
-  font-size: 0.2em;
+  font-size: 0.25em;
   padding: 3px 8px;
   margin-left: 5px;
   background: #2A6319;
@@ -136,7 +161,7 @@
 .phone {
   width: 400px;
   height: 151px;
-  margin-top: -120px;
+  margin-top: 20px;
   color: white;
 }
 
@@ -177,10 +202,9 @@
 }
 
 .animal-panel {
-  position: absolute;
   width: 1200px;
   height: 151px;
-  margin-top: 313px;
+  margin-top: 253px;
   margin-left: 70px;
   color: black;
   padding-left: 10px;
@@ -423,10 +447,11 @@
 }
 
 .content-wrapper {
+  position: relative;
   min-height: 1000px;
   width: 100%;
-  background: url("/images/tree-layer.png") top center no-repeat;
-  overflow: hidden;
+  background: url("/images/tree-layer.png") top center repeat-y;
+  z-index: 100;
 }
 
 .content {
@@ -520,8 +545,10 @@
 }
 
 .about-wrapper {
-  background: url("/images/about-layout.png") top center no-repeat;
-  min-height: 500px;
+  position: relative;
+  background: url("/images/footer.png") top left repeat, url("/images/about-layout.jpg") top center no-repeat;
+  height: 900px;
+  z-index: 1;
 }
 
 .delivery {
@@ -530,7 +557,6 @@
 }
 
 .delivery-wrapper {
-  margin-top: 100px;
   background: url("/images/light-tree.png") center center repeat;
   padding-bottom: 30px;
 }

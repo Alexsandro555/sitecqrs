@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Files\Entities\TypeFile;
 use Modules\Files\Events\FileFormatAdded;
 use Modules\Files\Events\FileFormatDeleted;
+use Modules\Files\Events\TypeFilesModdified;
 
 class TypeFileController extends Controller
 {
@@ -115,12 +116,27 @@ class TypeFileController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
+     * @param Request $request
+     * @return array
+     * @throws \Exception
      */
     public function update(Request $request)
     {
+      // Получаем актуальные значения типов файлов
+      $currentTypeFile = $request->typefile;
+      if($currentTypeFile) {
+        // Получаем содержимое таблицы типов файлов
+        $typeFile = TypeFile::findOrFail($currentTypeFile['id']);
+        // Выполняем обновление
+        $typeFile->name = $currentTypeFile['name'];
+        $typeFile->config = $currentTypeFile['config'];
+        $typeFile->save();
+        event(new TypeFilesModdified($typeFile));
+        return ['message' => 'Сохранено!'];
+      }
+      else {
+        throw new \Exception('Типа файла неопределен');
+      }
     }
 
     /**

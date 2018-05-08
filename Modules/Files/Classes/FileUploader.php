@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Modules\Files\Contracts\Uploader;
 use Modules\Files\Entities\File;
 use Intervention\Image\ImageManager;
+use Modules\Files\Classes\UploadInfo;
 
 
 class FileUploader extends AbstractFileUploader implements Uploader

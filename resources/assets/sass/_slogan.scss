@@ -1,6 +1,6 @@
 .main-slogan {
   height: 121px;
-  margin-top: -60px;
+  margin-top: 60px;
   color: white;
   background: url('#{$path}/slogan-ln.png') left center repeat-y;
   line-height: 40px;
@@ -8,7 +8,7 @@
   font-size: 3.2em;
   text-transform: uppercase;
   text-align: left;
-  padding-left: 30px;
+  padding-left: 10px;
 }
 
 .sub-slogan {
@@ -16,7 +16,7 @@
 }
 
 .main-slogan__from {
-  font-size: 0.2em;
+  font-size: 0.25em;
   padding: 3px 8px;
   margin-left: 5px;
   background: #2A6319;

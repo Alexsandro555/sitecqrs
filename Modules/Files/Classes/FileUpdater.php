@@ -18,6 +18,7 @@ class FileUpdater extends AbstractFileUploader
   protected $manager;
   protected $typeFile;
   protected $file;
+  protected $uploadInfo;
 
   public function __construct($file, $typeFile)
   {
@@ -26,14 +27,24 @@ class FileUpdater extends AbstractFileUploader
     $this->manager = new ImageManager();
   }
 
-  public function addFormat($original, $name, $resize, $absolute, $width, $height) {
-    $file = $this->manager->make(storage_path($this->path).$original);
+  private function getAllowedFilename($original) {
     $pos = strripos($original,'.');
     $originalNameWithoutExt = substr($original, 0, $pos);
     $extension = substr($original,$pos+1,strlen($original)-1);
     $filename = $this->sanitize($originalNameWithoutExt);
-    // вызываем метод без вызова file_exists, потому что оригинальный файл по-любому существует в storage
     $allowed_filename = $this->createUniqueFilename($filename, $extension);
+    return $allowed_filename;
+  }
+
+  public function resize($original, $name, $resize, $absolute, $width, $height) {
+    $file = $this->manager->make(storage_path($this->path).$original);
+    $allowed_filename = $this->getAllowedFilename($original);
+    /*$pos = strripos($original,'.');
+    $originalNameWithoutExt = substr($original, 0, $pos);
+    $extension = substr($original,$pos+1,strlen($original)-1);
+    $filename = $this->sanitize($originalNameWithoutExt);*/
+    // вызываем метод без вызова file_exists, потому что оригинальный файл по-любому существует в storage
+    //$allowed_filename = $this->createUniqueFilename($filename, $extension);
     if ($resize) {
       if ($absolute) {
         $uploadiconSuccess = $this->resizeAbsolute($file, $allowed_filename, $width, $height, $this->path);
@@ -51,7 +62,7 @@ class FileUpdater extends AbstractFileUploader
 
     // сохранение в базе
     //Начало построения структуры коллекции
-    $arrFile['filename'] = $allowed_filename;
+    /*$arrFile['filename'] = $allowed_filename;
     $arrFile['size'] = $size;
     if(isset($uploadiconSuccess) && $uploadiconSuccess) {
       $arrFile['width'] = $uploadiconSuccess->width();
@@ -64,11 +75,28 @@ class FileUpdater extends AbstractFileUploader
           $arrFile['resize'] = $item;
         }
       }
+    }*/
+
+    $file = collect();
+    $file->put('filename',$allowed_filename);
+    $file->put('size',$size);
+    if(isset($uploadiconSuccess) && $uploadiconSuccess) {
+      $file->put('width',$uploadiconSuccess->width());
+      $file->put('height',$uploadiconSuccess->height());
+    }
+    // у original нет resize - для него это условие не выполниться
+    if($this->typeFile->config->has('resize')) {
+      $resize = $this->typeFile->config->get('resize');
+      foreach ($resize as $item) {
+        if($item["name"] === $name) {
+          $file->put('resize',$item);
+        }
+      }
     }
 
-    $this->arrFile[$name] = $arrFile;
+    //$arrFile[$name] = $file;
     $files = $this->file->config->get('files');
-    $files[$name] = $arrFile;
+    $files[$name] = $file;
     $fileCollect = collect();
     $fileCollect->put('files',$files);
     $this->file->config = $fileCollect;

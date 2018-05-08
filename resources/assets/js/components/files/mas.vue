@@ -176,7 +176,7 @@
                 axios.get('/files/get-images/'+this.fileableId, {}).then(function (response)
                 {
                     response.data.forEach(function(item) {
-                        if(item.config.files["small"]) {
+                        if(item.config.files["main"]) {
                             let id = item.id;
                             let filename = item.config.files["main"].filename;
                             let size = item.config.files["main"].size;

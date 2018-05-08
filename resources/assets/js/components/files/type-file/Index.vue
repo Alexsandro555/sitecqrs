@@ -205,7 +205,7 @@
                         typeFile.config.resize.splice(index,1);
                     }
                 });
-                axios.post('/admin/type-file/del-format', {name: name, id: id})
+                axios.post('/files/type-files/del-format', {name: name, id: id})
                     .then((response) => {
                         this.isSaveSuccessful = true;
                         this.message = response.data.message;
@@ -215,7 +215,7 @@
                     })
             },
             save(scope, typeFile) {
-                if(this.$refs['form-type-file-'+typeFile.id][0].validate()) {
+                //if(this.$refs['form-type-file-'+typeFile.id][0].validate()) {
                     axios.post('/files/type-files/update', {typefile: typeFile})
                         .then((response) => {
                             this.isSaveSuccessful = true;
@@ -226,10 +226,10 @@
                         }).catch(error => {
                         console.log(error);
                     })
-                }
+                /*}
                 else {
                     alert('Заполните поля')
-                }
+                }*/
             },
 
             isEmptyObject(obj) {

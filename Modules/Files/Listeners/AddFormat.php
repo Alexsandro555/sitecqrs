@@ -41,7 +41,7 @@ class AddFormat
             if($key == 'original') {
               $filename = $fileFormat["filename"];
               $fileUpdater = new FileUpdater($file, $typeFile);
-              $fileUpdater->addFormat($filename,$curTypeFile["name"],true,$curTypeFile["absolute"],$curTypeFile["width"],$curTypeFile["height"]);
+              $fileUpdater->resize($filename,$curTypeFile["name"],true,$curTypeFile["absolute"],$curTypeFile["width"],$curTypeFile["height"]);
               $countFile++;
             }
           }

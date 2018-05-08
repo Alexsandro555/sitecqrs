@@ -79,10 +79,10 @@ class CatalogController extends Controller
     public function destroy(Request $request)
     {
       $product = Product::find($request->id);
-      /*$currentFiles = File::where('fileable_id',$id)->where('fileable_type','App\Product')->get();
+      $currentFiles = File::where('fileable_id',$id)->where('fileable_type','Modules\Catalog\Entities\Product')->get();
       foreach ($currentFiles as $currentFile) {
         $currentFile->delete();
-      }*/
+      }
       $product->delete();
       return ['message' => 'Успешно удалено!'];
     }
