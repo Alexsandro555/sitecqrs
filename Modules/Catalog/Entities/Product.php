@@ -44,7 +44,7 @@ class Product extends Model
    * Получить все изображения продукта
    */
   public function files() {
-    return $this->morphMany('Leader\UploadFile\Models\File', 'fileable');
+    return $this->morphMany('Modules\Files\Entities\File', 'fileable');
   }
 
   public function producer_type_product() {

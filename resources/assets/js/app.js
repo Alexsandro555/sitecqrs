@@ -9,23 +9,31 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Vuex from 'vuex';
+import Vuetify from 'vuetify';
+Vue.use(Vuetify);
+import 'material-design-icons/iconfont/material-icons.css'
+import 'vuetify/dist/vuetify.min.css'
+import createStore from './store/states.js'
+
+import VueRouter from 'vue-router';
+Vue.use(Vuex);
+Vue.use(VueRouter);
+
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('app', require('./components/app/Index.vue'));
+Vue.component('cart-widget', require('./components/cart/widget'));
+//Vue.component('tableProducts', require('./components/table-products'));
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import Vuetify from 'vuetify';
-Vue.use(Vuetify);
-import 'material-design-icons/iconfont/material-icons.css'
-import 'vuetify/dist/vuetify.min.css'
 
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('app', require('./components/app/Index.vue'));
-//Vue.component('tableProducts', require('./components/table-products'));
-
+/* Возможно код ниже следуе вынести в отдельный файл route.js */
 import tableProducts from './components/product/table-products';
 import updateProduct from './components/product/create';
 import listLineProducts from './components/product/line-product/list';
@@ -55,6 +63,7 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router,
+    store: new Vuex.Store(createStore()),
     data: {
         drawer: null,
         items: [
@@ -149,5 +158,10 @@ const app = new Vue({
                 active: true
             }
         ]
+    },
+    methods: {
+        addCart(id) {
+            this.$store.dispatch('cart/add', { id })
+        }
     }
 });

@@ -41,19 +41,7 @@
                                         <v-flex xs4 class="hidden-md-and-down">
                                             <v-layout row wrap>
                                                 <v-flex xs10>
-                                                    <div class="cart">
-                                                        <table>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td rowspan="2"><img src="{{asset('images/cart.png')}}"/></td>
-                                                                <td><span class="cart__col-yell">2</span> товара на</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="cart__col-yell">1 1000 000</span> руб.</td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                    <cart-widget></cart-widget>
                                                 </v-flex>
                                                 <v-flex xs2 justify-center>
                                                     <img class="find" src="{{asset('images/find.png')}}"/>

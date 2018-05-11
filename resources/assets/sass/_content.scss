@@ -1,9 +1,12 @@
+.content-wrapper-top {
+  background: url('#{$path}/tree-layer-top.png') top center repeat;
+  height: 29px;
+}
 .content-wrapper {
-  position:relative;
-  min-height: 1000px;
+  //min-height: 500px;
   width: 100%;
-  background: url('#{$path}/tree-layer.png') top center repeat-y;
-  z-index:100;
+  background: url('#{$path}/tree-layer.png') top center repeat;
+  padding-bottom: 20px;
 }
 
 .content {
@@ -41,5 +44,11 @@
   @include border-radius(6px);
   text-decoration: none;
   font-family: $font-os-condenced-bold;
+  margin-right: 20px;
   padding: 5px 20px;
+
+}
+
+.content__banner {
+  margin: 0px 20px;
 }

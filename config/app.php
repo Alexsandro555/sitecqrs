@@ -179,6 +179,9 @@ return [
 
         /* Подключенные внешние пакеты */
         Alexusmai\Ruslug\RuslugServiceProvider::class,
+
+        /* Пакет корзины */
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
     ],
 
     /*
@@ -228,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Slug' => Alexusmai\Ruslug\RuslugFacade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];
