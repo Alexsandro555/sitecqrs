@@ -1,5 +1,5 @@
 .application .theme--light.footer, .theme--light .footer {
-  background: url('#{$path}/footer-top-lay.png') top left repeat-x, url('#{$path}/footer.png') top left repeat-x, url('#{$path}/footer-layout.png') bottom center repeat-x;
+  background: url('#{$path}/footer-top-lay.png') top left repeat-x, url('#{$path}/footer.png') top left repeat, url('#{$path}/footer-layout.png') bottom center repeat-x;
 }
 
 .footer-wrapper {
@@ -13,7 +13,6 @@
 }
 
 .footer-top-menu>li {
-  font-size: 1.2em;
   font-family: $font-os-condenced-bold;
   text-transform: uppercase;
   display:inline-block;

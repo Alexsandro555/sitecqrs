@@ -12,5 +12,18 @@
 */
 
 Route::get('/', ['uses' => 'main\MainController@index', 'as' => 'main']);
-Route::get('/admin/', ['uses' => 'Admin\AdminController@index', 'as' => 'admin']);
+Route::get('authenticated', 'main\MainController@authenticated');
+Route::get('/admin', ['uses' => 'Admin\AdminController@index', 'as' => 'admin'])->middleware('admin');
 Route::get('/demo', 'main\MainController@mas');
+
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+
+Route::get('/exit', function() {
+  Auth::logout();
+  return redirect()->route('main');
+});
+
+

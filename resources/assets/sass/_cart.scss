@@ -2,6 +2,7 @@
   width: 156px;
   height: 57px;
   background: rgba(48,107,28,1);
+  font-family: $font-os-condenced-bold;
 }
 .cart table {
   font-family: $font-os-light;
@@ -13,4 +14,8 @@
 
 .cart__col-yell {
   color: #F3C042;
+}
+
+.cart__img {
+  padding-right: 10px;
 }

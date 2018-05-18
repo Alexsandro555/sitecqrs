@@ -1,0 +1,43 @@
+<template>
+    <div>
+        <div v-if="username">
+            <a class="login-widget" @click="onAdmin" href="/">{{username}}</a>
+        </div>
+        <div v-else>
+            <a class="login-widget" @click.stop="onLogin" href="#">Войти</a>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        props: { },
+        data: function() {
+            return {
+                username: null
+            }
+        },
+        mounted() {
+            axios.get('/authenticated').then((response) => {
+                this.username = response.data
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        methods: {
+            onLogin() {
+                this.$store.dispatch('auth/active')
+            },
+            onAdmin() {
+                this.$store.dispatch('auth/adminView')
+                this.$router.push('admin')
+            }
+        }
+     }
+</script>
+
+<style>
+    .login-widget {
+        text-decoration: none;
+        color: white;
+    }
+</style>

@@ -116,6 +116,7 @@
   width: 156px;
   height: 57px;
   background: #306b1c;
+  font-family: "OpenSans-CondensedBold", sans-serif;
 }
 
 .cart table {
@@ -128,6 +129,10 @@
 
 .cart__col-yell {
   color: #F3C042;
+}
+
+.cart__img {
+  padding-right: 10px;
 }
 
 .find {
@@ -183,12 +188,12 @@
   margin-top: 20px;
   display: inline-block;
   background: none;
-  border: 2px solid #F6D349;
+  border: 2px solid #F9D94B;
   -mox-border-radius: 6px;
   border-radius: 6px;
   padding: 7px;
   font-weight: bold;
-  color: #F6D349;
+  color: #F9D94B;
   text-transform: uppercase;
   text-decoration: none;
   font-family: "OpenSans-CondensedBold", sans-serif;
@@ -217,16 +222,16 @@
 
 .menu-left-img {
   position: absolute;
-  z-index: 1000;
-  margin-top: -41px;
+  z-index: 100;
+  margin-top: -70px;
 }
 
 .menu-left-wrappers {
   position: absolute;
   margin-left: 0px;
   width: 262px;
-  z-index: 1000;
-  margin-top: -30px;
+  z-index: 100;
+  margin-top: -60px;
   overflow: visible;
   -mox-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
@@ -279,7 +284,7 @@
   font-family: "OpenSans-CondensedBold", sans-serif;
   text-transform: uppercase;
   color: #ffff;
-  background: url("/images/menu-left-header.png") no-repeat center center, #F6D349;
+  background: url("/images/menu-left-header.png") no-repeat center center, #F9D94B;
   text-transform: uppercase;
 }
 
@@ -476,24 +481,24 @@
 }
 
 .content__subheader {
-  color: #F6D349;
+  color: #F9D94B;
 }
 
 .content__buttom {
   margin-top: 30px;
   display: inline-block;
   background: none;
-  border: 2px solid #F6D349;
+  border: 2px solid #F9D94B;
   padding: 7px;
   font-size: 1.3em;
-  color: #F6D349;
+  color: #F9D94B;
   text-transform: uppercase;
   -mox-border-radius: 6px;
   border-radius: 6px;
   text-decoration: none;
   font-family: "OpenSans-CondensedBold", sans-serif;
-  margin-right: 20px;
-  padding: 5px 20px;
+  margin-right: 15px;
+  padding: 5px 10px;
 }
 
 .content__banner {
@@ -557,14 +562,44 @@
 }
 
 .about-wrapper {
-  background: url("/images/about-layout.jpg") top center no-repeat;
+  background: url("/images/about-layout.png") top center no-repeat;
   -webkit-clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
           clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
 }
 
 .about {
   background-color: rgba(69, 115, 32, 0.8);
-  height: 900px;
+}
+
+.about__content {
+  margin: auto;
+  width: 1200px;
+  height: 800px;
+  padding-top: 100px;
+}
+
+.news__conent {
+  color: #ffff;
+  font-family: "Open-Sans", sans-serif;
+  font-size: 0.9em;
+}
+
+.news__date {
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  font-size: 1.1em;
+}
+
+.news__header {
+  background-color: #F9D94B;
+  display: inline-block;
+  padding: 10px 5px;
+  color: #56331d;
+}
+
+.news__header a {
+  color: black;
+  font-family: "OpenSans-CondensedBold", sans-serif;
+  font-size: 1.2em;
 }
 
 .delivery {
@@ -586,7 +621,6 @@
   height: 100px;
   line-height: 100px;
   padding-left: 30px;
-  margin-left: 10px;
 }
 
 .delivery__subheader {
@@ -630,7 +664,7 @@
 
 .application .theme--light.footer,
 .theme--light .footer {
-  background: url("/images/footer-top-lay.png") top left repeat-x, url("/images/footer.png") top left repeat-x, url("/images/footer-layout.png") bottom center repeat-x;
+  background: url("/images/footer-top-lay.png") top left repeat-x, url("/images/footer.png") top left repeat, url("/images/footer-layout.png") bottom center repeat-x;
 }
 
 .footer-wrapper {
@@ -644,7 +678,6 @@
 }
 
 .footer-top-menu > li {
-  font-size: 1.2em;
   font-family: "OpenSans-CondensedBold", sans-serif;
   text-transform: uppercase;
   display: inline-block;
@@ -669,7 +702,7 @@
 .footer__mail {
   font-size: 1.2em;
   font-family: "Open-Sans", sans-serif;
-  color: #F6D349;
+  color: #F9D94B;
 }
 
 .footer__address {

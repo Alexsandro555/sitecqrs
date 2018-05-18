@@ -8,6 +8,11 @@ Route::group(['middleware' => 'web', 'prefix' => 'files', 'namespace' => 'Module
         'before' => 'csrf',
         'uses' => 'FilesController@store'
       ]);
+    Route::post('/image-wysiwyg-upload',
+      [
+        'before' => 'csrf',
+        'uses' => 'FilesController@storeWysiwyg'
+      ]);
     Route::get('/get-images/{id}', 'FilesController@getImages');
     Route::get('/delete-file/{id}', 'FilesController@deleteFile');
 

@@ -1,12 +1,19 @@
 .tree {
   background: url('#{$path}/tree-layer.png') top center repeat;
 }
+
 .about-wrapper {
-  background: url('#{$path}/about-layout.jpg') top center no-repeat;
+  background: url('#{$path}/about-layout.png') top center no-repeat;
   clip-path: polygon(0 10%,100% 0,100% 100%,0 100%)
 }
 
 .about {
   background-color: rgba(69,115,32,0.8);
-  height: 900px;
+}
+
+.about__content {
+  margin: auto;
+  width: $main-width;
+  height: 800px;
+  padding-top: 100px;
 }

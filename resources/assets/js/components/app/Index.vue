@@ -31,6 +31,7 @@
             <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
             <span class="title ml-3 mr-5" @click="goMainPage()">Лидер</span>
             <v-text-field solo-inverted flat label="Поиск" prepend-icon="search"></v-text-field>
+            <v-btn light @click.stop="exit">Выход</v-btn>
             <v-spacer></v-spacer>
         </v-toolbar>
         <v-content>
@@ -53,27 +54,27 @@
                     { heading: 'Действия' },
                     {
                         text: 'Типы продуктов',
-                        path: '/list-type-products'
+                        path: '/admin/list-type-products'
                     },
                     {
                         text: 'Производители',
-                        path: '/list-producers'
+                        path: '/admin/list-producers'
                     },
                     {
                         text: 'Линейки продукции',
-                        path: '/list-line-products'
+                        path: '/admin/list-line-products'
                     },
                     {
                         text: 'Аттрибуты',
-                        path: '/list-attributes'
+                        path: '/admin/list-attributes'
                     },
                     {
                         text: 'Привязка атрибутов',
-                        path: '/bind-attributes'
+                        path: '/admin/bind-attributes'
                     },
                     {
                       text: 'Типы файлов',
-                      path: '/type-files'
+                      path: '/admin/type-files'
                     },
                     { divider: true },
                 ]
@@ -81,10 +82,22 @@
         },
         methods: {
             select(path) {
+                console.log(path)
                 this.$router.push(path);
             },
             goMainPage() {
                 this.$router.push({name: 'table-products'})
+            },
+            exit() {
+                localStorage.setItem('isAdmin','false')
+                this.$store.dispatch('auth/disableAdmin')
+                this.$store.dispatch('auth/disableAdminView')
+                this.$router.push('/')
+                axios.get('/exit').then((response) => {
+
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         }
     }

@@ -63,6 +63,15 @@ class CartController extends Controller
     }
 
     /**
+     * @return array
+     */
+    public function current() {
+      $total = Cart::subtotal();
+      $count = Cart::count();
+      return ["total"=>$total,"count"=>$count];
+    }
+
+    /**
      * Show the specified resource.
      * @return Response
      */

@@ -3,7 +3,7 @@
         <table>
             <tbody>
             <tr>
-                <td rowspan="2"><img src="images/cart.png"/></td>
+                <td rowspan="2"><img class="cart__img" src="images/cart.png"/></td>
                 <td><span class="cart__col-yell">{{count}}</span> товара на</td>
             </tr>
             <tr>
@@ -19,6 +19,9 @@
     const {mapState} = createNamespacedHelpers('cart')
 
     export default {
+        created() {
+            this.$store.dispatch('cart/current')
+        },
         computed: {
             ...mapState({
                 count: state => state.count,

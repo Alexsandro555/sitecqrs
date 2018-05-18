@@ -49,12 +49,7 @@
                                                 prefix="₽"
                                                 required
                                         ></v-text-field>
-                                        <v-text-field
-                                                name="description"
-                                                label="Описание"
-                                                v-model="form.description"
-                                                textarea
-                                        ></v-text-field>
+                                        <div id="wysiwyg"></div>
                                         <v-text-field
                                                 name="qty"
                                                 label="Количество"
@@ -130,11 +125,15 @@
     import productAttributes from '../attribute';
     import uploader from '../../files';
     import mas from '../../files/mas.vue';
+    import vueditor from '../../vueditor/dist/script/vueditor.min.js'
+    import '../../vueditor/dist/style/vueditor.min.css'
+    //import wysiwyg from '../../wysiwyg'
 
     export default {
         props: { },
         data: function() {
             return {
+                inst: null,
                 tabs: null,
                 valid: false,
                 form: new Form({
@@ -186,7 +185,8 @@
         components: {
             'product-attributes': productAttributes,
             'uploader': uploader,
-            mas
+            mas,
+            //wysiwyg
         },
         watch: {
           '$route' (to, from) {
@@ -205,7 +205,23 @@
             this.initial();
             this.getAttributes();
         },
+        mounted() {
+        },
         methods: {
+            initializeEditor() {
+                // инициализация wysiwyg-редактора
+                let inst = vueditor.createEditor('#wysiwyg', {
+                    uploadUrl: '/files/image-wysiwyg-upload',
+                    uploadFile: '/files/upload-file',
+                    fileableId: Number(this.form.id),
+                    typeFiles: "image-wysiwyg",
+                    model: "Modules\Catalog\Entities\Product",
+                    id: 'product-wysiwyg',
+                    classList: ['product-wysiwyg'],
+                });
+                inst.setContent(this.form.description);
+                this.inst = inst;
+            },
             initial() {
                 if(this.$route.params.id == -1) {
                     axios.get('/catalog/create', {}).then(response => {
@@ -218,6 +234,7 @@
                                 this.form[key] = response.data.defaultProduct[key];
                             }
                         }
+                        this.initializeEditor();
                     }).catch(error => {
                         console.log(error);
                     });
@@ -233,6 +250,7 @@
                                 this.form[key] = response.data.product[key];
                             }
                         }
+                        this.initializeEditor();
                     }).catch(error => {
                         console.log(error);
                     });
@@ -240,6 +258,7 @@
             },
             onSubmit() {
                 if(this.$refs.form.validate()) {
+                    this.form.description = this.inst.getContent();
                     this.form.submit('post', '/catalog/update').then(data => {
                         if(this.$route.params.id === '-1') {
                             this.$router.push({ name: 'table-products'})
@@ -287,3 +306,9 @@
         }
      }
 </script>
+
+<style>
+    .product-wysiwyg {
+        min-height: 350px;
+    }
+</style>

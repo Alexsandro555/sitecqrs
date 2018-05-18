@@ -45,6 +45,36 @@ class FilesController extends Controller
     }
 
     /**
+     * @param UploadService $uploadService
+     * @param UploadInfo $uploadInfo
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function storeWysiwyg(UploadService $uploadService, UploadInfo $uploadInfo) {
+      if($uploadService->upload()) {
+        $file = File::find($uploadInfo->currentFileId);
+        $arrFiles = [];
+        foreach ($file->config as $files)
+        {
+          foreach ($files as $key=>$file)
+          {
+            if($key !== 'original')
+            {
+              $fileItem['filename'] = $file["filename"];
+              $fileItem['width'] = $file["width"];
+              $fileItem['height'] = $file["height"];
+              $arrFiles[] = $fileItem;
+            }
+          }
+        }
+        return response()->json(['error'=> false, 'files'=> $arrFiles], 200);
+      }
+      else {
+        throw new \Exception('Загрузка не удалась - не должно возникать');
+      }
+    }
+
+    /**
      *  Get Files
      * @param int $id
      * @return \Illuminate\Http\Response:json

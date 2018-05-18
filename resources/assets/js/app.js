@@ -20,9 +20,15 @@ import VueRouter from 'vue-router';
 Vue.use(Vuex);
 Vue.use(VueRouter);
 
+import site from './components/site';
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//Vue.component('site', require('./components/site/Index.vue'));
 Vue.component('app', require('./components/app/Index.vue'));
-Vue.component('cart-widget', require('./components/cart/widget'));
+Vue.component('cart-widget', require('../../../Modules/Cart/Resources/assets/js/components/cart/widget'));
+Vue.component('dialog-registration', require('./components/auth/register'));
+Vue.component('dialog-login', require('./components/auth/login'));
+Vue.component('auth-widget', require('./components/auth/login-widget'));
 //Vue.component('tableProducts', require('./components/table-products'));
 
 
@@ -44,20 +50,21 @@ import bindAttributes from './components/product/attribute/binding';
 import typeFiles from './components/files/type-file';
 
 const routes = [
-    {path: '/', name: 'table-products', component: tableProducts},
-    {path: '/update-product/:id', name: 'update-product', component: updateProduct},
-    {path: '/list-line-products', name: 'list-line-products', component: listLineProducts},
-    {path: '/list-type-products', name: 'list-type-products', component: listTypeProducts},
-    {path: '/list-producers', name: 'list-producers', component: listProducers},
-    {path: '/list-attributes', name: 'list-attributes', component: listAttributes},
-    {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes},
-    {path: '/type-files', name: 'type-files', component: typeFiles}
+    //{path: '/', name: 'site', component: site},
+    {path: '/admin', name: 'table-products', component: tableProducts},
+    {path: '/admin/update-product/:id', name: 'update-product', component: updateProduct},
+    {path: '/admin/list-line-products', name: 'list-line-products', component: listLineProducts},
+    {path: '/admin/list-type-products', name: 'list-type-products', component: listTypeProducts},
+    {path: '/admin/list-producers', name: 'list-producers', component: listProducers},
+    {path: '/admin/list-attributes', name: 'list-attributes', component: listAttributes},
+    {path: '/admin/bind-attributes', name: 'bind-attributes', component: bindAttributes},
+    {path: '/admin/type-files', name: 'type-files', component: typeFiles}
 ];
 //import routes from './routes';
 
 const router = new VueRouter({
     routes,
-    base: "/admin/"
+    mode: 'history'
 })
 
 const app = new Vue({
@@ -65,6 +72,7 @@ const app = new Vue({
     router,
     store: new Vuex.Store(createStore()),
     data: {
+        //isAdminView: false,
         drawer: null,
         items: [
             {
@@ -159,9 +167,40 @@ const app = new Vue({
             }
         ]
     },
+    components: {
+      site
+    },
+    mounted() {
+    },
+    computed: {
+      isAdminView() {
+          return this.$store.state.auth.isAdminView;
+      },
+      isAdmin() {
+          return this.$store.state.auth.isAdmin;
+      }
+    },
     methods: {
+        login() {
+            // если client аутентифицирован уже
+            if(this.$store.getters['auth/getAdmin']) {
+                // отображаем панель администрирования
+                this.$store.dispatch('auth/adminView')
+                this.$router.push('admin')
+            }
+            else {
+                this.$store.dispatch('auth/active')
+            }
+        },
         addCart(id) {
             this.$store.dispatch('cart/add', { id })
         }
     }
 });
+
+/*router.beforeEach((to, from, next) => {
+    if(localStorage.getItem('isAdmin') !== true) {
+        console.log(this.$store)
+        //this.$store.dispatch('auth/disableAdminView')
+    }
+})*/
