@@ -153,8 +153,9 @@
                 }
             },
             dropzoneMounted() {
+                //this.getImages()
                 /*let dropzone = this.$refs.productDropzone;
-                axios.get('/files/get-images/'+this.fileableId, {}).then(function (response)
+                axios.post('/files/get-images/', {'id':this.fileableId, 'model': this.model}).then(function (response)
                 {
                     console.log("Images: ",response.data)
                     response.data.forEach(function(item) {
@@ -173,7 +174,7 @@
             },
             getImages() {
                 let dropzone = this.$refs.productDropzone;
-                axios.get('/files/get-images/'+this.fileableId, {}).then(function (response)
+                axios.post('/files/get-images', {id:this.fileableId, model: this.model}).then(function (response)
                 {
                     response.data.forEach(function(item) {
                         if(item.config.files["main"]) {
@@ -235,9 +236,9 @@
   #customdropzone .dz-preview .dz-remove {
       color: white;
   }
-    .ms {
-        display: block;
-        text-align: center;
-        text-decoration: none;
-    }
+  .ms {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
 </style>

@@ -2,24 +2,30 @@
   width: 263px;
   height: 390px;
   @include border-radius(0px 0px 6px 6px);
-  display: inline-block;
+  display: block;
   background: url('#{$path}/special-product__item-head-lay.png') top center no-repeat;
   background-color: $color-white;
-  margin-right: 10px;
+  //margin: 0px 10px;
   //padding-top: 20px;
-  padding: 15px 0px 10px 0px;
+  margin: 0 auto;
+  padding: 0px 0px 10px 0px;
 }
 
-.special-product>a {
+.special-product__header {
+  height: 82px;
+}
+
+.special-product__header>a {
   color: $color-green;
   font-size: 1.1em;
-  font-family: $font-os;
-  padding: 5px;
+  font-family: $font-os-semibold;
+  line-height: 82px;
+  //padding: 5px;
 }
 
 .special-product__img {
-  margin-top: 20px;
-  padding: 10px;
+  margin-top: 10px;
+  padding: 5px 10px;
   height: 180px;
   line-height: 180px;
 }

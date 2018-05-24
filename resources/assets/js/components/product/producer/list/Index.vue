@@ -112,7 +112,9 @@
         created() {
             axios.get('/catalog/producer', {}).then(response => {
                 this.loader = false;
-                this.items = response.data;
+                this.items = response.data.producers;
+                this.editedItem.sort = response.data.sort+1;
+                this.defaultItem.sort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
@@ -155,6 +157,7 @@
                         let that = this;
                         Object.assign(that.items[that.editedIndex], that.editedItem)
                         this.editedItem.submit('post', '/catalog/producer/update').then(data => {
+                            this.close()
                         }).catch(errors => {
                             console.log(errors);
                         });
@@ -163,12 +166,12 @@
                     if(this.$refs.form.validate()) {
                         this.editedItem.submit('post', '/catalog/producer/store').then(data => {
                             this.items.push(data.model)
+                            this.close()
                         }).catch(errors => {
                             console.log(errors);
                         });
                     }
                 }
-                this.close()
             }
         }
      }

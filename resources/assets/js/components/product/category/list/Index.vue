@@ -14,9 +14,6 @@
                     <v-btn icon class="mx-0" @click="editItem(props.item)">
                         <v-icon color="teal">edit</v-icon>
                     </v-btn>
-                    <!--<v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                        <v-icon color="pink">delete</v-icon>
-                    </v-btn>-->
                 </td>
             </template>
             <template slot="no-data">
@@ -26,71 +23,70 @@
             </template>
         </v-data-table>
         <div class="text-xs-left pt-2">
-        <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
-            <v-card>
-                <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                    <v-container grid-list-md>
-                        <v-form ref="form" lazy-validation v-model="valid">
-                            <v-layout wrap>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="title"
-                                            label="Название атрибута"
-                                            v-model="editedItem.title"
-                                            :rules="titleRules"
-                                            :counter="255"
-                                            required></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="sort"
-                                            label="Сорт."
-                                            :rules="sortRules"
-                                            v-model="editedItem.sort"
-                                            required
-                                    ></v-text-field>
-                                </v-flex>
-                        </v-layout>
-                        </v-form>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
+            <v-dialog  v-model="dialog" max-width="500px">
+                <v-btn color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container grid-list-md>
+                            <v-form ref="form" lazy-validation v-model="valid">
+                                <v-layout wrap>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="title"
+                                                label="Наименование категории"
+                                                v-model="editedItem.title"
+                                                :rules="titleRules"
+                                                :counter="255"
+                                                required></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="sort"
+                                                label="Сорт."
+                                                v-model="editedItem.sort"
+                                        ></v-text-field>
+                                    </v-flex>
+                                </v-layout>
+                            </v-form>
+                            <v-flex xs12>
+                                <mas v-if="editedItem.id" url="/files/upload" :fileable-id="Number(editedItem.id)" :type-files="['image-product']" model="Modules\Catalog\Entities\Catalog"></mas>
+                            </v-flex>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
+                        <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </div>
     </div>
 </template>
 <script>
     import {Form} from '../../../form/Form.js'
+    import mas from '../../../files/mas.vue';
 
     export default {
         data: function() {
             return {
                 valid: false,
                 editedItem: new Form({
-                        id: 0,
-                        title: '',
-                        sort: ''
-                    }),
+                    id: 0,
+                    title: '',
+                    sort: ''
+                }),
                 defaultItem: new Form({
                     id: 0,
                     title: '',
                     sort: ''
                 }),
                 titleRules: [
-                    v => !!v || 'Наименование атрибута обязательно для заполнения',
-                    v => v.length <=255 || 'Наименование атрибута должно иметь длину не более 255 символов'
-                ],
-                sortRules: [
-                  v => !!v || 'Сортировка обязательная для заполнения'
+                    v => !!v || 'Наименование обязательно для заполнения',
+                    v => v.length <=255 || 'Наименование должно иметь длину не более 255 символов'
                 ],
                 dialog: false,
                 editedIndex: -1,
@@ -110,17 +106,20 @@
             }
         },
         created() {
-            axios.get('/catalog/attribute', {}).then(response => {
+            axios.get('/catalog/categories', {}).then(response => {
                 this.loader = false;
-                this.items = response.data.attributes;
+                this.items = response.data.categories;
                 this.editedItem.sort = response.data.sort+1;
                 this.defaultItem.sort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
             formTitle () {
-                return this.editedIndex === -1 ? 'Добавление атрибута' : 'Редактирование атрибута'
+                return this.editedIndex === -1 ? 'Добавление нового типа продукта' : 'Редактирование типа продукта'
             }
+        },
+        components: {
+          mas
         },
         methods: {
             editItem (item) {
@@ -135,19 +134,17 @@
             deleteItem (item) {
                 const index = this.items.indexOf(item)
                 if(confirm('Вы уверены что хотите удалить запись?')) {
-                    axios.delete('/catalog/attribute/delete', {data: {id: this.items[index].id}}).then(response => {
+                    axios.delete('/catalog/type-product/delete', {data: {id: this.items[index].id}}).then(response => {
                     }).catch(error => {
 
                     });
                     this.items.splice(index, 1)
                 }
             },
-
             close () {
                 this.dialog = false
                 setTimeout(() => {
                     this.editedItem = this.defaultItem;
-                    //this.editedItem = Object.assign({}, this.defaultItem)
                     this.editedIndex = -1
                 }, 300)
             },
@@ -156,7 +153,7 @@
                     if(this.$refs.form.validate()) {
                         let that = this;
                         Object.assign(that.items[that.editedIndex], that.editedItem)
-                        this.editedItem.submit('post', '/catalog/attribute/update').then(data => {
+                        this.editedItem.submit('post', '/catalog/category/update').then(data => {
                             this.close()
                         }).catch(errors => {
                             console.log(errors);
@@ -164,7 +161,7 @@
                     }
                 } else {
                     if(this.$refs.form.validate()) {
-                        this.editedItem.submit('post', '/catalog/attribute/store').then(data => {
+                        this.editedItem.submit('post', '/catalog/category/store').then(data => {
                             this.items.push(data.model)
                             this.close()
                         }).catch(errors => {
@@ -172,10 +169,9 @@
                         });
                     }
                 }
-
             }
         }
-     }
+    }
 </script>
 
 <style scoped>

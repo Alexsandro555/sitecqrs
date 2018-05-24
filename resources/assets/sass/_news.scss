@@ -2,6 +2,8 @@
   color: $color-white;
   font-family: $font-os;
   font-size: 0.9em;
+  margin-top:40px;
+  margin-left: 40px;
 }
 
 .news__date {
@@ -12,7 +14,7 @@
 .news__header {
   background-color: $color-yell;
   display: inline-block;
-  padding: 10px 5px;
+  padding: 2px 20px;
   color: $color-green-dark;
 
 }
@@ -21,4 +23,8 @@
   color: black;
   font-family: $font-os-condenced-bold;
   font-size: 1.2em;
+}
+
+.news__button {
+  margin-left: 40px;
 }

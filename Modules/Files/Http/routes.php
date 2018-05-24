@@ -13,7 +13,10 @@ Route::group(['middleware' => 'web', 'prefix' => 'files', 'namespace' => 'Module
         'before' => 'csrf',
         'uses' => 'FilesController@storeWysiwyg'
       ]);
-    Route::get('/get-images/{id}', 'FilesController@getImages');
+    Route::post('/get-images', [
+      'before' => 'csrf',
+      'uses' => 'FilesController@getImages'
+    ]);
     Route::get('/delete-file/{id}', 'FilesController@deleteFile');
 
 

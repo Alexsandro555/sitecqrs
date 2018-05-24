@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Catalog\Http\Requests\TypeProduct;
+namespace Modules\Catalog\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TypeProductRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,9 +15,7 @@ class TypeProductRequest extends FormRequest
     {
       return [
         'title' => 'required',
-        'tnved_id' => 'required',
         'sort' => 'required',
-        //'category_id' => 'required'
       ];
     }
 

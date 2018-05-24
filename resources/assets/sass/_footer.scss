@@ -1,5 +1,5 @@
 .application .theme--light.footer, .theme--light .footer {
-  background: url('#{$path}/footer-top-lay.png') top left repeat-x, url('#{$path}/footer.png') top left repeat, url('#{$path}/footer-layout.png') bottom center repeat-x;
+  background: url('#{$path}/footer-top-lay.png') top left repeat-x, linear-gradient(to left, rgba(78,100,42,1), rgba(78,100,42,0.6)), url('#{$path}/footer-layout.png') bottom center repeat-x;
 }
 
 .footer-wrapper {
@@ -30,18 +30,20 @@
 }
 
 .footer__phone {
+  display: block;
   color: $color-white;
-  padding-top: 50px;
+  margin-top: 10px;
 }
 
 .footer__mail {
-  font-size: 1.2em;
+  font-size: 1em;
   font-family: $font-os;
   color: $color-yell;
 }
 
 .footer__address {
-  font-size: 1.1em;
+  margin-top: 30px;
+  font-size: 1em;
 }
 
 .application .theme--light.footer__menu.list, .theme--light .footer__menu .list {
@@ -57,4 +59,17 @@
 
 .footer-menu-ava {
   margin-right: 10px;
+}
+
+.footer__copyright {
+  font-size: 0.8em;
+  margin-right: 30px;
+}
+
+.footer__logo {
+  margin-right: 30px;
+}
+
+.footer-right {
+  margin-right: 30px;
 }

@@ -33,8 +33,11 @@ class ProducerTypeProduct extends Model
     return $this->hasMany(Product::class);
   }
 
+  /**
+   * Получить все изображения категории
+   */
   public function files() {
-    return $this->morphMany('Leader\UploadFile\Models\File', 'fileable');
+    return $this->morphMany('Modules\Files\Entities\File', 'fileable');
   }
 
   public function attributes() {

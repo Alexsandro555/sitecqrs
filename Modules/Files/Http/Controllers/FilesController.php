@@ -79,9 +79,9 @@ class FilesController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response:json
      */
-    public function getImages($id)
+    public function getImages(Request $request)
     {
-      $files = File::where('fileable_id',$id)->where('fileable_type','Modules\Catalog\Entities\Product')->get();
+      $files = File::where('fileable_id',$request->id)->where('fileable_type',$request->model)->get();
       return response()->json($files,200);
     }
 

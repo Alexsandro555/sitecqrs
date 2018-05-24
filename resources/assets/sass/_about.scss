@@ -16,4 +16,31 @@
   width: $main-width;
   height: 800px;
   padding-top: 100px;
+  color: $color-white;
+}
+
+.about__left {
+  margin-left: 40px;
+}
+
+.about__cit {
+  background: url('#{$path}/cit.png') left center no-repeat;
+
+}
+
+.container.grid-list-xs .layout .flex.about__cit {
+  padding-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.about-official {
+  background-color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: $color-white;
+}
+
+.low-font {
+  font-size: 1.8em;
 }

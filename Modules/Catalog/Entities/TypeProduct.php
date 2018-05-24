@@ -14,6 +14,7 @@ class TypeProduct extends Model
     'title',
     'sort',
     'tnved_id',
+    'category_id',
     'description'
   ];
 
@@ -41,5 +42,9 @@ class TypeProduct extends Model
 
   public function attributes() {
     return $this->morphToMany('Modules\Catalog\Entities\Attribute', 'attributable');
+  }
+
+  public function categories() {
+    return $this->belongsTo('Modules\Catalog\Entities\Category');
   }
 }

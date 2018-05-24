@@ -43,7 +43,7 @@
 <body>
 <div id="app">
     <v-app id="inspire">
-        <!--<div class="first">
+        <div class="first">
             <v-list>
                 <v-list-group v-model="item.active" v-for="item in items" :key="item.title" no-action>
                     <v-list-tile slot="activator">
@@ -79,7 +79,7 @@
                     </template>
                 </v-list-group>
             </v-list>
-        </div>-->
+        </div>
         <div class="second">
             <v-container fluid grid-list-xs>
                 <v-layout row wrap>

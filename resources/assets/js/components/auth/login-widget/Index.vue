@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="username">
-            <a class="login-widget" @click="onAdmin" href="/">{{username}}</a>
+            <a class="login-widget" href="/admin">{{username}}</a>
         </div>
         <div v-else>
             <a class="login-widget" @click.stop="onLogin" href="#">Войти</a>

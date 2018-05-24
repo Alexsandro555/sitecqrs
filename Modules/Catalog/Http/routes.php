@@ -2,6 +2,8 @@
 
 Route::group(['middleware' => 'web', 'prefix' => 'catalog', 'namespace' => 'Modules\Catalog\Http\Controllers'], function()
 {
+  Route::get('/special-products', 'CatalogController@specialProducts');
+
   Route::get('/', 'CatalogController@index');
   Route::get('/create', 'CatalogController@create');
   Route::post('/update',
@@ -38,6 +40,25 @@ Route::group(['middleware' => 'web', 'prefix' => 'catalog', 'namespace' => 'Modu
   Route::delete('/type-product/delete', [
     'before' => 'csrf',
     'uses' => 'TypeProductController@destroy'
+  ]);
+
+
+  //=========================Category============================================
+  Route::get('/categories', 'CategoryController@index');
+  Route::get('/category/create', 'CategoryController@create');
+  Route::post('/category/store',
+    [
+      'before' => 'csrf',
+      'uses' => 'CategoryController@store'
+    ]);
+  Route::post('/category/update',
+    [
+      'before' => 'csrf',
+      'uses' => 'CategoryController@update'
+    ]);
+  Route::delete('/category/delete', [
+    'before' => 'csrf',
+    'uses' => 'CategoryController@destroy'
   ]);
 
 

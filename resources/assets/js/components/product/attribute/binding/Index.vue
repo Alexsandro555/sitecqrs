@@ -43,7 +43,7 @@
                                         :rules="attrFiltrRules"
                                         required
                                 ></v-select>
-                                <v-btn large color="primary" :disabled="!valid" @click.prevent="onSave()">Сохранить</v-btn>
+                                <v-btn large color="primary" :disabled="!valid" @click.stop="onSave()">Сохранить</v-btn>
                             </v-form>
                             <v-flex xs12 sm6 md12>
                                 <br>
@@ -173,7 +173,7 @@
                 console.log(error);
             });
             axios.get('/catalog/attribute', {}).then(response => {
-                response.data.forEach((item) => {
+                response.data.attributes.forEach((item) => {
                     this.attributes.push({id: item.id, title: item.title});
                 });
             }).catch(error => {
@@ -184,6 +184,7 @@
         },
         methods: {
             selectTypeProduct(event) {
+                if(event === null) return;
                 this.typeProductId = event;
                 this.lineProductId = 0;
                 // Данные для выпадающих списком Тип продукции, Линейка продукции
@@ -195,13 +196,15 @@
                 }).catch(error => {
                     console.log(error);
                 });
-                axios.get('catalog/attribute/filtered/'+event, {}).then(response => {
+                axios.get('/catalog/attribute/filtered/'+event, {}).then(response => {
+                    console.log(response.data)
                     this.attrFiltr = response.data
                 }).catch(error => {
                     console.log(error);
                 });
             },
             selectLineProduct(event) {
+                if(event === null) return;
                 this.lineProductId = event;
                 this.typeProductId = 0;
                 axios.get('/catalog/attribute/line-product/'+event, {}).then(response => {
@@ -219,6 +222,7 @@
                 });
             },
             selectAttribute(event) {
+                if(event === null) return;
                 this.attrVal = [];
                 this.attrResp = [];
                 for (let i=0, l = event.length; i<l; i++) {
@@ -244,7 +248,12 @@
             onSave() {
                 axios.post('/catalog/attribute/save', {attr: this.attrResp, typeProductId: this.typeProductId, lineProductId: this.lineProductId}).then(response => {
                     this.attrResp = [];
-                    location.reload();
+                    /*this.selTypeProduct = null;
+                    this.selLineProduct = null;
+                    this.selectedFiltr = null;*/
+                    this.$refs["form-attr"].reset();
+                    //this.$router.push('bind-attributes')
+                    //location.reload();
                 }).catch(error => {
                     console.log(error);
                 });

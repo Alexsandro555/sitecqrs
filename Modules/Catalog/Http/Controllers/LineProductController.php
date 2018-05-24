@@ -20,7 +20,8 @@ class LineProductController extends Controller
       return [
         "typeProducts" => TypeProduct::all(),
         "producers" => Producer::all(),
-        "lineProducts" => ProducerTypeProduct::all()
+        "lineProducts" => ProducerTypeProduct::all(),
+        "sort" => ProducerTypeProduct::latest()->first()->sort
       ];
     }
 

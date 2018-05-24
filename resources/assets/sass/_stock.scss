@@ -1,0 +1,51 @@
+.stock {
+  background: url('#{$path}/stocks.png') center center no-repeat;
+  //background: rgba(10,10,10,0.5);
+  min-width: 259px;
+  min-height: 265px;
+  padding: 10px;
+}
+
+.stock__pr {
+  color: $color-yell;
+  font-size: 2.5em;
+  font-family: $font-os-condenced-bold;
+}
+
+.stock__pr span {
+  font-size: 0.5em;
+  text-transform: uppercase;
+  background-color: $color-yell;
+  color: $color-green-dark;
+  padding: 5px 5px;
+}
+
+.stock__desc {
+  margin-top: 13px;
+  font: $font-os-condenced-bold;
+  font-size: 1.5em;
+  color: $color-white;
+  text-transform: uppercase;
+  line-height: 1.0;
+}
+
+.stock__price {
+  margin-top: 50px;
+  color: $color-yell;
+  font-size: 1.5em;
+  font: $font-os-condenced-bold;
+
+}
+
+.stock__sub-price {
+  color: $color-white;
+  font-size: 0.8em;
+}
+
+.stock__btn {
+  font-size: 0.5em;
+}
+
+.stock__price--bottom {
+  margin-bottom: 40px;
+}

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Catalog\Entities\Tnved;
 use Modules\Catalog\Http\Requests\TypeProduct\TypeProductRequest;
 use Modules\Catalog\Entities\TypeProduct;
+use Modules\Catalog\Entities\Category;
 
 class TypeProductController extends Controller
 {
@@ -17,8 +18,10 @@ class TypeProductController extends Controller
     public function index()
     {
       return [
+        "categories" => Category::all(),
         "typeProducts" => TypeProduct::all(),
-        "tnveds" => Tnved::all()
+        "tnveds" => Tnved::all(),
+        "sort" => TypeProduct::latest()->first()->sort
       ];
     }
 

@@ -27,7 +27,7 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-btn v-show="typeProducts.length>0" color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline">{{ formTitle }}</span>
@@ -43,6 +43,7 @@
                                             item-text="title"
                                             item-value="id"
                                             label="Тип продукции"
+                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
                                             single-line
                                     ></v-select>
                                 </v-flex>
@@ -53,6 +54,7 @@
                                             item-text="title"
                                             item-value="id"
                                             label="Производитель"
+                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
                                             single-line
                                     ></v-select>
                                 </v-flex>
@@ -96,15 +98,15 @@
                 editedItem: new Form({
                         id: 0,
                         name_line: '',
-                        type_product_id: 1,
-                        producer_id: 1,
+                        type_product_id: null,
+                        producer_id: null,
                         sort: ''
                     }),
                 defaultItem: new Form({
                     id: 0,
                     name_line: '',
-                    type_product_id: 1,
-                    producer_id: 1,
+                    type_product_id: null,
+                    producer_id: null,
                     sort: ''
                 }),
                 titleRules: [
@@ -136,6 +138,8 @@
                 this.items = response.data.lineProducts;
                 this.typeProducts = response.data.typeProducts;
                 this.producers = response.data.producers;
+                this.editedItem.sort = response.data.sort+1;
+                this.defaultItem.sort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
@@ -180,6 +184,7 @@
                         let that = this;
                         Object.assign(that.items[that.editedIndex], that.editedItem)
                         this.editedItem.submit('post', '/catalog/line-product/update').then(data => {
+                            this.close()
                         }).catch(errors => {
                             console.log(errors);
                         });
@@ -188,12 +193,13 @@
                     if(this.$refs.form.validate()) {
                         this.editedItem.submit('post', '/catalog/line-product/store').then(data => {
                             this.items.push(data.model)
+                            this.close()
                         }).catch(errors => {
                             console.log(errors);
                         });
                     }
                 }
-                this.close()
+
             }
         }
      }

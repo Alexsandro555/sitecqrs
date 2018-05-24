@@ -18,7 +18,10 @@ class AttributeController extends Controller
      */
     public function index()
     {
-      return Attribute::all();
+      return [
+        "attributes" => Attribute::all(),
+        "sort" => Attribute::latest()->first()->sort
+      ];
     }
 
     /**

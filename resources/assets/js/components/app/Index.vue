@@ -53,28 +53,32 @@
                     { divider: true },
                     { heading: 'Действия' },
                     {
+                        text: 'Категории',
+                        path: '/categories'
+                    },
+                    {
                         text: 'Типы продуктов',
-                        path: '/admin/list-type-products'
+                        path: '/list-type-products'
                     },
                     {
                         text: 'Производители',
-                        path: '/admin/list-producers'
+                        path: '/list-producers'
                     },
                     {
                         text: 'Линейки продукции',
-                        path: '/admin/list-line-products'
+                        path: '/list-line-products'
                     },
                     {
                         text: 'Аттрибуты',
-                        path: '/admin/list-attributes'
+                        path: '/list-attributes'
                     },
                     {
                         text: 'Привязка атрибутов',
-                        path: '/admin/bind-attributes'
+                        path: '/bind-attributes'
                     },
                     {
                       text: 'Типы файлов',
-                      path: '/admin/type-files'
+                      path: '/type-files'
                     },
                     { divider: true },
                 ]
@@ -89,12 +93,12 @@
                 this.$router.push({name: 'table-products'})
             },
             exit() {
-                localStorage.setItem('isAdmin','false')
-                this.$store.dispatch('auth/disableAdmin')
-                this.$store.dispatch('auth/disableAdminView')
-                this.$router.push('/')
+                //localStorage.setItem('isAdmin','false')
+                //this.$store.dispatch('auth/disableAdmin')
+                //this.$store.dispatch('auth/disableAdminView')
+                //this.$router.push('/')
                 axios.get('/exit').then((response) => {
-
+                    document.location.href="/"
                 }).catch(err => {
                     console.log(err)
                 })

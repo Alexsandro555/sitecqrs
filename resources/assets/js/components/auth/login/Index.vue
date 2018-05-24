@@ -115,10 +115,11 @@
                 })*/
                 let obj = this.form;
                 axios({url: '/login', data: obj, method: 'POST'}).then(resp => {
-                    localStorage.setItem("isAdmin", "true")
-                    this.admin()
-                    this.adminView()
-                    this.$router.push('admin')
+                    document.location.href="/"
+                    //localStorage.setItem("isAdmin", "true")
+                    //this.admin()
+                    //this.adminView()
+                    //this.$router.push('admin')
                 }).catch(error => {
                     let response = error.response;
                     if(response.status === 422) {

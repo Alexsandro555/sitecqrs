@@ -27,7 +27,7 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-btn v-show="categories.length>0" color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline">{{ formTitle }}</span>
@@ -38,11 +38,24 @@
                             <v-layout wrap>
                                 <v-flex xs12 sm6 md12>
                                     <v-select
+                                            :items="categories"
+                                            v-model="editedItem.category_id"
+                                            item-text="title"
+                                            item-value="id"
+                                            label="Категория"
+                                            single-line
+                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
+                                            required
+                                    ></v-select>
+                                </v-flex>
+                                <v-flex xs12 sm6 md12>
+                                    <v-select
                                             :items="tnveds"
                                             v-model="editedItem.tnved_id"
                                             item-text="title"
                                             item-value="id"
                                             label="ТНВЭД"
+                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
                                             single-line
                                     ></v-select>
                                 </v-flex>
@@ -86,15 +99,20 @@
                 editedItem: new Form({
                         id: 0,
                         title: '',
-                        tnved_id: 1,
+                        tnved_id: null,
+                        category_id: null,
                         sort: ''
                     }),
                 defaultItem: new Form({
                     id: 0,
                     title: '',
-                    tnved_id: 1,
+                    tnved_id: null,
+                    category_id: null,
                     sort: ''
                 }),
+                requiredRules: [
+                    v => !!v || 'Обязательно для заполнения',
+                ],
                 titleRules: [
                     v => !!v || 'Наименование линейки продукта обязательно для заполнения',
                     v => v.length <=255 || 'Наименование линейки продукта должно иметь длину не более 255 символов'
@@ -102,6 +120,7 @@
                 dialog: false,
                 editedIndex: -1,
                 loader: true,
+                categories: [],
                 tnveds: [],
                 headers: [
                     {
@@ -122,6 +141,9 @@
                 this.loader = false;
                 this.items = response.data.typeProducts;
                 this.tnveds = response.data.tnveds;
+                this.categories = response.data.categories;
+                this.editedItem.sort = response.data.sort+1;
+                this.defaultItem.sort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
@@ -136,6 +158,7 @@
                     id: 0,
                     title: '',
                     tnved_id: 1,
+                    category_id: 1,
                     sort: ''
                 }), item)
                 this.dialog = true
@@ -165,6 +188,7 @@
                         let that = this;
                         Object.assign(that.items[that.editedIndex], that.editedItem)
                         this.editedItem.submit('post', '/catalog/type-product/update').then(data => {
+                            this.close()
                         }).catch(errors => {
                             console.log(errors);
                         });
@@ -173,12 +197,13 @@
                     if(this.$refs.form.validate()) {
                         this.editedItem.submit('post', '/catalog/type-product/store').then(data => {
                             this.items.push(data.model)
+                            this.close()
                         }).catch(errors => {
                             console.log(errors);
                         });
                     }
                 }
-                this.close()
+
             }
         }
      }

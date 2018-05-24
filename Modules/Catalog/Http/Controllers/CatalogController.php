@@ -131,4 +131,9 @@ class CatalogController extends Controller
       $product->attributes()->sync($arr);
       return ['message' => 'Успешно сохранено!'];
     }
+
+
+    public function specialProducts() {
+      return Product::with('files')->get();
+    }
 }

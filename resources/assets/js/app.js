@@ -1,3 +1,4 @@
+import sliderFullPage from "./store/modules/slider-full-page/state";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11,6 +12,8 @@ window.Vue = require('vue');
 
 import Vuex from 'vuex';
 import Vuetify from 'vuetify';
+import VueCarousel from 'vue-carousel';
+
 Vue.use(Vuetify);
 import 'material-design-icons/iconfont/material-icons.css'
 import 'vuetify/dist/vuetify.min.css'
@@ -19,6 +22,7 @@ import createStore from './store/states.js'
 import VueRouter from 'vue-router';
 Vue.use(Vuex);
 Vue.use(VueRouter);
+
 
 import site from './components/site';
 
@@ -29,6 +33,7 @@ Vue.component('cart-widget', require('../../../Modules/Cart/Resources/assets/js/
 Vue.component('dialog-registration', require('./components/auth/register'));
 Vue.component('dialog-login', require('./components/auth/login'));
 Vue.component('auth-widget', require('./components/auth/login-widget'));
+Vue.component('leader-slider', require('./components/leader/slider'));
 //Vue.component('tableProducts', require('./components/table-products'));
 
 
@@ -42,6 +47,7 @@ Vue.component('auth-widget', require('./components/auth/login-widget'));
 /* Возможно код ниже следуе вынести в отдельный файл route.js */
 import tableProducts from './components/product/table-products';
 import updateProduct from './components/product/create';
+import listCategories from './components/product/category/list';
 import listLineProducts from './components/product/line-product/list';
 import listTypeProducts from './components/product/type-product/list';
 import listProducers from './components/product/producer/list';
@@ -51,20 +57,22 @@ import typeFiles from './components/files/type-file';
 
 const routes = [
     //{path: '/', name: 'site', component: site},
-    {path: '/admin', name: 'table-products', component: tableProducts},
-    {path: '/admin/update-product/:id', name: 'update-product', component: updateProduct},
-    {path: '/admin/list-line-products', name: 'list-line-products', component: listLineProducts},
-    {path: '/admin/list-type-products', name: 'list-type-products', component: listTypeProducts},
-    {path: '/admin/list-producers', name: 'list-producers', component: listProducers},
-    {path: '/admin/list-attributes', name: 'list-attributes', component: listAttributes},
-    {path: '/admin/bind-attributes', name: 'bind-attributes', component: bindAttributes},
-    {path: '/admin/type-files', name: 'type-files', component: typeFiles}
+    {path: '/', name: 'table-products', component: tableProducts},
+    {path: '/update-product/:id', name: 'update-product', component: updateProduct},
+    {path: '/categories', name: 'categories', component: listCategories},
+    {path: '/list-line-products', name: 'list-line-products', component: listLineProducts},
+    {path: '/list-type-products', name: 'list-type-products', component: listTypeProducts},
+    {path: '/list-producers', name: 'list-producers', component: listProducers},
+    {path: '/list-attributes', name: 'list-attributes', component: listAttributes},
+    {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes},
+    {path: '/type-files', name: 'type-files', component: typeFiles}
 ];
 //import routes from './routes';
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
+    mode: 'history',
+    base: 'admin'
 })
 
 const app = new Vue({
@@ -173,12 +181,27 @@ const app = new Vue({
     mounted() {
     },
     computed: {
-      isAdminView() {
+        /*isAdminView() {
           return this.$store.state.auth.isAdminView;
-      },
-      isAdmin() {
+        },
+        isAdmin() {
           return this.$store.state.auth.isAdmin;
-      }
+        }*/
+        chickens() {
+          return this.$store.state.sliderFullPage.slides.chickens
+        },
+        cows() {
+          return this.$store.state.sliderFullPage.slides.cows
+        },
+        pigs() {
+            return this.$store.state.sliderFullPage.slides.pigs
+        },
+        rams() {
+            return this.$store.state.sliderFullPage.slides.rams
+        },
+        main() {
+            return this.$store.state.sliderFullPage.slides.main
+        },
     },
     methods: {
         login() {
@@ -194,6 +217,9 @@ const app = new Vue({
         },
         addCart(id) {
             this.$store.dispatch('cart/add', { id })
+        },
+        changeSlide(val) {
+            this.$store.dispatch('sliderFullPage/change',val)
         }
     }
 });

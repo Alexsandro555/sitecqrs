@@ -1,14 +1,14 @@
-.delivery {
-  margin: auto;
-  width: $main-width;
-}
-
 .delivery-wrapper {
+  width: 100%;
   //margin-top: 100px;
   background: url('#{$path}/light-tree.png') center center repeat;
   padding-bottom: 30px;
 }
 
+.delivery {
+  margin: auto;
+  width: $main-width;
+}
 
 .delivery__header {
   text-transform: uppercase;
@@ -22,24 +22,28 @@
   //margin-left: 10px;
 }
 
+.delivery__header--margin {
+  margin-left: 50px;
+}
+
 .delivery__subheader {
   color: $color-green-md-dark;
 }
 
 .delivery__buttom {
-  margin-right: 30px;
+  margin-right: 70px;
   margin-top: 30px;
   display: inline-block;
   background: none;
   border: 2px solid $color-green-md-dark;
   padding: 7px;
-  font-size: 1.3em;
-  color: $color-green-md-dark;
+  font-size: 1.2em;
+  color: $color-green-dark;
   text-transform: uppercase;
   @include border-radius(6px);
   text-decoration: none;
   font-family: $font-os-condenced-bold;
-  padding: 5px 20px;
+  padding: 5px 10px;
 }
 
 .delivery__desc {
@@ -53,10 +57,15 @@
 }
 
 .delivery__tel {
-  color: $color-green-md-dark;
+  color: $color-green-dark;
   font-family: $font-os-condenced-bold;
+  font-size: 1.1em;
 }
 
 .deliverty_tabl {
+  font-size: 1em;
+}
+
+.delivery__info {
   font-size: 1.1em;
 }
