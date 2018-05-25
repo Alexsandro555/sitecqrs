@@ -71,7 +71,7 @@
                                         </v-flex>
                                         <v-flex sm3 offset-sm3 class="hidden-md-and-down">
                                             <div class="phone text-xs-right">
-                                                c 8 до 22 <span class="phone__sun" @click.stop="login">без выходных</span><br>
+                                                c 8 до 22 <span class="phone__sun">без выходных</span><br>
                                                 <span class="phone__number">+7 (495) 780 44 96</span><br>
                                                 <a class="phone__callback" href="#">Заказать звонок</a>
                                             </div>

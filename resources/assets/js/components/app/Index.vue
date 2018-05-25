@@ -86,7 +86,6 @@
         },
         methods: {
             select(path) {
-                console.log(path)
                 this.$router.push(path);
             },
             goMainPage() {

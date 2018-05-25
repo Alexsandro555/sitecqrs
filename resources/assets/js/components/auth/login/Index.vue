@@ -93,6 +93,26 @@
                 this.disactive();
             },
             onSubmit() {
+                let obj = this.form;
+                /*axios.post('/login', {data: obj}).then(resp => {
+                    console.log('work')
+                }).catch(error => {
+                    console.log('err')
+                    let response = error.response;
+                    if(response.status === 422) {
+                        this.flagError = true
+                        const errors = response.data.errors
+                        for(var key in errors) {
+                            errors[key].forEach(item => {
+                                this.arrErrors.push({'key': key, 'val': item })
+                            })
+                        }
+                        setTimeout(() => {
+                            this.flagAlert = false
+                            this.arrErrors = []
+                        }, 4000);
+                    }
+                });*/
                 /*this.form.submit('post','/login').then(resp => {
                     localStorage.setItem("isAdmin", "true")
                     this.admin()
@@ -113,7 +133,7 @@
                         setTimeout(() => this.flagAlert = false, 2000);
                     }
                 })*/
-                let obj = this.form;
+
                 axios({url: '/login', data: obj, method: 'POST'}).then(resp => {
                     document.location.href="/"
                     //localStorage.setItem("isAdmin", "true")
@@ -121,6 +141,7 @@
                     //this.adminView()
                     //this.$router.push('admin')
                 }).catch(error => {
+                    console.log('err')
                     let response = error.response;
                     if(response.status === 422) {
                         this.flagError = true

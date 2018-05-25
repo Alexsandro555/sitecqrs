@@ -2,6 +2,7 @@ export default {
     namespaced: true,
     state: {
         active: false,
+        openRegistration: false,
         isAdmin: localStorage.getItem("isAdmin") === "true"? true: false,
         isAdminView: false
     },
@@ -23,6 +24,12 @@ export default {
         },
         disableAdmin({commit}) {
             commit('DISABLE_ADMIN')
+        },
+        registration({commit}) {
+            commit('REGISTRATION')
+        },
+        disableRegistration({commit}) {
+            commit('DISABLE_REGISTRATION')
         }
      },
     getters: {
@@ -48,6 +55,12 @@ export default {
         },
         DISABLE_ADMIN: (state) => {
             state.isAdmin = false
+        },
+        REGISTRATION: (state) => {
+            state.openRegistration = true
+        },
+        DISABLE_REGISTRATION: (state) => {
+            state.openRegistration = false
         }
     }
 }

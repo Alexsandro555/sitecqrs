@@ -19,7 +19,8 @@ class MainController extends Controller
   public function authenticated(Request $request) {
     $user = $request->user();
     if($user) {
-      if($user->admin == 1) return $user->name;
+      //if($user->admin == 1) return $user->name;
+      return $user->name;
     }
     return null;
   }

@@ -20,5 +20,9 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('exit', function() {
+  Auth::logout();
+});
+
 
 

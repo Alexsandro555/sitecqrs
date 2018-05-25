@@ -4,7 +4,8 @@
             <a class="login-widget" href="/admin">{{username}}</a>
         </div>
         <div v-else>
-            <a class="login-widget" @click.stop="onLogin" href="#">Войти</a>
+            <a class="login-widget" @click.stop="onLogin" href="#">Войти</a> |
+            <a class="login-widget" @click.stop="registration">Регистрация</a>
         </div>
     </div>
 </template>
@@ -30,6 +31,9 @@
             onAdmin() {
                 this.$store.dispatch('auth/adminView')
                 this.$router.push('admin')
+            },
+            registration() {
+                this.$store.dispatch('auth/registration')
             }
         }
      }

@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="registration" max-width="500px" class="text-xs-center">
+    <v-dialog v-model="openRegistration" max-width="500px" class="text-xs-center">
         <v-card>
             <v-card-media dark height="100px" class="register-head">
                 <v-flex xs11 offset-xs1 class="left">
@@ -51,19 +51,20 @@
             </v-card-title>
             <v-card-actions>
                 <v-btn color="green darken-4" dark @click.stop="register">Зарегистрироваться</v-btn>
-                <v-btn color="primary" flat @click.stop="registration=false">Закрыть</v-btn>
+                <v-btn color="primary" flat @click.stop="close">Закрыть</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
 </template>
 <script>
     import {Form} from '../../form/Form.js'
+    import { createNamespacedHelpers, mapActions } from 'vuex'
+    const {mapState} = createNamespacedHelpers('auth')
     export default {
         props: { },
         data: function() {
             return {
                 valid: false,
-                registration: false,
                 form: new Form({
                     name: '',
                     email: '',
@@ -89,18 +90,29 @@
                 e3: true
             }
         },
+        computed: {
+            ...mapState({
+                openRegistration: state => state.openRegistration,
+            })
+        },
         mounted: function() {
         },
         methods: {
+            ...mapActions('auth',[
+                'registration',
+                'disableRegistration'
+            ]),
             register() {
                 if(this.$refs.form.validate()) {
                     this.form.submit('post', '/register').then(data => {
-                        console.log(data);
-                        this.registration = false;
+                        this.disableRegistration();
                     }).catch(errors => {
                         console.log(errors)
                     });
                 }
+            },
+            close() {
+                this.disableRegistration();
             }
         }
      }
