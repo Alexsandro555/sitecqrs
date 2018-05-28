@@ -76046,7 +76046,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             editedItem: new __WEBPACK_IMPORTED_MODULE_0__form_Form_js__["a" /* Form */]({
                 id: 0,
                 title: '',
-                sort: ''
+                sort: 0
             }),
             defaultItem: new __WEBPACK_IMPORTED_MODULE_0__form_Form_js__["a" /* Form */]({
                 id: 0,
@@ -76077,6 +76077,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.loader = false;
             _this.items = response.data.categories;
             _this.editedItem.sort = response.data.sort + 1;
+            console.log(response.data.sort);
             _this.defaultItem.sort = response.data.sort + 1;
         }).catch(function (error) {});
     },
