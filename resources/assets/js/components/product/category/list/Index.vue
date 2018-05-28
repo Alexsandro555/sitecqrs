@@ -77,7 +77,7 @@
                 editedItem: new Form({
                     id: 0,
                     title: '',
-                    sort: ''
+                    sort: 0
                 }),
                 defaultItem: new Form({
                     id: 0,
@@ -110,6 +110,7 @@
                 this.loader = false;
                 this.items = response.data.categories;
                 this.editedItem.sort = response.data.sort+1;
+                console.log(response.data.sort)
                 this.defaultItem.sort = response.data.sort+1;
             }).catch(error => {});
         },
