@@ -15,10 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $sort = Category::latest()->first()->sort;
+        $category = Category::latest()->first();
         return [
           'categories' => Category::all(),
-          'sort' => $sort?$sort:1
+          'sort' => $category?$category->sort:1
         ];
     }
 

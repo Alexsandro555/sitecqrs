@@ -17,10 +17,10 @@ class ProducerController extends Controller
      */
     public function index()
     {
-      $sort = Producer::latest()->first()->sort;
+      $producer = Producer::latest()->first();
       return [
         "producers" => Producer::all(),
-        "sort" => $sort?$sort:1
+        "sort" => $producer?$producer->sort:1
       ];
     }
 
