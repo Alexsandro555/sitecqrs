@@ -293,7 +293,7 @@
             <dialog-registration></dialog-registration>
             <dialog-login></dialog-login>
         </v-app>
-        <!--Ко-->
+        <!--Коf-->
         <!--</div>-->
 </div>
 <script src="/js/app.js" type="application/javascript"></script>
