@@ -54,9 +54,9 @@ import listProducers from './components/product/producer/list';
 import listAttributes from './components/product/attribute/list';
 import bindAttributes from './components/product/attribute/binding';
 import typeFiles from './components/files/type-file';
+import banner from '../../../Modules/Banner/Resources/assets/js/Banner';
 
 const routes = [
-    //{path: '/', name: 'site', component: site},
     {path: '/', name: 'table-products', component: tableProducts},
     {path: '/update-product/:id', name: 'update-product', component: updateProduct},
     {path: '/categories', name: 'categories', component: listCategories},
@@ -65,9 +65,9 @@ const routes = [
     {path: '/list-producers', name: 'list-producers', component: listProducers},
     {path: '/list-attributes', name: 'list-attributes', component: listAttributes},
     {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes},
-    {path: '/type-files', name: 'type-files', component: typeFiles}
+    {path: '/type-files', name: 'type-files', component: typeFiles},
+    {path: '/banner', name: 'banner', component: banner},
 ];
-//import routes from './routes';
 
 const router = new VueRouter({
     routes,

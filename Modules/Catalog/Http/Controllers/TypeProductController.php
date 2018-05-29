@@ -17,11 +17,12 @@ class TypeProductController extends Controller
      */
     public function index()
     {
+      $typeProduct = TypeProduct::latest()->first();
       return [
         "categories" => Category::all(),
         "typeProducts" => TypeProduct::all(),
         "tnveds" => Tnved::all(),
-        "sort" => TypeProduct::latest()->first()->sort
+        "sort" => $typeProduct?$typeProduct->sort:0
       ];
     }
 

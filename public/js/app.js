@@ -13877,8 +13877,8 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(23);
-__webpack_require__(165);
-module.exports = __webpack_require__(166);
+__webpack_require__(168);
+module.exports = __webpack_require__(169);
 
 
 /***/ }),
@@ -13919,6 +13919,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_product_attribute_binding___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_product_attribute_binding__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_files_type_file__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_files_type_file___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_files_type_file__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__Modules_Banner_Resources_assets_js_Banner__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__Modules_Banner_Resources_assets_js_Banner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__Modules_Banner_Resources_assets_js_Banner__);
 
 
 /**
@@ -13974,10 +13976,8 @@ Vue.component('leader-slider', __webpack_require__(100));
 
 
 
-var routes = [
-//{path: '/', name: 'site', component: site},
-{ path: '/', name: 'table-products', component: __WEBPACK_IMPORTED_MODULE_9__components_product_table_products___default.a }, { path: '/update-product/:id', name: 'update-product', component: __WEBPACK_IMPORTED_MODULE_10__components_product_create___default.a }, { path: '/categories', name: 'categories', component: __WEBPACK_IMPORTED_MODULE_11__components_product_category_list___default.a }, { path: '/list-line-products', name: 'list-line-products', component: __WEBPACK_IMPORTED_MODULE_12__components_product_line_product_list___default.a }, { path: '/list-type-products', name: 'list-type-products', component: __WEBPACK_IMPORTED_MODULE_13__components_product_type_product_list___default.a }, { path: '/list-producers', name: 'list-producers', component: __WEBPACK_IMPORTED_MODULE_14__components_product_producer_list___default.a }, { path: '/list-attributes', name: 'list-attributes', component: __WEBPACK_IMPORTED_MODULE_15__components_product_attribute_list___default.a }, { path: '/bind-attributes', name: 'bind-attributes', component: __WEBPACK_IMPORTED_MODULE_16__components_product_attribute_binding___default.a }, { path: '/type-files', name: 'type-files', component: __WEBPACK_IMPORTED_MODULE_17__components_files_type_file___default.a }];
-//import routes from './routes';
+
+var routes = [{ path: '/', name: 'table-products', component: __WEBPACK_IMPORTED_MODULE_9__components_product_table_products___default.a }, { path: '/update-product/:id', name: 'update-product', component: __WEBPACK_IMPORTED_MODULE_10__components_product_create___default.a }, { path: '/categories', name: 'categories', component: __WEBPACK_IMPORTED_MODULE_11__components_product_category_list___default.a }, { path: '/list-line-products', name: 'list-line-products', component: __WEBPACK_IMPORTED_MODULE_12__components_product_line_product_list___default.a }, { path: '/list-type-products', name: 'list-type-products', component: __WEBPACK_IMPORTED_MODULE_13__components_product_type_product_list___default.a }, { path: '/list-producers', name: 'list-producers', component: __WEBPACK_IMPORTED_MODULE_14__components_product_producer_list___default.a }, { path: '/list-attributes', name: 'list-attributes', component: __WEBPACK_IMPORTED_MODULE_15__components_product_attribute_list___default.a }, { path: '/bind-attributes', name: 'bind-attributes', component: __WEBPACK_IMPORTED_MODULE_16__components_product_attribute_binding___default.a }, { path: '/type-files', name: 'type-files', component: __WEBPACK_IMPORTED_MODULE_17__components_files_type_file___default.a }, { path: '/banner', name: 'banner', component: __WEBPACK_IMPORTED_MODULE_18__Modules_Banner_Resources_assets_js_Banner___default.a }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_7_vue_router__["a" /* default */]({
     routes: routes,
@@ -67363,7 +67363,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, {
                 text: 'Типы файлов',
                 path: '/type-files'
-            }, { divider: true }]
+            }, { divider: true }, {
+                text: 'Баннеры',
+                path: '/banner'
+            }]
         };
     },
     methods: {
@@ -81318,12 +81321,389 @@ if (false) {
 
 /***/ }),
 /* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(166)
+/* template */
+var __vue_template__ = __webpack_require__(167)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "Modules/Banner/Resources/assets/js/Banner.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7703aaed", Component.options)
+  } else {
+    hotAPI.reload("data-v-7703aaed", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 166 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__resources_assets_js_components_files_mas_vue__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__resources_assets_js_components_files_mas_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__resources_assets_js_components_files_mas_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_assets_js_components_form_Form_js__ = __webpack_require__(4);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {},
+    data: function data() {
+        return {
+            valid: false,
+            flagAlert: false,
+            alertType: 'info',
+            resultMessage: '',
+            banners: [],
+            editedItem: new __WEBPACK_IMPORTED_MODULE_1__resources_assets_js_components_form_Form_js__["a" /* Form */]({
+                title: '',
+                description: ''
+            }),
+            defaultItem: new __WEBPACK_IMPORTED_MODULE_1__resources_assets_js_components_form_Form_js__["a" /* Form */]({
+                title: '',
+                description: ''
+            }),
+            titleRules: [function (v) {
+                return !!v || 'Название обязательно для заполнения';
+            }, function (v) {
+                return v.length <= 255 || 'Название должно иметь длину не более 255 символов';
+            }]
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/banner').then(function (response) {
+            _this.banners = response.data;
+        }).catch(function (err) {});
+    },
+
+    mounted: function mounted() {},
+    components: {
+        mas: __WEBPACK_IMPORTED_MODULE_0__resources_assets_js_components_files_mas_vue___default.a
+    },
+    methods: {
+        save: function save() {
+            var _this2 = this;
+
+            if (this.$refs.form.validate()) {
+                this.editedItem.submit('post', '/banner/save').then(function (response) {
+                    _this2.resultMessage = response.data.message;
+                    _this2.flagAlert = true;
+                    setTimeout(function () {
+                        return _this2.flagAlert = false;
+                    }, 2000);
+                    _this2.$refs.form.reset();
+                }).catch(function (errors) {
+                    console.log(errors);
+                });
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-flex",
+    { attrs: { xs4: "", offset4: "" } },
+    [
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "", "grid-list-md": "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs8: "", "offset-xs1": "" } },
+                    [
+                      _c(
+                        "v-form",
+                        {
+                          ref: "form",
+                          attrs: { "lazy-validation": "" },
+                          model: {
+                            value: _vm.valid,
+                            callback: function($$v) {
+                              _vm.valid = $$v
+                            },
+                            expression: "valid"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md12: "" } },
+                                [
+                                  _vm.flagAlert
+                                    ? _c(
+                                        "v-alert",
+                                        {
+                                          attrs: {
+                                            type: _vm.alertType,
+                                            value: true
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(_vm.resultMessage) +
+                                              "\n                                "
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      name: "title",
+                                      label: "Название",
+                                      rules: _vm.titleRules,
+                                      counter: 255,
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.editedItem.title,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "title", $$v)
+                                      },
+                                      expression: "editedItem.title"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      name: "description",
+                                      label: "Описание",
+                                      "multi-line": ""
+                                    },
+                                    model: {
+                                      value: _vm.editedItem.description,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItem,
+                                          "description",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItem.description"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "blue darken-1", flat: "" },
+                                  nativeOn: {
+                                    click: function($event) {
+                                      return _vm.save($event)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Сохранить")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.banners, function(banner) {
+        return _c(
+          "v-card",
+          { key: banner.id },
+          [
+            _c(
+              "v-container",
+              { attrs: { fluid: "", "grid-list-md": "" } },
+              [
+                _c(
+                  "v-layout",
+                  { attrs: { row: "", wrap: "" } },
+                  [
+                    _c(
+                      "v-flex",
+                      {
+                        staticClass: "text-xs-center",
+                        attrs: {
+                          xs8: "",
+                          "offset-xs1": "",
+                          center: "",
+                          "align-end": "",
+                          flexbox: ""
+                        }
+                      },
+                      [
+                        _c("h2", { staticClass: "text-xs-left" }, [
+                          _vm._v(_vm._s(banner.title))
+                        ]),
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(banner.description) +
+                            "\n                    "
+                        ),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("v-divider"),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("mas", {
+                          attrs: {
+                            url: "/files/upload",
+                            "fileable-id": banner.id,
+                            "type-files": ["banner"],
+                            model: "Modules\\Banner\\Entities\\Banner"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7703aaed", module.exports)
+  }
+}
+
+/***/ }),
+/* 168 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 166 */
+/* 169 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

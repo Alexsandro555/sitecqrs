@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $category = Category::latest()->first();
         return [
           'categories' => Category::all(),
-          'sort' => $category?$category->sort:1
+          'sort' => $category?$category->sort:0
         ];
     }
 

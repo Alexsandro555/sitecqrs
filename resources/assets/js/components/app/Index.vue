@@ -81,6 +81,10 @@
                       path: '/type-files'
                     },
                     { divider: true },
+                    {
+                        text: 'Баннеры',
+                        path: '/banner'
+                    }
                 ]
             }
         },

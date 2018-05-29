@@ -17,11 +17,12 @@ class LineProductController extends Controller
      */
     public function index()
     {
+      $producerTypeProduct = ProducerTypeProduct::latest()->first();
       return [
         "typeProducts" => TypeProduct::all(),
         "producers" => Producer::all(),
         "lineProducts" => ProducerTypeProduct::all(),
-        "sort" => ProducerTypeProduct::latest()->first()->sort
+        "sort" => $producerTypeProduct?$producerTypeProduct->sort:0
       ];
     }
 
