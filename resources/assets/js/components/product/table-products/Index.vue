@@ -22,7 +22,7 @@
             </template>
             <template slot="no-data">
                 <v-alert :value="true" color="error" icon="warning">
-                    Sorry, nothing to display here :(
+                    Извините, нет данных для отображения :(
                 </v-alert>
             </template>
         </v-data-table>

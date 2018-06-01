@@ -11,7 +11,7 @@ class Tnved extends Model
 
   protected $dates = ['deleted_at'];
 
-  protected $fillable = ['title','service','active'];
+  protected $fillable = ['code','title','active'];
 
   public function type_products()
   {

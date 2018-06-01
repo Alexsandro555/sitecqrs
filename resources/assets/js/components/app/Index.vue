@@ -57,6 +57,10 @@
                         path: '/categories'
                     },
                     {
+                        text: 'ТНВЭД',
+                        path: '/tnved'
+                    },
+                    {
                         text: 'Типы продуктов',
                         path: '/list-type-products'
                     },

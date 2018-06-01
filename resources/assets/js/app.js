@@ -55,6 +55,10 @@ import listAttributes from './components/product/attribute/list';
 import bindAttributes from './components/product/attribute/binding';
 import typeFiles from './components/files/type-file';
 import banner from '../../../Modules/Banner/Resources/assets/js/Banner';
+import tnved from './components/product/tnved/list';
+import swal from 'sweetalert';
+import initializer from "./store/modules/initializer";
+
 
 const routes = [
     {path: '/', name: 'table-products', component: tableProducts},
@@ -67,6 +71,7 @@ const routes = [
     {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes},
     {path: '/type-files', name: 'type-files', component: typeFiles},
     {path: '/banner', name: 'banner', component: banner},
+    {path: '/tnved', name: 'tnved', component: tnved}
 ];
 
 const router = new VueRouter({
@@ -178,8 +183,6 @@ const app = new Vue({
     components: {
       site
     },
-    mounted() {
-    },
     computed: {
         /*isAdminView() {
           return this.$store.state.auth.isAdminView;
@@ -202,6 +205,15 @@ const app = new Vue({
         main() {
             return this.$store.state.sliderFullPage.slides.main
         },
+    },
+    created() {
+        this.$store.dispatch('initializer/init')
+        for(let key in this.$store._modulesNamespaceMap) {
+            let name = this.$store._modulesNamespaceMap[key].state.name
+            if(name) {
+                this.$store.dispatch('initializer/fields',name)
+            }
+        }
     },
     methods: {
         login() {

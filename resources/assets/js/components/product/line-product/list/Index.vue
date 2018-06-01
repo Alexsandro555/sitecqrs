@@ -27,92 +27,85 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn v-show="typeProducts.length>0" color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
-            <v-card>
-                <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                    <v-container grid-list-md>
-                        <v-form ref="form" lazy-validation v-model="valid">
+            <v-btn color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-form ref="form" @submit.prevent="save" lazy-validation v-model="valid">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container grid-list-md>
                             <v-layout wrap>
-                                <v-flex xs12 sm6 md12>
-                                    <v-select
-                                            :items="typeProducts"
-                                            v-model="editedItem.type_product_id"
-                                            item-text="title"
-                                            item-value="id"
-                                            label="Тип продукции"
-                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
-                                            single-line
-                                    ></v-select>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-select
-                                            :items="producers"
-                                            v-model="editedItem.producer_id"
-                                            item-text="title"
-                                            item-value="id"
-                                            label="Производитель"
-                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
-                                            single-line
-                                    ></v-select>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="name_line"
-                                            label="Наименование линейки продукции"
-                                            v-model="editedItem.name_line"
-                                            :rules="titleRules"
-                                            :counter="255"
-                                            required></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="sort"
-                                            label="Сорт."
-                                            v-model="editedItem.sort"
-                                    ></v-text-field>
-                                </v-flex>
-                        </v-layout>
-                        </v-form>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
-                </v-card-actions>
-            </v-card>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-select
+                                                :items="typeProducts"
+                                                v-model="type_product_id"
+                                                item-text="title"
+                                                item-value="id"
+                                                label="Тип продукции"
+                                                :rules="selectedRules"
+                                                :error-messages="messages.type_product_id"
+                                                single-line
+                                        ></v-select>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-select
+                                                :items="producers"
+                                                v-model="producer_id"
+                                                item-text="title"
+                                                item-value="id"
+                                                label="Производитель"
+                                                :rules="selectedRules"
+                                                :error-messages="messages.producer_id"
+                                                single-line
+                                        ></v-select>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="name_line"
+                                                label="Наименование линейки продукции"
+                                                v-model="name_line"
+                                                :rules="titleRules"
+                                                :counter="255"
+                                                :error-messages="messages.name_line"
+                                                required></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="sort"
+                                                label="Сорт."
+                                                v-model="sort"
+                                                :rules="sortRules"
+                                                :error-messages="messages.sort"
+                                                required
+                                        ></v-text-field>
+                                    </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
+                        <v-btn color="blue darken-1" :disabled="loading" flat type="submit">Сохранить</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
         </div>
     </div>
 </template>
 <script>
-    import {Form} from '../../../form/Form.js'
+    import { createNamespacedHelpers } from 'vuex'
+    const {mapState, mapActions} = createNamespacedHelpers('initializer')
 
     export default {
         data: function() {
             return {
-                valid: false,
-                editedItem: new Form({
-                        id: 0,
-                        name_line: '',
-                        type_product_id: null,
-                        producer_id: null,
-                        sort: ''
-                    }),
-                defaultItem: new Form({
-                    id: 0,
-                    name_line: '',
-                    type_product_id: null,
-                    producer_id: null,
-                    sort: ''
-                }),
-                titleRules: [
-                    v => !!v || 'Наименование линейки продукта обязательно для заполнения',
-                    v => v.length <=255 || 'Наименование линейки продукта должно иметь длину не более 255 символов'
-                ],
+                id: null,
+                type_product_id: null,
+                producer_id: null,
+                name_line: null,
+                sort: null,
                 dialog: false,
                 editedIndex: -1,
                 loader: true,
@@ -129,7 +122,20 @@
                     { text: 'Сорт', value: 'sort' },
                     { text: 'Действия', sortable: false}
                 ],
-                items: []
+                items: [],
+                loading: false,
+                // валидация
+                valid: false,
+                titleRules: [
+                    v => this.required(v),
+                    v => v && v.length <=255 || 'Наименование линейки продукта должно иметь длину не более 255 символов'
+                ],
+                selectedRules: [
+                    v => this.selectRequired(v),
+                ],
+                sortRules: [
+                    v => this.required(v),
+                ]
             }
         },
         created() {
@@ -138,68 +144,89 @@
                 this.items = response.data.lineProducts;
                 this.typeProducts = response.data.typeProducts;
                 this.producers = response.data.producers;
-                this.editedItem.sort = response.data.sort+1;
-                this.defaultItem.sort = response.data.sort+1;
+                this.sort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
+            ...mapState({
+                messages: state => state.messages,
+            }),
             formTitle () {
                 return this.editedIndex === -1 ? 'Добавление линейки' : 'Редактирование линейки'
             }
         },
         methods: {
+            ...mapActions([
+                'resetError'
+            ]),
+            required(v) {
+                return !!v || 'Обязательно для заполнения'
+            },
+            selectRequired(v) {
+                return !!v || 'Необходимо выбрать значение'
+            },
             editItem (item) {
                 this.editedIndex = this.items.indexOf(item)
-                this.editedItem = Object.assign(new Form({
-                    id: 0,
-                    name_line: '',
-                    type_product_id: 1,
-                    producer_id: 1,
-                    sort: ''
-                }), item)
+                this.id = item.id
+                this.name_line = item.name_line
+                this.sort = item.sort
+                this.type_product_id = item.type_product_id
+                this.producer_id = item.producer_id
                 this.dialog = true
             },
             deleteItem (item) {
                 const index = this.items.indexOf(item)
                 if(confirm('Вы уверены что хотите удалить запись?')) {
                     axios.delete('/catalog/line-product/delete', {data: {id: this.items[index].id}}).then(response => {
+                        swal('', response.data.message, "success");
                     }).catch(error => {
-
                     });
                     this.items.splice(index, 1)
                 }
             },
-
             close () {
+                this.resetError()
                 this.dialog = false
+                this.loading = false
+                this.$refs.form.reset()
                 setTimeout(() => {
-                    this.editedItem = this.defaultItem;
-                    //this.editedItem = Object.assign({}, this.defaultItem)
                     this.editedIndex = -1
                 }, 300)
             },
             save () {
+                let data = {
+                    id: this.id,
+                    name_line: this.name_line,
+                    type_product_id: this.type_product_id,
+                    producer_id: this.producer_id,
+                    sort: this.sort
+                }
                 if (this.editedIndex > -1) {
                     if(this.$refs.form.validate()) {
-                        let that = this;
-                        Object.assign(that.items[that.editedIndex], that.editedItem)
-                        this.editedItem.submit('post', '/catalog/line-product/update').then(data => {
+                        this.loading = true
+                        Object.assign(this.items[this.editedIndex], data)
+                        axios.post('/catalog/line-product/update',data).then(response => {
+                            this.loading = true
+                            this.$refs.form.reset();
                             this.close()
-                        }).catch(errors => {
-                            console.log(errors);
+                            swal('', response.data.message, "success");
+                        }).catch(err => {
+                            this.valid = false
                         });
                     }
                 } else {
                     if(this.$refs.form.validate()) {
-                        this.editedItem.submit('post', '/catalog/line-product/store').then(data => {
-                            this.items.push(data.model)
+                        this.loading = true
+                        axios.post('/catalog/line-product/store', data).then(response => {
+                            this.items.push(response.data.model)
+                            this.loading = false
                             this.close()
-                        }).catch(errors => {
-                            console.log(errors);
+                            swal('', response.data.message, "success");
+                        }).catch(err => {
+                            this.valid = false
                         });
                     }
                 }
-
             }
         }
      }

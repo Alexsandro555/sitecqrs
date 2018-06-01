@@ -15,6 +15,7 @@ class CreateProducersTable extends Migration
     {
         Schema::create('producers', function (Blueprint $table) {
           $table->increments('id');
+          $table->integer('remote_id')->nullable();
           $table->string('title',255);
           $table->integer('sort');
           $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

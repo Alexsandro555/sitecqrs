@@ -15,6 +15,7 @@ class CreateProducerTypeProductTable extends Migration
     {
         Schema::create('producer_type_product', function (Blueprint $table) {
           $table->increments('id');
+          $table->integer('remote_id')->nullable();
           $table->string('name_line');
           $table->integer('sort');
           $table->integer('type_product_id')->length(11)->unsigned();

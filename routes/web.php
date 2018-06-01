@@ -24,5 +24,7 @@ Route::get('exit', function() {
   Auth::logout();
 });
 
+Route::get('/initializer/fields/{name}', 'Initializer\InitializerController@fields');
+
 
 

@@ -11,6 +11,59 @@ class Product extends Model
 
   protected $dates = ['deleted_at'];
 
+  protected $form = [
+    'id' => [
+      'primary' => true,
+      'type' => 'text',
+      'hidden' => true
+    ],
+    'title' => [
+      'type' => 'text',
+      'validation' => 'titleRules',
+    ],
+    'vendor' => [
+      'type' => 'text',
+    ],
+    'IEC' => [
+      'type' => 'text',
+    ],
+    'qty' => [
+      'type' => 'number',
+      'validation' => 'requiredRules'
+    ],
+    'sort' => [
+      'type' => 'number',
+    ],
+    'price' => [
+      'type' => 'decimal',
+      'validation' => 'priceRules'
+    ],
+    'description' => [
+      'type' => 'textarea'
+    ],
+    'onsale' => [
+      'type' => 'checkbox'
+    ],
+    'special' => [
+      'type' => 'checkbox'
+    ],
+    'need_order' => [
+      'type' => 'checkbox'
+    ],
+    'active' => [
+      'type' => 'checkbox'
+    ],
+    'type_product_id' => [
+      'type' => 'select-box'
+    ],
+    'producer_id' => [
+      'type' => 'select-box'
+    ],
+    'producer_type_product_id' => [
+      'type' => 'select-box'
+    ]
+  ];
+
   protected $fillable = [
     'id',
     'title',

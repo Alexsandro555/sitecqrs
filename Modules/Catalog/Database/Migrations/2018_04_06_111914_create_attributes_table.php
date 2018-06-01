@@ -16,6 +16,7 @@ class CreateAttributesTable extends Migration
         Schema::create('attributes', function (Blueprint $table) {
           $table->engine = 'InnoDB';
           $table->increments('id');
+          $table->integer('remote_id')->nullable();
           $table->integer('sort')->length(11)->unsigned();
           $table->string('title', 255);
           $table->string('alias', 255)->nullable();

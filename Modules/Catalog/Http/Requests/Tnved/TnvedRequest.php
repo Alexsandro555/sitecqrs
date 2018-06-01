@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Catalog\Http\Requests\TypeProduct;
+namespace Modules\Catalog\Http\Requests\Tnved;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TypeProductRequest extends FormRequest
+class TnvedRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,12 +13,11 @@ class TypeProductRequest extends FormRequest
      */
     public function rules()
     {
-      return [
-        'title' => 'required',
-        'tnved_id' => 'required',
-        'category_id' => 'required',
-        'sort' => 'required'
-      ];
+        return [
+          'title' => 'required',
+          'code' => 'required|integer',
+          'active' => 'required',
+        ];
     }
 
     /**

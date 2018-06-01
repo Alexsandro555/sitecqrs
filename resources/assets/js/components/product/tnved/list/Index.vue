@@ -7,9 +7,8 @@
                       hide-actions
                       class="elevation-1">
             <template slot="items" slot-scope="props">
-                <td>{{ props.item.id }}</td>
+                <td>{{ props.item.code }}</td>
                 <td class="text-xs-left">{{ props.item.title }}</td>
-                <td class="text-xs-left">{{ props.item.sort }}</td>
                 <td class="justify-center layout px-0">
                     <v-btn icon class="mx-0" @click="editItem(props.item)">
                         <v-icon color="teal">edit</v-icon>
@@ -24,7 +23,7 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
             <v-dialog  v-model="dialog" max-width="500px">
-                <v-btn color="primary"  dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+                <v-btn color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
                 <v-form ref="form" @submit.prevent="save" lazy-validation v-model="valid">
                     <v-card>
                         <v-card-title>
@@ -35,98 +34,92 @@
                                     <v-layout wrap>
                                         <v-flex xs12 sm6 md12>
                                             <v-text-field
+                                                    name="code"
+                                                    label="Номер ТНВЭД"
+                                                    v-model="code"
+                                                    :disabled="editedIndex!==-1"
+                                                    :rules="idRules"
+                                                    :counter="255"
+                                                    :error-messages="messages.code"
+                                                    required></v-text-field>
+                                            <v-text-field
                                                     name="title"
-                                                    label="Наименование категории"
+                                                    label="Названиие"
                                                     v-model="title"
                                                     :rules="titleRules"
-                                                    :counter="255"
                                                     :error-messages="messages.title"
+                                                    :counter="255"
                                                     required></v-text-field>
-                                        </v-flex>
-                                        <v-flex xs12 sm6 md12>
-                                            <v-text-field
-                                                    name="sort"
-                                                    label="Сорт."
-                                                    v-model="sort"
-                                                    :rules="sortRules"
-                                                    :error-messages="messages.sort"
-                                                    required
-                                            ></v-text-field>
+                                            <v-checkbox
+                                                    label="Актив."
+                                                    v-model="active"
+                                                    ></v-checkbox>
                                         </v-flex>
                                     </v-layout>
-                                <v-flex xs12>
-                                    <!--<mas v-if="id" url="/files/upload" :fileable-id="Number(id)" :type-files="['image-product']" model="Modules\Catalog\Entities\Catalog"></mas>-->
-                                </v-flex>
                             </v-container>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                            <v-btn color="blue darken-1" :disabled="loading" flat type="submit">Сохранить</v-btn>
+                            <v-btn type="submit" :disabled="loading" color="blue darken-1" flat>Сохранить</v-btn>
                         </v-card-actions>
-                </v-card>
+                    </v-card>
                 </v-form>
             </v-dialog>
         </div>
     </div>
 </template>
 <script>
-    import mas from '../../../files/mas.vue';
     import { createNamespacedHelpers } from 'vuex'
-
     const {mapState, mapActions} = createNamespacedHelpers('initializer')
 
     export default {
         data: function() {
             return {
-                id: null,
+                code: null,
                 title: null,
-                description: null,
-                sort: null,
+                active: null,
                 dialog: false,
                 editedIndex: -1,
                 loader: true,
                 loading: false,
                 headers: [
                     {
-                        text: '#',
+                        text: 'Код ТНВЭД',
                         align: 'left',
-                        sortable: false,
-                        value: 'id'
+                        value: 'code'
                     },
-                    { text: 'Название', align: 'left', value: 'title' },
-                    { text: 'Сорт', value: 'sort' },
+                    { text: 'Название', align: 'left', value: 'name_line' },
                     { text: 'Действия', sortable: false}
                 ],
                 items: [],
+                categories: [],
                 // Валидация
                 valid: false,
+                idRules: [
+                    v => this.required(v),
+                    v => /^[0-9].*$/.test(v) || 'Номер должен содержать только цифры',
+                ],
                 titleRules: [
                     v => this.required(v),
-                    v => v && v.length <=255 || 'Наименование должно иметь длину не более 255 символов'
-                ],
-                sortRules: [
-                    v => this.required(v),
+                    v => v && v.length <=255 || 'Название должно иметь длину не более 255 символов'
                 ]
             }
         },
         created() {
-            axios.get('/catalog/categories', {}).then(response => {
+            axios.get('/catalog/tnved').then(response => {
                 this.loader = false;
-                this.items = response.data.categories;
-                this.sort = response.data.sort+1;
-            }).catch(error => {});
+                this.items = response.data;
+            }).catch(error => {
+            });
         },
         computed: {
             ...mapState({
                 messages: state => state.messages,
             }),
             formTitle () {
-                return this.editedIndex === -1 ? 'Добавление новой категории' : 'Редактирование категории'
+                return this.editedIndex === -1 ? 'Добавление ТНВЭД' : 'Редактирование ТНВЭД'
             }
-        },
-        components: {
-          mas
         },
         methods: {
             ...mapActions([
@@ -137,17 +130,15 @@
             },
             editItem (item) {
                 this.editedIndex = this.items.indexOf(item)
-                this.id = item.id
+                this.active = item.active
                 this.title = item.title
-                this.sort = item.sort
-                this.description = item.description
+                this.code = item.code
                 this.dialog = true
             },
             deleteItem (item) {
                 const index = this.items.indexOf(item)
                 if(confirm('Вы уверены что хотите удалить запись?')) {
-                    axios.delete('/catalog/type-product/delete', {data: {id: this.items[index].id}}).then(response => {
-                        swal('', response.data.message, "success");
+                    axios.delete('/catalogt/tnved/delete', {data: {code: this.items[index].code}}).then(response => {
                     }).catch(error => {
 
                     });
@@ -158,23 +149,23 @@
                 this.resetError()
                 this.dialog = false
                 this.loading = false
-                this.$refs.form.reset()
+                this.$refs.form.reset();
                 setTimeout(() => {
                     this.editedIndex = -1
                 }, 300)
+                this.loading = false
             },
             save () {
                 let data = {
-                    id: this.id,
+                    code: this.code,
                     title: this.title,
-                    sort: this.sort
+                    active: this.active?this.active:false
                 }
-                if(this.editedIndex > -1) {
+                if (this.editedIndex > -1) {
                     if(this.$refs.form.validate()) {
                         this.loading = true
                         Object.assign(this.items[this.editedIndex], data)
-                        axios.post('/catalog/category/update',data).then(response => {
-                            this.loading = false
+                        axios.post('/catalog/tnved/update',data).then(response => {
                             this.$refs.form.reset();
                             this.close()
                             swal('', response.data.message, "success");
@@ -182,18 +173,17 @@
                             this.valid = false
                         });
                     }
-                }
-                else {
+                } else {
                     if(this.$refs.form.validate()) {
                         this.loading = true
-                        axios.post('/catalog/category/store', data).then(response => {
+                        axios.post('/catalog/tnved/store', data).then(response => {
                             this.items.push(response.data.model)
                             this.loading = false
                             this.close()
                             swal('', response.data.message, "success");
                         }).catch(err => {
                             this.valid = false
-                        });
+                        })
                     }
                 }
             }

@@ -184,6 +184,8 @@
         },
         methods: {
             selectTypeProduct(event) {
+                this.selAttrLineProduct = [];
+                this.selLineProduct = null;
                 if(event === null) return;
                 this.typeProductId = event;
                 this.lineProductId = 0;
@@ -197,7 +199,6 @@
                     console.log(error);
                 });
                 axios.get('/catalog/attribute/filtered/'+event, {}).then(response => {
-                    console.log(response.data)
                     this.attrFiltr = response.data
                 }).catch(error => {
                     console.log(error);
@@ -259,7 +260,7 @@
                 });
             },
             onRemoveTypeProductAttribute() {
-                axios.post("/catalog/attribute/remAttrTypeProd", {attr: this.selectedAttrTypeProduct}).then(function (response)
+                axios.post("/catalog/attribute/remAttrTypeProd", {attr: this.selectedAttrTypeProduct, type_product_id: this.selTypeProduct}).then(function (response)
                 {
                     location.reload();
                 }).catch(function (error)
@@ -268,7 +269,7 @@
                 });
             },
             onRemoveLineProductAttribute() {
-                axios.post("/catalog/attribute/remAttrLineProd", {attr: this.selAttrLineProduct}).then(function (response)
+                axios.post("/catalog/attribute/remAttrLineProd", {attr: this.selAttrLineProduct, producer_type_product_id: this.selLineProduct}).then(function (response)
                 {
                     location.reload();
                 }).catch(function (error)

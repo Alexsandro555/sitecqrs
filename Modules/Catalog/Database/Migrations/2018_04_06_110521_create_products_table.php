@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
           $table->engine = 'InnoDB';
           $table->increments('id');
+          $table->integer('remote_id')->nullable();
           $table->string('title', 255);
           $table->string('url_key', 255)->unique();
           $table->decimal('price',10,2);

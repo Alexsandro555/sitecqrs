@@ -127,6 +127,8 @@
     import mas from '../../files/mas.vue';
     import vueditor from '../../vueditor/dist/script/vueditor.min.js'
     import '../../vueditor/dist/style/vueditor.min.css'
+    import { createNamespacedHelpers } from 'vuex'
+    const productModule = createNamespacedHelpers('product')
     //import wysiwyg from '../../wysiwyg'
 
     export default {
@@ -194,6 +196,9 @@
           }
         },
         computed: {
+          ...productModule.mapState({
+              fields: state => state.fields
+          }),
           curTypeProduct() {
               return this.originalLinesProduct.filter(item => item.id === this.form.type_product_id)[0] || [];
           },
@@ -204,8 +209,6 @@
         created() {
             this.initial();
             this.getAttributes();
-        },
-        mounted() {
         },
         methods: {
             initializeEditor() {

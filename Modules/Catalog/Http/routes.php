@@ -42,8 +42,21 @@ Route::group(['middleware' => 'web', 'prefix' => 'catalog', 'namespace' => 'Modu
     'uses' => 'TypeProductController@destroy'
   ]);
 
+  //=========================ТВЭД===================================================
+  Route::get('/tnved', 'TnvedController@index');
+  Route::post('/tnved/store',
+    [
+      'before' => 'csrf',
+      'uses' => 'TnvedController@store'
+    ]);
+  Route::post('/tnved/update',
+    [
+      'before' => 'csrf',
+      'uses' => 'TnvedController@update'
+    ]);
 
-  //=========================Category============================================
+
+  //=========================Category================================================
   Route::get('/categories', 'CategoryController@index');
   Route::get('/category/create', 'CategoryController@create');
   Route::post('/category/store',

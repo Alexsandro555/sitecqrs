@@ -93,17 +93,17 @@ class CatalogController extends Controller
      */
     public function attributes($id) {
       $product = Product::find($id);
+      $lineAttributesCollection = collect();
+      $typeProductsCollection = collect();
+      if($product->type_product_id)
+      {
+        $typeProductsCollection = TypeProduct::find($product->type_product_id)->attributes;
+      }
       if($product->producer_type_product_id) {
-        return ProducerTypeProduct::find($product->producer_type_product_id)->attributes;
+        $lineAttributesCollection =  ProducerTypeProduct::find($product->producer_type_product_id)->attributes;
       }
-      else {
-        if($product->type_product_id){
-          return TypeProduct::find($product->type_product_id)->attributes;
-        }
-        else {
-          return [];
-        }
-      }
+      $result = $typeProductsCollection->concat($lineAttributesCollection);
+      return $result;
     }
 
     /**

@@ -27,96 +27,94 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn v-show="categories.length>0" color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
-            <v-card>
-                <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                    <v-container grid-list-md>
-                        <v-form ref="form" lazy-validation v-model="valid">
+            <v-btn color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-form ref="form" @submit.prevent="save" lazy-validation v-model="valid">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container grid-list-md>
                             <v-layout wrap>
-                                <v-flex xs12 sm6 md12>
-                                    <v-select
-                                            :items="categories"
-                                            v-model="editedItem.category_id"
-                                            item-text="title"
-                                            item-value="id"
-                                            label="Категория"
-                                            single-line
-                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
-                                            required
-                                    ></v-select>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-select
-                                            :items="tnveds"
-                                            v-model="editedItem.tnved_id"
-                                            item-text="title"
-                                            item-value="id"
-                                            label="ТНВЭД"
-                                            :rules="[v => !!v || 'Необходимо выбрать значение']"
-                                            single-line
-                                    ></v-select>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="title"
-                                            label="Наименование типа продукции"
-                                            v-model="editedItem.title"
-                                            :rules="titleRules"
-                                            :counter="255"
-                                            required></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="sort"
-                                            label="Сорт."
-                                            v-model="editedItem.sort"
-                                    ></v-text-field>
-                                </v-flex>
-                        </v-layout>
-                        </v-form>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
-                </v-card-actions>
-            </v-card>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-select
+                                                :items="categories"
+                                                v-model="category_id"
+                                                item-text="title"
+                                                item-value="id"
+                                                label="Категория"
+                                                single-line
+                                                :rules="categoryRules"
+                                                :error-messages="messages.category_id"
+                                                required
+                                        ></v-select>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-select
+                                                :items="tnveds"
+                                                v-model="tnved_id"
+                                                item-text="title"
+                                                item-value="code"
+                                                label="ТНВЭД"
+                                                :rules="tnvedRules"
+                                                :error-messages="messages.tnved_id"
+                                                single-line
+                                        ></v-select>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="title"
+                                                label="Наименование типа продукции"
+                                                v-model="title"
+                                                :rules="titleRules"
+                                                :counter="255"
+                                                :error-messages="messages.title"
+                                                required></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="description"
+                                                label="Описание"
+                                                v-model="description"
+                                                multi-line></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="sort"
+                                                label="Сорт."
+                                                v-model="sort"
+                                                :rules="sortRules"
+                                                :error-messages="messages.sort"
+                                                required
+                                        ></v-text-field>
+                                    </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
+                        <v-btn color="blue darken-1" flat :disabled="loading" type="submit">Сохранить</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
         </div>
     </div>
 </template>
 <script>
-    import {Form} from '../../../form/Form.js'
+    import { createNamespacedHelpers } from 'vuex'
+    const {mapState, mapActions} = createNamespacedHelpers('initializer')
 
     export default {
         data: function() {
             return {
-                valid: false,
-                editedItem: new Form({
-                        id: 0,
-                        title: '',
-                        tnved_id: null,
-                        category_id: null,
-                        sort: ''
-                    }),
-                defaultItem: new Form({
-                    id: 0,
-                    title: '',
-                    tnved_id: null,
-                    category_id: null,
-                    sort: ''
-                }),
-                requiredRules: [
-                    v => !!v || 'Обязательно для заполнения',
-                ],
-                titleRules: [
-                    v => !!v || 'Наименование линейки продукта обязательно для заполнения',
-                    v => v.length <=255 || 'Наименование линейки продукта должно иметь длину не более 255 символов'
-                ],
+                id: null,
+                title: null,
+                sort: null,
+                tnved_id: null,
+                category_id: null,
+                description: null,
                 dialog: false,
                 editedIndex: -1,
                 loader: true,
@@ -133,7 +131,23 @@
                     { text: 'Сорт', value: 'sort' },
                     { text: 'Действия', sortable: false}
                 ],
-                items: []
+                items: [],
+                loading: false,
+                // Валидация
+                valid: false,
+                titleRules: [
+                    v => this.required(v),
+                    v => v && v.length <=255 || 'Название типа продукта должно иметь длину не более 255 символов'
+                ],
+                categoryRules: [
+                    v => this.selectRequired(v),
+                ],
+                tnvedRules: [
+                    v => this.selectRequired(v),
+                ],
+                sortRules: [
+                    v => this.required(v),
+                ]
             }
         },
         created() {
@@ -142,68 +156,93 @@
                 this.items = response.data.typeProducts;
                 this.tnveds = response.data.tnveds;
                 this.categories = response.data.categories;
-                this.editedItem.sort = response.data.sort+1;
-                this.defaultItem.sort = response.data.sort+1;
-            }).catch(error => {});
+                this.sort = response.data.sort+1;
+            }).catch(error => {
+            });
         },
         computed: {
+            ...mapState({
+                messages: state => state.messages,
+            }),
             formTitle () {
                 return this.editedIndex === -1 ? 'Добавление нового типа продукта' : 'Редактирование типа продукта'
             }
         },
         methods: {
+            ...mapActions([
+                'resetError'
+            ]),
+            required(v) {
+                return !!v || 'Обязательно для заполнения'
+            },
+            selectRequired(v) {
+                return !!v || 'Необходимо выбрать значение'
+            },
             editItem (item) {
                 this.editedIndex = this.items.indexOf(item)
-                this.editedItem = Object.assign(new Form({
-                    id: 0,
-                    title: '',
-                    tnved_id: 1,
-                    category_id: 1,
-                    sort: ''
-                }), item)
+                this.id = item.id
+                this.title = item.title
+                this.sort = item.sort
+                this.description = item.description
+                this.category_id = item.category_id
+                this.tnved_id = item.tnved_id
                 this.dialog = true
             },
             deleteItem (item) {
                 const index = this.items.indexOf(item)
                 if(confirm('Вы уверены что хотите удалить запись?')) {
                     axios.delete('/catalog/type-product/delete', {data: {id: this.items[index].id}}).then(response => {
+                        swal('', response.data.message, "success");
                     }).catch(error => {
-
                     });
                     this.items.splice(index, 1)
                 }
             },
 
             close () {
+                this.resetError()
                 this.dialog = false
+                this.loading = false
+                this.$refs.form.reset()
                 setTimeout(() => {
-                    this.editedItem = this.defaultItem;
-                    //this.editedItem = Object.assign({}, this.defaultItem)
                     this.editedIndex = -1
                 }, 300)
             },
             save () {
+                let data = {
+                    id: this.id,
+                    title: this.title,
+                    description: this.description,
+                    category_id: this.category_id,
+                    tnved_id: this.tnved_id,
+                    sort: this.sort
+                }
                 if (this.editedIndex > -1) {
                     if(this.$refs.form.validate()) {
-                        let that = this;
-                        Object.assign(that.items[that.editedIndex], that.editedItem)
-                        this.editedItem.submit('post', '/catalog/type-product/update').then(data => {
+                        this.loading = true
+                        Object.assign(this.items[this.editedIndex], data)
+                        axios.post('/catalog/type-product/update',data).then(response => {
+                            this.loading = true
+                            this.$refs.form.reset();
                             this.close()
-                        }).catch(errors => {
-                            console.log(errors);
+                            swal('', response.data.message, "success");
+                        }).catch(err => {
+                            this.valid = false
                         });
                     }
                 } else {
                     if(this.$refs.form.validate()) {
-                        this.editedItem.submit('post', '/catalog/type-product/store').then(data => {
-                            this.items.push(data.model)
+                        this.loading = true
+                        axios.post('/catalog/type-product/store', data).then(response => {
+                            this.items.push(response.data.model)
+                            this.loading = false
                             this.close()
-                        }).catch(errors => {
-                            console.log(errors);
+                            swal('', response.data.message, "success");
+                        }).catch(err => {
+                            this.valid = false
                         });
                     }
                 }
-
             }
         }
      }

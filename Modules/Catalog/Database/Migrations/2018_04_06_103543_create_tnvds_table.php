@@ -14,14 +14,13 @@ class CreateTnvdsTable extends Migration
     public function up()
     {
       Schema::create('tnveds', function (Blueprint $table) {
-        $table->bigInteger('id');
+        $table->bigInteger('code');
+        $table->integer('remote_id')->nullable();
         $table->string('title',255);
-        $table->boolean('service')->default(false);
         $table->boolean('active')->default(false);
         $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         $table->softDeletes();
-        $table->primary('id');
       });
     }
 

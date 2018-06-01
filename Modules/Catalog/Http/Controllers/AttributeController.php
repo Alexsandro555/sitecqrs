@@ -111,17 +111,30 @@ class AttributeController extends Controller
 
     public function filteredAttr($id) {
       $attributes = Attribute::all();
-      $arr1 = [];
+      $arrAttributes = [];
       foreach ($attributes as $attribute) {
-        $arr1[$attribute["id"]] = $attribute["title"];
+        $arrAttributes[$attribute["id"]] = $attribute["title"];
       }
-      $arr2 = [];
-      foreach (TypeProduct::find($id)->attributes as $attribute) {
-        $arr2[$attribute["id"]] = $attribute["title"];
+      $typeProduct = TypeProduct::find($id);
+      if($typeProduct) {
+        $arr2 = [];
+        foreach ($typeProduct->attributes as $attribute) {
+          $arr2[$attribute["id"]] = $attribute["title"];
+        }
+        $arrAttributes = array_diff($arrAttributes,$arr2);
+
+        foreach($typeProduct->producer_type_products as $producerTypeProduct) {
+          if($producerTypeProduct) {
+            $arr = [];
+            foreach ($producerTypeProduct->attributes as $attribute) {
+              $arr[$attribute["id"]] = $attribute["title"];
+            }
+            $arrAttributes = array_diff($arrAttributes,$arr);
+          }
+        }
       }
-      $arrResult = array_diff($arr1,$arr2);
       $arrT = [];
-      foreach ($arrResult as $key=>$arr) {
+      foreach ($arrAttributes as $key=>$arr) {
         $temp['id'] = $key;
         $temp['title'] = $arr;
         $arrT[] = $temp;
@@ -129,29 +142,41 @@ class AttributeController extends Controller
       return $arrT;
     }
 
-  /**
-   * Get Attributes
-   */
-  public function filteredAttrLine($id)
-  {
-    $attributes = Attribute::all();
-    $arr1 = [];
-    foreach ($attributes as $attribute) {
-      $arr1[$attribute["id"]] = $attribute["title"];
+    /**
+     * Get Attributes
+     */
+    public function filteredAttrLine($id)
+    {
+      $attributes = Attribute::all();
+      $arrAttributes = [];
+      foreach ($attributes as $attribute) {
+        $arrAttributes[$attribute["id"]] = $attribute["title"];
+      }
+      $producerTypeProduct = ProducerTypeProduct::find($id);
+      if($producerTypeProduct) {
+        $arr2 = [];
+        foreach ($producerTypeProduct->attributes as $attribute) {
+          $arr2[$attribute["id"]] = $attribute["title"];
+        }
+        $arrAttributes = array_diff($arrAttributes,$arr2);
+
+        $typeProduct = $producerTypeProduct->type_product;
+        if($typeProduct) {
+          $arr = [];
+          foreach ($typeProduct->attributes as $attribute) {
+            $arr[$attribute["id"]] = $attribute["title"];
+          }
+          $arrAttributes = array_diff($arrAttributes,$arr);
+        }
+      }
+      $arrT = [];
+      foreach ($arrAttributes as $key=>$arr) {
+        $temp['id'] = $key;
+        $temp['title'] = $arr;
+        $arrT[] = $temp;
+      }
+      return $arrT;
     }
-    $arr2 = [];
-    foreach (ProducerTypeProduct::find($id)->attributes as $attribute) {
-      $arr2[$attribute["id"]] = $attribute["title"];
-    }
-    $arrResult = array_diff($arr1,$arr2);
-    $arrT = [];
-    foreach ($arrResult as $key=>$arr) {
-      $temp['id'] = $key;
-      $temp['title'] = $arr;
-      $arrT[] = $temp;
-    }
-    return $arrT;
-  }
 
   /**
    * @param Request $request
@@ -188,15 +213,17 @@ class AttributeController extends Controller
 
   public function remAttrTypeProd(Request $request) {
     $attr = $request->attr;
+    $type_product_id = $request->type_product_id;
     foreach ($attr as $item) {
-      DB::table('attributables')->where('attribute_id', $item)->where('attributable_type', 'Modules\Catalog\Entities\TypeProduct')->delete();
+      DB::table('attributables')->where('attribute_id', $item)->where('attributable_type', 'Modules\Catalog\Entities\TypeProduct')->where('attributable_id',$type_product_id)->delete();
     }
   }
 
   public function remAttrLineProd(Request $request) {
     $attr = $request->attr;
+    $producer_type_product_id = $request->producer_type_product_id;
     foreach ($attr as $item) {
-      DB::table('attributables')->where('attribute_id', $item)->where('attributable_type', 'Modules\Catalog\Entities\ProducerTypeProduct')->delete();
+      DB::table('attributables')->where('attribute_id', $item)->where('attributable_type', 'Modules\Catalog\Entities\ProducerTypeProduct')->where('attributable_id',$producer_type_product_id)->delete();
     }
   }
 }

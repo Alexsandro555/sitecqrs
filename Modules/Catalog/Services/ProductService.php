@@ -19,7 +19,6 @@ class ProductService
       $product->title = 'По умолчанию';
       $product->url_key = 'po-umolchaniyu';
       $product->price = 0;
-      $product->type_product_id = 1;
       $product->sort = 1;
       $product->qty = 1;
       $product->active = 1;

@@ -28,70 +28,57 @@
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
             <v-btn color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
-            <v-card>
-                <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                    <v-container grid-list-md>
-                        <v-form ref="form" lazy-validation v-model="valid">
-                            <v-layout wrap>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="title"
-                                            label="Название атрибута"
-                                            v-model="editedItem.title"
-                                            :rules="titleRules"
-                                            :counter="255"
-                                            required></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md12>
-                                    <v-text-field
-                                            name="sort"
-                                            label="Сорт."
-                                            :rules="sortRules"
-                                            v-model="editedItem.sort"
-                                            required
-                                    ></v-text-field>
-                                </v-flex>
-                        </v-layout>
-                        </v-form>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-form ref="form" @submit.prevent="save" lazy-validation v-model="valid">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container grid-list-md>
+                                <v-layout wrap>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="title"
+                                                label="Название атрибута"
+                                                v-model="title"
+                                                :rules="titleRules"
+                                                :counter="255"
+                                                :error-messages="messages.title"
+                                                required></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12 sm6 md12>
+                                        <v-text-field
+                                                name="sort"
+                                                label="Сорт."
+                                                :rules="sortRules"
+                                                v-model="sort"
+                                                :error-messages="messages.sort"
+                                                required
+                                        ></v-text-field>
+                                    </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
+                        <v-btn color="blue darken-1" flat type="submit">Сохранить</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
         </div>
     </div>
 </template>
 <script>
-    import {Form} from '../../../form/Form.js'
+    import { createNamespacedHelpers } from 'vuex'
+    const {mapState, mapActions} = createNamespacedHelpers('initializer')
 
     export default {
         data: function() {
             return {
-                valid: false,
-                editedItem: new Form({
-                        id: 0,
-                        title: '',
-                        sort: ''
-                    }),
-                defaultItem: new Form({
-                    id: 0,
-                    title: '',
-                    sort: ''
-                }),
-                titleRules: [
-                    v => !!v || 'Наименование атрибута обязательно для заполнения',
-                    v => v.length <=255 || 'Наименование атрибута должно иметь длину не более 255 символов'
-                ],
-                sortRules: [
-                  v => !!v || 'Сортировка обязательная для заполнения'
-                ],
+                title: null,
+                sort: null,
                 dialog: false,
                 editedIndex: -1,
                 loader: true,
@@ -106,73 +93,115 @@
                     { text: 'Сорт', value: 'sort' },
                     { text: 'Действия', sortable: false}
                 ],
-                items: []
+                items: [],
+                loading: false,
+                // валидация
+                valid: false,
+                titleRules: [
+                    v => this.required(v),
+                    v => v && v.length <=255 || 'Наименование атрибута должно иметь длину не более 255 символов'
+                ],
+                sortRules: [
+                    v => this.required(v),
+                ]
             }
         },
         created() {
             axios.get('/catalog/attribute', {}).then(response => {
                 this.loader = false;
                 this.items = response.data.attributes;
-                this.editedItem.sort = response.data.sort+1;
-                this.defaultItem.sort = response.data.sort+1;
+                this.sort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
+            ...mapState({
+                messages: state => state.messages,
+            }),
             formTitle () {
                 return this.editedIndex === -1 ? 'Добавление атрибута' : 'Редактирование атрибута'
             }
         },
         methods: {
+            ...mapActions([
+                'resetError'
+            ]),
+            required(v) {
+                return !!v || 'Обязательно для заполнения'
+            },
             editItem (item) {
                 this.editedIndex = this.items.indexOf(item)
-                this.editedItem = Object.assign(new Form({
-                    id: 0,
-                    title: '',
-                    sort: ''
-                }), item)
+                this.id = item.id
+                this.title = item.title
+                this.sort = item.sort
                 this.dialog = true
             },
             deleteItem (item) {
                 const index = this.items.indexOf(item)
                 if(confirm('Вы уверены что хотите удалить запись?')) {
                     axios.delete('/catalog/attribute/delete', {data: {id: this.items[index].id}}).then(response => {
+                        swal('', response.data.message, "success");
                     }).catch(error => {
-
                     });
                     this.items.splice(index, 1)
                 }
             },
-
             close () {
+                this.resetError()
                 this.dialog = false
+                this.loading = false
+                this.$refs.form.reset()
                 setTimeout(() => {
-                    this.editedItem = this.defaultItem;
-                    //this.editedItem = Object.assign({}, this.defaultItem)
                     this.editedIndex = -1
                 }, 300)
             },
             save () {
+                let data = {
+                    id: this.id,
+                    title: this.title,
+                    sort: this.sort
+                }
                 if (this.editedIndex > -1) {
                     if(this.$refs.form.validate()) {
-                        let that = this;
-                        Object.assign(that.items[that.editedIndex], that.editedItem)
-                        this.editedItem.submit('post', '/catalog/attribute/update').then(data => {
+                        this.loading = true
+                        Object.assign(this.items[this.editedIndex], data)
+                        axios.post('/catalog/attribute/update',data).then(response => {
+                            this.loading = true
+                            this.$refs.form.reset();
                             this.close()
-                        }).catch(errors => {
-                            console.log(errors);
+                            swal('', response.data.message, "success");
+                        }).catch(err => {
+                            this.valid = false
                         });
                     }
                 } else {
                     if(this.$refs.form.validate()) {
-                        this.editedItem.submit('post', '/catalog/attribute/store').then(data => {
-                            this.items.push(data.model)
+                        this.loading = true
+                        axios.post('/catalog/attribute/store', data).then(response => {
+                            this.items.push(response.data.model)
+                            this.loading = false
                             this.close()
-                        }).catch(errors => {
-                            console.log(errors);
+                            swal('', response.data.message, "success");
+                        }).catch(err => {
+                            this.valid = false
                         });
                     }
                 }
-
+            },
+            errorHandler(err) {
+                this.valid = false
+                this.loading = false
+                let errorType = err.response.status
+                if(errorType == 422) {
+                    let errors = err.response.data.errors
+                    if(errors) {
+                        for(let field in errors) {
+                            this.messages[field].push(errors[field])
+                        }
+                    }
+                }
+                else {
+                    swal(errorType.toString(), err.response.data.message, "error");
+                }
             }
         }
      }
