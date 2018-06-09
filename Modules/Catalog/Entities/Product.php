@@ -4,63 +4,41 @@ namespace Modules\Catalog\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\RelationTrait;
 
 class Product extends Model
 {
   use SoftDeletes;
 
+  use RelationTrait;
+
   protected $dates = ['deleted_at'];
 
-  protected $form = [
-    'id' => [
-      'primary' => true,
-      'type' => 'text',
-      'hidden' => true
-    ],
+  public $form = ['id','title','vendor','IEC','qty','sort','price','description','onsale','special','need_order','active','type_product','producer_type_product','producer'];
+
+  public $validations = [
     'title' => [
-      'type' => 'text',
-      'validation' => 'titleRules',
+      'required' => true,
+      'max' => 255,
     ],
     'vendor' => [
-      'type' => 'text',
+      'max' => 12,
     ],
     'IEC' => [
-      'type' => 'text',
-    ],
-    'qty' => [
-      'type' => 'number',
-      'validation' => 'requiredRules'
-    ],
-    'sort' => [
-      'type' => 'number',
+      'max' => 12,
     ],
     'price' => [
-      'type' => 'decimal',
-      'validation' => 'priceRules'
+      'required' => true,
+      'regex' => '^[0-9].*$',
+      'max' => 12
     ],
-    'description' => [
-      'type' => 'textarea'
+    'qty' => [
+      'required' => true,
+      'regex' => '^[0-9].*$',
     ],
-    'onsale' => [
-      'type' => 'checkbox'
-    ],
-    'special' => [
-      'type' => 'checkbox'
-    ],
-    'need_order' => [
-      'type' => 'checkbox'
-    ],
-    'active' => [
-      'type' => 'checkbox'
-    ],
-    'type_product_id' => [
-      'type' => 'select-box'
-    ],
-    'producer_id' => [
-      'type' => 'select-box'
-    ],
-    'producer_type_product_id' => [
-      'type' => 'select-box'
+    'sort' => [
+      'required' => true,
+      'regex' => '^[0-9].*$',
     ]
   ];
 
@@ -102,6 +80,10 @@ class Product extends Model
 
   public function producer_type_product() {
     return $this->belongsTo('Modules\Catalog\Entities\ProducerTypeProduct');
+  }
+
+  public function producer() {
+    return $this->belongsTo('Modules\Catalog\Entities\Producer');
   }
 
   public function setTitleAttribute($value)

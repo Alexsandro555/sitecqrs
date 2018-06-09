@@ -4,10 +4,13 @@ namespace Modules\Catalog\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\RelationTrait;
 
 class TypeProduct extends Model
 {
   use SoftDeletes;
+
+  use RelationTrait;
 
   protected $fillable = [
     'id',

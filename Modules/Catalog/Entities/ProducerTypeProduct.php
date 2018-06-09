@@ -9,6 +9,8 @@ class ProducerTypeProduct extends Model
 {
   protected $table = 'producer_type_product';
 
+  public $name = 'name_line';
+
   //use SoftDeletes;
 
   protected $fillable = [

@@ -63,8 +63,15 @@ class CatalogController extends Controller
      * @param ProductRequest $productRequest
      * @return array
      */
-    public function update(ProductRequest $productRequest)
+    public function update(Request $productRequest)
     {
+      // тут добавить сохранение продукта
+      $product = Product::find($productRequest->id);
+      $relationships = $product->getRelationships();
+      foreach ($relationships as $key => $relationship) {
+        $relatinshipModel = $relationship["model"]::find($productRequest[$key]);
+        $relatinshipModel->products()->save($product);
+      }
       $request = $productRequest->except('_token');
       $normTitle = str_replace("/"," ",$request["title"]);
       $request["url_key"] = \Slug::make($normTitle);

@@ -58,6 +58,7 @@ import banner from '../../../Modules/Banner/Resources/assets/js/Banner';
 import tnved from './components/product/tnved/list';
 import swal from 'sweetalert';
 import initializer from "./store/modules/initializer";
+import product from "../../../Modules/Catalog/Resources/assets/js/components/product/Add"
 
 
 const routes = [
@@ -71,7 +72,8 @@ const routes = [
     {path: '/bind-attributes', name: 'bind-attributes', component: bindAttributes},
     {path: '/type-files', name: 'type-files', component: typeFiles},
     {path: '/banner', name: 'banner', component: banner},
-    {path: '/tnved', name: 'tnved', component: tnved}
+    {path: '/tnved', name: 'tnved', component: tnved},
+    {path: '/testForm', name: 'test-form', component: product}
 ];
 
 const router = new VueRouter({
@@ -82,6 +84,9 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
+    $_veeValidate: {
+        validator: 'new'
+    },
     router,
     store: new Vuex.Store(createStore()),
     data: {
