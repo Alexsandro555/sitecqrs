@@ -4,12 +4,15 @@ namespace Modules\Catalog\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\RelationTrait;
 
 class ProducerTypeProduct extends Model
 {
   protected $table = 'producer_type_product';
 
   public $name = 'name_line';
+
+  use RelationTrait;
 
   //use SoftDeletes;
 

@@ -73,7 +73,7 @@ const routes = [
     {path: '/type-files', name: 'type-files', component: typeFiles},
     {path: '/banner', name: 'banner', component: banner},
     {path: '/tnved', name: 'tnved', component: tnved},
-    {path: '/testForm', name: 'test-form', component: product}
+    {path: '/testForm/:id', name: 'test-form', component: product}
 ];
 
 const router = new VueRouter({

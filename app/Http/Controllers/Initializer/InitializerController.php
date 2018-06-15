@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\File;
+use Mockery\Exception;
 
 class InitializerController extends Controller
 {
@@ -14,16 +15,22 @@ class InitializerController extends Controller
       $arrResult = [];
       $tableName = $name.'s';
       $columns = Schema::getColumnListing($tableName);
-      $primaryKey = \DB::select(\DB::raw("SELECT k.column_name FROM information_schema.table_constraints t JOIN information_schema.key_column_usage k USING(constraint_name, table_schema, table_name) WHERE t.constraint_type='PRIMARY KEY' AND t.table_schema=schema() AND t.table_name='".$tableName."'"))[0]->column_name;
-      foreach ($columns as $column) {
-        $arr=[];
-        $arr['type'] = Schema::getColumnType($tableName,$column);
-        $arr['label'] = \DB::select(\DB::raw("SELECT COLUMN_COMMENT FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$tableName."' AND COLUMN_NAME='".$column."'"))[0]->COLUMN_COMMENT;
-        if($column === $primaryKey) {
-          $arr['primary'] = true;
+      if($columns) {
+        $primaryKey = \DB::select(\DB::raw("SELECT k.column_name FROM information_schema.table_constraints t JOIN information_schema.key_column_usage k USING(constraint_name, table_schema, table_name) WHERE t.constraint_type='PRIMARY KEY' AND t.table_schema=schema() AND t.table_name='".$tableName."'"))[0]->column_name;
+        foreach ($columns as $column) {
+          $arr=[];
+          $arr['type'] = Schema::getColumnType($tableName,$column);
+          $arr['label'] = \DB::select(\DB::raw("SELECT COLUMN_COMMENT FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$tableName."' AND COLUMN_NAME='".$column."'"))[0]->COLUMN_COMMENT;
+          if($column === $primaryKey) {
+            $arr['primary'] = true;
+          }
+          $arrResult[$column] = $arr;
         }
-        $arrResult[$column] = $arr;
       }
+      else {
+        throw new Exception("Не могу получить данные из таблицы ".$tableName);
+      }
+
 
       $directories = \Illuminate\Support\Facades\File::directories(base_path().'/Modules');
       $form = [];
@@ -44,19 +51,22 @@ class InitializerController extends Controller
           $relationships = $model->getRelationships();
           foreach ($relationships as $key => $relationship) {
             $arr = [];
+            $arrKeys = [];
             if($relationship["type"] == 'BelongsTo') {
               $model = new $relationship["model"];
               $arr['type'] = 'selectbox';
               $arr['title'] = $model->name?$model->name:'title';
               $arr['label'] = \DB::select(\DB::raw("SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_NAME = '".$relationship["table"]."'"))[0]->TABLE_COMMENT;
-             /* $modelRelationship = new $relationship["model"];
+              $modelRelationship = new $relationship["model"];
               $subRelationships = $modelRelationship->getRelationships();
               foreach($subRelationships as $keyRel => $subRelationship) {
-                if($subRelationship["type"] == 'HasMany') {
-                  $arr['items'] = $relationship["model"]::withCount($keyRel)->get();
+                if($subRelationship["type"] == 'HasMany' || $subRelationship["type"] == 'BelongsToMany') {
+                  $arrKeys[] = $keyRel;
                 }
-              }*/
-              $arr['items'] = $relationship["model"]::all();
+              }
+              $arr['items'] = $relationship["model"]::with($arrKeys)->get();
+              $arr['relations'] = $arrKeys;
+              //$arr['items'] = $relationship["model"]::all();
               $arrResult[$key] = $arr;
             }
           }

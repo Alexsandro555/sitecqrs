@@ -27,10 +27,7 @@ class CatalogController extends Controller
      */
     public function create(ProductService $productService)
     {
-      return [
-        'typeProducts' => TypeProduct::with('producers')->orderBy('sort', 'asc')->get(),
-        'defaultProduct' => $productService->createDefault()
-      ];
+      return $productService->createDefault();
     }
 
 
@@ -53,10 +50,8 @@ class CatalogController extends Controller
      */
     public function edit($id)
     {
-      return [
-        'typeProducts' => TypeProduct::with('producers')->orderBy('sort', 'asc')->get(),
-        'product' => Product::find($id)
-      ];
+      return Product::with(['type_product','producer','producer_type_product'])->where('id',$id)->first();
+      //return Product::find($id);
     }
 
     /**
@@ -66,13 +61,18 @@ class CatalogController extends Controller
     public function update(Request $productRequest)
     {
       // тут добавить сохранение продукта
+      $arrExcept = [];
       $product = Product::find($productRequest->id);
       $relationships = $product->getRelationships();
       foreach ($relationships as $key => $relationship) {
-        $relatinshipModel = $relationship["model"]::find($productRequest[$key]);
-        $relatinshipModel->products()->save($product);
+        if($relationship["type"] == 'BelongsTo') {
+          $relatinshipModel = $relationship["model"]::find($productRequest[$key]);
+          $relatinshipModel->products()->save($product);
+          $arrExcept[] = $key;
+        }
       }
-      $request = $productRequest->except('_token');
+      $arrExcept[]  = '_token';
+      $request = $productRequest->except($arrExcept);
       $normTitle = str_replace("/"," ",$request["title"]);
       $request["url_key"] = \Slug::make($normTitle);
       Product::where('id', $request["id"])->update($request);

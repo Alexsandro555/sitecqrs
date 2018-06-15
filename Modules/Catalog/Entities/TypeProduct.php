@@ -39,9 +39,9 @@ class TypeProduct extends Model
     return $this->belongsToMany('Modules\Catalog\Entities\Producer')->withPivot('id','name_line','sort');
   }
 
-  public function files() {
+  /*public function files() {
     return $this->morphMany('Leader\UploadFile\Models\File', 'fileable');
-  }
+  }*/
 
   public function attributes() {
     return $this->morphToMany('Modules\Catalog\Entities\Attribute', 'attributable');

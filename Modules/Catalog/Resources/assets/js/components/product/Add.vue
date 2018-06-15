@@ -1,31 +1,35 @@
 <template>
     <v-flex xs8>
         <v-toolbar color="indigo darken-1" dark tabs>
-                <v-tabs slot="extension" left v-model="tabs" slider-color="white" color="transparent">
-                    <v-tab href="#main" class="subheading">Основные параметры</v-tab>
-                    <v-tab href="#attributes" class="subheading">Аттрибуты</v-tab>
-                </v-tabs>
-            </v-toolbar>
-        <v-tabs-items v-model="tabs">
-            <v-tab-item key="main" :id="'main'">
-                <v-card>
-                    <v-container fluid grid-list-md>
-                        <v-layout row wrap>
-                            <v-flex xs2></v-flex>
-                                <v-flex xs8 center align-end flexbox>
-                                    <div>
-                                        <v-form ref="form" lazy-validation v-model="valid">
-                                            <template v-for="(field, num) in fields">
-                                                <form-builder :field="field" :num="num" :items="items" @update="updateItem"></form-builder>
-                                            </template>
-                                            <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
-                                        </v-form>
-                                    </div>
-                                </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-card>
-            </v-tab-item>
+            <v-tabs slot="extension" left v-model="tabs" slider-color="white" color="transparent">
+                <v-tab href="#main" class="subheading">Основные параметры</v-tab>
+                <v-tab href="#attributes" class="subheading">Аттрибуты</v-tab>
+            </v-tabs>
+        </v-toolbar>
+    <v-tabs-items v-model="tabs">
+        <v-tab-item key="main" :id="'main'">
+            <v-card>
+                <v-container fluid grid-list-md>
+                    <v-layout row wrap>
+                        <v-flex xs2></v-flex>
+                            <v-flex xs8 center align-end flexbox>
+                                <div>
+                                    <v-form ref="form" lazy-validation v-model="valid">
+                                        <template v-for="(field, num) in fields">
+                                            <form-builder :field="field" :num="num" :items="items" @update="updateItem"></form-builder>
+                                        </template>
+                                        <file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>
+                                        <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
+                                    </v-form>
+                                </div>
+                            </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-card>
+        </v-tab-item>
+        <v-tab-item key="attributes" :id="'attributes'">
+            <product-attributes :attributes="attributes" :id="this.$route.params.id"></product-attributes>
+        </v-tab-item>
         </v-tabs-items>
     </v-flex>
 </template>
@@ -33,6 +37,8 @@
     import { createNamespacedHelpers } from 'vuex'
     const module = createNamespacedHelpers('product')
     import formBuilder from '../../../../../../../resources/assets/js/components/form/builder/FormBuilder'
+    import fileBox from './../../../../../../../Modules/Files/Resources/assets/js/components/file-box/FileBox'
+    import productAttributes from './attributes/Attributes';
     export default {
         props: { },
         data: function() {
@@ -41,53 +47,81 @@
                 valid: false,
             }
         },
-        mounted: function() {
-            //console.log("Val: ", this.$store.state.product.items)
+        mounted() {
+            this.initial()
+            this.getAttributes()
         },
         computed: {
             ...module.mapState({
                 fields: state => state.fields,
                 items: state => state.items,
+                typeFiles: state => state.typeFiles,
+                model: state => state.model,
+                attributes: state => state.attributes
             }),
         },
         watch: {
-            items: function (newItems, oldItems) {
-                if(newItems.type_product !== oldItems.type_product) {
-                    //console.log(this.$data)
-                    if(this.fields && this.fields.type_product) {
-                        console.log(this.fields.type_product.items.filter(item => item.id === newItems.type_product))
-                    }
-                    //
-                    //this.originalLinesProduct.filter(item => item.id === this.form.type_product_id)[0] || [];
-                }
+            '$route' (to, from) {
+                this.initial();
             }
         },
         components: {
-          formBuilder
+            formBuilder,
+            fileBox,
+            productAttributes
         },
         methods: {
+            initial() {
+                if(this.$route.params.id == -1) {
+                    this.$store.dispatch('product/create').then(response => {
+                        this.updateRelations()
+                    }).catch(error => {})
+                } else {
+                    this.$store.dispatch('product/update',this.$route.params.id).then(response => {
+                        this.updateRelations()
+                    }).catch(error => {})
+                }
+            },
+            updateRelations() {
+                this.$store.dispatch('product/updateRelations',this.items.type_product)
+            },
             updateItem(obj) {
                 this.$store.dispatch('product/updateItem', obj)
             },
             /*...mapActions('product',[
                 'updateItem'
             ]),*/
-
-            onSubmit() { /*
+            onSubmit() {
                 if(this.$refs.form.validate()) {
-                    axios.post('/catalog/update', {id: '7', title: this.title, vendor: this.vendor, IEC: this.IEC, price: this.price,
-                        description: this.description, qty: this.qty, sort: this.sort, onsale: this.onsale,
-                        special: this.special, need_order: this.need_order, active: this.active,
-                        type_product: this.type_product, producer: this.producer, producer_type_product: this.producer_type_product }).then(response => {
-                        }).catch(err => {
+                    axios.post('/catalog/update', this.items).then(response => {
+                        if(this.$route.params.id === '-1') {
+                            this.$router.push({ name: 'table-products'})
+                        }
+                        else {
+                            let data = response.data
+                            /*for(let key in data.model) {
+                                if(this.form.hasOwnProperty(key) && data.model[key] !== null) {
+                                    this.form[key] = data.model[key]
+                                }
+                            }*/
+                            this.$store.dispatch('product/resetAttributes')
+                            this.getAttributes()
+                        }
+
+                    }).catch(err => {
                             console.log(err)
-                        })
+                    })
                     }
                     else {
                         return;
-                    }*/
+                    }
 
             },
+            getAttributes() {
+                if(this.$route.params.id !== '-1') {
+                    this.$store.dispatch('product/attributes',this.$route.params.id)
+                }
+            }
         }
      }
 </script>

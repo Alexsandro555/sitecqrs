@@ -78,12 +78,12 @@ class Product extends Model
     return $this->morphMany('Modules\Files\Entities\File', 'fileable');
   }
 
-  public function producer_type_product() {
-    return $this->belongsTo('Modules\Catalog\Entities\ProducerTypeProduct');
-  }
-
   public function producer() {
     return $this->belongsTo('Modules\Catalog\Entities\Producer');
+  }
+
+  public function producer_type_product() {
+    return $this->belongsTo('Modules\Catalog\Entities\ProducerTypeProduct');
   }
 
   public function setTitleAttribute($value)

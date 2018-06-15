@@ -12,6 +12,10 @@
 */
 
 Route::get('/', ['uses' => 'main\MainController@index', 'as' => 'main']);
+Route::get('/test', function () {
+  $product = Modules\Catalog\Entities\Product::with('type_product')->get();
+  dd($product);
+});
 Route::get('authenticated', 'main\MainController@authenticated');
 Route::get('/admin', ['uses' => 'Admin\AdminController@index', 'as' => 'admin'])->middleware('admin');
 Route::get('/demo', 'main\MainController@mas');
