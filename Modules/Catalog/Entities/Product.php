@@ -5,67 +5,101 @@ namespace Modules\Catalog\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\RelationTrait;
+use App\Traits\TableColumnsTrait;
 
 class Product extends Model
 {
   use SoftDeletes;
 
   use RelationTrait;
+  use TableColumnsTrait;
 
   protected $dates = ['deleted_at'];
 
-  public $form = ['id','title','vendor','IEC','qty','sort','price','description','onsale','special','need_order','active','type_product','producer_type_product','producer'];
-
-  public $validations = [
+  public $form = [
+    'id' => [
+      'enabled' => true
+    ],
     'title' => [
-      'required' => true,
-      'max' => 255,
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+        'max' => 255
+      ]
     ],
     'vendor' => [
-      'max' => 12,
+      'enabled' => true,
+      'validations' => [
+        'max' => 12
+      ]
     ],
     'IEC' => [
-      'max' => 12,
+      'enabled' => true,
+      'validations' => [
+        'max' => 12
+      ]
     ],
     'price' => [
-      'required' => true,
-      'regex' => '^[0-9].*$',
-      'max' => 12
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+        'regex' => '^[0-9].*$',
+        'max' => 12
+      ]
     ],
     'qty' => [
-      'required' => true,
-      'regex' => '^[0-9].*$',
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+        'regex' => '^[0-9].*$',
+      ]
     ],
     'sort' => [
-      'required' => true,
-      'regex' => '^[0-9].*$',
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+        'regex' => '^[0-9].*$',
+      ]
+    ],
+    'description' => [
+      'enabled' => true
+    ],
+    'onsale' => [
+      'enabled' => true
+    ],
+    'special' => [
+      'enabled' => true
+    ],
+    'need_order' => [
+      'enabled' => true
+    ],
+    'active' => [
+      'enabled' => true
+    ],
+    'type_product' => [
+      'enabled' => true
+    ],
+    'producer_type_product' => [
+      'enabled' => true
+    ],
+    'producer' => [
+      'enabled' => true
     ]
   ];
 
-  protected $fillable = [
-    'id',
-    'title',
-    'url_key',
-    'price',
-    'description',
-    'qty',
-    'active',
-    'sort',
-    'onsale',
-    'special',
-    'need_order',
-    'type_product_id',
-    'producer_type_product_id',
-    'producer_id',
-    'vendor',
-    'IEC'
-  ];
-
+  protected $guarded = [];
 
   public function type_product() {
     return $this->belongsTo('Modules\Catalog\Entities\TypeProduct');
   }
 
+  public function producer() {
+    return $this->belongsTo('Modules\Catalog\Entities\Producer');
+  }
+
+  public function producer_type_product() {
+    return $this->belongsTo('Modules\Catalog\Entities\ProducerTypeProduct');
+  }
 
   public function attributes() {
     return $this->belongsToMany('Modules\Catalog\Entities\Attribute')->withPivot('value');
@@ -76,14 +110,6 @@ class Product extends Model
    */
   public function files() {
     return $this->morphMany('Modules\Files\Entities\File', 'fileable');
-  }
-
-  public function producer() {
-    return $this->belongsTo('Modules\Catalog\Entities\Producer');
-  }
-
-  public function producer_type_product() {
-    return $this->belongsTo('Modules\Catalog\Entities\ProducerTypeProduct');
   }
 
   public function setTitleAttribute($value)

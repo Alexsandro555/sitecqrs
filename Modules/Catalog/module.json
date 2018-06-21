@@ -6,7 +6,8 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\Catalog\\Providers\\CatalogServiceProvider"
+        "Modules\\Catalog\\Providers\\CatalogServiceProvider",
+        "Modules\\Catalog\\Providers\\ProductServiceProvider"
     ],
     "aliases": {},
     "files": [

@@ -26,11 +26,6 @@ export default {
         },
         resetError({commit}) {
             commit('RESET_ERROR')
-        },
-        fields({ commit, dispatch }, name) {
-            axios.get('/initializer/fields/'+name).then(response => {
-                dispatch('product/setFields',response.data, {root: true})
-            }).catch(err => {})
         }
     },
     getters: {},

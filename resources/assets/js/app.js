@@ -63,7 +63,7 @@ import product from "../../../Modules/Catalog/Resources/assets/js/components/pro
 
 const routes = [
     {path: '/', name: 'table-products', component: tableProducts},
-    {path: '/update-product/:id', name: 'update-product', component: updateProduct},
+    {path: '/update-product/:id', name: 'update-product', component: product},
     {path: '/categories', name: 'categories', component: listCategories},
     {path: '/list-line-products', name: 'list-line-products', component: listLineProducts},
     {path: '/list-type-products', name: 'list-type-products', component: listTypeProducts},
@@ -213,12 +213,6 @@ const app = new Vue({
     },
     created() {
         this.$store.dispatch('initializer/init')
-        for(let key in this.$store._modulesNamespaceMap) {
-            let name = this.$store._modulesNamespaceMap[key].state.name
-            if(name) {
-                this.$store.dispatch('initializer/fields',name)
-            }
-        }
     },
     methods: {
         login() {

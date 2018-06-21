@@ -47,8 +47,10 @@
                 valid: false,
             }
         },
+        created() {
+            this.setFields()
+        },
         mounted() {
-            this.initial()
             this.getAttributes()
         },
         computed: {
@@ -71,6 +73,11 @@
             productAttributes
         },
         methods: {
+            setFields() {
+                this.$store.dispatch('product/setFields').then(response => {
+                    this.initial()
+                }).catch(error => {})
+            },
             initial() {
                 if(this.$route.params.id == -1) {
                     this.$store.dispatch('product/create').then(response => {
