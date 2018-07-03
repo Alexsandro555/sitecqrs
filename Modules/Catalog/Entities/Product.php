@@ -36,6 +36,7 @@ class Product extends Model
     'IEC' => [
       'enabled' => true,
       'validations' => [
+        'required' => true,
         'max' => 16
       ]
     ],
