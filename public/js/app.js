@@ -83085,7 +83085,7 @@ var ValidationConvert = function () {
                 if (key == 'max') {
                     result.push(function (v) {
                         if (v) {
-                            return v.length <= params[key] || 'Название должно иметь длину не более ' + params[key] + ' символов';
+                            return v.length <= params[key] || 'Допустимо не более ' + params[key] + ' символов';
                         } else {
                             return true;
                         }
