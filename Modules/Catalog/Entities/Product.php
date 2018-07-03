@@ -77,13 +77,22 @@ class Product extends Model
       'enabled' => true
     ],
     'type_product' => [
-      'enabled' => true
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+      ]
     ],
     'producer_type_product' => [
-      'enabled' => true
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+      ]
     ],
     'producer' => [
-      'enabled' => true
+      'enabled' => true,
+      'validations' => [
+        'required' => true,
+      ]
     ]
   ];
 

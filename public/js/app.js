@@ -83021,6 +83021,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -83242,6 +83244,8 @@ var render = function() {
                           "item-text": _vm.field.title,
                           "item-value": "id",
                           label: _vm.field.label,
+                          rules: _vm.getRules(_vm.field.validations),
+                          required: _vm.getRequired(_vm.field.validations),
                           "single-line": ""
                         },
                         on: {

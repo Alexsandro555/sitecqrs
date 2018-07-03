@@ -55,6 +55,8 @@
                   :item-text="field.title"
                   item-value="id"
                   :label="field.label"
+                  :rules="getRules(field.validations)"
+                  :required="getRequired(field.validations)"
                   @change="updateItem($event,num)"
                   single-line></v-select>
     </div>
