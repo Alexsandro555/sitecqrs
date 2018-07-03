@@ -30,21 +30,20 @@ class Product extends Model
     'vendor' => [
       'enabled' => true,
       'validations' => [
-        'max' => 16
+        'max' => 15
       ]
     ],
     'IEC' => [
       'enabled' => true,
       'validations' => [
-        'required' => true,
-        'max' => 16
+        'max' => 15
       ]
     ],
     'price' => [
       'enabled' => true,
       'validations' => [
         'required' => true,
-        'regex' => '^[0-9].*$',
+        'regex' => '\d+.$',
         'max' => 12
       ]
     ],
