@@ -91,6 +91,7 @@
             ]),
             close() {
                 this.disactive();
+                this.$refs.form.reset()
             },
             onSubmit() {
                 let obj = this.form;

@@ -149,7 +149,9 @@
                 this.resetError()
                 this.dialog = false
                 this.loading = false
+                const sort = this.sort
                 this.$refs.form.reset()
+                this.sort = sort
                 setTimeout(() => {
                     this.editedIndex = -1
                 }, 300)

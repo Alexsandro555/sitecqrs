@@ -198,12 +198,13 @@
                     this.items.splice(index, 1)
                 }
             },
-
             close () {
                 this.resetError()
                 this.dialog = false
                 this.loading = false
+                const sort = this.sort
                 this.$refs.form.reset()
+                this.sort = sort
                 setTimeout(() => {
                     this.editedIndex = -1
                 }, 300)
@@ -225,7 +226,7 @@
                             this.loading = true
                             this.$refs.form.reset();
                             this.close()
-                            swal('', response.data.message, "success");
+                            //swal('', response.data.message, "success");
                         }).catch(err => {
                             this.valid = false
                         });
@@ -237,7 +238,6 @@
                             this.items.push(response.data.model)
                             this.loading = false
                             this.close()
-                            swal('', response.data.message, "success");
                         }).catch(err => {
                             this.valid = false
                         });

@@ -68692,6 +68692,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["createNam
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapActions"])('auth', ['disactive', 'adminView', 'admin']), {
         close: function close() {
             this.disactive();
+            this.$refs.form.reset();
         },
         onSubmit: function onSubmit() {
             var _this = this;
@@ -76412,7 +76413,9 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
             this.resetError();
             this.dialog = false;
             this.loading = false;
+            var sort = this.sort;
             this.$refs.form.reset();
+            this.sort = sort;
             setTimeout(function () {
                 _this3.editedIndex = -1;
             }, 300);
@@ -77029,7 +77032,9 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.resetError();
             this.dialog = false;
             this.loading = false;
+            var sort = this.sort;
             this.$refs.form.reset();
+            this.sort = sort;
             setTimeout(function () {
                 _this3.editedIndex = -1;
             }, 300);
@@ -77715,7 +77720,9 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.resetError();
             this.dialog = false;
             this.loading = false;
+            var sort = this.sort;
             this.$refs.form.reset();
+            this.sort = sort;
             setTimeout(function () {
                 _this3.editedIndex = -1;
             }, 300);
@@ -77739,7 +77746,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                         _this4.loading = true;
                         _this4.$refs.form.reset();
                         _this4.close();
-                        swal('', response.data.message, "success");
+                        //swal('', response.data.message, "success");
                     }).catch(function (err) {
                         _this4.valid = false;
                     });
@@ -77751,7 +77758,6 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                         _this4.items.push(response.data.model);
                         _this4.loading = false;
                         _this4.close();
-                        swal('', response.data.message, "success");
                     }).catch(function (err) {
                         _this4.valid = false;
                     });
@@ -78371,7 +78377,9 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.resetError();
             this.dialog = false;
             this.loading = false;
+            var sort = this.sort;
             this.$refs.form.reset();
+            this.sort = sort;
             setTimeout(function () {
                 _this3.editedIndex = -1;
             }, 300);
@@ -78946,7 +78954,9 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.resetError();
             this.dialog = false;
             this.loading = false;
+            var sort = this.sort;
             this.$refs.form.reset();
+            this.sort = sort;
             setTimeout(function () {
                 _this3.editedIndex = -1;
             }, 300);
@@ -82367,7 +82377,9 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.resetError();
             this.dialog = false;
             this.loading = false;
+            var sort = this.sort;
             this.$refs.form.reset();
+            this.sort = sort;
             setTimeout(function () {
                 _this3.editedIndex = -1;
             }, 300);
