@@ -12,7 +12,7 @@
                 @vdropzone-removed-file="fileRemoved"
                 @vdropzone-sending="vsending"
                 id="customdropzone"
-                :destroyDropzone="true">
+                :destroyDropzone="false">
         </vue-dropzone>
     </div>
 </template>

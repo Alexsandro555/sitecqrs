@@ -69285,23 +69285,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -69400,13 +69383,21 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "special-product__img" }, [
-                  _c("img", { attrs: { src: "/images/special-product.png" } })
+                  item.file
+                    ? _c("img", {
+                        attrs: { src: "/storage/" + item.file.medium.filename }
+                      })
+                    : _c("img", {
+                        attrs: { src: "/images/no-image.png", width: "150px" }
+                      })
                 ]),
+                _vm._v(" "),
+                _c("br"),
                 _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "special-product__desc text-xs-center" },
-                  [_vm._v("Сделан на заказ из стандартных компонентов")]
+                  [_vm._v("Сделан на заказ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -74379,6 +74370,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //console.log(message.message)
         },
         fileRemoved: function fileRemoved(file) {
+            if (this.$children[0]._isBeingDestroyed) {
+                // Dropzone has a bug that removes the file on destruction
+                // https://github.com/enyo/dropzone/issues/1175
+                return;
+            }
+
             var id = undefined;
             if (file.xhr) {
                 var resp = JSON.parse(file.xhr.response);
@@ -83571,7 +83568,7 @@ var render = function() {
           options: _vm.dropzoneOptions,
           "include-styling": false,
           id: "customdropzone",
-          destroyDropzone: true
+          destroyDropzone: false
         },
         on: {
           "vdropzone-thumbnail": _vm.thumbnail,

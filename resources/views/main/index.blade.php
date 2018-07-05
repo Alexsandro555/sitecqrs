@@ -23,7 +23,7 @@
                <a class="content__buttom" href="#">В каталог <v-icon color="yellow darken-2" medium>keyboard_arrow_right</v-icon></a>
             </v-flex>
             <v-flex class="text-md-center" offset-md3 offset-xs1 lg9 md8 sm9 xs10>
-                <leader-slider :perpage=3 url="/catalog/special-products" :per-custom="[[200, 1], [480, 1], [720, 1], [960, 2], [1270, 3]]"></leader-slider>
+                <leader-slider :perpage=3 url="/catalog/special-products" :per-custom="[[200, 1], [480, 1], [720, 2], [960, 2], [1280, 3]]"></leader-slider>
             </v-flex>
          </v-layout>
       </v-flex>

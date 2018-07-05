@@ -224,7 +224,7 @@
                                                         </span>
                                                     </v-flex>
                                                     <v-flex xs4 class="footer__address text-xs-right">
-                                                        <v-flex offset-md4 class="text-xs-left footer-right">
+                                                        <v-flex offset-md4 class="text-xs-left footer__address--margbot10 footer-right">
                                                             <img align="top" src="{{asset('images/footer-mail-img.png')}}"/>
                                                             <span class="footer__mail">info@mail.ru</span><br>
                                                             <img align="top" src="{{asset('images/footer-map-marker-img.png')}}"/>

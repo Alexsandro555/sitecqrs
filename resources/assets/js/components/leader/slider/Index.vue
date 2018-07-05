@@ -7,9 +7,11 @@
                         <a href="'/catalog/detail/'+item.slug">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a>
                     </div>
                     <div class="special-product__img">
-                        <img src="/images/special-product.png"/>
+                        <img v-if="item.file" :src="'/storage/'+item.file.medium.filename" />
+                        <img v-else src="/images/no-image.png" width="150px"/>
                     </div>
-                    <div class="special-product__desc text-xs-center">Сделан на заказ из стандартных компонентов</div>
+                    <br>
+                    <div class="special-product__desc text-xs-center">Сделан на заказ</div>
                     <v-layout col wrap>
                         <v-flex xs8 class="special-product__price text-xs-center">
                             <span>{{Math.floor(item.price)}}</span> руб.
@@ -19,25 +21,6 @@
                         </v-flex>
                     </v-layout>
                 </div>
-                <!--<div class="product-wrapper">
-                    <div class="product">
-                        <div class="product-image">
-                            <template v-for="(file, index) in item.file">
-                                <img v-if="index === 'medium'" :src="'/storage/'+file.filename"/>
-                            </template>
-                            <img v-if="!item.file" :src="'/storage/no-image.png'" height="200px"/>
-                        </div>
-                        <div class="product-name"><a :href="'/catalog/detail/'+item.slug">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a></div>
-                        <div class="product-desc">
-                            Сделан на заказ из стандартных компонентов
-                            <hr class="product-hr">
-                            <div>
-                                <span class="product-price">{{Math.floor(item.price)}}</span><span class="product-rub"> руб.</span>
-                                <a href="#" @click.prevent="addCart(item.id)"><img src="/storage/product-cart.png"/></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
             </slide>
         </carousel>
     </div>

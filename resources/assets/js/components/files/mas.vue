@@ -133,6 +133,13 @@
                 //console.log(message.message)
             },
             fileRemoved(file)  {
+                if (this.$children[0]._isBeingDestroyed) {
+                    // Dropzone has a bug that removes the file on destruction
+                    // https://github.com/enyo/dropzone/issues/1175
+                    return;
+                }
+
+
                 let id = undefined;
                 if(file.xhr) {
                     let resp = JSON.parse(file.xhr.response)
