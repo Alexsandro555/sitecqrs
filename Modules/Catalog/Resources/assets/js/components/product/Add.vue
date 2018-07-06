@@ -1,37 +1,40 @@
 <template>
-    <v-flex xs8>
-        <v-toolbar color="indigo darken-1" dark tabs>
-            <v-tabs slot="extension" left v-model="tabs" slider-color="white" color="transparent">
-                <v-tab href="#main" class="subheading">Основные параметры</v-tab>
-                <v-tab href="#attributes" class="subheading">Аттрибуты</v-tab>
-            </v-tabs>
-        </v-toolbar>
-    <v-tabs-items v-model="tabs">
-        <v-tab-item key="main" :id="'main'">
-            <v-card>
-                <v-container fluid grid-list-md>
-                    <v-layout row wrap>
-                        <v-flex xs2></v-flex>
-                            <v-flex xs8 center align-end flexbox>
-                                <div>
-                                    <v-form ref="form" lazy-validation v-model="valid">
-                                        <template v-for="(field, num) in fields">
-                                            <form-builder :field="field" :num="num" :items="items" @update="updateItem"></form-builder>
-                                        </template>
-                                        <file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>
-                                        <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
-                                    </v-form>
-                                </div>
-                            </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-card>
-        </v-tab-item>
-        <v-tab-item key="attributes" :id="'attributes'">
-            <product-attributes :attributes="attributes" :id="this.$route.params.id"></product-attributes>
-        </v-tab-item>
-        </v-tabs-items>
-    </v-flex>
+    <div>
+        <v-progress-circular v-if="loader" indeterminate :size="50" color="primary"></v-progress-circular>
+        <v-flex v-if="!loader" xs8>
+            <v-toolbar color="indigo darken-1" dark tabs>
+                <v-tabs slot="extension" left v-model="tabs" slider-color="white" color="transparent">
+                    <v-tab href="#main" class="subheading">Основные параметры</v-tab>
+                    <v-tab href="#attributes" class="subheading">Аттрибуты</v-tab>
+                </v-tabs>
+            </v-toolbar>
+            <v-tabs-items v-model="tabs">
+                <v-tab-item key="main" :id="'main'">
+                    <v-card>
+                        <v-container fluid grid-list-md>
+                            <v-layout row wrap>
+                                <v-flex xs2></v-flex>
+                                <v-flex xs8 center align-end flexbox>
+                                    <div>
+                                        <v-form ref="form" lazy-validation v-model="valid">
+                                            <template v-for="(field, num) in fields">
+                                                <form-builder :field="field" :num="num" :items="items" @update="updateItem"></form-builder>
+                                            </template>
+                                            <file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>
+                                            <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
+                                        </v-form>
+                                    </div>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item key="attributes" :id="'attributes'">
+                    <product-attributes :attributes="attributes" :id="this.$route.params.id"></product-attributes>
+                </v-tab-item>
+            </v-tabs-items>
+        </v-flex>
+    </div>
 </template>
 <script>
     import { createNamespacedHelpers } from 'vuex'
@@ -45,6 +48,7 @@
             return {
                 tabs: null,
                 valid: false,
+                loader: true
             }
         },
         created() {
@@ -81,10 +85,12 @@
             initial() {
                 if(this.$route.params.id == -1) {
                     this.$store.dispatch('product/create').then(response => {
+                        this.loader = false;
                         this.updateRelations()
                     }).catch(error => {})
                 } else {
                     this.$store.dispatch('product/update',this.$route.params.id).then(response => {
+                        this.loader = false;
                         this.updateRelations()
                     }).catch(error => {})
                 }

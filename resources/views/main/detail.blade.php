@@ -9,7 +9,7 @@
                     <leader-detail-image :url="'/files/product-image/{{$product->id}}'"></leader-detail-image>
                     <v-flex class="detail__title" xs12 md8>
                         <h1>{{$product->title}}</h1>
-                        <span class="detail__price">{{$product->price}} ₽</span>
+                        <span class="detail__price">{{$product->price}} ₽  {{$product->price_amount}}</span>
                     </v-flex>
                 </v-layout>
             </v-flex>
