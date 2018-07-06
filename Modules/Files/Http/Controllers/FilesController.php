@@ -136,4 +136,8 @@ class FilesController extends Controller
     public function destroy()
     {
     }
+
+    public function productImage($id) {
+      return File::with('typeFile')->where('fileable_id',$id)->where('fileable_type','Modules\Catalog\Entities\Product')->get();
+    }
 }

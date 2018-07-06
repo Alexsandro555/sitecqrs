@@ -47,6 +47,12 @@ class Product extends Model
         'max' => 12
       ]
     ],
+    'price_amount' => [
+      'enabled' => true,
+      'validations' => [
+        'max' => 25
+      ]
+    ],
     'qty' => [
       'enabled' => true,
       'validations' => [

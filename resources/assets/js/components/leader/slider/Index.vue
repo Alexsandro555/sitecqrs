@@ -4,7 +4,7 @@
             <slide v-for="item in items" :key="item.id">
                 <div class="special-product text-xs-center" align="center">
                     <div class="special-product__header text-xs-center">
-                        <a href="'/catalog/detail/'+item.slug">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a>
+                        <a :href="item.slug">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a>
                     </div>
                     <div class="special-product__img">
                         <img v-if="item.file" :src="'/storage/'+item.file.medium.filename" />

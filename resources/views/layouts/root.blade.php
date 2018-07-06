@@ -89,6 +89,7 @@
                             </div>
                             <!--<img class="header__img" src="{{asset('images/header-layer.png')}}"/>-->
                         </header>
+                        <div class="content-wrapper-top"></div>
                         @yield('content')
                         <footer class="footer">
                             <div class="footer-wrapper">

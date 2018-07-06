@@ -5,6 +5,7 @@ namespace App\Http\Controllers\main;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
+use Modules\Catalog\Entities\Product;
 
 class MainController extends Controller
 {
@@ -23,5 +24,10 @@ class MainController extends Controller
       return $user->name;
     }
     return null;
+  }
+
+  public function detail($slug) {
+    $product = Product::with('files')->where('url_key',$slug)->first();
+    return view('main.detail', compact('product'));
   }
 }

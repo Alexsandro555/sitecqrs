@@ -1,7 +1,6 @@
 @extends('layouts.root')
 
 @section('content')
-   <div class="content-wrapper-top"></div>
    <div class="content-wrapper text-xs-center">
       <div class="content">
         @include('main.menu')

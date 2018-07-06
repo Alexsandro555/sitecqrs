@@ -64,4 +64,6 @@ Route::get('/files', function() {
   dd($filteredResult);
 });
 
+Route::get('{slug}','main\MainController@detail');
+
 

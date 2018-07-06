@@ -19,6 +19,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'files', 'namespace' => 'Module
     ]);
     Route::get('/delete-file/{id}', 'FilesController@deleteFile');
 
+    Route::get('/product-image/{id}', 'FilesController@productImage');
 
 
     // манипуляция типом файла

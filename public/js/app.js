@@ -14107,6 +14107,7 @@ Vue.component('dialog-registration', __webpack_require__(87));
 Vue.component('dialog-login', __webpack_require__(94));
 Vue.component('auth-widget', __webpack_require__(98));
 Vue.component('leader-slider', __webpack_require__(103));
+Vue.component('leader-detail-image', __webpack_require__(196));
 //Vue.component('tableProducts', require('./components/table-products'));
 
 
@@ -69366,19 +69367,15 @@ var render = function() {
                   "div",
                   { staticClass: "special-product__header text-xs-center" },
                   [
-                    _c(
-                      "a",
-                      { attrs: { href: "'/catalog/detail/'+item.slug" } },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            item.title.length > 52
-                              ? item.title.substr(0, 50) + "..."
-                              : item.title
-                          )
+                    _c("a", { attrs: { href: item.slug } }, [
+                      _vm._v(
+                        _vm._s(
+                          item.title.length > 52
+                            ? item.title.substr(0, 50) + "..."
+                            : item.title
                         )
-                      ]
-                    )
+                      )
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -84017,6 +84014,256 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 194 */,
+/* 195 */,
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(197)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(199)
+/* template */
+var __vue_template__ = __webpack_require__(200)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/leader/leader-detail-image/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8e480d12", Component.options)
+  } else {
+    hotAPI.reload("data-v-8e480d12", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(198);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("6099aaf6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8e480d12\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8e480d12\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.detail__image {\n    display: block;\n}\n.detail__image-big {\n    display: block;\n    float: left;\n    width: 306px;\n    //height: 259px;\n    background-color: white;\n    margin-top:25px;\n}\n.detail-images-center {\n    margin: 5px;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    height: 259px;\n    line-height: 259px;\n}\n.detail-images-center img {\n    display: inline-block;\n    vertical-align: middle;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 199 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_carousel__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_carousel__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        url: String
+    },
+    data: function data() {
+        return {
+            elements: [],
+            items: [],
+            curImage: ''
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get(this.url).then(function (response) {
+            _this.elements = response.data;
+            response.data.forEach(function (element) {
+                _this.items.push({ 'id': element.id, 'file': element.config.files.small.filename });
+            });
+            _this.curImage = _this.items.length > 0 ? '/storage/' + _this.elements[0].config.files.main.filename : '/images/no-image.png';
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    components: {
+        Carousel: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Carousel"],
+        Slide: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Slide"]
+    },
+    methods: {
+        selectSlide: function selectSlide(id, event) {
+            var _this2 = this;
+
+            this.elements.forEach(function (element) {
+                if (element.id === id) {
+                    _this2.curImage = '/storage/' + element.config.files.main.filename;
+                }
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-flex",
+    { staticClass: "detail__image", attrs: { xs4: "" } },
+    [
+      _c("v-layout", { attrs: { column: "", wrap: "" } }, [
+        _c("div", { staticClass: "detail__image-big" }, [
+          _c("div", { staticClass: "detail-images-center" }, [
+            _c("img", { attrs: { src: _vm.curImage } })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          [
+            _vm._v("\n             \n            "),
+            _vm.items.length > 0
+              ? _c(
+                  "carousel",
+                  {
+                    attrs: {
+                      name: "carousel4",
+                      "pagination-enabled": false,
+                      "navigation-enabled": true,
+                      "per-page": 3,
+                      "per-page-custom": [[480, 3], [768, 3]]
+                    }
+                  },
+                  _vm._l(_vm.items, function(item) {
+                    return _c("slide", { key: item.id }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "carousel-slide",
+                          on: {
+                            click: function($event) {
+                              _vm.selectSlide(item.id)
+                            }
+                          }
+                        },
+                        [_c("img", { attrs: { src: "/storage/" + item.file } })]
+                      )
+                    ])
+                  })
+                )
+              : _vm._e()
+          ],
+          1
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8e480d12", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

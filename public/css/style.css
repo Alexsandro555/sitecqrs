@@ -480,6 +480,19 @@
   color: #346e1d;
 }
 
+.application .theme--light.list .list__group--active:after,
+.application .theme--light.list .list__group--active:before,
+.application .theme--light.list .list__group__header:hover,
+.application .theme--light.list .list__tile--highlighted,
+.application .theme--light.list .list__tile--link:hover,
+.theme--light .list .list__group--active:after,
+.theme--light .list .list__group--active:before,
+.theme--light .list .list__group__header:hover,
+.theme--light .list .list__tile--highlighted,
+.theme--light .list .list__tile--link:hover {
+  background: transparent;
+}
+
 .content-wrapper-top {
   background: url("/images/tree-layer-top.png") top center repeat;
   height: 29px;
@@ -532,6 +545,10 @@
 
 .content__banner {
   margin: 0px 20px;
+}
+
+.content--leftmargin310 {
+  margin-left: 310px;
 }
 
 .special-product {
@@ -868,5 +885,15 @@
 
 .footer-right {
   margin-right: 30px;
+}
+
+.detail__title {
+  color: white;
+  margin-top: 20px;
+}
+
+.detail__price {
+  color: yellow;
+  font-size: 18px;
 }
 
