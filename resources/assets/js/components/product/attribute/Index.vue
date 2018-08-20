@@ -39,7 +39,8 @@
         },
         data: function() {
             return {
-                valid: false
+                valid: false,
+                lastSort: null
             }
         },
         created() {

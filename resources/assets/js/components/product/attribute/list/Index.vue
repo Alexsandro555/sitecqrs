@@ -27,7 +27,7 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn color="primary" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-btn color="primary" @click="createItem" dark slot="activator" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
             <v-form ref="form" @submit.prevent="save" lazy-validation v-model="valid">
                 <v-card>
                     <v-card-title>
@@ -79,6 +79,7 @@
             return {
                 title: null,
                 sort: null,
+                lastSort: null,
                 dialog: false,
                 editedIndex: -1,
                 loader: true,
@@ -110,7 +111,7 @@
             axios.get('/catalog/attribute', {}).then(response => {
                 this.loader = false;
                 this.items = response.data.attributes;
-                this.sort = response.data.sort+1;
+                this.lastSort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
@@ -134,6 +135,10 @@
                 this.title = item.title
                 this.sort = item.sort
                 this.dialog = true
+            },
+            createItem() {
+                this.editedIndex = -1
+                this.sort = this.lastSort
             },
             deleteItem (item) {
                 const index = this.items.indexOf(item)
@@ -181,6 +186,7 @@
                         axios.post('/catalog/attribute/store', data).then(response => {
                             this.items.push(response.data.model)
                             this.loading = false
+                            this.lastSort = this.lastSort+1;
                             this.close()
                             swal('', response.data.message, "success");
                         }).catch(err => {

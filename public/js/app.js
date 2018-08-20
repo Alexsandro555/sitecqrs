@@ -70584,7 +70584,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            valid: false
+            valid: false,
+            lastSort: null
         };
     },
     created: function created() {},
@@ -75638,6 +75639,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
         return {
             title: null,
             sort: null,
+            lastSort: null,
             dialog: false,
             editedIndex: -1,
             loader: true,
@@ -75667,7 +75669,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
         axios.get('/catalog/attribute', {}).then(function (response) {
             _this2.loader = false;
             _this2.items = response.data.attributes;
-            _this2.sort = response.data.sort + 1;
+            _this2.lastSort = response.data.sort + 1;
         }).catch(function (error) {});
     },
 
@@ -75690,6 +75692,10 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.title = item.title;
             this.sort = item.sort;
             this.dialog = true;
+        },
+        createItem: function createItem() {
+            this.editedIndex = -1;
+            this.sort = this.lastSort;
         },
         deleteItem: function deleteItem(item) {
             var index = this.items.indexOf(item);
@@ -75740,6 +75746,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                     axios.post('/catalog/attribute/store', data).then(function (response) {
                         _this4.items.push(response.data.model);
                         _this4.loading = false;
+                        _this4.lastSort = _this4.lastSort + 1;
                         _this4.close();
                         swal('', response.data.message, "success");
                     }).catch(function (err) {
@@ -75882,6 +75889,7 @@ var render = function() {
                 {
                   staticClass: "text-left mb-2",
                   attrs: { slot: "activator", color: "primary", dark: "" },
+                  on: { click: _vm.createItem },
                   slot: "activator"
                 },
                 [_c("v-icon", [_vm._v("add")])],
