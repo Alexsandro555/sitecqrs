@@ -13,8 +13,7 @@
 
 Route::get('/', ['uses' => 'main\MainController@index', 'as' => 'main']);
 Route::get('/test', function () {
-  $product = Modules\Catalog\Entities\Product::with('type_product')->get();
-  dd($product);
+  phpinfo();
 });
 Route::get('authenticated', 'main\MainController@authenticated');
 Route::get('/admin', ['uses' => 'Admin\AdminController@index', 'as' => 'admin'])->middleware('admin');

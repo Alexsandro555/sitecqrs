@@ -61,6 +61,7 @@ import swal from 'sweetalert';
 import initializer from "./store/modules/initializer";
 import product from "../../../Modules/Catalog/Resources/assets/js/components/product/Add"
 
+console.log('hu');
 
 const routes = [
     {path: '/', name: 'table-products', component: tableProducts},

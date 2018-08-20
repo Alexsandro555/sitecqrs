@@ -490,7 +490,7 @@
 .theme--light .list .list__group__header:hover,
 .theme--light .list .list__tile--highlighted,
 .theme--light .list .list__tile--link:hover {
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
 }
 
 .content-wrapper-top {
