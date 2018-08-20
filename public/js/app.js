@@ -14136,8 +14136,6 @@ Vue.component('leader-detail-image', __webpack_require__(106));
 
 
 
-console.log('hu');
-
 var routes = [{ path: '/', name: 'table-products', component: __WEBPACK_IMPORTED_MODULE_9__components_product_table_products___default.a }, { path: '/update-product/:id', name: 'update-product', component: __WEBPACK_IMPORTED_MODULE_22__Modules_Catalog_Resources_assets_js_components_product_Add___default.a }, { path: '/categories', name: 'categories', component: __WEBPACK_IMPORTED_MODULE_11__components_product_category_list___default.a }, { path: '/list-line-products', name: 'list-line-products', component: __WEBPACK_IMPORTED_MODULE_12__components_product_line_product_list___default.a }, { path: '/list-type-products', name: 'list-type-products', component: __WEBPACK_IMPORTED_MODULE_13__components_product_type_product_list___default.a }, { path: '/list-producers', name: 'list-producers', component: __WEBPACK_IMPORTED_MODULE_14__components_product_producer_list___default.a }, { path: '/list-attributes', name: 'list-attributes', component: __WEBPACK_IMPORTED_MODULE_15__components_product_attribute_list___default.a }, { path: '/bind-attributes', name: 'bind-attributes', component: __WEBPACK_IMPORTED_MODULE_16__components_product_attribute_binding___default.a }, { path: '/type-files', name: 'type-files', component: __WEBPACK_IMPORTED_MODULE_17__components_files_type_file___default.a }, { path: '/banner', name: 'banner', component: __WEBPACK_IMPORTED_MODULE_18__Modules_Banner_Resources_assets_js_Banner___default.a }, { path: '/tnved', name: 'tnved', component: __WEBPACK_IMPORTED_MODULE_19__components_product_tnved_list___default.a }, { path: '/testForm/:id', name: 'test-form', component: __WEBPACK_IMPORTED_MODULE_22__Modules_Catalog_Resources_assets_js_components_product_Add___default.a }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_7_vue_router__["a" /* default */]({
@@ -79536,6 +79534,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 var module = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNamespacedHelpers"])('product');
@@ -80553,33 +80553,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
+    { attrs: { flud: "", "grid-list-md": "" } },
     [
-      _vm.loader
-        ? _c("v-progress-circular", {
-            attrs: { indeterminate: "", size: 50, color: "primary" }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.loader
-        ? _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _c(
-                "v-toolbar",
-                { attrs: { color: "indigo darken-1", dark: "", tabs: "" } },
+      _c(
+        "v-layout",
+        { attrs: { wrap: "", row: "" } },
+        [
+          _vm.loader
+            ? _c("v-progress-circular", {
+                attrs: { indeterminate: "", size: 50, color: "primary" }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.loader
+            ? _c(
+                "v-flex",
+                { attrs: { xs8: "" } },
                 [
                   _c(
-                    "v-tabs",
+                    "v-toolbar",
+                    { attrs: { color: "indigo darken-1", dark: "", tabs: "" } },
+                    [
+                      _c(
+                        "v-tabs",
+                        {
+                          attrs: {
+                            slot: "extension",
+                            left: "",
+                            "slider-color": "white",
+                            color: "transparent"
+                          },
+                          slot: "extension",
+                          model: {
+                            value: _vm.tabs,
+                            callback: function($$v) {
+                              _vm.tabs = $$v
+                            },
+                            expression: "tabs"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-tab",
+                            {
+                              staticClass: "subheading",
+                              attrs: { href: "#main" }
+                            },
+                            [_vm._v("Основные параметры")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-tab",
+                            {
+                              staticClass: "subheading",
+                              attrs: { href: "#attributes" }
+                            },
+                            [_vm._v("Аттрибуты")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tabs-items",
                     {
-                      attrs: {
-                        slot: "extension",
-                        left: "",
-                        "slider-color": "white",
-                        color: "transparent"
-                      },
-                      slot: "extension",
                       model: {
                         value: _vm.tabs,
                         callback: function($$v) {
@@ -80590,136 +80631,111 @@ var render = function() {
                     },
                     [
                       _c(
-                        "v-tab",
-                        { staticClass: "subheading", attrs: { href: "#main" } },
-                        [_vm._v("Основные параметры")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-tab",
-                        {
-                          staticClass: "subheading",
-                          attrs: { href: "#attributes" }
-                        },
-                        [_vm._v("Аттрибуты")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-tabs-items",
-                {
-                  model: {
-                    value: _vm.tabs,
-                    callback: function($$v) {
-                      _vm.tabs = $$v
-                    },
-                    expression: "tabs"
-                  }
-                },
-                [
-                  _c(
-                    "v-tab-item",
-                    { key: "main", attrs: { id: "main" } },
-                    [
-                      _c(
-                        "v-card",
+                        "v-tab-item",
+                        { key: "main", attrs: { id: "main" } },
                         [
                           _c(
-                            "v-container",
-                            { attrs: { fluid: "", "grid-list-md": "" } },
+                            "v-card",
                             [
                               _c(
-                                "v-layout",
-                                { attrs: { row: "", wrap: "" } },
+                                "v-container",
+                                { attrs: { fluid: "", "grid-list-md": "" } },
                                 [
-                                  _c("v-flex", { attrs: { xs2: "" } }),
-                                  _vm._v(" "),
                                   _c(
-                                    "v-flex",
-                                    {
-                                      attrs: {
-                                        xs8: "",
-                                        center: "",
-                                        "align-end": "",
-                                        flexbox: ""
-                                      }
-                                    },
+                                    "v-layout",
+                                    { attrs: { row: "", wrap: "" } },
                                     [
+                                      _c("v-flex", { attrs: { xs2: "" } }),
+                                      _vm._v(" "),
                                       _c(
-                                        "div",
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs8: "",
+                                            center: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
                                         [
                                           _c(
-                                            "v-form",
-                                            {
-                                              ref: "form",
-                                              attrs: { "lazy-validation": "" },
-                                              model: {
-                                                value: _vm.valid,
-                                                callback: function($$v) {
-                                                  _vm.valid = $$v
-                                                },
-                                                expression: "valid"
-                                              }
-                                            },
+                                            "div",
                                             [
-                                              _vm._l(_vm.fields, function(
-                                                field,
-                                                num
-                                              ) {
-                                                return [
-                                                  _c("form-builder", {
-                                                    attrs: {
-                                                      field: field,
-                                                      num: num,
-                                                      items: _vm.items
-                                                    },
-                                                    on: {
-                                                      update: _vm.updateItem
-                                                    }
-                                                  })
-                                                ]
-                                              }),
-                                              _vm._v(" "),
-                                              _c("file-box", {
-                                                attrs: {
-                                                  url: "/files/upload",
-                                                  "fileable-id": Number(
-                                                    _vm.items.id
-                                                  ),
-                                                  "type-files": _vm.typeFiles,
-                                                  model: _vm.model
-                                                }
-                                              }),
-                                              _vm._v(" "),
                                               _c(
-                                                "v-btn",
+                                                "v-form",
                                                 {
+                                                  ref: "form",
                                                   attrs: {
-                                                    large: "",
-                                                    color: "primary",
-                                                    disabled: !_vm.valid
+                                                    "lazy-validation": ""
                                                   },
-                                                  on: {
-                                                    click: function($event) {
-                                                      $event.preventDefault()
-                                                      _vm.onSubmit()
-                                                    }
+                                                  model: {
+                                                    value: _vm.valid,
+                                                    callback: function($$v) {
+                                                      _vm.valid = $$v
+                                                    },
+                                                    expression: "valid"
                                                   }
                                                 },
-                                                [_vm._v("Сохранить")]
+                                                [
+                                                  _vm._l(_vm.fields, function(
+                                                    field,
+                                                    num
+                                                  ) {
+                                                    return [
+                                                      _c("form-builder", {
+                                                        attrs: {
+                                                          field: field,
+                                                          num: num,
+                                                          items: _vm.items
+                                                        },
+                                                        on: {
+                                                          update: _vm.updateItem
+                                                        }
+                                                      })
+                                                    ]
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c("file-box", {
+                                                    attrs: {
+                                                      url: "/files/upload",
+                                                      "fileable-id": Number(
+                                                        _vm.items.id
+                                                      ),
+                                                      "type-files":
+                                                        _vm.typeFiles,
+                                                      model: _vm.model
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        large: "",
+                                                        color: "primary",
+                                                        disabled: !_vm.valid
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          $event.preventDefault()
+                                                          _vm.onSubmit()
+                                                        }
+                                                      }
+                                                    },
+                                                    [_vm._v("Сохранить")]
+                                                  )
+                                                ],
+                                                2
                                               )
                                             ],
-                                            2
+                                            1
                                           )
-                                        ],
-                                        1
+                                        ]
                                       )
-                                    ]
+                                    ],
+                                    1
                                   )
                                 ],
                                 1
@@ -80729,31 +80745,31 @@ var render = function() {
                           )
                         ],
                         1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tab-item",
+                        { key: "attributes", attrs: { id: "attributes" } },
+                        [
+                          _c("product-attributes", {
+                            attrs: {
+                              attributes: _vm.attributes,
+                              id: this.$route.params.id
+                            }
+                          })
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-tab-item",
-                    { key: "attributes", attrs: { id: "attributes" } },
-                    [
-                      _c("product-attributes", {
-                        attrs: {
-                          attributes: _vm.attributes,
-                          id: this.$route.params.id
-                        }
-                      })
                     ],
                     1
                   )
                 ],
                 1
               )
-            ],
-            1
-          )
-        : _vm._e()
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )
