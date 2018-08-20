@@ -27,7 +27,7 @@
         </v-data-table>
         <div class="text-xs-left pt-2">
         <v-dialog  v-model="dialog" max-width="500px">
-            <v-btn color="primary" dark slot="activator"  class="text-left mb-2"><v-icon>add</v-icon></v-btn>
+            <v-btn color="primary" dark slot="activator" @click="createItem" class="text-left mb-2"><v-icon>add</v-icon></v-btn>
             <v-form ref="form" @submit.prevent="save" lazy-validation v-model="valid">
                 <v-card>
                     <v-card-title>
@@ -122,6 +122,7 @@
                     { text: 'Сорт', value: 'sort' },
                     { text: 'Действия', sortable: false}
                 ],
+                lastSort: null,
                 items: [],
                 loading: false,
                 // валидация
@@ -144,7 +145,7 @@
                 this.items = response.data.lineProducts;
                 this.typeProducts = response.data.typeProducts;
                 this.producers = response.data.producers;
-                this.sort = response.data.sort+1;
+                this.lastSort = response.data.sort+1;
             }).catch(error => {});
         },
         computed: {
@@ -173,6 +174,10 @@
                 this.type_product_id = item.type_product_id
                 this.producer_id = item.producer_id
                 this.dialog = true
+            },
+            createItem() {
+                this.editedIndex = -1
+                this.sort = this.lastSort
             },
             deleteItem (item) {
                 const index = this.items.indexOf(item)
@@ -222,6 +227,7 @@
                         axios.post('/catalog/line-product/store', data).then(response => {
                             this.items.push(response.data.model)
                             this.loading = false
+                            this.lastSort = this.lastSort+1;
                             this.close()
                             swal('', response.data.message, "success");
                         }).catch(err => {

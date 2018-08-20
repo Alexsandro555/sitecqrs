@@ -73065,6 +73065,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
             title: null,
             description: null,
             sort: null,
+            lastSort: null,
             dialog: false,
             editedIndex: -1,
             loader: true,
@@ -73094,7 +73095,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
         axios.get('/catalog/categories', {}).then(function (response) {
             _this2.loader = false;
             _this2.items = response.data.categories;
-            _this2.sort = response.data.sort + 1;
+            _this2.lastSort = response.data.sort + 1;
         }).catch(function (error) {});
     },
 
@@ -73144,6 +73145,10 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
                 _this3.editedIndex = -1;
             }, 300);
         },
+        createItem: function createItem() {
+            this.editedIndex = -1;
+            this.sort = this.lastSort;
+        },
         save: function save() {
             var _this4 = this;
 
@@ -73171,6 +73176,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
                     axios.post('/catalog/category/store', data).then(function (response) {
                         _this4.items.push(response.data.model);
                         _this4.loading = false;
+                        _this4.lastSort = _this4.lastSort + 1;
                         _this4.close();
                         swal('', response.data.message, "success");
                     }).catch(function (err) {
@@ -73298,6 +73304,7 @@ var render = function() {
                 {
                   staticClass: "text-left mb-2",
                   attrs: { slot: "activator", color: "primary", dark: "" },
+                  on: { click: _vm.createItem },
                   slot: "activator"
                 },
                 [_c("v-icon", [_vm._v("add")])],
@@ -73687,6 +73694,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                 sortable: false,
                 value: 'id'
             }, { text: 'Название', align: 'left', value: 'name_line' }, { text: 'Сорт', value: 'sort' }, { text: 'Действия', sortable: false }],
+            lastSort: null,
             items: [],
             loading: false,
             // валидация
@@ -73712,7 +73720,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             _this2.items = response.data.lineProducts;
             _this2.typeProducts = response.data.typeProducts;
             _this2.producers = response.data.producers;
-            _this2.sort = response.data.sort + 1;
+            _this2.lastSort = response.data.sort + 1;
         }).catch(function (error) {});
     },
 
@@ -73740,6 +73748,10 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.type_product_id = item.type_product_id;
             this.producer_id = item.producer_id;
             this.dialog = true;
+        },
+        createItem: function createItem() {
+            this.editedIndex = -1;
+            this.sort = this.lastSort;
         },
         deleteItem: function deleteItem(item) {
             var index = this.items.indexOf(item);
@@ -73792,6 +73804,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                     axios.post('/catalog/line-product/store', data).then(function (response) {
                         _this4.items.push(response.data.model);
                         _this4.loading = false;
+                        _this4.lastSort = _this4.lastSort + 1;
                         _this4.close();
                         swal('', response.data.message, "success");
                     }).catch(function (err) {
@@ -73919,6 +73932,7 @@ var render = function() {
                 {
                   staticClass: "text-left mb-2",
                   attrs: { slot: "activator", color: "primary", dark: "" },
+                  on: { click: _vm.createItem },
                   slot: "activator"
                 },
                 [_c("v-icon", [_vm._v("add")])],
@@ -74357,6 +74371,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             id: null,
             title: null,
             sort: null,
+            lastSort: null,
             tnved_id: null,
             category_id: null,
             description: null,
@@ -74399,7 +74414,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             _this2.items = response.data.typeProducts;
             _this2.tnveds = response.data.tnveds;
             _this2.categories = response.data.categories;
-            _this2.sort = response.data.sort + 1;
+            _this2.lastSort = response.data.sort + 1;
         }).catch(function (error) {});
     },
 
@@ -74428,6 +74443,10 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.category_id = item.category_id;
             this.tnved_id = item.tnved_id;
             this.dialog = true;
+        },
+        createItem: function createItem() {
+            this.editedIndex = -1;
+            this.sort = this.lastSort;
         },
         deleteItem: function deleteItem(item) {
             var index = this.items.indexOf(item);
@@ -74481,6 +74500,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                     axios.post('/catalog/type-product/store', data).then(function (response) {
                         _this4.items.push(response.data.model);
                         _this4.loading = false;
+                        _this4.lastSort = _this4.lastSort + 1;
                         _this4.close();
                     }).catch(function (err) {
                         _this4.valid = false;
@@ -74607,6 +74627,7 @@ var render = function() {
                 {
                   staticClass: "text-left mb-2",
                   attrs: { slot: "activator", color: "primary", dark: "" },
+                  on: { click: _vm.createItem },
                   slot: "activator"
                 },
                 [_c("v-icon", [_vm._v("add")])],
@@ -75036,6 +75057,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             sort: null,
             valid: false,
             dialog: false,
+            lastSort: null,
             editedIndex: -1,
             loader: true,
             loading: false,
@@ -75062,7 +75084,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
         axios.get('/catalog/producer', {}).then(function (response) {
             _this2.loader = false;
             _this2.items = response.data.producers;
-            _this2.sort = response.data.sort + 1;
+            _this2.lastSort = response.data.sort + 1;
         }).catch(function (error) {});
     },
 
@@ -75085,6 +75107,10 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
             this.title = item.title;
             this.sort = item.sort;
             this.dialog = true;
+        },
+        createItem: function createItem() {
+            this.editedIndex = -1;
+            this.sort = this.lastSort;
         },
         deleteItem: function deleteItem(item) {
             var index = this.items.indexOf(item);
@@ -75134,6 +75160,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                     axios.post('/catalog/producer/store', data).then(function (response) {
                         _this4.items.push(response.data.model);
                         _this4.loading = false;
+                        _this4.lastSort = _this4.lastSort + 1;
                         _this4.close();
                         swal('', response.data.message, "success");
                     }).catch(function (err) {
@@ -75261,6 +75288,7 @@ var render = function() {
                 {
                   staticClass: "text-left mb-2",
                   attrs: { slot: "activator", color: "primary", dark: "" },
+                  on: { click: _vm.createItem },
                   slot: "activator"
                 },
                 [_c("v-icon", [_vm._v("add")])],
