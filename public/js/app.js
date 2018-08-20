@@ -69599,6 +69599,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -69621,7 +69622,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             response.data.forEach(function (element) {
                 _this.items.push({ 'id': element.id, 'file': element.config.files.small.filename });
             });
-            _this.curImage = _this.items.length > 0 ? '/storage/' + _this.elements[0].config.files.main.filename : '/images/no-image.png';
+            _this.curImage = _this.items.length > 0 ? '/storage/' + _this.elements[0].config.files.main.filename : null;
         }).catch(function (error) {
             console.log(error);
         });
@@ -69659,7 +69660,11 @@ var render = function() {
       _c("v-layout", { attrs: { column: "", wrap: "" } }, [
         _c("div", { staticClass: "detail__image-big" }, [
           _c("div", { staticClass: "detail-images-center" }, [
-            _c("img", { attrs: { src: _vm.curImage } })
+            _vm.curImage
+              ? _c("img", { attrs: { src: _vm.curImage } })
+              : _c("img", {
+                  attrs: { src: "/images/no-image.png", width: "200px" }
+                })
           ])
         ]),
         _vm._v(" "),

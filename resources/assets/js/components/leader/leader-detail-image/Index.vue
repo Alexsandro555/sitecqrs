@@ -3,7 +3,8 @@
         <v-layout column wrap>
             <div class="detail__image-big">
                 <div class="detail-images-center">
-                    <img :src="curImage" />
+                    <img v-if="curImage" :src="curImage" />
+                    <img v-else src="/images/no-image.png" width="200px"/>
                 </div>
             </div>
             <div>
@@ -52,7 +53,7 @@
                 response.data.forEach(element => {
                     this.items.push({'id': element.id, 'file': element.config.files.small.filename});
                 });
-                this.curImage = this.items.length>0?'/storage/' + this.elements[0].config.files.main.filename:'/images/no-image.png'
+                this.curImage = this.items.length>0?'/storage/' + this.elements[0].config.files.main.filename:null
             }).catch(error => { console.log(error); });
         },
         components: {
