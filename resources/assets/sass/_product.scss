@@ -13,13 +13,18 @@
 
 .special-product__header {
   height: 82px;
+  line-height: 82px;
 }
 
 .special-product__header>a {
   color: $color-green;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-family: $font-os-semibold;
-  line-height: 82px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.25;
+  text-decoration: none;
+  padding: 0 15px;
   //padding: 5px;
 }
 
