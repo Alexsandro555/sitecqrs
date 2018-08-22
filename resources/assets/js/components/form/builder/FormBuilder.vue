@@ -75,8 +75,6 @@
                 validationConvert: new ValidationConvert(),
             }
         },
-        mounted: function() {
-        },
         methods: {
             updateItem(value,key) {
                 let objField = {}

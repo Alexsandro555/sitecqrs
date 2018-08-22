@@ -297,7 +297,7 @@
         <!--Коf-->
         <!--</div>-->
 </div>
-<script src="/js/app.js" type="application/javascript"></script>
+<script src="{{mix('/js/app.js')}}" type="application/javascript"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 </body>
 </html>

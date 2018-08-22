@@ -9,9 +9,19 @@ use Modules\Catalog\Http\Requests\LineProduct\LineProductRequest;
 use Modules\Catalog\Entities\TypeProduct;
 use Modules\Catalog\Entities\Producer;
 use Illuminate\Http\Request;
+use Modules\Catalog\Services\CacheService;
 
 class LineProductController extends Controller
 {
+
+  private $cacheService;
+
+  public function __construct(CacheService $cacheService)
+  {
+    $this->cacheService = $cacheService;
+  }
+
+
     /**
      * @return mixed
      */
@@ -44,6 +54,7 @@ class LineProductController extends Controller
      */
     public function store(lineProductRequest $lineProductRequest)
     {
+      $this->cacheService->clear('product');
       $request = $lineProductRequest->except('_token','id');
       return ['message' => 'Успешно сохранено!', 'model' => ProducerTypeProduct::create($request)];
     }
@@ -68,6 +79,7 @@ class LineProductController extends Controller
 
     public function update(lineProductRequest $lineProductRequest)
     {
+      $this->cacheService->clear('product');
       $request = $lineProductRequest->except('_token','id');
       return ['message' => 'Успешно обновлено!', 'model' => ProducerTypeProduct::where('id',$lineProductRequest->id)->update($request)];
     }
@@ -78,6 +90,7 @@ class LineProductController extends Controller
      */
     public function destroy(Request $request)
     {
+      $this->cacheService->clear('product');
       $lineProduct = ProducerTypeProduct::find($request->id);
       $lineProduct->delete();
       return ['message' => 'Успешно удалено!'];

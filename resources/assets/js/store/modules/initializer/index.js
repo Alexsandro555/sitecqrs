@@ -9,6 +9,7 @@ export default {
                     return response;
                 },
                 error => {
+                    console.log(error)
                     let errorType = error.response.status
                     if(errorType == 422) {
                         let errors = error.response.data.errors

@@ -9,9 +9,18 @@ use Modules\Catalog\Entities\Tnved;
 use Modules\Catalog\Http\Requests\TypeProduct\TypeProductRequest;
 use Modules\Catalog\Entities\TypeProduct;
 use Modules\Catalog\Entities\Category;
+use Illuminate\Support\Facades\Cache;
+use Modules\Catalog\Services\CacheService;
 
 class TypeProductController extends Controller
 {
+
+  private $cacheService;
+
+  public function __construct(CacheService $cacheService)
+  {
+    $this->cacheService = $cacheService;
+  }
     /**
      * @return array
      */
@@ -35,13 +44,16 @@ class TypeProductController extends Controller
         return view('catalog::create');
     }
 
-    /**
-     * @param TypeProductRequest $typeProductRequest
-     * @return array
-     */
+  /**
+   * @param TypeProductRequest $typeProductRequest
+   * @param CacheService $cacheService
+   * @return array
+   */
     public function store(TypeProductRequest $typeProductRequest)
     {
+      $this->cacheService->clear('product');
       $request = $typeProductRequest->except('_token','id');
+
       return ['message' => 'Успешно сохранено!', 'model' => TypeProduct::create($request)];
     }
 
@@ -70,6 +82,7 @@ class TypeProductController extends Controller
     public function update(TypeProductRequest $typeProductRequest)
     {
       $request = $typeProductRequest->except('_token','id');
+      $this->cacheService->clear('product');
       return ['message' => 'Успешно обновлено!', 'model' => TypeProduct::where('id',$typeProductRequest->id)->update($request)];
     }
 
@@ -81,6 +94,7 @@ class TypeProductController extends Controller
     {
       $typeProduct = TypeProduct::find($request->id);
       $typeProduct->delete();
+      $this->cacheService->clear('product');
       return ['message' => 'Успешно удалено!'];
     }
 }
