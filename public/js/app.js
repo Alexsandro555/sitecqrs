@@ -4113,7 +4113,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -9424,7 +9423,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.detail__image {\n    display: block;\n}\n.detail__image-big {\n    display: block;\n    float: left;\n    width: 306px;\n    //height: 259px;\n    background-color: white;\n}\n.detail-images-center {\n    margin: 5px;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    height: 259px;\n    line-height: 259px;\n}\n.detail-images-center img {\n    display: inline-block;\n    vertical-align: middle;\n}\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    max-width: 100%;\n    float: left;\n    margin-top: 20px;\n    line-height: 280px;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n    display: inline-block; /* центрировать..*/\n    vertical-align: middle;  /* ..по вертикали */\n    line-height: 1.25; /* переопределить высоту строки на обычную */\n}\n/* Конец добавления размытия по-краям */\n.outer-carousel-slide {\n    line-height: 90px;\n}\n.carousel-slide {\n    display: inline-block; /* центрировать..*/\n    vertical-align: middle;  /* ..по вертикали */\n    line-height: 1.25; /* переопределить высоту строки на обычную */\n}\n", ""]);
+exports.push([module.i, "\n.detail__image {\n    display: block;\n}\n.detail__image-big {\n    display: block;\n    float: left;\n    width: 306px;\n    //height: 259px;\n    background-color: white;\n}\n.detail-images-center {\n    margin: 5px;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    height: 239px;\n    line-height: 239px;\n}\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    max-width: 100%;\n    float: left;\n    display: inline-block;\n    vertical-align: middle;\n    line-height: 1.25; /* переопределить высоту строки на обычную */\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n.outer-carousel-slide {\n    line-height: 90px;\n}\n.carousel-slide {\n    display: inline-block; /* центрировать..*/\n    vertical-align: middle;  /* ..по вертикали */\n    line-height: 1.25; /* переопределить высоту строки на обычную */\n}\n", ""]);
 
 // exports
 
@@ -43285,7 +43284,7 @@ var render = function() {
             [
               _c("div", { staticClass: "detail__image-big" }, [
                 _c("div", { staticClass: "detail-images-center" }, [
-                  _c("a", { staticClass: "img-shadow", attrs: { href: "#" } }, [
+                  _c("div", { staticClass: "img-shadow" }, [
                     _vm.curImage
                       ? _c("img", {
                           staticClass: "text-xs-center",

@@ -4,11 +4,10 @@
             <v-layout column align-center wrap>
                 <div class="detail__image-big">
                     <div class="detail-images-center">
-                        <a href="#" class="img-shadow">
+                        <div class="img-shadow">
                             <img v-if="curImage" class="text-xs-center" :src="curImage" />
                             <img v-else src="/images/no-image.png" class="text-xs-center" width="200px"/>
-                        </a>
-
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -88,13 +87,8 @@
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        height: 259px;
-        line-height: 259px;
-    }
-
-    .detail-images-center img {
-        display: inline-block;
-        vertical-align: middle;
+        height: 239px;
+        line-height: 239px;
     }
 
     /* Добавление размытия по-краям */
@@ -102,8 +96,9 @@
         position: relative;
         max-width: 100%;
         float: left;
-        margin-top: 20px;
-        line-height: 280px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.25; /* переопределить высоту строки на обычную */
     }
 
     .img-shadow::before {
@@ -120,9 +115,6 @@
 
     .img-shadow img {
         float: left;
-        display: inline-block; /* центрировать..*/
-        vertical-align: middle;  /* ..по вертикали */
-        line-height: 1.25; /* переопределить высоту строки на обычную */
 
     }
     /* Конец добавления размытия по-краям */
