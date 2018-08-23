@@ -89,9 +89,9 @@
         bottom: 0;
         left: 0;
         right: 0;
-        box-shadow: 0 0 8px 8px white inset;
-        -moz-box-shadow: 0 0 8px 8px white inset;
-        -webkit-box-shadow: 0 0 8px 8px white inset;
+        box-shadow: 0 0 2px 2px white inset;
+        -moz-box-shadow: 0 0 2px 2px white inset;
+        -webkit-box-shadow: 0 0 2px 2px white inset;
     }
 
     .img-shadow img {
