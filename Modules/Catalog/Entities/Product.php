@@ -30,7 +30,7 @@ class Product extends Model
     'vendor' => [
       'enabled' => true,
       'validations' => [
-        'max' => 15
+        'max' => 255
       ]
     ],
     'IEC' => [

@@ -30,4 +30,8 @@ class MainController extends Controller
     $product = Product::with('files')->where('url_key',$slug)->first();
     return view('main.detail', compact('product'));
   }
+
+  public function catalog($id) {
+
+  }
 }

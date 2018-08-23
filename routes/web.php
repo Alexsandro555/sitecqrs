@@ -29,6 +29,7 @@ Route::get('exit', function() {
 
 Route::get('/initializer/fields/{name}', 'Initializer\InitializerController@fields');
 
+Route::get('/left-menu', 'Menu\MenuController@index');
 
 Route::get('/files', function() {
   $name = 'product';
@@ -62,6 +63,7 @@ Route::get('/files', function() {
   $filteredResult['relationships'] = $arrResult['relationships'];
   dd($filteredResult);
 });
+
 
 Route::get('{slug}','main\MainController@detail');
 

@@ -4116,6 +4116,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4239,6 +4259,84 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         Carousel: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Carousel"],
         Slide: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Slide"]
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/menu/LeftMenu.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'LeftMenu',
+    props: {},
+    data: function data() {
+        return {
+            menu: []
+        };
+    },
+    mounted: function mounted() {
+        this.getMenu();
+    },
+    methods: {
+        getMenu: function getMenu() {
+            var _this = this;
+
+            axios.get('/left-menu').then(function (response) {
+                return response.data;
+            }).then(function (response) {
+                _this.menu = response;
+            }).catch(function (error) {});
+        }
     }
 });
 
@@ -40690,6 +40788,214 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3240b54f\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/menu/LeftMenu.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("img", {
+        staticClass: "menu-left-img hidden-sm-and-down",
+        attrs: { src: "images/menu-left-hr.png" }
+      }),
+      _vm._v(" "),
+      _c(
+        "v-card",
+        { staticClass: "menu-left-wrappers hidden-sm-and-down" },
+        [
+          _c(
+            "v-list",
+            { staticClass: "list-menu-left" },
+            [
+              _c(
+                "v-list-tile",
+                { staticClass: "menu-left__header" },
+                [
+                  _c(
+                    "v-list-tile-content",
+                    [
+                      _c(
+                        "v-list-tile-title",
+                        { staticClass: "text-md-center" },
+                        [_vm._v("Каталог продукции")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.menu, function(itemMenu) {
+                return [
+                  _c(
+                    "v-menu",
+                    {
+                      staticClass: "menu-left-h",
+                      attrs: { "offset-x": "", "open-on-hover": "" }
+                    },
+                    [
+                      _c(
+                        "v-list-group",
+                        {
+                          attrs: { slot: "activator" },
+                          slot: "activator",
+                          model: {
+                            value: itemMenu.id,
+                            callback: function($$v) {
+                              _vm.$set(itemMenu, "id", $$v)
+                            },
+                            expression: "itemMenu.id"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-list-tile",
+                            { attrs: { slot: "activator" }, slot: "activator" },
+                            [
+                              _c(
+                                "v-list-tile-content",
+                                [
+                                  _c("v-list-tile-title", [
+                                    _vm._v(_vm._s(itemMenu.title))
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._l(itemMenu.type_products, function(subItem) {
+                            return _c(
+                              "v-list-tile",
+                              { key: subItem.id },
+                              [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c(
+                                      "v-list-tile-title",
+                                      {
+                                        staticClass: "menu-left-item-el",
+                                        attrs: { slot: "activator" },
+                                        slot: "activator"
+                                      },
+                                      [
+                                        _c("img", {
+                                          attrs: {
+                                            src:
+                                              "images/menu-left-item-sub-arr.png"
+                                          }
+                                        }),
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(subItem.title) +
+                                            "\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      itemMenu.type_products
+                        ? _c(
+                            "div",
+                            { staticClass: "sub-menu" },
+                            [
+                              _vm._l(itemMenu.type_products, function(submenu) {
+                                return _c(
+                                  "v-layout",
+                                  {
+                                    key: submenu.id,
+                                    attrs: { column: "", wrap: "" }
+                                  },
+                                  [
+                                    _c(
+                                      "v-layout",
+                                      { attrs: { column: "", wrap: "" } },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sub-menu__header" },
+                                          [_vm._v(_vm._s(submenu.title))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list",
+                                          _vm._l(
+                                            submenu.producer_type_products,
+                                            function(item) {
+                                              return _c(
+                                                "v-list-tile",
+                                                { key: item.id },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    { attrs: { href: "#" } },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(item.name_line)
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c("br")
+                            ],
+                            2
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3240b54f", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-38b4b938\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/product/attribute/index.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42948,57 +43254,76 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-flex",
-    { staticClass: "detail__image", attrs: { xs4: "" } },
+    { staticClass: "detail__image", attrs: { xs5: "" } },
     [
-      _c("v-layout", { attrs: { column: "", wrap: "" } }, [
-        _c("div", { staticClass: "detail__image-big" }, [
-          _c("div", { staticClass: "detail-images-center" }, [
-            _vm.curImage
-              ? _c("img", { attrs: { src: _vm.curImage } })
-              : _c("img", {
-                  attrs: { src: "/images/no-image.png", width: "200px" }
-                })
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          [
-            _vm._v("\n             \n            "),
-            _vm.items.length > 0
-              ? _c(
-                  "carousel",
-                  {
-                    attrs: {
-                      name: "carousel4",
-                      "pagination-enabled": false,
-                      "navigation-enabled": true,
-                      "per-page": 3,
-                      "per-page-custom": [[480, 3], [768, 3]]
-                    }
-                  },
-                  _vm._l(_vm.items, function(item) {
-                    return _c("slide", { key: item.id }, [
-                      _c(
-                        "div",
+      _c(
+        "v-container",
+        { attrs: { fluid: "", "grid-list-md": "" } },
+        [
+          _c(
+            "v-layout",
+            { attrs: { column: "", "align-center": "", wrap: "" } },
+            [
+              _c("div", { staticClass: "detail__image-big" }, [
+                _c("div", { staticClass: "detail-images-center" }, [
+                  _vm.curImage
+                    ? _c("img", {
+                        staticClass: "text-xs-center",
+                        attrs: { src: _vm.curImage }
+                      })
+                    : _c("img", {
+                        staticClass: "text-xs-center",
+                        attrs: { src: "/images/no-image.png", width: "200px" }
+                      })
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _vm._v("\n                 \n                "),
+                  _vm.items.length > 0
+                    ? _c(
+                        "carousel",
                         {
-                          staticClass: "carousel-slide",
-                          on: {
-                            click: function($event) {
-                              _vm.selectSlide(item.id)
-                            }
+                          attrs: {
+                            name: "carousel4",
+                            "pagination-enabled": false,
+                            "navigation-enabled": true,
+                            "per-page": 3,
+                            "per-page-custom": [[480, 3], [768, 3]]
                           }
                         },
-                        [_c("img", { attrs: { src: "/storage/" + item.file } })]
+                        _vm._l(_vm.items, function(item) {
+                          return _c("slide", { key: item.id }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "carousel-slide",
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectSlide(item.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  attrs: { src: "/storage/" + item.file }
+                                })
+                              ]
+                            )
+                          ])
+                        })
                       )
-                    ])
-                  })
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -77818,6 +78143,7 @@ Vue.component('dialog-login', __webpack_require__("./resources/assets/js/compone
 Vue.component('auth-widget', __webpack_require__("./resources/assets/js/components/auth/login-widget/index.vue"));
 Vue.component('leader-slider', __webpack_require__("./resources/assets/js/components/leader/slider/index.vue"));
 Vue.component('leader-detail-image', __webpack_require__("./resources/assets/js/components/leader/leader-detail-image/index.vue"));
+Vue.component('left-menu', __webpack_require__("./resources/assets/js/components/menu/LeftMenu.vue"));
 //Vue.component('tableProducts', require('./components/table-products'));
 
 
@@ -78873,6 +79199,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-546ae323", Component.options)
   } else {
     hotAPI.reload("data-v-546ae323", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/menu/LeftMenu.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/menu/LeftMenu.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3240b54f\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/menu/LeftMenu.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/menu/LeftMenu.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3240b54f", Component.options)
+  } else {
+    hotAPI.reload("data-v-3240b54f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

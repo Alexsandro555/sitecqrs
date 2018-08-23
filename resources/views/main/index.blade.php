@@ -3,7 +3,7 @@
 @section('content')
    <div class="content-wrapper text-xs-center">
       <div class="content">
-        @include('main.menu')
+        <left-menu></left-menu>
         <v-flex xs12>
          <v-layout row wrap>
             <v-flex offset-xs3 xs6 class="hidden-md-and-down">

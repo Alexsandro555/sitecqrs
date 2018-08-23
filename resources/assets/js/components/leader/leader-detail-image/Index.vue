@@ -1,10 +1,30 @@
 <template>
-    <v-flex xs4 class="detail__image">
-        <v-layout column wrap>
+    <v-flex xs5 class="detail__image">
+        <v-container fluid grid-list-md>
+            <v-layout column align-center wrap>
+                <div class="detail__image-big">
+                    <div class="detail-images-center">
+                        <img v-if="curImage" class="text-xs-center" :src="curImage" />
+                        <img v-else src="/images/no-image.png" class="text-xs-center" width="200px"/>
+                    </div>
+                </div>
+                <div>
+                    &nbsp;
+                    <carousel v-if="items.length>0" name="carousel4"  :pagination-enabled=false :navigation-enabled=true :per-page=3  :per-page-custom="[[480, 3], [768, 3]]">
+                        <slide v-for="item in items" :key="item.id">
+                            <div class="carousel-slide" @click="selectSlide(item.id)">
+                                <img :src="'/storage/'+item.file"/>
+                            </div>
+                        </slide>
+                    </carousel>
+                </div>
+            </v-layout>
+        </v-container>
+        <!--<v-layout column wrap>
             <div class="detail__image-big">
                 <div class="detail-images-center">
-                    <img v-if="curImage" :src="curImage" />
-                    <img v-else src="/images/no-image.png" width="200px"/>
+                    <img v-if="curImage" class="text-xs-center" :src="curImage" />
+                    <img v-else src="/images/no-image.png" class="text-xs-center" width="200px"/>
                 </div>
             </div>
             <div>
@@ -17,7 +37,7 @@
                     </slide>
                 </carousel>
             </div>
-        </v-layout>
+        </v-layout>-->
         <!--
 
         </div>

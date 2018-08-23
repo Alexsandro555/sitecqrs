@@ -35,6 +35,7 @@ Vue.component('dialog-login', require('./components/auth/login'));
 Vue.component('auth-widget', require('./components/auth/login-widget'));
 Vue.component('leader-slider', require('./components/leader/slider'));
 Vue.component('leader-detail-image', require('./components/leader/leader-detail-image'));
+Vue.component('left-menu', require('./components/menu/LeftMenu'));
 //Vue.component('tableProducts', require('./components/table-products'));
 
 
