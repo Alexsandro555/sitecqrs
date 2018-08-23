@@ -7,8 +7,12 @@
                         <a :href="item.slug">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a>
                     </div>
                     <div class="special-product__img">
-                        <img v-if="item.file" :src="'/storage/'+item.file.medium.filename" />
-                        <img v-else src="/images/no-image.png" width="150px"/>
+                        <v-layout aligin-center row wrap>
+                            <a href="#" class="img-shadow">
+                                <img v-if="item.file" :src="'/storage/'+item.file.medium.filename" />
+                                <img v-else src="/images/no-image.png" width="150px"/>
+                            </a>
+                        </v-layout>
                     </div>
                     <br>
                     <div class="special-product__desc text-xs-center">Сделан на заказ</div>
@@ -68,3 +72,30 @@
         }
      }
 </script>
+
+<style>
+    /* Добавление размытия по-краям */
+    .img-shadow {
+        position: relative;
+        margin: 0 auto;
+        max-width: 100%;
+        float: left;
+    }
+
+    .img-shadow::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        box-shadow: 0 0 8px 8px white inset;
+        -moz-box-shadow: 0 0 8px 8px white inset;
+        -webkit-box-shadow: 0 0 8px 8px white inset;
+    }
+
+    .img-shadow img {
+        float: left;
+    }
+    /* Конец добавления размытия по-краям */
+</style>

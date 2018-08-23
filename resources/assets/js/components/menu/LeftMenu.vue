@@ -25,7 +25,7 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-group>
-                        <div class="sub-menu" v-if="itemMenu.type_products">
+                        <div class="sub-menu" v-if="itemMenu.type_products.length>0">
                             <v-layout column wrap v-for="submenu in itemMenu.type_products" :key="submenu.id">
                                     <v-layout column wrap>
                                         <span class="sub-menu__header">{{submenu.title}}</span>

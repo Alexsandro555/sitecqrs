@@ -4,14 +4,22 @@
             <v-layout column align-center wrap>
                 <div class="detail__image-big">
                     <div class="detail-images-center">
-                        <img v-if="curImage" class="text-xs-center" :src="curImage" />
-                        <img v-else src="/images/no-image.png" class="text-xs-center" width="200px"/>
+                        <a href="#" class="img-shadow">
+                            <img v-if="curImage" class="text-xs-center" :src="curImage" />
+                            <img v-else src="/images/no-image.png" class="text-xs-center" width="200px"/>
+                        </a>
+
                     </div>
                 </div>
                 <div>
                     &nbsp;
-                    <carousel v-if="items.length>0" name="carousel4"  :pagination-enabled=false :navigation-enabled=true :per-page=3  :per-page-custom="[[480, 3], [768, 3]]">
-                        <slide v-for="item in items" :key="item.id">
+                    <carousel style="width: 280px" v-if="items.length>0"
+                              name="carousel4"
+                              :pagination-enabled=false
+                              :navigation-enabled=true
+                              :per-page=3
+                              :per-page-custom="[[480, 3]]">
+                        <slide class="outer-carousel-slide" v-for="item in items" :key="item.id">
                             <div class="carousel-slide" @click="selectSlide(item.id)">
                                 <img :src="'/storage/'+item.file"/>
                             </div>
@@ -20,36 +28,6 @@
                 </div>
             </v-layout>
         </v-container>
-        <!--<v-layout column wrap>
-            <div class="detail__image-big">
-                <div class="detail-images-center">
-                    <img v-if="curImage" class="text-xs-center" :src="curImage" />
-                    <img v-else src="/images/no-image.png" class="text-xs-center" width="200px"/>
-                </div>
-            </div>
-            <div>
-                &nbsp;
-                <carousel v-if="items.length>0" name="carousel4"  :pagination-enabled=false :navigation-enabled=true :per-page=3  :per-page-custom="[[480, 3], [768, 3]]">
-                    <slide v-for="item in items" :key="item.id">
-                        <div class="carousel-slide" @click="selectSlide(item.id)">
-                            <img :src="'/storage/'+item.file"/>
-                        </div>
-                    </slide>
-                </carousel>
-            </div>
-        </v-layout>-->
-        <!--
-
-        </div>
-        <div>
-            <carousel name="carousel4" style="width: 270px; height: 100px; margin-left: 20px;"  :pagination-enabled=false :navigation-enabled=true :per-page=3  :per-page-custom="[[480, 3], [768, 3]]">
-                <slide v-for="item in items" :key="item.id">
-                    <div class="carousel-slide" @click="selectSlide(item.id)">
-                        <img :src="'/storage/'+item.file"/>
-                    </div>
-                </slide>
-            </carousel>
-        </div>-->
     </v-flex>
 </template>
 <script>
@@ -61,7 +39,7 @@
         },
         data: function() {
             return {
-                elements: [],
+                elements:[],
                 items:[],
                 curImage: '',
             }
@@ -118,5 +96,45 @@
     .detail-images-center img {
         display: inline-block;
         vertical-align: middle;
+    }
+
+    /* Добавление размытия по-краям */
+    .img-shadow {
+        position: relative;
+        max-width: 100%;
+        float: left;
+        margin-top: 20px;
+        line-height: 280px;
+    }
+
+    .img-shadow::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        box-shadow: 0 0 8px 8px white inset;
+        -moz-box-shadow: 0 0 8px 8px white inset;
+        -webkit-box-shadow: 0 0 8px 8px white inset;
+    }
+
+    .img-shadow img {
+        float: left;
+        display: inline-block; /* центрировать..*/
+        vertical-align: middle;  /* ..по вертикали */
+        line-height: 1.25; /* переопределить высоту строки на обычную */
+
+    }
+    /* Конец добавления размытия по-краям */
+
+    .outer-carousel-slide {
+        line-height: 90px;
+    }
+
+    .carousel-slide {
+        display: inline-block; /* центрировать..*/
+        vertical-align: middle;  /* ..по вертикали */
+        line-height: 1.25; /* переопределить высоту строки на обычную */
     }
 </style>
