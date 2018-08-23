@@ -81,7 +81,6 @@
         width: 306px;
         //height: 259px;
         background-color: white;
-        margin-top:25px;
     }
 
     .detail-images-center {
