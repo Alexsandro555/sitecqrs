@@ -4,7 +4,6 @@
         <v-data-table v-if="!loader"
                 :headers="headers"
                 :items="items"
-                hide-actions
                 class="elevation-1">
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.id }}</td>
@@ -51,7 +50,8 @@
                     { text: 'Цена (руб.)', value: 'price' },
                     { text: 'Действия', value: 'title', sortable: false}
                 ],
-                items: []
+                items: [],
+                //pagination: {},
             }
         },
         created() {
@@ -62,6 +62,15 @@
 
             });
         },
+        /*computed: {
+            pages () {
+                if (this.pagination.rowsPerPage == null ||
+                    this.pagination.totalItems == null
+                ) return 0
+
+                return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+            }
+        },*/
         mounted: function() {
         },
         methods: {

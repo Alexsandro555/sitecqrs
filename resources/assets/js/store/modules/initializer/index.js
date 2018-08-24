@@ -11,6 +11,9 @@ export default {
                 error => {
                     console.log(error)
                     let errorType = error.response.status
+                    if(errorType == 419) {
+                        setTimeout(() => {document.location.href = '/'},2000)
+                    }
                     if(errorType == 422) {
                         let errors = error.response.data.errors
                         if(errors) {
