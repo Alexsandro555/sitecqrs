@@ -56,11 +56,24 @@
         components: {
             vueDropzone
         },
+        mounted() {
+            this.getImages()
+        },
         watch: {
             fileableId: function (val) {
+                console.log('fileable id')
                 $(".dz-preview").remove();
                 this.getImages()
             }
+        },
+        beforeRouteEnter(to, from, next) {
+            console.log('work')
+            next(vm => vm.getImages())
+        },
+        beforeRouteUpdate(to, from ,next) {
+            console.log('work2')
+          this.getImages()
+          next()
         },
         methods: {
             template() {

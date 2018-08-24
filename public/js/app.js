@@ -2569,12 +2569,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         vueDropzone: __WEBPACK_IMPORTED_MODULE_0_vue2_dropzone___default.a
     },
+    mounted: function mounted() {
+        this.getImages();
+    },
+
     watch: {
         fileableId: function fileableId(val) {
+            console.log('fileable id');
             $(".dz-preview").remove();
             this.getImages();
         }
     },
+    beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+        console.log('work');
+        next(function (vm) {
+            return vm.getImages();
+        });
+    },
+    beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+        console.log('work2');
+        this.getImages();
+        next();
+    },
+
     methods: {
         template: function template() {
             return '\n                <div class="dz-preview dz-file-preview" id="drop-img-vue">\n                    <div class="dz-image">\n                        <div data-dz-thumbnail-bg></div>\n                    </div>\n                    <div class="dz-details">\n                        <div class="dz-size"><span data-dz-size></span></div>\n                        <div class="dz-filename"><span data-dz-name></span></div>\n                    </div>\n                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>\n                    <div class="dz-error-message"><span data-dz-errormessage></span></div>\n                    <div class="dz-success-mark"><i class="fa fa-check"></i></div>\n                    <div class="dz-error-mark"><i class="fa fa-close"></i></div>\n                    <a class="dz-remove ms" href="javascript:undefined;" data-dz-remove="">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</a>\n                </div>\n        ';
@@ -9378,7 +9395,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    float: left;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 2px 2px white inset;\n    -moz-box-shadow: 0 0 2px 2px white inset;\n    -webkit-box-shadow: 0 0 2px 2px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    float: left;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n", ""]);
 
 // exports
 
