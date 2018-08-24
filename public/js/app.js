@@ -6018,6 +6018,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
@@ -6030,7 +6048,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 sortable: true,
                 value: 'id'
             }, { text: 'Название', value: 'title' }, { text: 'Путь', value: 'url_key' }, { text: 'Цена (руб.)', value: 'price' }, { text: 'Действия', value: 'title', sortable: false }],
-            items: []
+            items: [],
+            search: ''
             //pagination: {},
         };
     },
@@ -6059,6 +6078,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.delete('/catalog/delete', { data: { id: this.items[index].id } }).then(function (response) {}).catch(function (error) {});
                 this.items.splice(index, 1);
             }
+        },
+        goToPage: function goToPage(url) {
+            document.location.href = '/' + url;
         }
     }
 });
@@ -39075,129 +39097,194 @@ var render = function() {
       _vm._v(" "),
       !_vm.loader
         ? _c(
-            "v-data-table",
-            {
-              staticClass: "elevation-1",
-              attrs: { headers: _vm.headers, items: _vm.items },
-              scopedSlots: _vm._u([
-                {
-                  key: "items",
-                  fn: function(props) {
-                    return [
-                      _c("td", [_vm._v(_vm._s(props.item.id))]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-xs-left" }, [
-                        _vm._v(_vm._s(props.item.title))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-xs-left" }, [
-                        _vm._v(_vm._s(props.item.url_key))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-xs-left" }, [
-                        _vm._v(_vm._s(props.item.price))
-                      ]),
-                      _vm._v(" "),
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                [
+                  _vm._v("\n            Продукты\n            "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "append-icon": "search",
+                      label: "Поиск",
+                      "single-line": "",
+                      "hide-details": ""
+                    },
+                    model: {
+                      value: _vm.search,
+                      callback: function($$v) {
+                        _vm.search = $$v
+                      },
+                      expression: "search"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              !_vm.loader
+                ? _c(
+                    "v-data-table",
+                    {
+                      staticClass: "elevation-1",
+                      attrs: {
+                        headers: _vm.headers,
+                        items: _vm.items,
+                        search: _vm.search
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "items",
+                          fn: function(props) {
+                            return [
+                              _c("td", [_vm._v(_vm._s(props.item.id))]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-xs-left" }, [
+                                _vm._v(_vm._s(props.item.title))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "text-xs-left" },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "yellow" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.goToPage(props.item.url_key)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("find_in_page")])],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-xs-left" }, [
+                                _vm._v(_vm._s(props.item.price))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "justify-center layout px-0" },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      staticClass: "mx-0",
+                                      attrs: { icon: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.$router.push(
+                                            "/update-product/" + props.item.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-icon",
+                                        { attrs: { color: "teal" } },
+                                        [_vm._v("edit")]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      staticClass: "mx-0",
+                                      attrs: {
+                                        disabled:
+                                          props.item.url_key ===
+                                          "po-umolchaniyu",
+                                        icon: ""
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.deleteItem(props.item)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-icon",
+                                        { attrs: { color: "pink" } },
+                                        [_vm._v("delete")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          }
+                        }
+                      ])
+                    },
+                    [
                       _c(
-                        "td",
-                        { staticClass: "justify-center layout px-0" },
+                        "template",
+                        { slot: "no-data" },
                         [
                           _c(
-                            "v-btn",
+                            "v-alert",
                             {
-                              staticClass: "mx-0",
-                              attrs: { icon: "" },
-                              on: {
-                                click: function($event) {
-                                  _vm.$router.push(
-                                    "/update-product/" + props.item.id
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", { attrs: { color: "teal" } }, [
-                                _vm._v("edit")
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              staticClass: "mx-0",
                               attrs: {
-                                disabled:
-                                  props.item.url_key === "po-umolchaniyu",
-                                icon: ""
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteItem(props.item)
-                                }
+                                value: true,
+                                color: "error",
+                                icon: "warning"
                               }
                             },
                             [
-                              _c("v-icon", { attrs: { color: "pink" } }, [
-                                _vm._v("delete")
-                              ])
-                            ],
-                            1
+                              _vm._v(
+                                "\n                Извините, нет данных для отображения :(\n            "
+                              )
+                            ]
                           )
                         ],
                         1
                       )
-                    ]
-                  }
-                }
-              ])
-            },
-            [
+                    ],
+                    2
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _c(
-                "template",
-                { slot: "no-data" },
+                "div",
+                { staticClass: "text-xs-left pt-2" },
                 [
                   _c(
-                    "v-alert",
-                    { attrs: { value: true, color: "error", icon: "warning" } },
+                    "router-link",
+                    { attrs: { to: "/update-product/-1" } },
                     [
-                      _vm._v(
-                        "\n                Извините, нет данных для отображения :(\n            "
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "text-left mb-2",
+                          attrs: { color: "primary", dark: "" }
+                        },
+                        [_c("v-icon", [_vm._v("add")])],
+                        1
                       )
-                    ]
+                    ],
+                    1
                   )
                 ],
                 1
               )
             ],
-            2
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "text-xs-left pt-2" },
-        [
-          _c(
-            "router-link",
-            { attrs: { to: "/update-product/-1" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  staticClass: "text-left mb-2",
-                  attrs: { color: "primary", dark: "" }
-                },
-                [_c("v-icon", [_vm._v("add")])],
-                1
-              )
-            ],
             1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ],
     1
   )
