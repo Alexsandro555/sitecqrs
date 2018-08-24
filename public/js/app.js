@@ -5013,10 +5013,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -5045,7 +5041,6 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
                 sortable: false,
                 value: 'id'
             }, { text: 'Название', align: 'left', value: 'title' }, { text: 'Сорт', value: 'sort' }, { text: 'Действия', sortable: false }],
-            pagination: {},
             items: [],
             // Валидация
             valid: false,
@@ -5076,11 +5071,6 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
     }), {
         formTitle: function formTitle() {
             return this.editedIndex === -1 ? 'Добавление новой категории' : 'Редактирование категории';
-        },
-        pages: function pages() {
-            if (this.pagination.rowsPerPage == null || this.pagination.totalItems == null) return 0;
-
-            return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage);
         }
     }),
     components: {
@@ -41838,13 +41828,7 @@ var render = function() {
               attrs: {
                 headers: _vm.headers,
                 items: _vm.items,
-                "hide-actions": "",
-                pagination: _vm.pagination
-              },
-              on: {
-                "update:pagination": function($event) {
-                  _vm.pagination = $event
-                }
+                "hide-actions": ""
               },
               scopedSlots: _vm._u([
                 {
@@ -41912,24 +41896,6 @@ var render = function() {
             2
           )
         : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "text-xs-center pt-2" },
-        [
-          _c("v-pagination", {
-            attrs: { length: _vm.pages },
-            model: {
-              value: _vm.pagination.page,
-              callback: function($$v) {
-                _vm.$set(_vm.pagination, "page", $$v)
-              },
-              expression: "pagination.page"
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
       _c(
         "div",

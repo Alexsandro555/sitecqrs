@@ -5,7 +5,6 @@
                       :headers="headers"
                       :items="items"
                       hide-actions
-                      :pagination.sync="pagination"
                       class="elevation-1">
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.id }}</td>
