@@ -1,0 +1,70 @@
+<template>
+    <v-container flud grid-list-lg>
+        <v-layout row wrap>
+            <v-flex xs12>
+                <v-card>
+                    <v-card-title><h1>Редактирование статьи</h1></v-card-title>
+                    <v-card-text>
+                        <v-container grid-list-md>
+                            <v-layout wrap>
+                                <v-flex xs12>
+                                    <v-form ref="form" lazy-validation v-model="valid">
+                                        <template v-for="(field, num) in fields">
+                                            <form-builder :field="field" :num="num" :items="item" @update="updateItem"></form-builder>
+                                        </template>
+                                    </v-form>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" :disabled="false" flat @click.prevent="save()">Сохранить</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
+</template>
+<script>
+    import { mapActions, mapState} from 'vuex'
+    import { ACTIONS, GLOBAL } from '@/constants'
+    import FormBuilder from '@/components/form/builder/FormBuilder.vue'
+
+    export default {
+        props: {
+            id: {
+                type: Number,
+                default: null
+            },
+        },
+        data: function() {
+            return {
+                valid: false,
+                form: null,
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            next(vm => vm.init())
+        },
+        beforeRouteUpdate(to, from, next) {
+            this.init()
+            next()
+        },
+        computed: {
+            ...mapState('article', ['item', 'items', 'fields'])
+        },
+        components: {
+            FormBuilder
+        },
+        methods: {
+            init() {
+                if(!this.items.length>0) {
+                    this.$router.push({name: 'articles'})
+                }
+                this.setFields(this.id)
+            },
+            ...mapActions('article',{setFields: GLOBAL.SET_FIELDS, updateItem: GLOBAL.UPDATE_ITEM, load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA})
+        }
+     }
+</script>

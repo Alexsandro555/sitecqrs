@@ -88,6 +88,11 @@
                     {
                         text: 'Баннеры',
                         path: '/banner'
+                    },
+                    { divider: true },
+                    {
+                        text: 'Статьи',
+                        path: '/articles'
                     }
                 ]
             }

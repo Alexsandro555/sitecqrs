@@ -17,7 +17,7 @@ import VueCarousel from 'vue-carousel';
 Vue.use(Vuetify);
 import 'material-design-icons/iconfont/material-icons.css'
 import 'vuetify/dist/vuetify.min.css'
-import createStore from './store/states.js'
+import createStore from './vuex/states.js'
 
 import VueRouter from 'vue-router';
 Vue.use(Vuex);
@@ -61,10 +61,20 @@ import tnved from './components/product/tnved/list';
 import swal from 'sweetalert';
 import initializer from "./store/modules/initializer";
 import product from "../../../Modules/Catalog/Resources/assets/js/components/product/Add"
-
+import EditArticle from "@article/vue/Edit"
+import Articles from "@article/vue/Articles"
+import Products from "@catalog/vue/Products"
+import EditCatalog from "@catalog/vue/Edit"
 
 const routes = [
-    {path: '/', name: 'table-products', component: tableProducts},
+    {path: '/', name: 'products', component: Products},
+    {
+        path: '/catalog/edit/:id?',
+        name: 'edit-catalog',
+        component: EditCatalog,
+        props: (route) => ({id: parseInt(route.params.id)})
+    },
+    //{path: '/', name: 'table-products', component: tableProducts},
     {path: '/update-product/:id', name: 'update-product', component: product},
     {path: '/categories', name: 'categories', component: listCategories},
     {path: '/list-line-products', name: 'list-line-products', component: listLineProducts},
@@ -75,7 +85,14 @@ const routes = [
     {path: '/type-files', name: 'type-files', component: typeFiles},
     {path: '/banner', name: 'banner', component: banner},
     {path: '/tnved', name: 'tnved', component: tnved},
-    {path: '/testForm/:id', name: 'test-form', component: product}
+    {path: '/testForm/:id', name: 'test-form', component: product},
+    {
+        path: '/article/edit/:id?',
+        name: 'edit-article',
+        component: EditArticle,
+        props: (route) => ({ id: parseInt(route.params.id)})
+    },
+    {path: '/articles', name: 'articles', component: Articles}
 ];
 
 const router = new VueRouter({
@@ -102,15 +119,35 @@ const app = new Vue({
                         title: 'List Item',
                         recept: [
                             { header: 'Today' },
-                            { avatar: 'https://vuetifyjs.com/static/doc-images/lists/1.jpg', title: 'Brunch this weekend?', subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?" },
+                            {
+                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/1.jpg',
+                                title: 'Brunch this weekend?',
+                                subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+                            },
                             { divider: true, inset: true },
-                            { avatar: 'https://vuetifyjs.com/static/doc-images/lists/2.jpg', title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>', subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend." },
+                            {
+                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/2.jpg',
+                                title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+                                subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
+                            },
                             { divider: true, inset: true },
-                            { avatar: 'https://vuetifyjs.com/static/doc-images/lists/3.jpg', title: 'Oui oui', subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?" },
+                            {
+                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/3.jpg',
+                                title: 'Oui oui',
+                                subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
+                            },
                             { divider: true, inset: true },
-                            { avatar: 'https://vuetifyjs.com/static/doc-images/lists/4.jpg', title: 'Birthday gift', subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?" },
+                            {
+                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/4.jpg',
+                                title: 'Birthday gift',
+                                subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
+                            },
                             { divider: true, inset: true },
-                            { avatar: 'https://vuetifyjs.com/static/doc-images/lists/5.jpg', title: 'Recipe to try', subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos." }
+                            {
+                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/5.jpg',
+                                title: 'Recipe to try',
+                                subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
+                            }
                         ]
                     },
                 ],
