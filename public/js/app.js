@@ -2800,6 +2800,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -44610,15 +44620,36 @@ var render = function() {
                                     [
                                       _vm._l(_vm.fields, function(field, num) {
                                         return [
-                                          _c("form-builder", {
-                                            attrs: {
-                                              field: field,
-                                              num: num,
-                                              items: _vm.item
-                                            },
-                                            on: { update: _vm.updateItem }
-                                          })
+                                          num !== "content"
+                                            ? _c("form-builder", {
+                                                attrs: {
+                                                  field: field,
+                                                  num: num,
+                                                  items: _vm.item
+                                                },
+                                                on: { update: _vm.updateItem }
+                                              })
+                                            : _vm._e()
                                         ]
+                                      }),
+                                      _vm._v(" "),
+                                      _c("wysiwyg", {
+                                        attrs: {
+                                          "element-id": _vm.id,
+                                          name: "description",
+                                          url: "category-wysiwyg",
+                                          "url-file": "upload-file",
+                                          "type-file-upload": "file",
+                                          "type-file": "image-wysiwyg",
+                                          model: "model"
+                                        },
+                                        model: {
+                                          value: _vm.item.content,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.item, "content", $$v)
+                                          },
+                                          expression: "item.content"
+                                        }
                                       })
                                     ],
                                     2

@@ -10,8 +10,18 @@
                                 <v-flex xs12>
                                     <v-form ref="form" lazy-validation v-model="valid">
                                         <template v-for="(field, num) in fields">
-                                            <form-builder :field="field" :num="num" :items="item" @update="updateItem"></form-builder>
+                                            <form-builder :field="field" v-if="num !== 'content'" :num="num" :items="item" @update="updateItem"></form-builder>
                                         </template>
+                                        <wysiwyg
+                                                :element-id="id"
+                                                name="description"
+                                                url="category-wysiwyg"
+                                                url-file="upload-file"
+                                                type-file-upload="file"
+                                                type-file="image-wysiwyg"
+                                                model="model"
+                                                v-model="item.content">
+                                        </wysiwyg>
                                     </v-form>
                                 </v-flex>
                             </v-layout>
