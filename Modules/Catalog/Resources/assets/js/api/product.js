@@ -29,5 +29,14 @@ export const productApi = {
                 reject(error)
             })
         })
+    },
+    add() {
+        return new Promise((resolve, reject) => {
+            axios.get(this.url+'/create').then(response => response.data).then(response => {
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            });
+        })
     }
 }

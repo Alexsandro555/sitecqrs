@@ -22,5 +22,10 @@ export default {
                 commit(PRIVATE.SET_ATTRIBUTES,response)
             })
             .catch(error => {})
+    },
+    [ACTIONS.ADD]: ({ commit }) => {
+        productApi.add()
+            .then(response => {})
+            .catch(error => {})
     }
 }

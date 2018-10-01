@@ -6,6 +6,9 @@
 <script>
     import vueditor from '../vueditor/dist/script/vueditor.min.js'
     import '../vueditor/dist/style/vueditor.min.css'
+    import { mapActions, mapState} from 'vuex'
+    import { ACTIONS, GLOBAL } from '@/constants'
+
     export default {
         data: () => {
             return {
@@ -35,11 +38,9 @@
                 type: String,
                 required: true
             },
-            'value': String,
-            /*'value': {
-                type: String,
-                required: true
-            },*/
+            'value': {
+                type: String
+            },
             'model': {
                 type: String,
                 required: true
@@ -59,7 +60,7 @@
           }
         },
         mounted() {
-            let inst = vueditor.createEditor('#editor', {
+            this.inst = vueditor.createEditor('#editor', {
                 uploadUrl: '/files/'+this.url,
                 uploadFile: '/files/'+this.urlFile,
                 fileableId: this.elementId,
@@ -68,8 +69,6 @@
                 id: 'product-wysiwyg',
                 classList: ['product-wysiwyg'],
             });
-            this.inst = inst;
-            //inst.setContent(this.value);
         }
     }
 </script>

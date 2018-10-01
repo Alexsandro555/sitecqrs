@@ -55,6 +55,8 @@
 <script>
     import { ACTIONS } from "@/constants";
     import { mapActions, mapState } from 'vuex'
+    import { productApi } from '@catalog/api/product'
+
     export default {
         props: {},
         data: function() {
@@ -92,9 +94,11 @@
         },
         methods: {
             addArticle() {
-              this.add().then(response => {
-                  this.$router.push({name: 'update-product', params: { id: -1}})
-              }).catch(error => {})
+                productApi.add()
+                    .then(response => {
+                        this.$router.push({name: 'update-product', params: { id: response.id.toString()}})
+                    })
+                    .catch(error => {})
             },
             ...mapActions('catalog',{load: ACTIONS.LOAD, add: ACTIONS.ADD})
         }

@@ -18,8 +18,18 @@
                                         <div>
                                             <v-form ref="form" lazy-validation v-model="valid">
                                                 <template v-for="(field, num) in fields">
-                                                    <form-builder :field="field" :num="num" :items="item" @update="updateField"></form-builder>
+                                                    <form-builder :field="field" v-if="num!=='description'" :num="num" :items="item" @update="updateField"></form-builder>
                                                 </template>
+                                                <wysiwyg
+                                                    :element-id="id"
+                                                    name="description"
+                                                    url="category-wysiwyg"
+                                                    url-file="upload-file"
+                                                    type-file-upload="file"
+                                                    type-file="image-wysiwyg"
+                                                    model="model"
+                                                    v-model="item.description">
+                                                </wysiwyg>
                                                 <file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>
                                                 <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
                                             </v-form>
@@ -54,7 +64,8 @@
             return {
                 tabs: null,
                 valid: false,
-                a: 0
+                a: 0,
+                test: 'раз'
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -65,7 +76,7 @@
             next()
         },
         computed: {
-            ...mapState('catalog', ['item', 'items', 'fields', 'typeFiles', 'model', 'attributes'])
+            ...mapState('catalog', ['item', 'items', 'fields', 'typeFiles', 'model', 'attributes', 'model'])
         },
         components: {
             formBuilder,
@@ -88,7 +99,6 @@
             },
             onSubmit() {
                 if(this.$refs.form.validate()) {
-                    console.log(this.item)
                     axios.post('/catalog/update', this.item).then(response => {
                         /*if(this.$route.params.id === '-1') {
                             this.$router.push({ name: 'table-products'})
