@@ -69,10 +69,10 @@
             }
         },
         beforeRouteEnter(to, from, next) {
-            next(vm => vm.init())
+            next(vm => vm.init(to.params.id))
         },
         beforeRouteUpdate(to, from, next) {
-            this.init()
+            this.init(to.params.id)
             next()
         },
         computed: {
@@ -84,11 +84,12 @@
             productAttributes
         },
         methods: {
-            init() {
+            init(id) {
                 if(!this.items.length>0) {
                     this.$router.push({name: 'products'})
                 }
-                this.initialization(this.id)
+                let idItem = Number(id)
+                this.initialization(idItem)
                 this.getAllAttributes()
                 //this.updateItem('this.item.producer_type_product_id)
             },

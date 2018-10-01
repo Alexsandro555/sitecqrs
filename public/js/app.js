@@ -2830,11 +2830,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     beforeRouteEnter: function beforeRouteEnter(to, from, next) {
         next(function (vm) {
-            return vm.init();
+            return vm.init(to.params.id);
         });
     },
     beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
-        this.init();
+        this.init(to.params.id);
         next();
     },
 
@@ -2843,11 +2843,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         FormBuilder: __WEBPACK_IMPORTED_MODULE_2__components_form_builder_FormBuilder_vue___default.a
     },
     methods: _extends({
-        init: function init() {
+        init: function init(id) {
+            var idItem = Number(id);
             if (!this.items.length > 0) {
                 this.$router.push({ name: 'articles' });
             }
-            this.initialization(this.id);
+            this.initialization(idItem);
         }
     }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('article', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION, updateItem: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].UPDATE_ITEM, load: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].LOAD, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA }))
 });
@@ -3337,11 +3338,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     beforeRouteEnter: function beforeRouteEnter(to, from, next) {
         next(function (vm) {
-            return vm.init();
+            return vm.init(to.params.id);
         });
     },
     beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
-        this.init();
+        this.init(to.params.id);
         next();
     },
 
@@ -3352,11 +3353,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         productAttributes: __WEBPACK_IMPORTED_MODULE_4__attributes_Attributes___default.a
     },
     methods: _extends({
-        init: function init() {
+        init: function init(id) {
             if (!this.items.length > 0) {
                 this.$router.push({ name: 'products' });
             }
-            this.initialization(this.id);
+            var idItem = Number(id);
+            this.initialization(idItem);
             this.getAllAttributes();
             //this.updateItem('this.item.producer_type_product_id)
         },
@@ -8016,6 +8018,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: 'product-wysiwyg',
             classList: ['product-wysiwyg']
         });
+        this.inst.setContent(this.value);
     }
 });
 

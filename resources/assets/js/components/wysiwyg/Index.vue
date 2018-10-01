@@ -69,7 +69,14 @@
                 id: 'product-wysiwyg',
                 classList: ['product-wysiwyg'],
             });
-        }
+            this.inst.setContent(this.value)
+
+        },
+        /*methods: {
+            init() {
+                this.inst.setContent(this.value)
+            }
+        }*/
     }
 </script>
 

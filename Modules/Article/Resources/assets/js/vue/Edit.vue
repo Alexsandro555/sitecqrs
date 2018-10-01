@@ -55,10 +55,10 @@
             }
         },
         beforeRouteEnter(to, from, next) {
-            next(vm => vm.init())
+            next(vm => vm.init(to.params.id))
         },
         beforeRouteUpdate(to, from, next) {
-            this.init()
+            this.init(to.params.id)
             next()
         },
         computed: {
@@ -68,11 +68,12 @@
             FormBuilder
         },
         methods: {
-            init() {
+            init(id) {
+                let idItem = Number(id)
                 if(!this.items.length>0) {
                     this.$router.push({name: 'articles'})
                 }
-                this.initialization(this.id)
+                this.initialization(idItem)
             },
             ...mapActions('article',{initialization: GLOBAL.INITIALIZATION, updateItem: GLOBAL.UPDATE_ITEM, load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA})
         }
