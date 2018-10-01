@@ -93,7 +93,7 @@
         methods: {
             addArticle() {
               this.add().then(response => {
-                  this.$router.push({name: 'edit-article', params: { id: response.id}})
+                  this.$router.push({name: 'update-product', params: { id: -1}})
               }).catch(error => {})
             },
             ...mapActions('catalog',{load: ACTIONS.LOAD, add: ACTIONS.ADD})

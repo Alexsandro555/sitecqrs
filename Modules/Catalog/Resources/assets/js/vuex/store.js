@@ -18,6 +18,9 @@ const state = {
     items: [],
     item: {},
     fields: [],
+    typeFiles: ['image-product'],
+    model: 'Modules\\Catalog\\Entities\\Product',
+    attributes: []
 }
 
 const module = {

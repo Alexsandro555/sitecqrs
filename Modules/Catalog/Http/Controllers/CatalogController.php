@@ -55,7 +55,7 @@ class CatalogController extends Controller
     }
 
     /**
-     * @param ProductRequest $productRequest
+     * @param Request $productRequest
      * @return array
      */
     public function update(Request $productRequest)
@@ -66,7 +66,7 @@ class CatalogController extends Controller
       $relationships = $product->getRelationships();
       foreach ($relationships as $key => $relationship) {
         if($relationship["type"] == 'BelongsTo') {
-          $relatinshipModel = $relationship["model"]::find($productRequest[$key]);
+          $relatinshipModel = $relationship["model"]::find($productRequest[$key.'_id']);
           $relatinshipModel->products()->save($product);
           $arrExcept[] = $key;
         }

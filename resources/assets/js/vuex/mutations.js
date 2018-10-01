@@ -2,11 +2,11 @@ import { GLOBAL } from '@/constants'
 
 export default {
     SET_FIELDS: (state, payload) => {
-        for(let key in payload) {
+        /*for(let key in payload) {
             let obj = {}
             obj[key] = null;
             state.item = Object.assign({},state.item, obj)
-        }
+        }*/
         state.fields = payload
     },
     SELECT_ITEM: (state, payload) => {

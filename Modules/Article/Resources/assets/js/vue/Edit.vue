@@ -62,9 +62,9 @@
                 if(!this.items.length>0) {
                     this.$router.push({name: 'articles'})
                 }
-                this.setFields(this.id)
+                this.initialization(this.id)
             },
-            ...mapActions('article',{setFields: GLOBAL.SET_FIELDS, updateItem: GLOBAL.UPDATE_ITEM, load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA})
+            ...mapActions('article',{initialization: GLOBAL.INITIALIZATION, updateItem: GLOBAL.UPDATE_ITEM, load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA})
         }
      }
 </script>

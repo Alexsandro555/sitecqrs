@@ -48,10 +48,10 @@
         ></v-checkbox>
         <v-select v-else-if="field.type=='selectbox'"
                   :name="num"
-                  :value="items[num]"
+                  :value="items[num+'_id']"
                   :items="field.items"
                   :id="num"
-                  v-model="items[num]"
+                  v-model="items[num+'_id']"
                   :item-text="field.title"
                   item-value="id"
                   :label="field.label"

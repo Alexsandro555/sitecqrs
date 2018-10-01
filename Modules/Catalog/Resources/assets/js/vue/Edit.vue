@@ -18,9 +18,9 @@
                                         <div>
                                             <v-form ref="form" lazy-validation v-model="valid">
                                                 <template v-for="(field, num) in fields">
-                                                    <form-builder :field="field" :num="num" :items="item" @update="updateItem"></form-builder>
+                                                    <form-builder :field="field" :num="num" :items="item" @update="updateField"></form-builder>
                                                 </template>
-                                                <!--<file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>-->
+                                                <file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>
                                                 <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
                                             </v-form>
                                         </div>
@@ -30,7 +30,7 @@
                         </v-card>
                     </v-tab-item>
                     <v-tab-item key="attributes" :id="'attributes'">
-                        <!--<product-attributes :attributes="attributes" :id="this.$route.params.id"></product-attributes>-->
+                        <product-attributes :attributes="attributes" :id="id"></product-attributes>
                     </v-tab-item>
                 </v-tabs-items>
             </v-flex>
@@ -54,6 +54,7 @@
             return {
                 tabs: null,
                 valid: false,
+                a: 0
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -64,7 +65,7 @@
             next()
         },
         computed: {
-            ...mapState('catalog', ['item', 'items', 'fields'])
+            ...mapState('catalog', ['item', 'items', 'fields', 'typeFiles', 'model', 'attributes'])
         },
         components: {
             formBuilder,
@@ -76,9 +77,37 @@
                 if(!this.items.length>0) {
                     this.$router.push({name: 'products'})
                 }
-                this.setFields(this.id)
+                this.initialization(this.id)
+                this.getAllAttributes()
+                //this.updateItem('this.item.producer_type_product_id)
             },
-            ...mapActions('catalog',{setFields: GLOBAL.SET_FIELDS, updateItem: ACTIONS.UPDATE_ITEM, save: ACTIONS.SAVE_DATA}),
+            getAllAttributes() {
+                if(this.id !== -1) {
+                    this.getAttributes(this.id)
+                }
+            },
+            onSubmit() {
+                if(this.$refs.form.validate()) {
+                    console.log(this.item)
+                    axios.post('/catalog/update', this.item).then(response => {
+                        /*if(this.$route.params.id === '-1') {
+                            this.$router.push({ name: 'table-products'})
+                        }
+                        else {
+                            let data = response.data
+                            //this.$store.dispatch('product/resetAttributes')
+                            //this.getAttributes()
+                        }*/
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+                else {
+                    return;
+                }
+
+            },
+            ...mapActions('catalog',{initialization: GLOBAL.INITIALIZATION, save: ACTIONS.SAVE_DATA, updateField: ACTIONS.UPDATE_FIELD, getAttributes: ACTIONS.ATTRIBUTES}),
         }
     }
 </script>

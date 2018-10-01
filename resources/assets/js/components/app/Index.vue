@@ -53,6 +53,10 @@
                     { divider: true },
                     { heading: 'Действия' },
                     {
+                        text: 'Продукция',
+                        path: '/'
+                    },
+                    {
                         text: 'Категории',
                         path: '/categories'
                     },
@@ -102,7 +106,7 @@
                 this.$router.push(path);
             },
             goMainPage() {
-                this.$router.push({name: 'table-products'})
+                this.$router.push({name: 'products'})
             },
             exit() {
                 //localStorage.setItem('isAdmin','false')

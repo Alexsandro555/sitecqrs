@@ -445,6 +445,31 @@ var productApi = {
                 reject(error);
             });
         });
+    },
+    getAttributes: function getAttributes(id) {
+        var _this2 = this;
+
+        return new Promise(function (resolve, reject) {
+            __WEBPACK_IMPORTED_MODULE_0_axios_index___default.a.get(_this2.url + '/attributes/' + id).then(function (response) {
+                return response.data;
+            }).then(function (response) {
+                var attributes = [];
+                var productAttributes = response;
+                __WEBPACK_IMPORTED_MODULE_0_axios_index___default.a.get(_this2.url + '/attribute-values/' + id).then(function (res) {
+                    productAttributes.forEach(function (productAttribute) {
+                        var filtered = res.data.filter(function (item) {
+                            return item["id"] === productAttribute["id"];
+                        });
+                        attributes.push({ attribute_id: productAttribute["id"], title: productAttribute["title"], value: filtered.length !== 0 ? filtered[0]["pivot"]["value"] : "" });
+                    });
+                    resolve(attributes);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }).catch(function (error) {
+                reject(error);
+            });
+        });
     }
 };
 
@@ -887,11 +912,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     __WEBPACK_IMPORTED_MODULE_1__api_product__["a" /* productApi */].get().then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].SET_ITEMS, response);
     }).catch(function (error) {});
-}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].UPDATE_ITEM, function (_ref2, objField) {
+}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].UPDATE_FIELD, function (_ref2, objField) {
     var commit = _ref2.commit;
 
     commit('SET_ITEM', objField);
-    commit('UPDATE_RELATIONS', objField);
+    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, objField);
+}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].ATTRIBUTES, function (_ref3, id) {
+    var commit = _ref3.commit;
+
+    __WEBPACK_IMPORTED_MODULE_1__api_product__["a" /* productApi */].getAttributes(id).then(function (response) {
+        commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].SET_ATTRIBUTES, response);
+    }).catch(function (error) {});
 }), _ACTIONS$LOAD$ACTIONS);
 
 /***/ }),
@@ -909,15 +940,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__("./resources/assets/js/constants.js");
+var _PRIVATE$UPDATE_RELAT;
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_defineProperty({}, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, function (state, payload) {
+/* harmony default export */ __webpack_exports__["a"] = (_PRIVATE$UPDATE_RELAT = {}, _defineProperty(_PRIVATE$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, function (state, payload) {
     var _loop = function _loop(key) {
-        if (key === 'producer' || key === 'type_product') return {
+        if (key === 'producer' || key === 'producer_type_product') return {
                 v: 1
             };
         if (state.fields[key].relations) {
@@ -941,7 +974,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
     }
-}));
+}), _defineProperty(_PRIVATE$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].SET_ATTRIBUTES, function (state, payload) {
+    state.attributes = payload;
+}), _PRIVATE$UPDATE_RELAT);
 
 /***/ }),
 
@@ -977,7 +1012,10 @@ var state = {
     name: 'product',
     items: [],
     item: {},
-    fields: []
+    fields: [],
+    typeFiles: ['image-product'],
+    model: 'Modules\\Catalog\\Entities\\Product',
+    attributes: []
 };
 
 var module = {
@@ -2782,9 +2820,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             if (!this.items.length > 0) {
                 this.$router.push({ name: 'articles' });
             }
-            this.setFields(this.id);
+            this.initialization(this.id);
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('article', { setFields: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].SET_FIELDS, updateItem: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].UPDATE_ITEM, load: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].LOAD, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('article', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION, updateItem: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].UPDATE_ITEM, load: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].LOAD, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA }))
 });
 
 /***/ }),
@@ -3255,7 +3293,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             tabs: null,
-            valid: false
+            valid: false,
+            a: 0
         };
     },
     beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -3268,7 +3307,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         next();
     },
 
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapState"])('catalog', ['item', 'items', 'fields'])),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapState"])('catalog', ['item', 'items', 'fields', 'typeFiles', 'model', 'attributes'])),
     components: {
         formBuilder: __WEBPACK_IMPORTED_MODULE_2__components_form_builder_FormBuilder___default.a,
         fileBox: __WEBPACK_IMPORTED_MODULE_3__file_components_file_box_FileBox___default.a,
@@ -3279,9 +3318,35 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             if (!this.items.length > 0) {
                 this.$router.push({ name: 'products' });
             }
-            this.setFields(this.id);
+            this.initialization(this.id);
+            this.getAllAttributes();
+            //this.updateItem('this.item.producer_type_product_id)
+        },
+        getAllAttributes: function getAllAttributes() {
+            if (this.id !== -1) {
+                this.getAttributes(this.id);
+            }
+        },
+        onSubmit: function onSubmit() {
+            if (this.$refs.form.validate()) {
+                console.log(this.item);
+                axios.post('/catalog/update', this.item).then(function (response) {
+                    /*if(this.$route.params.id === '-1') {
+                        this.$router.push({ name: 'table-products'})
+                    }
+                    else {
+                        let data = response.data
+                        //this.$store.dispatch('product/resetAttributes')
+                        //this.getAttributes()
+                    }*/
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            } else {
+                return;
+            }
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('catalog', { setFields: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].SET_FIELDS, updateItem: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_ITEM, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('catalog', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA, updateField: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_FIELD, getAttributes: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].ATTRIBUTES }))
 });
 
 /***/ }),
@@ -3389,7 +3454,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var _this = this;
 
             this.add().then(function (response) {
-                _this.$router.push({ name: 'edit-article', params: { id: response.id } });
+                _this.$router.push({ name: 'update-product', params: { id: -1 } });
             }).catch(function (error) {});
         }
     }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('catalog', { load: __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].LOAD, add: __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].ADD }))
@@ -3437,7 +3502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: []
         },
         id: {
-            type: String,
+            type: Number,
             required: true
         }
     },
@@ -3738,6 +3803,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             drawer: null,
             items: [{ divider: true }, { heading: 'Действия' }, {
+                text: 'Продукция',
+                path: '/'
+            }, {
                 text: 'Категории',
                 path: '/categories'
             }, {
@@ -3775,7 +3843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$router.push(path);
         },
         goMainPage: function goMainPage() {
-            this.$router.push({ name: 'table-products' });
+            this.$router.push({ name: 'products' });
         },
         exit: function exit() {
             //localStorage.setItem('isAdmin','false')
@@ -41180,10 +41248,21 @@ var render = function() {
                                                       items: _vm.item
                                                     },
                                                     on: {
-                                                      update: _vm.updateItem
+                                                      update: _vm.updateField
                                                     }
                                                   })
                                                 ]
+                                              }),
+                                              _vm._v(" "),
+                                              _c("file-box", {
+                                                attrs: {
+                                                  url: "/files/upload",
+                                                  "fileable-id": Number(
+                                                    _vm.items.id
+                                                  ),
+                                                  "type-files": _vm.typeFiles,
+                                                  model: _vm.model
+                                                }
                                               }),
                                               _vm._v(" "),
                                               _c(
@@ -41224,10 +41303,16 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-tab-item", {
-                    key: "attributes",
-                    attrs: { id: "attributes" }
-                  })
+                  _c(
+                    "v-tab-item",
+                    { key: "attributes", attrs: { id: "attributes" } },
+                    [
+                      _c("product-attributes", {
+                        attrs: { attributes: _vm.attributes, id: _vm.id }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -42016,7 +42101,7 @@ var render = function() {
                     ? _c("v-select", {
                         attrs: {
                           name: _vm.num,
-                          value: _vm.items[_vm.num],
+                          value: _vm.items[_vm.num + "_id"],
                           items: _vm.field.items,
                           id: _vm.num,
                           "item-text": _vm.field.title,
@@ -42032,11 +42117,11 @@ var render = function() {
                           }
                         },
                         model: {
-                          value: _vm.items[_vm.num],
+                          value: _vm.items[_vm.num + "_id"],
                           callback: function($$v) {
-                            _vm.$set(_vm.items, _vm.num, $$v)
+                            _vm.$set(_vm.items, _vm.num + "_id", $$v)
                           },
-                          expression: "items[num]"
+                          expression: "items[num+'_id']"
                         }
                       })
                     : _vm._e()
@@ -83259,7 +83344,9 @@ var ACTIONS = {
     SAVE_DATA: "SAVE_DATA",
     DELETE: "DELETE",
     GET_ITEM: "GET_ITEM",
-    UPDATE_ITEM: "UPDATE_ITEM"
+    UPDATE_ITEM: "UPDATE_ITEM",
+    UPDATE_FIELD: "UPDATE_FIELD",
+    ATTRIBUTES: "ATTRIBUTES"
 };
 
 var PRIVATE = {
@@ -83267,10 +83354,12 @@ var PRIVATE = {
     SET_ITEMS: "SET_ITEMS",
     GET_ITEM: "GET_ITEM",
     ADD: "ADD",
-    UPDATE_RELATIONS: "UPDATE_RELATIONS"
+    UPDATE_RELATIONS: "UPDATE_RELATIONS",
+    SET_ATTRIBUTES: "SET_ATTRIBUTES"
 };
 
 var GLOBAL = {
+    INITIALIZATION: "INITIALIZATION",
     SET_ITEMS: "SET_ITEMS",
     SET_FIELDS: "SET_FIELDS",
     UPDATE_ITEM: "UPDATE_ITEM"
@@ -83409,34 +83498,40 @@ var setFields = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_js__ = __webpack_require__("./resources/assets/js/constants.js");
-var _GLOBAL$SET_FIELDS$GL;
+var _GLOBAL$INITIALIZATIO;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_GLOBAL$SET_FIELDS$GL = {}, _defineProperty(_GLOBAL$SET_FIELDS$GL, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].SET_FIELDS, function (_ref, id) {
-    var commit = _ref.commit,
+/* harmony default export */ __webpack_exports__["a"] = (_GLOBAL$INITIALIZATIO = {}, _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].INITIALIZATION, function (_ref, id) {
+    var dispatch = _ref.dispatch,
+        commit = _ref.commit,
         state = _ref.state;
+
+    dispatch(__WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].SET_FIELDS);
+    commit('SELECT_ITEM', id);
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].SET_FIELDS, function (_ref2) {
+    var commit = _ref2.commit,
+        state = _ref2.state;
 
     return new Promise(function (resolve, reject) {
         axios.get('/initializer/fields/' + state.name).then(function (response) {
             commit('SET_FIELDS', response.data);
-            commit('SELECT_ITEM', id);
             resolve();
         }).catch(function (err) {
             reject(error);
         });
     });
-}), _defineProperty(_GLOBAL$SET_FIELDS$GL, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].UPDATE_ITEM, function (_ref2, objField) {
-    var commit = _ref2.commit;
-
-    commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* PRIVATE */].SET_ITEM, objField);
-}), _defineProperty(_GLOBAL$SET_FIELDS$GL, __WEBPACK_IMPORTED_MODULE_0__constants_js__["a" /* ACTIONS */].GET_ITEM, function (_ref3, id) {
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].UPDATE_ITEM, function (_ref3, objField) {
     var commit = _ref3.commit;
 
+    commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* PRIVATE */].SET_ITEM, objField);
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["a" /* ACTIONS */].GET_ITEM, function (_ref4, id) {
+    var commit = _ref4.commit;
+
     commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* PRIVATE */].GET_ITEM, id);
-}), _GLOBAL$SET_FIELDS$GL);
+}), _GLOBAL$INITIALIZATIO);
 
 /***/ }),
 
@@ -83453,11 +83548,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["a"] = (_SET_FIELDS$SELECT_IT = {
     SET_FIELDS: function SET_FIELDS(state, payload) {
-        for (var key in payload) {
-            var obj = {};
+        /*for(let key in payload) {
+            let obj = {}
             obj[key] = null;
-            state.item = Object.assign({}, state.item, obj);
-        }
+            state.item = Object.assign({},state.item, obj)
+        }*/
         state.fields = payload;
     },
     SELECT_ITEM: function SELECT_ITEM(state, payload) {

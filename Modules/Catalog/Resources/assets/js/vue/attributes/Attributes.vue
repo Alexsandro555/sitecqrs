@@ -33,7 +33,7 @@
                 default: []
             },
             id: {
-                type: String,
+                type: Number,
                 required: true
             }
         },
