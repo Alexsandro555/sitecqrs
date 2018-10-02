@@ -7,26 +7,62 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Catalog\Entities\Product;
 use Cart;
+use Illuminate\Support\Facades\Config;
 
 
 class CartController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     * @return Response
+     * Get array elements in cart
+     * @return array
      */
-    public function index()
-    {
-        return view('cart::index');
+    private function getCart() {
+      $cart = Cart::content()->toArray();
+      $arr = [];
+      foreach($cart as $key=>$elem) {
+        $arr[] = $elem;
+      }
+      return $arr;
+    }
+
+
+    /**
+     * Get current cart
+    * @return array
+    */
+    public function index() {
+      return  [
+        'cart' => $this->getCart(),
+        'count' => Cart::count(),
+        'total' => Cart::subtotal()
+      ];
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         return view('cart::create');
+    }
+
+
+    public function coursePrice($product) {
+      if($product->onsale) {
+        return $price = $product->special_price;
+      }
+      $current = Config::get('course.value');
+      $price = $product->price;
+      if($product->type_product->title == 'Площадочные вибраторы') {
+        $priceRuNDS = ($current*$price*18)/100+$current*$price;
+        $price = floor($priceRuNDS-($priceRuNDS*7.2419)/100);
+      }
+      else {
+        $priceRuNDS = ($current*$price*18)/100+$current*$price;
+        $price = floor($priceRuNDS);
+      }
+      return $price;
     }
 
     /**
@@ -36,30 +72,48 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-      $id = $request->id;
-      $product = Product::with('files')->find($id);
-      if(!$product) {
-        throw new \Exception('Заданная позиция не была найдена');
-      }
+      $product = Product::with('files')->with('type_product')->findOrFail($request->id);
       $filename = "";
       foreach($product->files as $file)
       {
-        foreach ($file->config as $filesItem)
-        {
-          foreach ($filesItem as $key=>$fileItem)
+        if(!$file->figure) {
+          foreach ($file->config as $filesItem)
           {
-            if($key === "s-medium")
+            foreach ($filesItem as $key=>$fileItem)
             {
-              $filename = $fileItem["filename"];
-              break;
+              if($key === "small")
+              {
+                $filename = $fileItem["filename"];
+                break;
+              }
             }
           }
         }
       }
-      Cart::add($product->id, $product->title, 1, $product->price,['article'=>$product->article, 'slug'=>$product->url_key, 'filename'=>$filename!=""?$filename:"no-image.png"]);
+      $price = $this->coursePrice($product);
+      if($product->qty>0) {
+        $onstock = "На складе";
+      }
+      else {
+        $onstock = "4-5 недель";
+      }
+      Cart::add($product->id, $product->title, $request->count, $price,
+        [
+          'article'=>$product->article,
+          'type'=>$product->type_product->title,
+          'slug'=>$product->url_key,
+          'onstock'=>$onstock,
+          'filename'=>$filename!=""?$filename:"no-image.png"
+        ]
+      );
       $total = Cart::subtotal();
       $count = Cart::count();
-      return ["total"=>$total,"count"=>$count];
+      return $this->getCart();
+    }
+
+    public function setQty($id, $qty) {
+      Cart::update($id,$qty);
+      return [];
     }
 
     /**
@@ -99,10 +153,14 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @return Response
+     * @param $rowId
+     * @return array
      */
-    public function destroy()
+    public function destroy($rowId)
     {
+      if($rowId) {
+        Cart::remove($rowId);
+        return [];
+      }
     }
 }

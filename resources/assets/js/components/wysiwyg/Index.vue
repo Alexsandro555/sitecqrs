@@ -19,7 +19,7 @@
             'url': String,
             'fileUrl': String,
             'elementId': {
-                type: Number,
+                type: String,
                 required: true
             },
             'name': {

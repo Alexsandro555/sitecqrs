@@ -8,37 +8,42 @@ import sliderFullPage from "./store/modules/slider-full-page/state";
 
 require('./bootstrap');
 
+// Импорт основных библиотек
 window.Vue = require('vue');
-
 import Vuex from 'vuex';
+Vue.use(Vuex);
 import Vuetify from 'vuetify';
+Vue.use(Vuetify);
+
 import VueCarousel from 'vue-carousel';
 
-Vue.use(Vuetify);
+// Импорт CSS-файлов, которые могут потребоваться
 import 'material-design-icons/iconfont/material-icons.css'
 import 'vuetify/dist/vuetify.min.css'
+
+// создание хранилища
 import createStore from './vuex/states.js'
 
 import VueRouter from 'vue-router';
-Vue.use(Vuex);
 Vue.use(VueRouter);
 
 
 import site from './components/site';
 
+// Глобальные компоненты доступные в любом месте
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 //Vue.component('site', require('./components/site/Index.vue'));
 Vue.component('app', require('./components/app/Index.vue'));
-Vue.component('cart-widget', require('../../../Modules/Cart/Resources/assets/js/components/cart/widget'));
+//Vue.component('cart-widget', require('../../../Modules/Cart/Resources/assets/js/components/cart/widget'));
 Vue.component('dialog-registration', require('./components/auth/register'));
 Vue.component('dialog-login', require('./components/auth/login'));
 Vue.component('auth-widget', require('./components/auth/login-widget'));
 Vue.component('leader-slider', require('./components/leader/slider'));
 Vue.component('leader-detail-image', require('./components/leader/leader-detail-image'));
 Vue.component('left-menu', require('./components/menu/LeftMenu'));
+Vue.component('cart-widget', require('@cart/vue/Widget'));
 import Wysiwyg from '@/components/wysiwyg/Index'
 Vue.component('wysiwyg', Wysiwyg)
-//Vue.component('tableProducts', require('./components/table-products'));
 
 
 /**
@@ -49,8 +54,6 @@ Vue.component('wysiwyg', Wysiwyg)
 
 
 /* Возможно код ниже следуе вынести в отдельный файл route.js */
-import tableProducts from './components/product/table-products';
-import updateProduct from './components/product/create';
 import listCategories from './components/product/category/list';
 import listLineProducts from './components/product/line-product/list';
 import listTypeProducts from './components/product/type-product/list';
@@ -62,7 +65,6 @@ import banner from '../../../Modules/Banner/Resources/assets/js/Banner';
 import tnved from './components/product/tnved/list';
 import swal from 'sweetalert';
 import initializer from "./store/modules/initializer";
-import product from "../../../Modules/Catalog/Resources/assets/js/components/product/Add"
 import EditArticle from "@article/vue/Edit"
 import Articles from "@article/vue/Articles"
 import Products from "@catalog/vue/Products"
@@ -71,13 +73,11 @@ import EditCatalog from "@catalog/vue/Edit"
 const routes = [
     {path: '/', name: 'products', component: Products},
     {
-        path: '/catalog/edit/:id?',
+        path: '/catalog/edit/:id',
         name: 'edit-catalog',
         component: EditCatalog,
-        props: (route) => ({id: parseInt(route.params.id)})
+        props: true
     },
-    //{path: '/', name: 'table-products', component: tableProducts},
-    {path: '/update-product/:id', name: 'update-product', component: product},
     {path: '/categories', name: 'categories', component: listCategories},
     {path: '/list-line-products', name: 'list-line-products', component: listLineProducts},
     {path: '/list-type-products', name: 'list-type-products', component: listTypeProducts},
@@ -87,12 +87,12 @@ const routes = [
     {path: '/type-files', name: 'type-files', component: typeFiles},
     {path: '/banner', name: 'banner', component: banner},
     {path: '/tnved', name: 'tnved', component: tnved},
-    {path: '/testForm/:id', name: 'test-form', component: product},
+    //{path: '/testForm/:id', name: 'test-form', component: product},
     {
-        path: '/article/edit/:id?',
+        path: '/article/edit/:id',
         name: 'edit-article',
         component: EditArticle,
-        props: (route) => ({ id: parseInt(route.params.id)})
+        props: true
     },
     {path: '/articles', name: 'articles', component: Articles}
 ];
@@ -111,131 +111,12 @@ const app = new Vue({
     router,
     store: new Vuex.Store(createStore()),
     data: {
-        //isAdminView: false,
         drawer: null,
-        items: [
-            {
-                title: 'Attractions',
-                submenu: [
-                    {
-                        title: 'List Item',
-                        recept: [
-                            { header: 'Today' },
-                            {
-                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/1.jpg',
-                                title: 'Brunch this weekend?',
-                                subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-                            },
-                            { divider: true, inset: true },
-                            {
-                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/2.jpg',
-                                title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-                                subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-                            },
-                            { divider: true, inset: true },
-                            {
-                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/3.jpg',
-                                title: 'Oui oui',
-                                subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-                            },
-                            { divider: true, inset: true },
-                            {
-                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/4.jpg',
-                                title: 'Birthday gift',
-                                subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
-                            },
-                            { divider: true, inset: true },
-                            {
-                                avatar: 'https://vuetifyjs.com/static/doc-images/lists/5.jpg',
-                                title: 'Recipe to try',
-                                subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-                            }
-                        ]
-                    },
-                ],
-                active: true
-            },
-            {
-                title: 'Dining',
-                submenu: [
-                    {
-                        title: 'Breakfast & brunch',
-                        recept: [
-                            {title: 'Eag'},
-                            {title: 'Meat'},
-                            {title: 'Sugar'}
-                        ]
-                    },
-                    {
-                        title: 'New American',
-                        recept: [
-                            {title: 'Bronx'},
-                            {title: 'Avenu'}
-                        ]
-                    },
-                    {title: 'Sushi'}
-                ],
-                active: true
-            },
-            {
-                title: 'Education',
-                submenu: [
-                    {title: 'List Item'},
-                    {title: 'Three-Two'}
-                ],
-                active: true
-            },
-        ],
-        menus: [
-            {
-                title: 'Птицеводство',
-                active: true,
-                submenu: [
-                    {
-                        title: 'Кормление',
-                        active: true,
-                        items: [
-                            {
-                                title: 'Подпункт меню 1',
-                            },
-                            {
-                                title: 'Подпункт меню 2',
-                            },
-                            {
-                                title: 'Подпункт меню 3',
-                            }
-                        ]
-                    },
-                    {
-                        title: 'Обогрев',
-                        active: true
-                    }
-                ],
-            },
-            {
-                title: 'Свиноводство',
-                active: true
-            },
-            {
-                title: 'Скотоводство',
-                active: true
-            },
-            {
-                title: 'Прочее',
-                active: true
-            }
-        ]
     },
     components: {
       site
     },
     computed: {
-        /*isAdminView() {
-          return this.$store.state.auth.isAdminView;
-        },
-        isAdmin() {
-          return this.$store.state.auth.isAdmin;
-        }*/
         chickens() {
           return this.$store.state.sliderFullPage.slides.chickens
         },

@@ -48,7 +48,7 @@
                                                 <v-flex xs4 class="hidden-md-and-down">
                                                     <v-layout row wrap>
                                                         <v-flex xs10>
-                                                            <cart-widget></cart-widget>
+                                                            <cart-widget/>
                                                         </v-flex>
                                                         <v-flex xs2 justify-center>
                                                             <img class="find" src="{{asset('images/find.png')}}"/>
@@ -274,7 +274,7 @@
                                 <v-list-tile>
                                     Рубрики
                                 </v-list-tile>
-                                <v-list-group v-model="item.active" v-for="item in items" :key="item.title" no-action>
+                                <!--<v-list-group v-model="item.active" v-for="item in items" :key="item.title" no-action>
                                     <v-list-tile slot="activator">
                                         <v-list-tile-content>
                                             <v-list-tile-title>@{{ item.title }}</v-list-tile-title>
@@ -285,7 +285,7 @@
                                             <v-list-tile-title>@{{ subItem.title }}</v-list-tile-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
-                                </v-list-group>
+                                </v-list-group>-->
                             </v-list>
                         </v-toolbar>
                     </v-navigation-drawer>

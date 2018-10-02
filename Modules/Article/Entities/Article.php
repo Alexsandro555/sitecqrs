@@ -16,14 +16,6 @@ class Article extends Model
 
   protected $dates = ['deleted_at'];
 
-  protected $fillable = [
-    'id',
-    'title',
-    'url_key',
-    'content',
-    'news'
-  ];
-
   public $form = [
     'id' => [
       'enabled' => true

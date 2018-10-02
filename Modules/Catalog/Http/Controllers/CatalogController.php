@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Modules\Catalog\Entities\Product;
 use Modules\Catalog\Entities\TypeProduct;
 use Modules\Catalog\Http\Requests\Product\ProductRequest;
+use Modules\Files\Entities\File;
 
 class CatalogController extends Controller
 {
@@ -85,13 +86,14 @@ class CatalogController extends Controller
      */
     public function destroy(Request $request)
     {
-      $product = Product::find($request->id);
-      $currentFiles = File::where('fileable_id',$id)->where('fileable_type','Modules\Catalog\Entities\Product')->get();
+      $product = Product::findOrFail($request->id);
+      $currentFiles = File::where('fileable_id',$request->id)->where('fileable_type',Product::class)->get();
       foreach ($currentFiles as $currentFile) {
         $currentFile->delete();
       }
+      $id = $product->id;
       $product->delete();
-      return ['message' => 'Успешно удалено!'];
+      return ['message' => 'Успешно удалено!', 'id' => $id];
     }
 
     /**

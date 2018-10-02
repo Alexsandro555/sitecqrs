@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Article\Entities\Article;
+use Modules\Files\Entities\File;
 
 class ArticleController extends Controller
 {
@@ -73,11 +74,20 @@ class ArticleController extends Controller
     {
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
+  /**
+   * Delete seleted article
+   * @param Request $request
+   * @return array
+   */
+    public function destroy(Request $request)
     {
+      $article = Article::findOrFail($request->id);
+      $currentFiles = File::where('fileable_id',$request->id)->where('fileable_type',Article::class)->get();
+      foreach ($currentFiles as $currentFile) {
+        $currentFile->delete();
+      }
+      $id = $article->id;
+      $article->delete();
+      return ['message' => 'Успешно удалено!', 'id' => $id];
     }
 }

@@ -5,17 +5,14 @@ Route::group(['middleware' => 'web', 'prefix' => 'catalog', 'namespace' => 'Modu
   Route::get('/special-products', 'CatalogController@specialProducts');
 
   Route::get('/', 'CatalogController@index');
-  Route::get('/create', 'CatalogController@create');
+  Route::post('/', 'CatalogController@create');
   Route::post('/update',
     [
       'before' => 'csrf',
       'uses' => 'CatalogController@update'
     ]);
   Route::get('/edit/{id}', 'CatalogController@edit');
-  Route::delete('/delete', [
-    'before' => 'csrf',
-    'uses' => 'CatalogController@destroy'
-  ]);
+  Route::delete('/', 'CatalogController@destroy');
   Route::get('/attributes/{id}', 'CatalogController@attributes');
   Route::get('/attribute-values/{id}', 'CatalogController@attributeValues');
   Route::post('/save-attributes',

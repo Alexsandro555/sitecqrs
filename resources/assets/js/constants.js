@@ -1,12 +1,17 @@
 export const ACTIONS = {
-    LOAD: "LOAD",
-    ADD: "ADD",
+    //LOAD: "LOAD",
     SAVE_DATA: "SAVE_DATA",
-    DELETE: "DELETE",
+    //DELETE: "DELETE",
     GET_ITEM: "GET_ITEM",
     UPDATE_ITEM: "UPDATE_ITEM",
     UPDATE_FIELD: "UPDATE_FIELD",
-    ATTRIBUTES: "ATTRIBUTES"
+    ATTRIBUTES: "ATTRIBUTES",
+
+    //cart
+    LOAD: "LOAD",
+    ADD_CART: "ADD_CART",
+    UP_QTY: "UP_QTY",
+    DOWN_QTY: "DOWN_QTY"
 }
 
 export const PRIVATE = {
@@ -15,7 +20,14 @@ export const PRIVATE = {
     GET_ITEM: "GET_ITEM",
     ADD: "ADD",
     UPDATE_RELATIONS: "UPDATE_RELATIONS",
-    SET_ATTRIBUTES: "SET_ATTRIBUTES"
+    SET_ATTRIBUTES: "SET_ATTRIBUTES",
+    DELETE: "DELETE",
+
+    //cart
+    SET_CART: "SET_CART",
+    SET_TOTAL_AND_COUNT: "SET_TOTAL_AND_COUNT",
+    UP_QTY: "UP_QTY",
+    DOWN_QTY: "DOWN_QTY"
 }
 
 export const GLOBAL = {
@@ -23,6 +35,9 @@ export const GLOBAL = {
     SET_ITEMS: "SET_ITEMS",
     SET_FIELDS: "SET_FIELDS",
     UPDATE_ITEM: "UPDATE_ITEM",
+    LOAD: "LOAD",
+    ADD: "ADD",
+    DELETE: "DELETE"
 }
 
 export const MUTATIONS = {
@@ -30,4 +45,7 @@ export const MUTATIONS = {
 }
 
 export const GETTERS = {
+    //cart
+    TOTAL_CART: "TOTAL_CART",
+    QTY_CART: "QTY_CART"
 }

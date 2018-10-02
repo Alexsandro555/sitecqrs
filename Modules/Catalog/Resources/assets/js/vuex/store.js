@@ -20,7 +20,8 @@ const state = {
     fields: [],
     typeFiles: ['image-product'],
     model: 'Modules\\Catalog\\Entities\\Product',
-    attributes: []
+    attributes: [],
+    url: '/catalog'
 }
 
 const module = {

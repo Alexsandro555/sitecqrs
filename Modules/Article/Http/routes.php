@@ -4,5 +4,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modu
 {
     Route::get('/', 'ArticleController@index');
     Route::patch('/', 'ArticleController@store');
-    Route::get('/default', 'ArticleController@create');
+    Route::post('/', 'ArticleController@create');
+    Route::delete('/', 'ArticleController@destroy');
 });

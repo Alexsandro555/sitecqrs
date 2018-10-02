@@ -17,7 +17,8 @@ const state = {
     name: 'article',
     item: {},
     items: [],
-    fields: []
+    fields: [],
+    url: '/article'
 }
 
 const module = {

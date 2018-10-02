@@ -2,15 +2,6 @@ import axios from "axios/index"
 
 export const productApi = {
     url: '/catalog',
-    get() {
-        return new Promise((resolve, reject) => {
-            axios.get(this.url).then(response => response.data).then(response => {
-                resolve(response)
-            }).catch(error => {
-                reject(error)
-            })
-        })
-    },
     getAttributes(id) {
         return new Promise((resolve, reject) => {
             axios.get(this.url+'/attributes/'+id).then(response => response.data).then(response => {
@@ -28,15 +19,6 @@ export const productApi = {
             }).catch(error => {
                 reject(error)
             })
-        })
-    },
-    add() {
-        return new Promise((resolve, reject) => {
-            axios.get(this.url+'/create').then(response => response.data).then(response => {
-                resolve(response)
-            }).catch(error => {
-                reject(error)
-            });
         })
     }
 }

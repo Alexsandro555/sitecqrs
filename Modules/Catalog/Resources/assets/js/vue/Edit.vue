@@ -56,16 +56,14 @@
     export default {
         props: {
             id: {
-                type: Number,
-                default: null
+                type: String,
+                required: true
             },
         },
         data: function() {
             return {
                 tabs: null,
                 valid: false,
-                a: 0,
-                test: 'раз'
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -85,18 +83,11 @@
         },
         methods: {
             init(id) {
-                if(!this.items.length>0) {
+                if(this.items.length == 0) {
                     this.$router.push({name: 'products'})
                 }
-                let idItem = Number(id)
-                this.initialization(idItem)
-                this.getAllAttributes()
-                //this.updateItem('this.item.producer_type_product_id)
-            },
-            getAllAttributes() {
-                if(this.id !== -1) {
-                    this.getAttributes(this.id)
-                }
+                this.initialization(Number(id))
+                this.getAttributes(Number(id))
             },
             onSubmit() {
                 if(this.$refs.form.validate()) {

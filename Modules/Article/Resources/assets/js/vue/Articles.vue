@@ -15,7 +15,7 @@
                                     <v-btn icon class="mx-0" @click="$router.push('/article/edit/'+props.item.id)">
                                         <v-icon color="teal">edit</v-icon>
                                     </v-btn>
-                                    <v-btn :disabled="props.item.url_key === 'po-umolchaniyu'" icon class="mx-0" @click="deleteItem(props.item)">
+                                    <v-btn :disabled="props.item.url_key === 'po-umolchaniyu'" icon class="mx-0" :key="props.item.id" @click="deleteItem(props.item)">
                                         <v-icon color="pink">delete</v-icon>
                                     </v-btn>
                                 </td>
@@ -27,21 +27,20 @@
                             </template>
                         </v-data-table>
                     </v-card-text>
-                    <div class="text-xs-left pt-2">
+                    <v-card-actions>
                         <v-btn @click="addArticle" color="primary" dark class="text-left mb-2">
                             <v-icon>add</v-icon>
                         </v-btn>
-                    </div>
+                    </v-card-actions>
                 </v-card>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 <script>
-    import { ACTIONS } from "@/constants";
+    import { ACTIONS, GLOBAL } from "@/constants";
     import { mapActions, mapState } from 'vuex'
     export default {
-        props: {},
         data: function() {
             return {
                 headers: [
@@ -61,8 +60,7 @@
                         value: 'title',
                         sortable: false
                     }
-                ],
-                mas:''
+                ]
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -78,10 +76,15 @@
         methods: {
             addArticle() {
               this.add().then(response => {
-                  this.$router.push({name: 'edit-article', params: { id: response.id}})
+                  this.$router.push({name: 'edit-article', params: { id: response.id.toString()}})
               }).catch(error => {})
             },
-            ...mapActions('article',{load: ACTIONS.LOAD, add: ACTIONS.ADD})
+            deleteItem (item) {
+                if(confirm('Вы уверены что хотите удалить запись?')) {
+                    this.delete(item.id)
+                }
+            },
+            ...mapActions('article',{load: GLOBAL.LOAD, add: GLOBAL.ADD, delete: GLOBAL.DELETE})
         }
      }
 </script>

@@ -4,7 +4,7 @@
             <v-flex offset-xs2 xs8>
                 <v-card width="1200px">
                     <v-card-title>
-                        Продукты
+                        <h1>Продукция</h1>
                         <v-spacer></v-spacer>
                         <v-text-field
                                 v-model="search"
@@ -42,18 +42,18 @@
                             </template>
                         </v-data-table>
                     </v-card-text>
-                    <div class="text-xs-left pt-2">
+                    <v-card-actions>
                         <v-btn @click="addArticle" color="primary" dark class="text-left mb-2">
                             <v-icon>add</v-icon>
                         </v-btn>
-                    </div>
+                    </v-card-actions>
                 </v-card>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 <script>
-    import { ACTIONS } from "@/constants";
+    import { ACTIONS, GLOBAL } from "@/constants";
     import { mapActions, mapState } from 'vuex'
     import { productApi } from '@catalog/api/product'
 
@@ -71,6 +71,11 @@
                     {
                         text: 'Заголовок',
                         value: 'title',
+                        sortable: false
+                    },
+                    {
+                        text: 'Цена',
+                        value: 'price',
                         sortable: false
                     },
                     {
@@ -94,13 +99,21 @@
         },
         methods: {
             addArticle() {
-                productApi.add()
+                this.add()
                     .then(response => {
-                        this.$router.push({name: 'update-product', params: { id: response.id.toString()}})
+                        this.$router.push({name: 'edit-catalog', params: { id: response.id.toString()}})
                     })
                     .catch(error => {})
             },
-            ...mapActions('catalog',{load: ACTIONS.LOAD, add: ACTIONS.ADD})
+            goToPage(url) {
+              window.location.href = url
+            },
+            deleteItem (item) {
+                if(confirm('Вы уверены что хотите удалить запись?')) {
+                    this.delete(item.id)
+                }
+            },
+            ...mapActions('catalog',{load: GLOBAL.LOAD, add: GLOBAL.ADD, delete: GLOBAL.DELETE})
         }
      }
 </script>

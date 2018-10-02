@@ -44,8 +44,8 @@
     export default {
         props: {
             id: {
-                type: Number,
-                default: null
+                type: String,
+                required: true
             },
         },
         data: function() {
@@ -69,11 +69,10 @@
         },
         methods: {
             init(id) {
-                let idItem = Number(id)
-                if(!this.items.length>0) {
+                if(this.items.length == 0) {
                     this.$router.push({name: 'articles'})
                 }
-                this.initialization(idItem)
+                this.initialization(Number(id))
             },
             ...mapActions('article',{initialization: GLOBAL.INITIALIZATION, updateItem: GLOBAL.UPDATE_ITEM, load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA})
         }
