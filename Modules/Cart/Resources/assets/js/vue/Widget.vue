@@ -1,10 +1,20 @@
 <template>
-    <span>
-        <a @click="show" href="#">{{count}}  товар(ов), {{total}} руб.</a>
-    </span>
+    <div class="cart">
+        <table>
+            <tbody>
+            <tr>
+                <td rowspan="2"><img class="cart__img" src="images/cart.png"/></td>
+                <td><span class="cart__col-yell">{{count}}</span> товара на</td>
+            </tr>
+            <tr>
+                <td><span class="cart__col-yell">{{total}}</span> руб.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 <script>
-    import { ACTIONS, MUTATIONS, GETTERS } from "@/constants.js"
+    import { ACTIONS, MUTATIONS, GETTERS } from "@cart/constants"
     import { mapState, mapActions, mapMutations, mapGetters } from 'vuex'
     export default {
         props: {},
@@ -16,7 +26,6 @@
             this.load()
         },
         computed: {
-            ...mapState('cart', ['count', 'total']),
             ...mapGetters('cart', {total: GETTERS.TOTAL_CART, count: GETTERS.QTY_CART}),
         },
         methods: {

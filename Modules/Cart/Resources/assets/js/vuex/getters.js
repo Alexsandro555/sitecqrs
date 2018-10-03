@@ -1,4 +1,4 @@
-import { GETTERS } from "@/constants"
+import { GETTERS } from "@cart/constants"
 
 export default {
     [GETTERS.TOTAL_CART]: state => {

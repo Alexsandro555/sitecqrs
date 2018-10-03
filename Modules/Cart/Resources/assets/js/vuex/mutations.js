@@ -1,5 +1,4 @@
-import { PRIVATE} from "@/constants";
-import {MUTATIONS} from "../../../../../../resources/assets/js/constants";
+import { PRIVATE, MUTATIONS } from "@cart/constants";
 
 export default {
     [PRIVATE.SET_CART]: (state, payload) => {
@@ -33,7 +32,6 @@ export default {
         state.cart = state.cart.filter(item => item.rowId !== payload)
     },
     [MUTATIONS.SHOW_MODAL]: (state) => {
-        console.log('worki')
         state.modal = true
     }
 }

@@ -1,4 +1,4 @@
-import { ACTIONS, PRIVATE } from "@/constants"
+import { ACTIONS, PRIVATE } from "@cart/constants"
 import { cartApi } from "@cart/api/cart"
 
 export default {

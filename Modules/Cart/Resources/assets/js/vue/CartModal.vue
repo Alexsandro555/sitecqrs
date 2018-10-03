@@ -41,7 +41,7 @@
 </template>
 <script>
     import { mapGetters, mapActions, mapState, mapMutations } from 'vuex'
-    import { GETTERS, ACTIONS, MUTATIONS } from "@/constants"
+    import { GETTERS, ACTIONS, MUTATIONS } from "@cart/constants"
     import ModalWindow from "./ModalWindow"
     import CartItem from "./CartItem"
 
@@ -66,20 +66,6 @@
             closeModal() {
                 this.close();
             },
-            /*totalCart() {
-                let sum = 0
-                this.cart.forEach(cartItem => {
-                    sum = sum + cartItem.price*cartItem.qty
-                })
-                return sum
-            },
-            QtyCart() {
-                let qty = 0
-                this.cart.forEach(cartItem => {
-                    qty = qty + cartItem.qty
-                });
-                return qty
-            },*/
             ...mapActions('cart',{ load: ACTIONS.LOAD }),
             ...mapMutations('cart',{ close: MUTATIONS.CLOSE_CART_MODAL })
         }

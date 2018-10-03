@@ -405,6 +405,41 @@ var cartApi = {
 
 /***/ }),
 
+/***/ "./Modules/Cart/Resources/assets/js/constants.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ACTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return PRIVATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return MUTATIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return GETTERS; });
+var ACTIONS = {
+    LOAD: "LOAD",
+    ADD_CART: "ADD_CART",
+    UP_QTY: "UP_QTY",
+    DOWN_QTY: "DOWN_QTY",
+    DELETE: "DELETE"
+};
+
+var PRIVATE = {
+    SET_CART: "SET_CART",
+    SET_TOTAL_AND_COUNT: "SET_TOTAL_AND_COUNT",
+    UP_QTY: "UP_QTY",
+    DOWN_QTY: "DOWN_QTY"
+};
+
+var MUTATIONS = {
+    CLOSE_CART_MODAL: "CLOSE_CART_MODAL",
+    SHOW_MODAL: "SHOW_MODAL"
+};
+
+var GETTERS = {
+    TOTAL_CART: "TOTAL_CART",
+    QTY_CART: "QTY_CART"
+};
+
+/***/ }),
+
 /***/ "./Modules/Cart/Resources/assets/js/vue/Widget.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -457,7 +492,7 @@ module.exports = Component.exports
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__("./resources/assets/js/constants.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cart_constants__ = __webpack_require__("./Modules/Cart/Resources/assets/js/constants.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cart_api_cart__ = __webpack_require__("./Modules/Cart/Resources/assets/js/api/cart.js");
 var _ACTIONS$LOAD$ACTIONS;
 
@@ -466,41 +501,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_ACTIONS$LOAD$ACTIONS = {}, _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].LOAD, function (_ref) {
+/* harmony default export */ __webpack_exports__["a"] = (_ACTIONS$LOAD$ACTIONS = {}, _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].LOAD, function (_ref) {
     var commit = _ref.commit;
 
     __WEBPACK_IMPORTED_MODULE_1__cart_api_cart__["a" /* cartApi */].get().then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_CART, response.cart);
-        commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_TOTAL_AND_COUNT, { count: response.count, total: response.total });
+        commit(__WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].SET_CART, response.cart);
+        commit(__WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].SET_TOTAL_AND_COUNT, { count: response.count, total: response.total });
     }).catch(function (err) {});
-}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].ADD_CART, function (_ref2, data) {
+}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].ADD_CART, function (_ref2, data) {
     var commit = _ref2.commit;
 
     __WEBPACK_IMPORTED_MODULE_1__cart_api_cart__["a" /* cartApi */].patch(data).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_CART, response);
+        commit(__WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].SET_CART, response);
     }).catch(function (err) {});
-}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].UP_QTY, function (_ref3, id) {
+}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].UP_QTY, function (_ref3, id) {
     var commit = _ref3.commit,
         state = _ref3.state;
 
-    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].UP_QTY, id);
+    commit(__WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].UP_QTY, id);
     var qty = state.cart.find(function (item) {
         return item.rowId === id;
     }).qty;
     __WEBPACK_IMPORTED_MODULE_1__cart_api_cart__["a" /* cartApi */].setQty({ id: id, qty: qty }).then(function (response) {}).catch(function (err) {});
-}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].DOWN_QTY, function (_ref4, id) {
+}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].DOWN_QTY, function (_ref4, id) {
     var commit = _ref4.commit,
         state = _ref4.state;
 
-    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].DOWN_QTY, id);
+    commit(__WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].DOWN_QTY, id);
     var qty = state.cart.find(function (item) {
         return item.rowId === id;
     }).qty;
     __WEBPACK_IMPORTED_MODULE_1__cart_api_cart__["a" /* cartApi */].setQty({ id: id, qty: qty }).then(function (response) {}).catch(function (err) {});
-}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].DELETE, function (_ref5, rowId) {
+}), _defineProperty(_ACTIONS$LOAD$ACTIONS, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].DELETE, function (_ref5, rowId) {
     var commit = _ref5.commit;
 
-    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].DELETE, rowId);
+    commit(__WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].DELETE, rowId);
     __WEBPACK_IMPORTED_MODULE_1__cart_api_cart__["a" /* cartApi */].delete(rowId).then(function (response) {}).catch(function (error) {});
 }), _ACTIONS$LOAD$ACTIONS);
 
@@ -510,20 +545,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__("./resources/assets/js/constants.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cart_constants__ = __webpack_require__("./Modules/Cart/Resources/assets/js/constants.js");
 var _GETTERS$TOTAL_CART$G;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_GETTERS$TOTAL_CART$G = {}, _defineProperty(_GETTERS$TOTAL_CART$G, __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GETTERS */].TOTAL_CART, function (state) {
+/* harmony default export */ __webpack_exports__["a"] = (_GETTERS$TOTAL_CART$G = {}, _defineProperty(_GETTERS$TOTAL_CART$G, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["b" /* GETTERS */].TOTAL_CART, function (state) {
     var sum = 0;
     state.cart.forEach(function (cartItem) {
         sum = sum + cartItem.price * cartItem.qty;
     });
     return sum;
-}), _defineProperty(_GETTERS$TOTAL_CART$G, __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GETTERS */].QTY_CART, function (state) {
+}), _defineProperty(_GETTERS$TOTAL_CART$G, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["b" /* GETTERS */].QTY_CART, function (state) {
     var qty = 0;
     state.cart.forEach(function (cartItem) {
         qty = qty + Number(cartItem.qty);
@@ -537,32 +572,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__("./resources/assets/js/constants.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_assets_js_constants__ = __webpack_require__("./resources/assets/js/constants.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cart_constants__ = __webpack_require__("./Modules/Cart/Resources/assets/js/constants.js");
 var _PRIVATE$SET_CART$PRI;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-
-/* harmony default export */ __webpack_exports__["a"] = (_PRIVATE$SET_CART$PRI = {}, _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_CART, function (state, payload) {
+/* harmony default export */ __webpack_exports__["a"] = (_PRIVATE$SET_CART$PRI = {}, _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].SET_CART, function (state, payload) {
     state.cart = payload;
-}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_TOTAL_AND_COUNT, function (state, payload) {
+}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].SET_TOTAL_AND_COUNT, function (state, payload) {
     var total = payload.total,
         count = payload.count;
 
     state.total = total;
     state.count = count;
-}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_1__resources_assets_js_constants__["d" /* MUTATIONS */].CLOSE_CART_MODAL, function (state) {
+}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["c" /* MUTATIONS */].CLOSE_CART_MODAL, function (state) {
     state.modal = false;
-}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].UP_QTY, function (state, payload) {
+}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].UP_QTY, function (state, payload) {
     state.cart.forEach(function (item) {
         if (item.rowId === payload) {
             item.qty = Number(item.qty) + 1;
         }
     });
-}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].DOWN_QTY, function (state, payload) {
+}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].DOWN_QTY, function (state, payload) {
     state.cart.forEach(function (item) {
         if (item.rowId === payload) {
             if (Number(item.qty) > 1) {
@@ -570,12 +603,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
         }
     });
-}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].DELETE, function (state, payload) {
+}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["d" /* PRIVATE */].DELETE, function (state, payload) {
     state.cart = state.cart.filter(function (item) {
         return item.rowId !== payload;
     });
-}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_1__resources_assets_js_constants__["d" /* MUTATIONS */].SHOW_MODAL, function (state) {
-    console.log('worki');
+}), _defineProperty(_PRIVATE$SET_CART$PRI, __WEBPACK_IMPORTED_MODULE_0__cart_constants__["c" /* MUTATIONS */].SHOW_MODAL, function (state) {
     state.modal = true;
 }), _PRIVATE$SET_CART$PRI);
 
@@ -817,12 +849,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var commit = _ref.commit;
 
     commit('SET_ITEM', objField);
-    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].UPDATE_RELATIONS, objField);
+    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, objField);
 }), _defineProperty(_ACTIONS$UPDATE_FIELD, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].ATTRIBUTES, function (_ref2, id) {
     var commit = _ref2.commit;
 
     __WEBPACK_IMPORTED_MODULE_1__api_product__["a" /* productApi */].getAttributes(id).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_ATTRIBUTES, response);
+        commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].SET_ATTRIBUTES, response);
     }).catch(function (error) {});
 }), _ACTIONS$UPDATE_FIELD);
 
@@ -849,7 +881,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_PRIVATE$UPDATE_RELAT = {}, _defineProperty(_PRIVATE$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].UPDATE_RELATIONS, function (state, payload) {
+/* harmony default export */ __webpack_exports__["a"] = (_PRIVATE$UPDATE_RELAT = {}, _defineProperty(_PRIVATE$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, function (state, payload) {
     var _loop = function _loop(key) {
         if (key === 'producer' || key === 'producer_type_product') return {
                 v: 1
@@ -875,7 +907,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
     }
-}), _defineProperty(_PRIVATE$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].SET_ATTRIBUTES, function (state, payload) {
+}), _defineProperty(_PRIVATE$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].SET_ATTRIBUTES, function (state, payload) {
     state.attributes = payload;
 }), _PRIVATE$UPDATE_RELAT);
 
@@ -2644,7 +2676,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 this.delete(item.id);
             }
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('article', { load: __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].LOAD, add: __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].ADD, delete: __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].DELETE }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('article', { load: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].LOAD, add: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].ADD, delete: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].DELETE }))
 });
 
 /***/ }),
@@ -2737,7 +2769,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }
             this.initialization(Number(id));
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('article', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["c" /* GLOBAL */].INITIALIZATION, updateItem: __WEBPACK_IMPORTED_MODULE_1__constants__["c" /* GLOBAL */].UPDATE_ITEM, load: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].LOAD, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('article', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION, updateItem: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].UPDATE_ITEM, load: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].LOAD, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA }))
 });
 
 /***/ }),
@@ -2864,10 +2896,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_js__ = __webpack_require__("./resources/assets/js/constants.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cart_constants__ = __webpack_require__("./Modules/Cart/Resources/assets/js/constants.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2885,8 +2927,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.load();
     },
 
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapState"])('cart', ['count', 'total']), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapGetters"])('cart', { total: __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GETTERS */].TOTAL_CART, count: __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GETTERS */].QTY_CART })),
-    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('cart', { load: __WEBPACK_IMPORTED_MODULE_0__constants_js__["a" /* ACTIONS */].LOAD }), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapMutations"])('cart', { show: __WEBPACK_IMPORTED_MODULE_0__constants_js__["d" /* MUTATIONS */].SHOW_MODAL }))
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapGetters"])('cart', { total: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["b" /* GETTERS */].TOTAL_CART, count: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["b" /* GETTERS */].QTY_CART })),
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('cart', { load: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].LOAD }), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapMutations"])('cart', { show: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["c" /* MUTATIONS */].SHOW_MODAL }))
 });
 
 /***/ }),
@@ -3016,7 +3058,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return;
             }
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('catalog', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["c" /* GLOBAL */].INITIALIZATION, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA, updateField: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_FIELD, getAttributes: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].ATTRIBUTES }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('catalog', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA, updateField: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_FIELD, getAttributes: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].ATTRIBUTES }))
 });
 
 /***/ }),
@@ -3142,7 +3184,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 this.delete(item.id);
             }
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('catalog', { load: __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].LOAD, add: __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].ADD, delete: __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].DELETE }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('catalog', { load: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].LOAD, add: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].ADD, delete: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].DELETE }))
 });
 
 /***/ }),
@@ -38413,13 +38455,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
-    _c("a", { attrs: { href: "#" }, on: { click: _vm.show } }, [
-      _vm._v(_vm._s(_vm.count) + "  товар(ов), " + _vm._s(_vm.total) + " руб.")
+  return _c("div", { staticClass: "cart" }, [
+    _c("table", [
+      _c("tbody", [
+        _c("tr", [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("td", [
+            _c("span", { staticClass: "cart__col-yell" }, [
+              _vm._v(_vm._s(_vm.count))
+            ]),
+            _vm._v(" товара на")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [
+            _c("span", { staticClass: "cart__col-yell" }, [
+              _vm._v(_vm._s(_vm.total))
+            ]),
+            _vm._v(" руб.")
+          ])
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { rowspan: "2" } }, [
+      _c("img", { staticClass: "cart__img", attrs: { src: "images/cart.png" } })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -81112,24 +81183,16 @@ module.exports = Component.exports
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ACTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return PRIVATE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return GLOBAL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return MUTATIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return GETTERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return PRIVATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return GLOBAL; });
+/* unused harmony export MUTATIONS */
+/* unused harmony export GETTERS */
 var ACTIONS = {
-    //LOAD: "LOAD",
     SAVE_DATA: "SAVE_DATA",
-    //DELETE: "DELETE",
     GET_ITEM: "GET_ITEM",
     UPDATE_ITEM: "UPDATE_ITEM",
     UPDATE_FIELD: "UPDATE_FIELD",
-    ATTRIBUTES: "ATTRIBUTES",
-
-    //cart
-    LOAD: "LOAD",
-    ADD_CART: "ADD_CART",
-    UP_QTY: "UP_QTY",
-    DOWN_QTY: "DOWN_QTY"
+    ATTRIBUTES: "ATTRIBUTES"
 };
 
 var PRIVATE = {
@@ -81139,34 +81202,24 @@ var PRIVATE = {
     ADD: "ADD",
     UPDATE_RELATIONS: "UPDATE_RELATIONS",
     SET_ATTRIBUTES: "SET_ATTRIBUTES",
-    DELETE: "DELETE",
-
-    //cart
-    SET_CART: "SET_CART",
-    SET_TOTAL_AND_COUNT: "SET_TOTAL_AND_COUNT",
-    UP_QTY: "UP_QTY",
-    DOWN_QTY: "DOWN_QTY"
+    DELETE: "DELETE"
 };
 
 var GLOBAL = {
-    INITIALIZATION: "INITIALIZATION",
-    SET_ITEMS: "SET_ITEMS",
-    SET_FIELDS: "SET_FIELDS",
-    UPDATE_ITEM: "UPDATE_ITEM",
-    LOAD: "LOAD",
-    ADD: "ADD",
-    DELETE: "DELETE"
+    INITIALIZATION: "GLOBAL_INITIALIZATION",
+    SET_ITEMS: "GLOBAL_SET_ITEMS",
+    SET_FIELDS: "GLOBAL_SET_FIELDS",
+    UPDATE_ITEM: "GLOBAL_UPDATE_ITEM",
+    LOAD: "GLOBAL_LOAD",
+    ADD: "GLOBAL_ADD",
+    DELETE: "GLOBAL_DELETE"
 };
 
 var MUTATIONS = {
     SET_FIELDS: "SET_FIELDS"
 };
 
-var GETTERS = {
-    //cart
-    TOTAL_CART: "TOTAL_CART",
-    QTY_CART: "QTY_CART"
-};
+var GETTERS = {};
 
 /***/ }),
 
@@ -81277,14 +81330,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_GLOBAL$INITIALIZATIO = {}, _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].INITIALIZATION, function (_ref, id) {
+/* harmony default export */ __webpack_exports__["a"] = (_GLOBAL$INITIALIZATIO = {}, _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].INITIALIZATION, function (_ref, id) {
     var dispatch = _ref.dispatch,
         commit = _ref.commit,
         state = _ref.state;
 
-    dispatch(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].SET_FIELDS);
+    dispatch(__WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].SET_FIELDS);
     commit('SELECT_ITEM', id);
-}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].SET_FIELDS, function (_ref2) {
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].SET_FIELDS, function (_ref2) {
     var commit = _ref2.commit,
         state = _ref2.state;
 
@@ -81296,31 +81349,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             reject(error);
         });
     });
-}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].UPDATE_ITEM, function (_ref3, objField) {
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].UPDATE_ITEM, function (_ref3, objField) {
     var commit = _ref3.commit;
 
-    commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["e" /* PRIVATE */].SET_ITEM, objField);
-}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].LOAD, function (_ref4) {
+    commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* PRIVATE */].SET_ITEM, objField);
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].LOAD, function (_ref4) {
     var commit = _ref4.commit,
         state = _ref4.state;
 
     __WEBPACK_IMPORTED_MODULE_1__api_main_js__["a" /* api */].get(state.url).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].SET_ITEMS, response);
+        commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].SET_ITEMS, response);
     }).catch(function (error) {});
-}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].DELETE, function (_ref5, id) {
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].DELETE, function (_ref5, id) {
     var commit = _ref5.commit,
         state = _ref5.state;
 
     __WEBPACK_IMPORTED_MODULE_1__api_main_js__["a" /* api */].delete({ url: state.url, id: id }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["e" /* PRIVATE */].DELETE, response);
+        commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* PRIVATE */].DELETE, response);
     }).catch(function (error) {});
-}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* GLOBAL */].ADD, function (_ref6) {
+}), _defineProperty(_GLOBAL$INITIALIZATIO, __WEBPACK_IMPORTED_MODULE_0__constants_js__["b" /* GLOBAL */].ADD, function (_ref6) {
     var commit = _ref6.commit,
         state = _ref6.state;
 
     return new Promise(function (resolve, reject) {
         __WEBPACK_IMPORTED_MODULE_1__api_main_js__["a" /* api */].create(state.url).then(function (response) {
-            commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["e" /* PRIVATE */].ADD, response);
+            commit(__WEBPACK_IMPORTED_MODULE_0__constants_js__["c" /* PRIVATE */].ADD, response);
             resolve(response);
         }).catch(function (error) {
             reject(error);
@@ -81351,15 +81404,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
         state.item = Object.assign({}, item);
     }
-}, _defineProperty(_SET_FIELDS$SELECT_IT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* GLOBAL */].SET_ITEMS, function (state, payload) {
+}, _defineProperty(_SET_FIELDS$SELECT_IT, __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* GLOBAL */].SET_ITEMS, function (state, payload) {
     state.items = payload;
 }), _defineProperty(_SET_FIELDS$SELECT_IT, 'SET_ITEM', function SET_ITEM(state, payload) {
     state.item = Object.assign({}, state.item, payload);
-}), _defineProperty(_SET_FIELDS$SELECT_IT, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].DELETE, function (state, payload) {
+}), _defineProperty(_SET_FIELDS$SELECT_IT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].DELETE, function (state, payload) {
     state.items = state.items.filter(function (item) {
         return item.id !== payload.id;
     });
-}), _defineProperty(_SET_FIELDS$SELECT_IT, __WEBPACK_IMPORTED_MODULE_0__constants__["e" /* PRIVATE */].ADD, function (state, payload) {
+}), _defineProperty(_SET_FIELDS$SELECT_IT, __WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].ADD, function (state, payload) {
     state.items.push(payload);
 }), _SET_FIELDS$SELECT_IT);
 

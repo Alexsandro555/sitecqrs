@@ -20,7 +20,7 @@
     </tr>
 </template>
 <script>
-    import { ACTIONS } from "@/constants";
+    import { ACTIONS } from "@cart/constants";
     import { mapActions } from 'vuex'
 
     export default {
