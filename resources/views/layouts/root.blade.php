@@ -12,10 +12,6 @@
 </head>
 <body>
 <div id="app">
-        <!--<div v-if="isAdminView">
-            <app></app>
-        </div>
-        <div v-else>-->
         <v-app >
             <template>
                 <v-layout column wrap>
@@ -274,18 +270,6 @@
                                 <v-list-tile>
                                     Рубрики
                                 </v-list-tile>
-                                <!--<v-list-group v-model="item.active" v-for="item in items" :key="item.title" no-action>
-                                    <v-list-tile slot="activator">
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>@{{ item.title }}</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-list-tile v-for="subItem in item.submenu" :key="subItem.title">
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>@{{ subItem.title }}</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list-group>-->
                             </v-list>
                         </v-toolbar>
                     </v-navigation-drawer>

@@ -76,6 +76,13 @@
         computed: {
             ...mapState('catalog', ['item', 'items', 'fields', 'typeFiles', 'model', 'attributes', 'model'])
         },
+        watch: {
+            'fields' (to, from) {
+                if(!_.isEmpty(to)) {
+                    this.updateRelations(this.item.type_product_id)
+                }
+            }
+        },
         components: {
             formBuilder,
             fileBox,
@@ -109,7 +116,13 @@
                 }
 
             },
-            ...mapActions('catalog',{initialization: GLOBAL.INITIALIZATION, save: ACTIONS.SAVE_DATA, updateField: ACTIONS.UPDATE_FIELD, getAttributes: ACTIONS.ATTRIBUTES}),
+            ...mapActions('catalog',{
+                initialization: GLOBAL.INITIALIZATION,
+                save: ACTIONS.SAVE_DATA,
+                updateField: ACTIONS.UPDATE_FIELD,
+                getAttributes: ACTIONS.ATTRIBUTES,
+                updateRelations: ACTIONS.UPDATE_RELATIONS
+            }),
         }
     }
 </script>

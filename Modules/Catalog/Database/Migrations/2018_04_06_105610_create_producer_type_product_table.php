@@ -13,6 +13,8 @@ class CreateProducerTypeProductTable extends Migration
      */
     public function up()
     {
+        $tableName = 'producer_type_product';
+
         Schema::create('producer_type_product', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('remote_id')->nullable();
@@ -27,6 +29,8 @@ class CreateProducerTypeProductTable extends Migration
           $table->foreign('type_product_id')->references('id')->on('type_products')->onDelete('cascade');
           $table->foreign('producer_id')->references('id')->on('producers')->onDelete('cascade');
         });
+
+        DB::statement("ALTER TABLE `$tableName` comment 'Линейки продукции'");
     }
 
     /**

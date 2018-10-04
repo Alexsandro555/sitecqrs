@@ -13,7 +13,9 @@ class CreateTypeProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_products', function (Blueprint $table) {
+        $tableName = 'type_products';
+
+        Schema::create($tableName, function (Blueprint $table) {
           $table->increments('id');
           $table->integer('remote_id')->nullable();
           $table->integer('category_id')->nullable();
@@ -25,6 +27,8 @@ class CreateTypeProductsTable extends Migration
           $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
           $table->softDeletes();
         });
+
+        DB::statement("ALTER TABLE `$tableName` comment 'Типы продукции'");
     }
 
     /**

@@ -13,7 +13,9 @@ class CreateProducersTable extends Migration
      */
     public function up()
     {
-        Schema::create('producers', function (Blueprint $table) {
+        $tableName = 'producers';
+
+        Schema::create($tableName, function (Blueprint $table) {
           $table->increments('id');
           $table->integer('remote_id')->nullable();
           $table->string('title',255);
@@ -22,6 +24,8 @@ class CreateProducersTable extends Migration
           $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
           $table->softDeletes();
         });
+
+       DB::statement("ALTER TABLE `$tableName` comment 'Производители'");
     }
 
     /**

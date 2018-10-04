@@ -838,25 +838,31 @@ module.exports = Component.exports
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__("./resources/assets/js/constants.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_product__ = __webpack_require__("./Modules/Catalog/Resources/assets/js/api/product.js");
-var _ACTIONS$UPDATE_FIELD;
+var _ACTIONS$UPDATE_RELAT;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_ACTIONS$UPDATE_FIELD = {}, _defineProperty(_ACTIONS$UPDATE_FIELD, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].UPDATE_FIELD, function (_ref, objField) {
-    var commit = _ref.commit;
+/* harmony default export */ __webpack_exports__["a"] = (_ACTIONS$UPDATE_RELAT = {}, _defineProperty(_ACTIONS$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].UPDATE_RELATIONS, function (_ref, data) {
+    var commit = _ref.commit,
+        store = _ref.store;
+
+    var obj = { 'type_product': data };
+    commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, obj);
+}), _defineProperty(_ACTIONS$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].UPDATE_FIELD, function (_ref2, objField) {
+    var commit = _ref2.commit;
 
     commit('SET_ITEM', objField);
     commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].UPDATE_RELATIONS, objField);
-}), _defineProperty(_ACTIONS$UPDATE_FIELD, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].ATTRIBUTES, function (_ref2, id) {
-    var commit = _ref2.commit;
+}), _defineProperty(_ACTIONS$UPDATE_RELAT, __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* ACTIONS */].ATTRIBUTES, function (_ref3, id) {
+    var commit = _ref3.commit;
 
     __WEBPACK_IMPORTED_MODULE_1__api_product__["a" /* productApi */].getAttributes(id).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_0__constants__["c" /* PRIVATE */].SET_ATTRIBUTES, response);
     }).catch(function (error) {});
-}), _ACTIONS$UPDATE_FIELD);
+}), _ACTIONS$UPDATE_RELAT);
 
 /***/ }),
 
@@ -3027,6 +3033,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapState"])('catalog', ['item', 'items', 'fields', 'typeFiles', 'model', 'attributes', 'model'])),
+    watch: {
+        'fields': function fields(to, from) {
+            if (!_.isEmpty(to)) {
+                this.updateRelations(this.item.type_product_id);
+            }
+        }
+    },
     components: {
         formBuilder: __WEBPACK_IMPORTED_MODULE_2__components_form_builder_FormBuilder___default.a,
         fileBox: __WEBPACK_IMPORTED_MODULE_3__file_components_file_box_FileBox___default.a,
@@ -3058,7 +3071,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return;
             }
         }
-    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('catalog', { initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION, save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA, updateField: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_FIELD, getAttributes: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].ATTRIBUTES }))
+    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])('catalog', {
+        initialization: __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* GLOBAL */].INITIALIZATION,
+        save: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].SAVE_DATA,
+        updateField: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_FIELD,
+        getAttributes: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].ATTRIBUTES,
+        updateRelations: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* ACTIONS */].UPDATE_RELATIONS
+    }))
 });
 
 /***/ }),
@@ -81192,7 +81211,8 @@ var ACTIONS = {
     GET_ITEM: "GET_ITEM",
     UPDATE_ITEM: "UPDATE_ITEM",
     UPDATE_FIELD: "UPDATE_FIELD",
-    ATTRIBUTES: "ATTRIBUTES"
+    ATTRIBUTES: "ATTRIBUTES",
+    UPDATE_RELATIONS: "UPDATE_RELATIONS"
 };
 
 var PRIVATE = {
