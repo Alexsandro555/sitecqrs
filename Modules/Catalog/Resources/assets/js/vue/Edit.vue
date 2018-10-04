@@ -30,7 +30,7 @@
                                                     model="model"
                                                     v-model="item.description">
                                                 </wysiwyg>
-                                                <file-box url="/files/upload" :fileable-id="Number(items.id)" :type-files="typeFiles" :model="model"></file-box>
+                                                <file-box url="/files/upload" :fileable-id="Number(item.id)" :type-files="typeFiles" :model="model"></file-box>
                                                 <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
                                             </v-form>
                                         </div>

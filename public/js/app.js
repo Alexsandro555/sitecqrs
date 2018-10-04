@@ -40297,7 +40297,7 @@ var render = function() {
                                                 attrs: {
                                                   url: "/files/upload",
                                                   "fileable-id": Number(
-                                                    _vm.items.id
+                                                    _vm.item.id
                                                   ),
                                                   "type-files": _vm.typeFiles,
                                                   model: _vm.model
