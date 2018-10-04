@@ -90,9 +90,6 @@ class Product extends Model
     ],
     'producer_type_product' => [
       'enabled' => true,
-      'validations' => [
-        'required' => true,
-      ]
     ],
     'producer' => [
       'enabled' => true,

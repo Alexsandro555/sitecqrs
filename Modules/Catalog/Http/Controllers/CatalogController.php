@@ -68,7 +68,9 @@ class CatalogController extends Controller
       foreach ($relationships as $key => $relationship) {
         if($relationship["type"] == 'BelongsTo') {
           $relatinshipModel = $relationship["model"]::find($productRequest[$key.'_id']);
-          $relatinshipModel->products()->save($product);
+          if($relatinshipModel) {
+            $relatinshipModel->products()->save($product);
+          }
           $arrExcept[] = $key;
         }
       }
