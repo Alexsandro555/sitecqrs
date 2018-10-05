@@ -41,6 +41,7 @@
                 </v-layout>
             </v-container>
         </v-content>
+        <notifications/>
     </v-app>
 </template>
 <script>

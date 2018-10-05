@@ -6,6 +6,7 @@ import initializer from '../store/modules/initializer'
 import article from '@article/vuex/store'
 import catalog from '@catalog/vuex/store'
 import cart from '@cart/vuex/store'
+import notification from '@/vuex/notification/store'
 
 export default function() {
     return {
@@ -15,7 +16,9 @@ export default function() {
            initializer,
            article,
            catalog,
-           cart
+           cart,
+           notification
        },
+       mutations
     }
 }

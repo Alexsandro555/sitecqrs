@@ -19,7 +19,8 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return Product::all();
+      $temp = "";
+      return Product::all();
     }
 
     /**
@@ -140,7 +141,7 @@ class CatalogController extends Controller
       }
       $product = Product::find($productId);
       $product->attributes()->sync($arr);
-      return ['message' => 'Успешно сохранено!'];
+      return ['message' => 'Атрибуты сохранены!'];
     }
 
 

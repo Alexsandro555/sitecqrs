@@ -13,10 +13,6 @@ class MainController extends Controller
     return view('main.index');
   }
 
-  public function mas() {
-    return view('welcome');
-  }
-
   public function authenticated(Request $request) {
     $user = $request->user();
     if($user) {

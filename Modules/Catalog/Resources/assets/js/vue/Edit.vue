@@ -31,7 +31,7 @@
                                                     v-model="item.description">
                                                 </wysiwyg>
                                                 <file-box url="/files/upload" :fileable-id="Number(item.id)" :type-files="typeFiles" :model="model"></file-box>
-                                                <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit()">Сохранить</v-btn>
+                                                <v-btn large color="primary" :disabled="!valid" @click.prevent="onSubmit">Сохранить</v-btn>
                                             </v-form>
                                         </div>
                                     </v-flex>
@@ -98,23 +98,8 @@
             },
             onSubmit() {
                 if(this.$refs.form.validate()) {
-                    axios.post('/catalog/update', this.item).then(response => {
-                        /*if(this.$route.params.id === '-1') {
-                            this.$router.push({ name: 'table-products'})
-                        }
-                        else {
-                            let data = response.data
-                            //this.$store.dispatch('product/resetAttributes')
-                            //this.getAttributes()
-                        }*/
-                    }).catch(err => {
-                        console.log(err)
-                    })
+                    this.save(this.item)
                 }
-                else {
-                    return;
-                }
-
             },
             ...mapActions('catalog',{
                 initialization: GLOBAL.INITIALIZATION,

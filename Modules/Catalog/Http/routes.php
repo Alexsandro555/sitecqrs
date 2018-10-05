@@ -6,20 +6,17 @@ Route::group(['middleware' => 'web', 'prefix' => 'catalog', 'namespace' => 'Modu
 
   Route::get('/', 'CatalogController@index');
   Route::post('/', 'CatalogController@create');
-  Route::post('/update',
-    [
-      'before' => 'csrf',
-      'uses' => 'CatalogController@update'
-    ]);
+  Route::patch('/', 'CatalogController@update');
   Route::get('/edit/{id}', 'CatalogController@edit');
   Route::delete('/', 'CatalogController@destroy');
   Route::get('/attributes/{id}', 'CatalogController@attributes');
   Route::get('/attribute-values/{id}', 'CatalogController@attributeValues');
-  Route::post('/save-attributes',
+  Route::patch('/attributes', 'CatalogController@saveAttributes');
+  /*Route::post('/save-attributes',
     [
       'before' => 'csrf',
       'uses' => 'CatalogController@saveAttributes'
-    ]);
+    ]);*/
 
   //=========================TypeProduct============================================
   Route::get('/type-product', 'TypeProductController@index');

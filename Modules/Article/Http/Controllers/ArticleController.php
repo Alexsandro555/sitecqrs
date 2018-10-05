@@ -44,7 +44,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-      return ['message' => 'Успешное обновлено!', 'model' => Article::where('id', $request->id)->update($request->toArray())];
+      return ['message' => 'Статья успешно обновлена!', 'model' => Article::where('id', $request->id)->update($request->toArray())];
     }
 
     /**

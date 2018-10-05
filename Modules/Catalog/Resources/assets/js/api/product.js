@@ -20,5 +20,23 @@ export const productApi = {
                 reject(error)
             })
         })
+    },
+    patch(data) {
+        return new Promise((resolve, reject) => {
+            axios.patch(this.url, data).then(response => response.data).then(response => {
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+    saveAttributes(data) {
+        return new Promise((resolve, reject) => {
+            axios.patch(this.url+'/attributes', data).then(response => response.data).then(response => {
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
     }
 }

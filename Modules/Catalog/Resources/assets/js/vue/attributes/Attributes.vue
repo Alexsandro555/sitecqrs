@@ -26,6 +26,9 @@
     </div>
 </template>
 <script>
+    import { mapActions } from 'vuex'
+    import { ACTIONS } from '@/constants'
+
     export default {
         props: {
             attributes: {
@@ -49,11 +52,13 @@
         },
         methods: {
             onSave() {
-                axios.post('/catalog/save-attributes', {data: JSON.stringify(this.attributes), productId: this.id}).then(res => {
+                this.save({data: JSON.stringify(this.attributes), productId: this.id})
+                /*axios.post('/catalog/save-attributes', {data: JSON.stringify(this.attributes), productId: this.id}).then(res => {
                 }).catch(error => {
                     console.log(error);
-                });
-            }
+                });*/
+            },
+            ...mapActions('catalog', { save: ACTIONS.SAVE_ATTRIBUTES })
         }
     }
 </script>

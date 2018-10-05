@@ -61,7 +61,6 @@
         },
         watch: {
             fileableId: function (val) {
-                console.log('fileable id')
                 $(".dz-preview").remove();
                 this.getImages()
             }

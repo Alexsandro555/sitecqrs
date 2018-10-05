@@ -10,11 +10,23 @@ export default {
         commit('SET_ITEM',objField)
         commit(PRIVATE.UPDATE_RELATIONS, objField)
     },
-    [ACTIONS.ATTRIBUTES]: ({ commit }, id) => {
+    [ACTIONS.ATTRIBUTES]: ({ commit, dispatch }, id) => {
         productApi.getAttributes(id)
             .then(response => {
                 commit(PRIVATE.SET_ATTRIBUTES,response)
             })
             .catch(error => {})
+    },
+    [ACTIONS.SAVE_DATA]: ({commit, dispatch}, data) => {
+        productApi.patch(data)
+            .then(response => {
+                dispatch('successSaveNotification', response.message, {root: true})
+                commit(GLOBAL.UPDATE, response.model)
+            })
+    },
+    [ACTIONS.SAVE_ATTRIBUTES]: ({commit, dispatch}, data) => {
+        productApi.saveAttributes(data).then(response => {
+            dispatch('successSaveNotification', response.message, {root: true})
+        })
     }
 }
