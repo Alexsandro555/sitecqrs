@@ -40398,7 +40398,7 @@ var render = function() {
                                                 attrs: {
                                                   "element-id": _vm.id,
                                                   name: "description",
-                                                  url: "category-wysiwyg",
+                                                  url: "image-wysiwyg-upload",
                                                   "url-file": "upload-file",
                                                   "type-file-upload": "file",
                                                   "type-file": "image-wysiwyg",
