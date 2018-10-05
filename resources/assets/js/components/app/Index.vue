@@ -32,6 +32,7 @@
             <span class="title ml-3 mr-5" @click="goMainPage()">Лидер</span>
             <v-text-field solo-inverted flat label="Поиск" prepend-icon="search"></v-text-field>
             <v-btn light @click.stop="exit">Выход</v-btn>
+            <v-btn light @click.stop="goToSite">На главную</v-btn>
             <v-spacer></v-spacer>
         </v-toolbar>
         <v-content>
@@ -108,6 +109,9 @@
             },
             goMainPage() {
                 this.$router.push({name: 'products'})
+            },
+            goToSite() {
+              document.location.href="/"
             },
             exit() {
                 //localStorage.setItem('isAdmin','false')

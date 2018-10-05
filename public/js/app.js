@@ -3584,6 +3584,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
@@ -3632,6 +3633,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         goMainPage: function goMainPage() {
             this.$router.push({ name: 'products' });
+        },
+        goToSite: function goToSite() {
+            document.location.href = "/";
         },
         exit: function exit() {
             //localStorage.setItem('isAdmin','false')
@@ -40130,6 +40134,20 @@ var render = function() {
               }
             },
             [_vm._v("Выход")]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { light: "" },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.goToSite($event)
+                }
+              }
+            },
+            [_vm._v("На главную")]
           ),
           _vm._v(" "),
           _c("v-spacer")
