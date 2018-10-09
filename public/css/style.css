@@ -249,6 +249,14 @@
   margin-left: 30px;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.inline {
+  display: inline-block;
+}
+
 .menu-left-img {
   position: absolute;
   z-index: 100;
@@ -492,6 +500,11 @@
   background: rgba(0, 0, 0, 0);
 }
 
+.menu-left__link {
+  text-decoration: none;
+  color: #B16C3D;
+}
+
 .content-wrapper-top {
   background: url("/images/tree-layer-top.png") top center repeat;
   height: 29px;
@@ -507,6 +520,10 @@
   margin: auto;
   font-size: 0.9em;
   width: 1200px;
+}
+
+.content h1 {
+  color: white;
 }
 
 .content__header {
@@ -550,7 +567,12 @@
   margin-left: 310px;
 }
 
-.special-product {
+.left-50 {
+  margin-left: 50px;
+}
+
+.special-product,
+.product {
   width: 263px;
   height: 390px;
   -mox-border-radius: 0px 0px 6px 6px;
@@ -560,6 +582,11 @@
   background-color: #ffff;
   margin: 0 auto;
   padding: 0px 0px 10px 0px;
+}
+
+.product {
+  display: inline-block;
+  margin: 10px;
 }
 
 .special-product__header {

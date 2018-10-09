@@ -18,7 +18,8 @@ class TypeProduct extends Model
     'sort',
     'tnved_id',
     'category_id',
-    'description'
+    'description',
+    'url_key'
   ];
 
   protected $dates = ['deleted_at'];
@@ -32,7 +33,7 @@ class TypeProduct extends Model
   }
 
   public function producer_type_products() {
-    return $this->hasMany('Modules\Catalog\Entities\ProducerTypeProduct');
+    return $this->hasMany(ProducerTypeProduct::class);
   }
 
   public function producers() {

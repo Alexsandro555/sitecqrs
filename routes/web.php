@@ -28,7 +28,9 @@ Route::get('/initializer/fields/{name}', 'Initializer\InitializerController@fiel
 // Загрузка данных для меню
 Route::get('/left-menu', 'Menu\MenuController@index');
 
+
+Route::get('/catalog/{slug}', 'main\MainController@catalog');
 // Должен располагаться в самом низу
-Route::get('{slug}','main\MainController@detail');
+Route::get('/catalog/{slug_type_product}/{slug_producer_type_product}/{slug}',['uses' => 'main\MainController@detail', 'as' => 'detail']);
 
 

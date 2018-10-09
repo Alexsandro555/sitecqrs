@@ -56,6 +56,8 @@ class LineProductController extends Controller
     {
       $this->cacheService->clear('product');
       $request = $lineProductRequest->except('_token','id');
+      $normTitle = str_replace("/"," ",$request["title"]);
+      $request["url_key"] = \Slug::make($normTitle);
       return ['message' => 'Успешно сохранено!', 'model' => ProducerTypeProduct::create($request)];
     }
 
@@ -81,7 +83,12 @@ class LineProductController extends Controller
     {
       $this->cacheService->clear('product');
       $request = $lineProductRequest->except('_token','id');
-      return ['message' => 'Успешно обновлено!', 'model' => ProducerTypeProduct::where('id',$lineProductRequest->id)->update($request)];
+      $lineProduct = ProducerTypeProduct::find($lineProductRequest->id);
+      $normTitle = str_replace("/"," ",$request["name_line"]);
+      $request["url_key"] = \Slug::make($normTitle);
+      $lineProduct->fill($request);
+      $lineProduct->save();
+      return ['message' => 'Успешно обновлено!', 'model' => $lineProduct];
     }
 
     /**

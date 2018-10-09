@@ -5035,6 +5035,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'LeftMenu',
@@ -5056,6 +5058,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this.menu = response;
             }).catch(function (error) {});
+        },
+        goToPage: function goToPage(url) {
+            console.log(url);
+            window.location.href = url;
         }
     }
 });
@@ -41318,7 +41324,7 @@ var render = function() {
     [
       _c("img", {
         staticClass: "menu-left-img hidden-sm-and-down",
-        attrs: { src: "images/menu-left-hr.png" }
+        attrs: { src: "/images/menu-left-hr.png" }
       }),
       _vm._v(" "),
       _c(
@@ -41379,7 +41385,11 @@ var render = function() {
                                 "v-list-tile-content",
                                 [
                                   _c("v-list-tile-title", [
-                                    _vm._v(_vm._s(itemMenu.title))
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(itemMenu.title) +
+                                        "\n                                "
+                                    )
                                   ])
                                 ],
                                 1
@@ -41401,13 +41411,20 @@ var render = function() {
                                       {
                                         staticClass: "menu-left-item-el",
                                         attrs: { slot: "activator" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.goToPage(
+                                              "/catalog/" + subItem.url_key
+                                            )
+                                          }
+                                        },
                                         slot: "activator"
                                       },
                                       [
                                         _c("img", {
                                           attrs: {
                                             src:
-                                              "images/menu-left-item-sub-arr.png"
+                                              "/images/menu-left-item-sub-arr.png"
                                           }
                                         }),
                                         _vm._v(

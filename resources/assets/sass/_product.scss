@@ -11,6 +11,12 @@
   padding: 0px 0px 10px 0px;
 }
 
+.product {
+  @extend .special-product;
+  display: inline-block;
+  margin: 10px;
+}
+
 .special-product__header {
   height: 82px;
   line-height: 82px;

@@ -37,6 +37,14 @@ body {
   margin-left: 30px;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.inline {
+  display: inline-block;
+}
+
 @import 'menu-left';
 @import 'content';
 @import 'baner';

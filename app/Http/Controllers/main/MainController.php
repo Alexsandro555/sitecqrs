@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
 use Modules\Catalog\Entities\Product;
+use Modules\Catalog\Entities\TypeProduct;
+use MongoDB\BSON\Type;
+
 
 class MainController extends Controller
 {
@@ -22,12 +25,13 @@ class MainController extends Controller
     return null;
   }
 
-  public function detail($slug) {
+  public function detail($slug_type_product, $slug_producer_type_product, $slug) {
     $product = Product::with('files')->where('url_key',$slug)->first();
     return view('main.detail', compact('product'));
   }
 
-  public function catalog($id) {
-
+  public function catalog($slug) {
+     $typeProduct = TypeProduct::with('producer_type_products.products.files')->where('url_key', $slug)->first();
+     return view('main.catalog', compact('typeProduct'));
   }
 }

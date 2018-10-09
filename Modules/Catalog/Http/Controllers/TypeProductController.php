@@ -53,7 +53,8 @@ class TypeProductController extends Controller
     {
       $this->cacheService->clear('product');
       $request = $typeProductRequest->except('_token','id');
-
+      $normTitle = str_replace("/"," ",$request["title"]);
+      $request["url_key"] = \Slug::make($normTitle);
       return ['message' => 'Успешно сохранено!', 'model' => TypeProduct::create($request)];
     }
 
@@ -79,11 +80,15 @@ class TypeProductController extends Controller
      * @param TypeProductRequest $typeProductRequest
      * @return array
      */
-    public function update(TypeProductRequest $typeProductRequest)
-    {
+    public function update(TypeProductRequest $typeProductRequest) {
       $request = $typeProductRequest->except('_token','id');
       $this->cacheService->clear('product');
-      return ['message' => 'Успешно обновлено!', 'model' => TypeProduct::where('id',$typeProductRequest->id)->update($request)];
+      $typeProduct = TypeProduct::find($typeProductRequest->id);
+      $normTitle = str_replace("/"," ",$request["title"]);
+      $request["url_key"] = \Slug::make($normTitle);
+      $typeProduct->fill($request);
+      $typeProduct->save();
+      return ['message' => 'Успешно обновлено!', 'model' => $typeProduct];
     }
 
     /**

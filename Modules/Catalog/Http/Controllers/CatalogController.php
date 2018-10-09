@@ -19,7 +19,6 @@ class CatalogController extends Controller
      */
     public function index()
     {
-      $temp = "";
       return Product::all();
     }
 

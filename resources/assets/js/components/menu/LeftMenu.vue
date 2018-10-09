@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="menu-left-img hidden-sm-and-down" src="images/menu-left-hr.png"/>
+        <img class="menu-left-img hidden-sm-and-down" src="/images/menu-left-hr.png"/>
         <v-card class="menu-left-wrappers hidden-sm-and-down">
             <v-list class="list-menu-left">
                 <v-list-tile class="menu-left__header">
@@ -13,13 +13,15 @@
                         <v-list-group v-model="itemMenu.id" slot="activator">
                             <v-list-tile slot="activator">
                                 <v-list-tile-content>
-                                    <v-list-tile-title>{{ itemMenu.title }}</v-list-tile-title>
+                                    <v-list-tile-title>
+                                        {{ itemMenu.title }}
+                                    </v-list-tile-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                             <v-list-tile v-for="subItem in itemMenu.type_products" :key="subItem.id">
                                 <v-list-tile-content>
-                                    <v-list-tile-title class="menu-left-item-el" slot="activator">
-                                        <img src="images/menu-left-item-sub-arr.png"/>
+                                    <v-list-tile-title @click="goToPage('/catalog/'+subItem.url_key)" class="menu-left-item-el" slot="activator">
+                                        <img src="/images/menu-left-item-sub-arr.png"/>
                                         {{ subItem.title }}
                                     </v-list-tile-title>
                                 </v-list-tile-content>
@@ -61,6 +63,10 @@
                 axios.get('/left-menu').then(response => response.data).then( response => {
                     this.menu = response
                 }).catch(error => {})
+            },
+            goToPage(url) {
+                console.log(url)
+                window.location.href=url
             }
         }
      }

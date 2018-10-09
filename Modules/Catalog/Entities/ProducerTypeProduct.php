@@ -21,7 +21,8 @@ class ProducerTypeProduct extends Model
     'name_line',
     'sort',
     'producer_id',
-    'type_product_id'
+    'type_product_id',
+    'url_key'
   ];
 
   protected $guarded = [];
