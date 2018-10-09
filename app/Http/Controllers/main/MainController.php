@@ -31,7 +31,8 @@ class MainController extends Controller
   }
 
   public function catalog($slug) {
-     $typeProduct = TypeProduct::with('producer_type_products.products.files')->where('url_key', $slug)->first();
-     return view('main.catalog', compact('typeProduct'));
+      $typeProduct = TypeProduct::with('producer_type_products.products.files')->where('url_key', $slug)->first();
+      $products = Product::whereNull('producer_type_product_id')->where('type_product_id', $typeProduct->id)->get();
+     return view('main.catalog', compact('typeProduct', 'products'));
   }
 }
