@@ -571,6 +571,11 @@
   margin-left: 50px;
 }
 
+.content-discription {
+  color: white;
+  font-size: 2em;
+}
+
 .special-product,
 .product {
   width: 263px;

@@ -1,16 +1,16 @@
 <template>
-    <div>
+    <div class="left-menu">
         <img class="menu-left-img hidden-sm-and-down" src="/images/menu-left-hr.png"/>
         <v-card class="menu-left-wrappers hidden-sm-and-down">
             <v-list class="list-menu-left">
                 <v-list-tile class="menu-left__header">
                     <v-list-tile-content>
-                        <v-list-tile-title class="text-md-center">Каталог продукции</v-list-tile-title>
+                        <v-list-tile-title @click="clickToggle" class="text-md-center">Каталог продукции</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <template v-for="itemMenu in menu">
+                <template v-if="toggle" v-for="itemMenu in menu">
                     <v-menu offset-x open-on-hover class="menu-left-h">
-                        <v-list-group v-model="itemMenu.id" slot="activator">
+                        <v-list-group :value="false" slot="activator">
                             <v-list-tile slot="activator">
                                 <v-list-tile-content>
                                     <v-list-tile-title>
@@ -42,6 +42,11 @@
                         </div>
                     </v-menu>
                 </template>
+                <v-list-tile class="menu-left__footer">
+                    <v-list-tile-content>
+                        <v-list-tile-title @click="clickToggle" class="text-md-center collapse">{{toggle?'Свернуть':'Развернуть'}}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
             </v-list>
         </v-card>
     </div>
@@ -49,14 +54,22 @@
 <script>
     export default {
         name: 'LeftMenu',
-        props: { },
+        props: {
+            propToggle: {
+                type: Boolean,
+                default: true
+            }
+        },
         data: function() {
             return {
-                menu: []
+                menu: [],
+                toggle: false
             }
         },
         mounted: function() {
             this.getMenu()
+            console.log(this.propToggle)
+            this.toggle = this.propToggle
         },
         methods: {
             getMenu() {
@@ -65,9 +78,20 @@
                 }).catch(error => {})
             },
             goToPage(url) {
-                console.log(url)
                 window.location.href=url
+            },
+            clickToggle() {
+                this.toggle = !this.toggle
             }
         }
      }
 </script>
+<style>
+    .left-menu {
+        position: absolute;
+    }
+    .collapse {
+        font-size: 0.8em;
+        text-transform: uppercase;
+    }
+</style>

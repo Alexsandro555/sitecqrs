@@ -104,7 +104,7 @@
                 valid: false,
                 titleRules: [
                     v => this.required(v),
-                    v => v && v.length <=255 || 'Наименование должно иметь длину не более 255 символов'
+                    v => v && v.length <=20 || 'Наименование должно иметь длину не более 20 символов'
                 ],
                 sortRules: [
                     v => this.required(v),

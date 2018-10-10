@@ -2,12 +2,17 @@
 
 @section('content')
     <div class="content-wrapper">
-        <div class="content">
-            <!--<left-menu></left-menu>-->
+        <div class="content" style="position: relative">
+            <left-menu :prop-toggle="false"></left-menu>
             <v-layout row wrap>
-                <v-flex xs11 offset-xs1 md9 offset-md3>
+                <v-flex xs11 offset-xs1 md9 offset-md3 text-xs-left>
                     <v-layout row wrap>
-                        <h1>{{$typeProduct->title}}</h1>
+                        <p class="content__header text-md-left">
+                            {{$typeProduct->title}}
+                        </p>
+                        <p class="content-discription">
+                            {{$typeProduct->description}}
+                        </p>
                     </v-layout>
                 </v-flex>
             </v-layout>
