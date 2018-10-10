@@ -8,10 +8,10 @@
                 <v-flex xs11 offset-xs1 md9 offset-md3 text-xs-left>
                     <v-layout column wrap>
                         <p class="content__header text-md-left">
-                            {{$typeProduct->title}}
+                            {{$lineProduct->name_line}}
                         </p>
                         <p class="content-discription">
-                            {{$typeProduct->description}}
+                            {{$lineProduct->description}}
                         </p>
                     </v-layout>
                 </v-flex>
@@ -22,14 +22,14 @@
         <v-content>
             <v-layout row wrap>
                 <v-flex xs12 class="text-xs-left">
-                    @foreach($products as $product)
+                    @foreach($lineProduct->products as $product)
                         <div class="product text-xs-center">
                             <div class="special-product__header text-xs-center">
                                 <a href="{{route('detail',
                                               [
                                                   'slug'=>$product->url_key,
-                                                  'slug_type_product'=>$product->type_product->url_key,
-                                                  'slug_producer_type_product' => 'empty'
+                                                  'slug_type_product'=>$lineProduct->type_product->url_key,
+                                                  'slug_producer_type_product' => $lineProduct->url_key
                                               ])}}">
                                     {{str_limit($product->title, $limit = 52, $end="...")}}
                                 </a>

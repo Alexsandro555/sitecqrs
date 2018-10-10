@@ -44,8 +44,10 @@ Vue.component('left-menu', require('./components/menu/LeftMenu'));
 Vue.component('cart-widget', require('@cart/vue/Widget'));
 import Wysiwyg from '@/components/wysiwyg/Index'
 Vue.component('wysiwyg', Wysiwyg)
-import Notifications from '@/vue/Notifications.vue';
-Vue.component('notifications', Notifications);
+import Notifications from '@/vue/Notifications.vue'
+Vue.component('notifications', Notifications)
+import NamvigationMenu  from '@/vue/NavigationMenu.vue'
+Vue.component('navigation-menu', NamvigationMenu)
 
 
 /**

@@ -33,7 +33,7 @@
                                         <span class="sub-menu__header">{{submenu.title}}</span>
                                         <v-list>
                                             <v-list-tile v-for="item in submenu.producer_type_products" :key="item.id">
-                                                <a href="#">{{item.name_line}}</a>
+                                                <a :href="'/catalog/'+submenu.url_key+'/'+item.url_key"  >{{item.name_line}}</a>
                                             </v-list-tile>
                                         </v-list>
                                     </v-layout>

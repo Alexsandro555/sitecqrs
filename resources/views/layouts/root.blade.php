@@ -18,7 +18,7 @@
                     <v-container fluid grid-list-xs text-xs-center>
                         <header ref="header" :class="{header: true, chickens: chickens, cows: cows, pigs: pigs, rams:rams, 'main-layout': main}">
                             <v-flex xs1>
-                                <v-btn dark class="hidden-md-and-up" @click.stop="drawer = !drawer"><v-icon>reorder</v-icon></v-btn>
+                                <navigation-menu/>
                             </v-flex>
                             <div class="header-menu hidden-sm-and-down">
                                 <v-flex xl12 lg12 md12 sm12 xs12 class="wrapper">
@@ -248,31 +248,6 @@
                             </div>
                         </footer>
                     </v-container>
-                    <v-navigation-drawer v-model="drawer" temporary absolute dark style="position:fixed; top:0; left:0; overflow-y:scroll;">
-                        <v-toolbar flat>
-                            <v-list class="pa-0">
-                                <v-list-tile>
-                                    Страницы
-                                </v-list-tile>
-                            </v-list>
-                        </v-toolbar>
-                        <v-list>
-                            <v-list-tile>О компании</v-list-tile>
-                            <v-list-tile>Новости</v-list-tile>
-                            <v-list-tile>Оборудование</v-list-tile>
-                            <v-list-tile>Доставка и оплата</v-list-tile>
-                            <v-list-tile>Контакты</v-list-tile>
-                            <v-subheader>Рубрикатор</v-subheader>
-                        </v-list>
-                        <v-divider></v-divider>
-                        <v-toolbar flat>
-                            <v-list>
-                                <v-list-tile>
-                                    Рубрики
-                                </v-list-tile>
-                            </v-list>
-                        </v-toolbar>
-                    </v-navigation-drawer>
                 </v-layout>
             </template>
             <dialog-registration></dialog-registration>

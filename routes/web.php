@@ -30,6 +30,7 @@ Route::get('/left-menu', 'Menu\MenuController@index');
 
 
 Route::get('/catalog/{slug}', 'main\MainController@catalog');
+Route::get('/catalog/{slugTypeProduct}/{slugLineProduct}', 'main\MainController@lineProduct');
 // Должен располагаться в самом низу
 Route::get('/catalog/{slug_type_product}/{slug_producer_type_product}/{slug}',['uses' => 'main\MainController@detail', 'as' => 'detail']);
 
