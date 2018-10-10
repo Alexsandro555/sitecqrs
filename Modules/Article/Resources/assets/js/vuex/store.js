@@ -18,7 +18,8 @@ const state = {
     item: {},
     items: [],
     fields: [],
-    url: '/article'
+    url: '/article',
+    model: 'Modules\\Article\\Entities\\Article'
 }
 
 const module = {
