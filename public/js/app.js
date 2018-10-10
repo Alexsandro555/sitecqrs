@@ -5037,17 +5037,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'LeftMenu',
-    props: {},
+    props: {
+        propToggle: {
+            type: Boolean,
+            default: true
+        }
+    },
     data: function data() {
         return {
-            menu: []
+            menu: [],
+            toggle: false
         };
     },
     mounted: function mounted() {
         this.getMenu();
+        console.log(this.propToggle);
+        this.toggle = this.propToggle;
     },
     methods: {
         getMenu: function getMenu() {
@@ -5061,6 +5074,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         goToPage: function goToPage(url) {
             window.location.href = url;
+        },
+        clickToggle: function clickToggle() {
+            this.toggle = !this.toggle;
         }
     }
 });
@@ -5710,7 +5726,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["createNam
             titleRules: [function (v) {
                 return _this.required(v);
             }, function (v) {
-                return v && v.length <= 255 || 'Наименование должно иметь длину не более 255 символов';
+                return v && v.length <= 20 || 'Наименование должно иметь длину не более 20 символов';
             }],
             sortRules: [function (v) {
                 return _this.required(v);
@@ -6390,7 +6406,7 @@ var _createNamespacedHelp = Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["createNam
                 text: 'Код ТНВЭД',
                 align: 'left',
                 value: 'code'
-            }, { text: 'Название', align: 'left', value: 'name_line' }, { text: 'Действия2', sortable: false }],
+            }, { text: 'Название', align: 'left', value: 'name_line' }, { text: 'Действия', sortable: false }],
             items: [],
             categories: [],
             // Валидация
@@ -9671,7 +9687,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.left-menu {\n    position: absolute;\n}\n", ""]);
+exports.push([module.i, "\n.left-menu {\n    position: absolute;\n}\n.collapse {\n    font-size: 0.8em;\n    text-transform: uppercase;\n}\n", ""]);
 
 // exports
 
@@ -41359,7 +41375,10 @@ var render = function() {
                     [
                       _c(
                         "v-list-tile-title",
-                        { staticClass: "text-md-center" },
+                        {
+                          staticClass: "text-md-center",
+                          on: { click: _vm.clickToggle }
+                        },
                         [_vm._v("Каталог продукции")]
                       )
                     ],
@@ -41370,141 +41389,81 @@ var render = function() {
               ),
               _vm._v(" "),
               _vm._l(_vm.menu, function(itemMenu) {
-                return [
-                  _c(
-                    "v-menu",
-                    {
-                      staticClass: "menu-left-h",
-                      attrs: { "offset-x": "", "open-on-hover": "" }
-                    },
-                    [
+                return _vm.toggle
+                  ? [
                       _c(
-                        "v-list-group",
+                        "v-menu",
                         {
-                          attrs: { slot: "activator" },
-                          slot: "activator",
-                          model: {
-                            value: itemMenu.id,
-                            callback: function($$v) {
-                              _vm.$set(itemMenu, "id", $$v)
-                            },
-                            expression: "itemMenu.id"
-                          }
+                          staticClass: "menu-left-h",
+                          attrs: { "offset-x": "", "open-on-hover": "" }
                         },
                         [
                           _c(
-                            "v-list-tile",
-                            { attrs: { slot: "activator" }, slot: "activator" },
+                            "v-list-group",
+                            {
+                              attrs: { slot: "activator", value: false },
+                              slot: "activator"
+                            },
                             [
                               _c(
-                                "v-list-tile-content",
+                                "v-list-tile",
+                                {
+                                  attrs: { slot: "activator" },
+                                  slot: "activator"
+                                },
                                 [
-                                  _c("v-list-tile-title", [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(itemMenu.title) +
-                                        "\n                                "
-                                    )
-                                  ])
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm._l(itemMenu.type_products, function(subItem) {
-                            return _c(
-                              "v-list-tile",
-                              { key: subItem.id },
-                              [
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c(
-                                      "v-list-tile-title",
-                                      {
-                                        staticClass: "menu-left-item-el",
-                                        attrs: { slot: "activator" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.goToPage(
-                                              "/catalog/" + subItem.url_key
-                                            )
-                                          }
-                                        },
-                                        slot: "activator"
-                                      },
-                                      [
-                                        _c("img", {
-                                          attrs: {
-                                            src:
-                                              "/images/menu-left-item-sub-arr.png"
-                                          }
-                                        }),
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
                                         _vm._v(
                                           "\n                                    " +
-                                            _vm._s(subItem.title) +
+                                            _vm._s(itemMenu.title) +
                                             "\n                                "
                                         )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          })
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      itemMenu.type_products.length > 0
-                        ? _c(
-                            "div",
-                            { staticClass: "sub-menu" },
-                            [
-                              _vm._l(itemMenu.type_products, function(submenu) {
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm._l(itemMenu.type_products, function(subItem) {
                                 return _c(
-                                  "v-layout",
-                                  {
-                                    key: submenu.id,
-                                    attrs: { column: "", wrap: "" }
-                                  },
+                                  "v-list-tile",
+                                  { key: subItem.id },
                                   [
                                     _c(
-                                      "v-layout",
-                                      { attrs: { column: "", wrap: "" } },
+                                      "v-list-tile-content",
                                       [
                                         _c(
-                                          "span",
-                                          { staticClass: "sub-menu__header" },
-                                          [_vm._v(_vm._s(submenu.title))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list",
-                                          _vm._l(
-                                            submenu.producer_type_products,
-                                            function(item) {
-                                              return _c(
-                                                "v-list-tile",
-                                                { key: item.id },
-                                                [
-                                                  _c(
-                                                    "a",
-                                                    { attrs: { href: "#" } },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(item.name_line)
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          )
+                                          "v-list-tile-title",
+                                          {
+                                            staticClass: "menu-left-item-el",
+                                            attrs: { slot: "activator" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.goToPage(
+                                                  "/catalog/" + subItem.url_key
+                                                )
+                                              }
+                                            },
+                                            slot: "activator"
+                                          },
+                                          [
+                                            _c("img", {
+                                              attrs: {
+                                                src:
+                                                  "/images/menu-left-item-sub-arr.png"
+                                              }
+                                            }),
+                                            _vm._v(
+                                              "\n                                    " +
+                                                _vm._s(subItem.title) +
+                                                "\n                                "
+                                            )
+                                          ]
                                         )
                                       ],
                                       1
@@ -41512,18 +41471,106 @@ var render = function() {
                                   ],
                                   1
                                 )
-                              }),
-                              _vm._v(" "),
-                              _c("br")
+                              })
                             ],
                             2
-                          )
-                        : _vm._e()
+                          ),
+                          _vm._v(" "),
+                          itemMenu.type_products.length > 0
+                            ? _c(
+                                "div",
+                                { staticClass: "sub-menu" },
+                                [
+                                  _vm._l(itemMenu.type_products, function(
+                                    submenu
+                                  ) {
+                                    return _c(
+                                      "v-layout",
+                                      {
+                                        key: submenu.id,
+                                        attrs: { column: "", wrap: "" }
+                                      },
+                                      [
+                                        _c(
+                                          "v-layout",
+                                          { attrs: { column: "", wrap: "" } },
+                                          [
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "sub-menu__header"
+                                              },
+                                              [_vm._v(_vm._s(submenu.title))]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list",
+                                              _vm._l(
+                                                submenu.producer_type_products,
+                                                function(item) {
+                                                  return _c(
+                                                    "v-list-tile",
+                                                    { key: item.id },
+                                                    [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          attrs: { href: "#" }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              item.name_line
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                }
+                                              )
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("br")
+                                ],
+                                2
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _c(
+                "v-list-tile",
+                { staticClass: "menu-left__footer" },
+                [
+                  _c(
+                    "v-list-tile-content",
+                    [
+                      _c(
+                        "v-list-tile-title",
+                        {
+                          staticClass: "text-md-center collapse",
+                          on: { click: _vm.clickToggle }
+                        },
+                        [_vm._v(_vm._s(_vm.toggle ? "Свернуть" : "Развернуть"))]
+                      )
                     ],
                     1
                   )
-                ]
-              })
+                ],
+                1
+              )
             ],
             2
           )
