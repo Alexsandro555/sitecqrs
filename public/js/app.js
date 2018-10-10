@@ -71024,7 +71024,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", { attrs: { rowspan: "2" } }, [
-      _c("img", { staticClass: "cart__img", attrs: { src: "images/cart.png" } })
+      _c("img", {
+        staticClass: "cart__img",
+        attrs: { src: "/images/cart.png" }
+      })
     ])
   }
 ]
@@ -80399,7 +80402,7 @@ var render = function() {
                                         attrs: {
                                           "element-id": _vm.id,
                                           name: "description",
-                                          url: "category-wysiwyg",
+                                          url: "image-wysiwyg-upload",
                                           "url-file": "upload-file",
                                           "type-file-upload": "file",
                                           "type-file": "image-wysiwyg",
