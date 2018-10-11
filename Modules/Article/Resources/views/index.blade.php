@@ -6,7 +6,7 @@
             <v-layout row wrap>
                 <v-flex xs12 class="text-xs-center">
                     @foreach($articles as $article)
-                        <v-card style="min-height: 200px; padding: 40px;">
+                        <v-card class="article--card">
                             <v-card-title class="text-xs-center">
                                 <span class="article--title">
                                     <a href="/article/{{$article->url_key}}">{{$article->title}}</a>

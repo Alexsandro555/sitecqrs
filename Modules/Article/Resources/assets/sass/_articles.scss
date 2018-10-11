@@ -19,3 +19,9 @@
 .article--desc {
   color: white;
 }
+
+.application .theme--light.card, .theme--light .article--card{
+  min-height: 200px;
+  padding: 40px;
+  //background: url('#{$path}/light-tree.png') center center repeat;
+}
