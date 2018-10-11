@@ -26,7 +26,9 @@
                                         <v-flex xl4 lg4 md5 sm7 xs6>
                                             <v-list class="top-menu text-xs-right text-lg-center">
                                                 <v-list-tile class="top-menu__item">о компании</v-list-tile>
-                                                <v-list-tile class="top-menu__item">новости</v-list-tile>
+                                                <v-list-tile class="top-menu__item">
+                                                    <a class="header-menu__link"  href="/article/list">статьи</a>
+                                                </v-list-tile>
                                                 <v-list-tile class="top-menu__item">оборудование</v-list-tile>
                                             </v-list>
                                         </v-flex>

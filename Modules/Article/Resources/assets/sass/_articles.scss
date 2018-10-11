@@ -1,0 +1,21 @@
+.article--title a {
+  color: $color-green;
+  font-family: $font-os-condenced-bold;
+  font-size: 2.4em;
+  text-decoration: none;
+}
+
+.article--button {
+  @extend .content__buttom;
+  color: $color-green;
+  border-color: $color-green;
+}
+
+.article--content {
+  color: $color-green;
+  font-size: 1.3em;
+}
+
+.article--desc {
+  color: white;
+}

@@ -1,9 +1,32 @@
-@extends('article::layouts.master')
+@extends('layouts.root')
 
 @section('content')
-    <h1>Hello World</h1>
-
-    <p>
-        This view is loaded from module: {!! config('article.name') !!}
-    </p>
+    <div class="content-wrapper articles">
+        <v-content>
+            <v-layout row wrap>
+                <v-flex xs12 class="text-xs-center">
+                    @foreach($articles as $article)
+                        <v-card style="min-height: 200px; padding: 40px;">
+                            <v-card-title class="text-xs-center">
+                                <span class="article--title">
+                                    <a href="/article/{{$article->url_key}}">{{$article->title}}</a>
+                                </span>
+                            </v-card-title>
+                            <v-content class="text-xs-left">
+                                <p class="article--content">
+                                    {{str_limit(strip_tags($article->content), $limit = 52, $end="...")}}
+                                </p>
+                            </v-content>
+                            <v-card-actions>
+                                <a class="article--button" href="/article/{{$article->url_key}}">Подробнее</a>
+                            </v-card-actions>
+                        </v-card>
+                        <p>
+                            <br>
+                        </p>
+                    @endforeach
+                </v-flex>
+            </v-layout>
+        </v-content>
+    </div>
 @stop

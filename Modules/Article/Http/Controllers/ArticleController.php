@@ -20,6 +20,15 @@ class ArticleController extends Controller
         return Article::All();
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function list() {
+      $articles = Article::where('news',0)->get();
+      return view('article::index', compact('articles'));
+    }
+
     /**
      * Show the form for creating a new resource.
      * @return Response
@@ -51,9 +60,10 @@ class ArticleController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show()
+    public function show($slug)
     {
-        return view('article::show');
+      $article = Article::where('url_key', $slug)->first();
+      return view('article::show', compact('article'));
     }
 
     /**
@@ -62,7 +72,7 @@ class ArticleController extends Controller
      */
     public function edit()
     {
-        return view('article::edit');
+
     }
 
     /**

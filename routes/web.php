@@ -34,4 +34,3 @@ Route::get('/catalog/{slugTypeProduct}/{slugLineProduct}', 'main\MainController@
 // Должен располагаться в самом низу
 Route::get('/catalog/{slug_type_product}/{slug_producer_type_product}/{slug}',['uses' => 'main\MainController@detail', 'as' => 'detail']);
 
-
