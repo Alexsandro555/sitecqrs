@@ -24,7 +24,7 @@
                                 <td class="text-xs-left">{{ props.item.title }}</td>
                                 <td class="text-xs-left">{{ props.item.price }}</td>
                                 <td class="justify-center layout px-0">
-                                    <v-btn @click="goToPage(props.item.url_key)" icon class="mx-0">
+                                    <v-btn @click="goToPage(props.item)" icon class="mx-0">
                                         <v-icon>find_in_page</v-icon>
                                     </v-btn>
                                     <v-btn icon class="mx-0" @click="$router.push('/catalog/edit/'+props.item.id)">
@@ -105,8 +105,22 @@
                     })
                     .catch(error => {})
             },
-            goToPage(url) {
-              window.location.href = url
+            goToPage(item) {
+                let url = '/catalog/'
+                if(item.type_product) {
+                    url = url + item.type_product.url_key + '/'
+                }
+                else {
+                    url = url + '/empty/'
+                }
+                if(item.producer_type_product) {
+                    url = url + item.producer_type_product.url_key + '/'
+                }
+                else {
+                    url = url + '/empty/'
+                }
+                url = url + item.url_key
+                window.location.href = url
             },
             deleteItem (item) {
                 if(confirm('Вы уверены что хотите удалить запись?')) {

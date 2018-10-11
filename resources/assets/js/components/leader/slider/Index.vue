@@ -4,7 +4,7 @@
             <slide v-for="item in items" :key="item.id">
                 <div class="special-product text-xs-center" align="center">
                     <div class="special-product__header text-xs-center">
-                        <a :href="item.slug">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a>
+                        <a :href="getUrl(item)">{{item.title.length>52?item.title.substr(0,50)+'...':item.title}}</a>
                     </div>
                     <div class="special-product__img">
                         <v-layout aligin-center row wrap>
@@ -48,23 +48,29 @@
         },
         created() {
             axios.get(this.url).then(response => {
-                if(response.data.length > 0) {
-                    response.data.forEach(element => {
-                        let obj = {
-                            'id': element.id,
-                            'title': element.title,
-                            'price': element.price,
-                            'file': element.files.length>0?element.files.shift().config.files:null,
-                            'slug': element.url_key
-                        };
-                        this.items.push(obj);
-                    });
-                }
+                this.items = response.data
             }).catch((error) => {
                 console.log(error);
             });
         },
         methods: {
+          getUrl(item) {
+              let url = '/catalog/'
+              if(item.type_product) {
+                  url = url + item.type_product.url_key + '/'
+              }
+              else {
+                  url = url + '/empty/'
+              }
+              if(item.producer_type_product) {
+                  url = url + item.producer_type_product.url_key + '/'
+              }
+              else {
+                  url = url + '/empty/'
+              }
+              url = url + item.url_key
+              return url
+          }
         },
         components: {
             Carousel,

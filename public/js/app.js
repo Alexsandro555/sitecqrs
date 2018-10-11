@@ -3229,7 +3229,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this.$router.push({ name: 'edit-catalog', params: { id: response.id.toString() } });
             }).catch(function (error) {});
         },
-        goToPage: function goToPage(url) {
+        goToPage: function goToPage(item) {
+            var url = '/catalog/';
+            if (item.type_product) {
+                url = url + item.type_product.url_key + '/';
+            } else {
+                url = url + '/empty/';
+            }
+            if (item.producer_type_product) {
+                url = url + item.producer_type_product.url_key + '/';
+            } else {
+                url = url + '/empty/';
+            }
+            url = url + item.url_key;
             window.location.href = url;
         },
         deleteItem: function deleteItem(item) {
@@ -4959,24 +4971,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         axios.get(this.url).then(function (response) {
-            if (response.data.length > 0) {
-                response.data.forEach(function (element) {
-                    var obj = {
-                        'id': element.id,
-                        'title': element.title,
-                        'price': element.price,
-                        'file': element.files.length > 0 ? element.files.shift().config.files : null,
-                        'slug': element.url_key
-                    };
-                    _this.items.push(obj);
-                });
-            }
+            _this.items = response.data;
         }).catch(function (error) {
             console.log(error);
         });
     },
 
-    methods: {},
+    methods: {
+        getUrl: function getUrl(item) {
+            var url = '/catalog/';
+            if (item.type_product) {
+                url = url + item.type_product.url_key + '/';
+            } else {
+                url = url + '/empty/';
+            }
+            if (item.producer_type_product) {
+                url = url + item.producer_type_product.url_key + '/';
+            } else {
+                url = url + '/empty/';
+            }
+            url = url + item.url_key;
+            return url;
+        }
+    },
     components: {
         Carousel: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Carousel"],
         Slide: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Slide"]
@@ -7209,22 +7226,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
     data: function data() {
         return {
-            drawer: false
+            drawer: false,
+            menu: []
         };
     },
     computed: {
         //...mapState('name_module', ['item']),
         //...mapGetters('name_module', {}),
     },
+    mounted: function mounted() {
+        this.getMenu();
+    },
+
     methods: {
         open: function open() {
             this.drawer = !this.drawer;
+        },
+        goToPage: function goToPage(url) {
+            window.location.href = url;
+        },
+        getMenu: function getMenu() {
+            var _this = this;
+
+            axios.get('/left-menu').then(function (response) {
+                return response.data;
+            }).then(function (response) {
+                _this.menu = response;
+            }).catch(function (error) {});
         }
         //...mapActions('name_module',{load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA)
 
@@ -9838,7 +9879,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    float: left;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    float: left;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n", ""]);
 
 // exports
 
@@ -42201,24 +42242,60 @@ var render = function() {
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
-          _c(
-            "v-toolbar",
-            { attrs: { flat: "" } },
-            [
+          _vm._l(_vm.menu, function(itemMenu) {
+            return [
               _c(
-                "v-list",
+                "v-toolbar",
+                { key: itemMenu.id, attrs: { flat: "" } },
                 [
-                  _c("v-list-tile", [
-                    _vm._v("\n                    Рубрики\n                ")
-                  ])
+                  _c(
+                    "v-list",
+                    { staticClass: "pa-0" },
+                    [
+                      _c("v-list-tile", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(itemMenu.title) +
+                            "\n                    "
+                        )
+                      ])
+                    ],
+                    1
+                  )
                 ],
                 1
-              )
-            ],
-            1
-          )
+              ),
+              _vm._v(" "),
+              _vm._l(itemMenu.type_products, function(subItem) {
+                return _c(
+                  "v-list",
+                  { key: "sub" + subItem.id },
+                  [
+                    _c(
+                      "v-list-tile",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.goToPage("/catalog/" + subItem.url_key)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(subItem.title) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              })
+            ]
+          })
         ],
-        1
+        2
       )
     ],
     1
@@ -43504,7 +43581,7 @@ var render = function() {
                   "div",
                   { staticClass: "special-product__header text-xs-center" },
                   [
-                    _c("a", { attrs: { href: item.slug } }, [
+                    _c("a", { attrs: { href: _vm.getUrl(item) } }, [
                       _vm._v(
                         _vm._s(
                           item.title.length > 52
@@ -45577,7 +45654,7 @@ var render = function() {
                                           attrs: { icon: "" },
                                           on: {
                                             click: function($event) {
-                                              _vm.goToPage(props.item.url_key)
+                                              _vm.goToPage(props.item)
                                             }
                                           }
                                         },

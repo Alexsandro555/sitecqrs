@@ -18,13 +18,20 @@
                 <v-subheader>Рубрикатор</v-subheader>
             </v-list>
             <v-divider></v-divider>
-            <v-toolbar flat>
-                <v-list>
-                    <v-list-tile>
-                        Рубрики
+            <template v-for="itemMenu in menu">
+                <v-toolbar  :key="itemMenu.id" flat>
+                    <v-list class="pa-0">
+                        <v-list-tile>
+                            {{itemMenu.title}}
+                        </v-list-tile>
+                    </v-list>
+                </v-toolbar>
+                <v-list v-for="subItem in itemMenu.type_products" :key="'sub'+subItem.id">
+                    <v-list-tile @click="goToPage('/catalog/'+subItem.url_key)">
+                        {{subItem.title}}
                     </v-list-tile>
                 </v-list>
-            </v-toolbar>
+            </template>
         </v-navigation-drawer>
     </div>
 </template>
@@ -34,16 +41,28 @@
         props: {},
         data: function() {
             return {
-                drawer: false
+                drawer: false,
+                menu: []
             }
         },
         computed: {
             //...mapState('name_module', ['item']),
             //...mapGetters('name_module', {}),
         },
+        mounted() {
+          this.getMenu()
+        },
         methods: {
             open() {
                 this.drawer = !this.drawer
+            },
+            goToPage(url) {
+                window.location.href=url
+            },
+            getMenu() {
+                axios.get('/left-menu').then(response => response.data).then( response => {
+                    this.menu = response
+                }).catch(error => {})
             }
             //...mapActions('name_module',{load: ACTIONS.LOAD, save: ACTIONS.SAVE_DATA)
         }

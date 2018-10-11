@@ -3,7 +3,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="content">
-            @include('main.menu')
+            <left-menu :prop-toggle="false"></left-menu>
             <v-flex xs11 offset-xs1 md9 offset-md3>
                 <v-layout row wrap>
                     <leader-detail-image :url="'/files/product-image/{{$product->id}}'"></leader-detail-image>
@@ -27,7 +27,7 @@
                             <v-tab key="characteristics">Характеристики</v-tab>
                             <v-tab-item key="description">
                                 <br>
-                                <span style="color: white">
+                                <span class="text-xs-left" style="color: white">
                                    {!! $product->description !!}
                                 </span>
                             </v-tab-item>

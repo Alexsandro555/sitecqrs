@@ -17,31 +17,27 @@ class CatalogController extends Controller
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function index()
-    {
-      return Product::all();
+    public function index() {
+      return Product::with('type_product')->with('producer_type_product')->get();
     }
 
     /**
      * @param ProductService $productService
      * @return array
      */
-    public function create(ProductService $productService)
-    {
+    public function create(ProductService $productService) {
       return $productService->createDefault();
     }
 
 
-    public function store()
-    {
+    public function store() {
     }
 
     /**
      * Show the specified resource.
      * @return Response
      */
-    public function show()
-    {
+    public function show() {
         return view('catalog::show');
     }
 
@@ -49,8 +45,7 @@ class CatalogController extends Controller
      * @param $id
      * @return array
      */
-    public function edit($id)
-    {
+    public function edit($id) {
       return Product::with(['type_product','producer','producer_type_product'])->where('id',$id)->first();
       //return Product::find($id);
     }
@@ -59,8 +54,7 @@ class CatalogController extends Controller
      * @param Request $productRequest
      * @return array
      */
-    public function update(Request $productRequest)
-    {
+    public function update(Request $productRequest) {
       // тут добавить сохранение продукта
       $arrExcept = [];
       $product = Product::find($productRequest->id);
@@ -86,8 +80,7 @@ class CatalogController extends Controller
      * @param Request $request
      * @return array
      */
-    public function destroy(Request $request)
-    {
+    public function destroy(Request $request) {
       $product = Product::findOrFail($request->id);
       $currentFiles = File::where('fileable_id',$request->id)->where('fileable_type',Product::class)->get();
       foreach ($currentFiles as $currentFile) {
@@ -145,6 +138,6 @@ class CatalogController extends Controller
 
 
     public function specialProducts() {
-      return Product::with('files')->get();
+      return Product::with('files')->with('type_product')->with('producer_type_product')->get();
     }
 }
