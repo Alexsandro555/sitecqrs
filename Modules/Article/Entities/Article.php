@@ -45,11 +45,11 @@ class Article extends Model
 
   protected $guarded = [];
 
-  public function files() {
-    return $this->morphMany(File::class, 'fileable');
-  }
-
   public function setTitleAttribute($value) {
     $this->attributes['title'] = strip_tags($value);
+  }
+
+  public function files() {
+    return $this->morphMany(File::class, 'fileable');
   }
 }

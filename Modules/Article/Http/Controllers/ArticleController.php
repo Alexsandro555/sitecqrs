@@ -10,13 +10,12 @@ use Modules\Files\Entities\File;
 
 class ArticleController extends Controller
 {
-  /**
-   * Display listing articles
-   * @param $id
-   * @return \Illuminate\Database\Eloquent\Collection|static[]
-   */
-    public function index()
-    {
+    /**
+     * Display listing articles
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function index() {
         return Article::All();
     }
 
@@ -25,7 +24,7 @@ class ArticleController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function list() {
-      $articles = Article::where('news',0)->get();
+      $articles = Article::with('files')->where('news',0)->get();
       return view('article::index', compact('articles'));
     }
 
@@ -33,8 +32,7 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         $article = Article::where('url_key','po-umolchaniyu')->first();
         if(!$article) {
           $article = new Article;
@@ -51,9 +49,7 @@ class ArticleController extends Controller
      * @param Request $request
      * @return array
      */
-    public function store(Request $request)
-    {
-      $temp = $request;
+    public function store(Request $request) {
       return ['message' => 'Статья успешно обновлена!', 'model' => Article::where('id', $request->id)->update($request->toArray())];
     }
 
@@ -61,8 +57,7 @@ class ArticleController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show($slug)
-    {
+    public function show($slug) {
       $article = Article::where('url_key', $slug)->first();
       return view('article::show', compact('article'));
     }
@@ -71,8 +66,7 @@ class ArticleController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
-    {
+    public function edit() {
 
     }
 
@@ -81,17 +75,15 @@ class ArticleController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
     }
 
-  /**
-   * Delete seleted article
-   * @param Request $request
-   * @return array
-   */
-    public function destroy(Request $request)
-    {
+    /**
+     * Delete seleted article
+     * @param Request $request
+     * @return array
+     */
+    public function destroy(Request $request) {
       $article = Article::findOrFail($request->id);
       $currentFiles = File::where('fileable_id',$request->id)->where('fileable_type',Article::class)->get();
       foreach ($currentFiles as $currentFile) {
