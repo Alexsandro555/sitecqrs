@@ -4983,12 +4983,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (item.type_product) {
                 url = url + item.type_product.url_key + '/';
             } else {
-                url = url + '/empty/';
+                url = url + 'empty/';
             }
             if (item.producer_type_product) {
                 url = url + item.producer_type_product.url_key + '/';
             } else {
-                url = url + '/empty/';
+                url = url + 'empty/';
             }
             url = url + item.url_key;
             return url;

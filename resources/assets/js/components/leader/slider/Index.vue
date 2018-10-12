@@ -60,13 +60,13 @@
                   url = url + item.type_product.url_key + '/'
               }
               else {
-                  url = url + '/empty/'
+                  url = url + 'empty/'
               }
               if(item.producer_type_product) {
                   url = url + item.producer_type_product.url_key + '/'
               }
               else {
-                  url = url + '/empty/'
+                  url = url + 'empty/'
               }
               url = url + item.url_key
               return url
