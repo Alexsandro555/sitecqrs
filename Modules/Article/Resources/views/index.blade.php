@@ -14,7 +14,7 @@
                             </v-card-title>
                             <v-content class="text-xs-left">
                                 <p class="article--content">
-                                    {{str_limit(strip_tags($article->contetn), $limit = 102, $end="...")}}
+                                    {{str_limit(strip_tags($article->content), $limit = 102, $end="...")}}
                                 </p>
                             </v-content>
                             <v-card-actions>
