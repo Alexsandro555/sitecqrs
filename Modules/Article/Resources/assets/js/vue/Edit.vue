@@ -19,7 +19,7 @@
                                                 url-file="upload-file"
                                                 type-file-upload="file"
                                                 type-file="image-wysiwyg"
-                                                model="model"
+                                                model="Modules\Article\Entities\Article"
                                                 v-model="item.content">
                                         </wysiwyg>
                                     </v-form>

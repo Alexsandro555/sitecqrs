@@ -40543,7 +40543,8 @@ var render = function() {
                                                   "url-file": "upload-file",
                                                   "type-file-upload": "file",
                                                   "type-file": "image-wysiwyg",
-                                                  model: "model"
+                                                  model:
+                                                    "Modules\\Catalog\\Entities\\Product"
                                                 },
                                                 model: {
                                                   value: _vm.item.description,
@@ -43815,7 +43816,8 @@ var render = function() {
                                           "url-file": "upload-file",
                                           "type-file-upload": "file",
                                           "type-file": "image-wysiwyg",
-                                          model: "model"
+                                          model:
+                                            "Modules\\Article\\Entities\\Article"
                                         },
                                         model: {
                                           value: _vm.item.content,
@@ -80864,17 +80866,17 @@ var ValidationConvert = function () {
         b = n(44),
         y = i(b),
         x = n(49),
-        k = i(x),
-        w = n(54),
-        _ = i(w),
+        w = i(x),
+        k = n(54),
+        _ = i(k),
         C = n(56),
         E = i(C),
         S = n(61),
         $ = i(S),
         P = n(66),
         N = i(P),
-        j = n(73),
-        L = i(j);n(75), t.default = { components: { "ve-toolbar": s.default, "ve-design": a.default, "ve-sourcecode": m.default, "ve-code": v.default, "ve-forecolor": c.default, "ve-backcolor": c.default, "ve-fontname": d.default, "ve-fontsize": f.default, "ve-element": y.default, "ve-table": k.default, "ve-link": E.default, "ve-undo": _.default, "ve-picture": $.default, "ve-markdown": N.default, "ve-fullscreen": L.default }, computed: { fullscreen: function fullscreen() {
+        L = n(73),
+        j = i(L);n(75), t.default = { components: { "ve-toolbar": s.default, "ve-design": a.default, "ve-sourcecode": m.default, "ve-code": v.default, "ve-forecolor": c.default, "ve-backcolor": c.default, "ve-fontname": d.default, "ve-fontsize": f.default, "ve-element": y.default, "ve-table": w.default, "ve-link": E.default, "ve-undo": _.default, "ve-picture": $.default, "ve-markdown": N.default, "ve-fullscreen": j.default }, computed: { fullscreen: function fullscreen() {
           return this.$store.state.fullscreen;
         } }, methods: { setContent: function setContent(e) {
           this.$store.dispatch("updateContent", e);
@@ -81388,12 +81390,12 @@ var ValidationConvert = function () {
   }, function (e, t, n) {
     var i = n(63);"string" == typeof i && (i = [[e.i, i, ""]]);n(1)(i, {});i.locals && (e.exports = i.locals);
   }, function (e, t, n) {
-    t = e.exports = n(0)(void 0), t.push([e.i, "._2T9WD2D47RUUwZfCP40fYJ_0{width:500px;position:relative;top:50%;background:#fff;margin:0 auto;-webkit-transform:translateY(-60%);-ms-transform:translateY(-60%);transform:translateY(-60%)}", ""]), t.locals = { wrap: "_2T9WD2D47RUUwZfCP40fYJ_0" };
+    t = e.exports = n(0)(void 0), t.push([e.i, "._2T9WD2D47RUUwZfCP40fYJ_0{width:600px;position:relative;top:50%;background:#fff;margin:0 auto;-webkit-transform:translateY(-60%);-ms-transform:translateY(-60%);transform:translateY(-60%)}", ""]), t.locals = { wrap: "_2T9WD2D47RUUwZfCP40fYJ_0" };
   }, function (e, t, n) {
     "use strict";
     Object.defineProperty(t, "__esModule", { value: !0 });var i = n(3),
         o = n(2);t.default = { data: function data() {
-        return { url: "", lang: (0, i.getLang)("picture"), uploadUrl: (0, o.getConfig)("uploadUrl"), files: [], uploaded: !1, picked: "" };
+        return { url: "", lang: (0, i.getLang)("picture"), uploadUrl: (0, o.getConfig)("uploadUrl"), files: [], uploaded: !1, picked: "", aligment: "" };
       }, computed: { showPopup: function showPopup() {
           return this.$store.state.toolbar.picture.showPopup;
         } }, watch: { showPopup: function showPopup(e) {
@@ -81403,7 +81405,7 @@ var ValidationConvert = function () {
         }, changeHandler: function changeHandler() {
           var e = this.$refs.file;navigator.userAgent.indexOf("MSIE") >= 1 ? this.url = e.value : 0 !== e.files.length && -1 !== e.files.item(0).type.indexOf("image") && (this.url = window.URL.createObjectURL(e.files.item(0)));
         }, certainHandler: function certainHandler(e) {
-          this.$store.dispatch("execCommand", { name: "insertHTML", value: '<img class="wysiwyg-img" src="/storage/' + this.picked + '">' }), this.picked = "", this.files = [], this.uploaded = !1, this.hideDialog(), this.url = "";
+          "Left" === this.aligment ? (this.$store.dispatch("execCommand", { name: "insertHTML", value: '<div><img class="wysiwyg-img" style="float:left; margin: 7px 7px 7px 0" src="/storage/' + this.picked + '"></div><div style="clear:both"></div>' }), this.aligment = "") : "Right" === this.aligment ? (this.$store.dispatch("execCommand", { name: "insertHTML", value: '<div><img class="wysiwyg-img" style="float:right; margin: 7px 0 7px 7px" src="/storage/' + this.picked + '"></div><div style="clear:both"></div>' }), this.aligment = "") : this.$store.dispatch("execCommand", { name: "insertHTML", value: '<img class="wysiwyg-img" src="/storage/' + this.picked + '">' }), this.uploaded = !1, this.picked = "", this.files = [], this.uploaded = !1, this.hideDialog(), this.url = "";
         }, uploadHandler: function uploadHandler(e) {
           var t = this.$refs.file,
               n = this.$refs.form,
@@ -81429,10 +81431,14 @@ var ValidationConvert = function () {
             } } }, ["Загрузить"])]), e.uploaded ? t("div", { staticClass: "ve-dialog-body" }, [t("table", { attrs: { width: "100%" } }, [e._m(1), t("tbody", [e._l(e.files, function (n) {
           return t("tr", [t("td", [t("input", { directives: [{ name: "model", rawName: "v-model", value: e.picked, expression: "picked" }], attrs: { type: "radio", id: n.filename }, domProps: { value: n.filename, checked: e._q(e.picked, n.filename) }, on: { change: function change(t) {
                 e.picked = n.filename;
-              } } })]), t("td", [t("img", { attrs: { src: "/storage/" + n.filename, width: "100px" } })]), t("td", [e._s(n.filename)]), t("td", [e._s(n.width)]), t("td", [e._s(n.height)])]);
+              } } })]), t("td", [t("img", { attrs: { src: "/storage/" + n.filename, width: "100px" } })]), t("td", { attrs: { style: "text-align: center" } }, [e._s(n.filename)]), t("td", { attrs: { style: "text-align: center" } }, [e._s(n.width)]), t("td", { attrs: { style: "text-align: center" } }, [e._s(n.height)]), t("td", { attrs: { style: "text-align: center" } }, [t("input", { directives: [{ name: "model", rawName: "v-model", value: e.aligment, expression: "aligment" }], attrs: { type: "radio", value: "Left" }, domProps: { checked: e._q(e.aligment, "Left") }, on: { change: function change(t) {
+                e.aligment = "Left";
+              } } })]), t("td", { attrs: { style: "text-align: center" } }, [t("input", { directives: [{ name: "model", rawName: "v-model", value: e.aligment, expression: "aligment" }], attrs: { type: "radio", value: "Right" }, domProps: { checked: e._q(e.aligment, "Right") }, on: { change: function change(t) {
+                e.aligment = "Right";
+              } } })])]);
         })])])]) : e._e(), t("div", { staticClass: "ve-dialog-footer" }, [t("div", { staticClass: "ve-btn-box" }, [t("button", { staticClass: "ve-btn", on: { click: function click(t) {
               t.preventDefault(), e.hideDialog(t);
-            } } }, [e._s(e.lang.cancel)]), t("button", { staticClass: "ve-btn", on: { click: function click(t) {
+            } } }, [e._s(e.lang.cancel)]), t("button", { staticClass: "ve-btn", attrs: { disabled: !e.uploaded }, on: { click: function click(t) {
               t.preventDefault(), e.certainHandler(t);
             } } }, [e._s(e.lang.ok)])])])])]);
       }, staticRenderFns: [function () {
@@ -81440,7 +81446,7 @@ var ValidationConvert = function () {
             t = e.$createElement;e._self._c;return t("br");
       }, function () {
         var e = this,
-            t = e.$createElement;e._self._c;return t("thead", [t("th", ["#"]), t("th", ["Изображение"]), t("th", ["Имя"]), t("th", ["Ширина"]), t("th", ["Высота"])]);
+            t = e.$createElement;e._self._c;return t("thead", [t("th", ["#"]), t("th", ["Изображение"]), t("th", ["Имя"]), t("th", ["Ширина"]), t("th", ["Высота"]), t("th", ["Выравнивание слева"]), t("th", ["Выравнивание справа"])]);
       }] };
   }, function (e, t, n) {
     var i,

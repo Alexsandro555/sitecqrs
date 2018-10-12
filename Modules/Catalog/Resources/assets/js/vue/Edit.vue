@@ -27,7 +27,7 @@
                                                     url-file="upload-file"
                                                     type-file-upload="file"
                                                     type-file="image-wysiwyg"
-                                                    model="model"
+                                                    model="Modules\Catalog\Entities\Product"
                                                     v-model="item.description">
                                                 </wysiwyg>
                                                 <file-box url="/files/upload" :fileable-id="Number(item.id)" :type-files="typeFiles" :model="model"></file-box>
