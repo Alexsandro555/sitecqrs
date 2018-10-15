@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td class="center">
-            <img :src="'storage/'+cartItem.options.filename" height="40px"/>
+            <img :src="'/storage/'+cartItem.options.filename" height="40px"/>
         </td>
         <td class="center">
             <span>{{cartItem.options.type}}</span><br>
