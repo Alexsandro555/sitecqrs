@@ -10,7 +10,8 @@ export const PRIVATE = {
     SET_CART: "SET_CART",
     SET_TOTAL_AND_COUNT: "SET_TOTAL_AND_COUNT",
     UP_QTY: "UP_QTY",
-    DOWN_QTY: "DOWN_QTY"
+    DOWN_QTY: "DOWN_QTY",
+    DELETE: "DELETE"
 }
 
 export const MUTATIONS = {

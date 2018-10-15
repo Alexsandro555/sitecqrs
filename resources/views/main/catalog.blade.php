@@ -61,7 +61,7 @@
                                     <span>{{$product->price}}</span> руб.
                                 </v-flex>
                                 <v-flex xs4 class="special-product__cart">
-                                    <img src="/images/product-cart.png"/>
+                                    <img @click="addCart({{$product->id}})" src="/images/product-cart.png"/>
                                 </v-flex>
                             </v-layout>
                         </div>

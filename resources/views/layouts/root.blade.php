@@ -254,6 +254,7 @@
             </template>
             <dialog-registration></dialog-registration>
             <dialog-login></dialog-login>
+            <cart-modal></cart-modal>
         </v-app>
         <!--Коf-->
         <!--</div>-->

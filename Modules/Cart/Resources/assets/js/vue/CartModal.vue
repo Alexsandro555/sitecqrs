@@ -2,8 +2,8 @@
     <div id="baskets">
         <modal-window v-if="modal" @close="closeModal" :width="800">
             <div class="callback_close" @click="closeModal"></div>
-            <table width="100%">
-                <thead>
+            <table width="100%" class="cart-table">
+                <thead class="cart-header">
                     <tr>
                         <th colspan="6">
                             Корзина товаров
@@ -14,7 +14,7 @@
                         <th>Наименование товара</th>
                         <th>Количество</th>
                         <th>Стоимость</th>
-                        <th>Срок поставки</th>
+                        <th>Артикул</th>
                         <th>Удалить</th>
                     </tr>
                 </thead>
@@ -73,8 +73,67 @@
 </script>
 
 <style>
+    #baskets .cart-col
+    {
+        margin-left:0px;
+    }
+    #baskets .div-plus,#baskets .div-minus
+    {
+        right:6px;
+    }
+    #baskets table thead
+    {
+        border-radius: 12px;
+
+    }
+    #baskets table thead,form div.content-right-order table thead
+    {
+        background-color:#55982d;
+        color:white;
+    }
+    #baskets table thead tr
+    {
+        line-height: 45px;
+        height:45px;
+        padding: 0;
+    }
+    #baskets table tbody tr
+    {
+        border-bottom:1px solid #eee;
+        vertical-align:middle;
+    }
+    #baskets table tbody tr td
+    {
+        position: relative;
+        text-align: center;
+        border: 0px;
+    }
+    #baskets table tbody tr td:nth-child(2)
+    {
+        text-align: left;
+    }
+    #baskets table tbody tr td:nth-child(2) span,form div.content-right-order table tbody tr td:nth-child(2) span
+    {
+        color:#aaa;
+        font-size:9pt;
+    }
+    #baskets table tbody tr td:nth-child(6) img
+    {
+        cursor:hand;
+        cursor:pointer;
+    }
+    #baskets table tfoot tr,form div.content-right-order table tfoot tr {
+        background-color:#55982d;
+        line-height:45px;
+        height:45px;
+    }
+    #baskets table tfoot tr td,form div.content-right-order table tfoot tr td {
+        font-weight: bold;
+        font-size:13pt;
+        color:white;
+    }
     .callback_close {
-        background: rgba(0, 0, 0, 0) url('/css/images/close.png') no-repeat scroll 0 0;
+        background: rgba(0, 0, 0, 0) url('/images/close.png') no-repeat scroll 0 0;
         cursor: pointer;
         height: 22px;
         position: absolute;
@@ -82,5 +141,22 @@
         top: 5px;
         width: 22px;
         z-index: 2147483647;
+    }
+    .cart-submit{
+        background-color: #55982d;
+        border: 2px solid #55982d;
+        border-radius: 2px;
+        color: #ffffff;
+        font-weight: 600;
+        height: 35px;
+        width: 125px;
+    }
+    .cart-header {
+        background-color: #55982d;
+        color: black;
+    }
+    .cart-table {
+        border-collapse: collapse;
+        border-spacing: 0;
     }
 </style>

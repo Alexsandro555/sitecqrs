@@ -48,23 +48,6 @@ class CartController extends Controller
     }
 
 
-    public function coursePrice($product) {
-      if($product->onsale) {
-        return $price = $product->special_price;
-      }
-      $current = Config::get('course.value');
-      $price = $product->price;
-      if($product->type_product->title == 'Площадочные вибраторы') {
-        $priceRuNDS = ($current*$price*18)/100+$current*$price;
-        $price = floor($priceRuNDS-($priceRuNDS*7.2419)/100);
-      }
-      else {
-        $priceRuNDS = ($current*$price*18)/100+$current*$price;
-        $price = floor($priceRuNDS);
-      }
-      return $price;
-    }
-
     /**
      * @param Request $request
      * @return array
@@ -90,19 +73,11 @@ class CartController extends Controller
           }
         }
       }
-      $price = $this->coursePrice($product);
-      if($product->qty>0) {
-        $onstock = "На складе";
-      }
-      else {
-        $onstock = "4-5 недель";
-      }
-      Cart::add($product->id, $product->title, $request->count, $price,
+      Cart::add($product->id, $product->title, $request->count, $product->price,
         [
-          'article'=>$product->article,
+          'article'=>$product->vendor,
           'type'=>$product->type_product->title,
           'slug'=>$product->url_key,
-          'onstock'=>$onstock,
           'filename'=>$filename!=""?$filename:"no-image.png"
         ]
       );

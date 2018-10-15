@@ -48,6 +48,8 @@ import Notifications from '@/vue/Notifications.vue'
 Vue.component('notifications', Notifications)
 import NamvigationMenu  from '@/vue/NavigationMenu.vue'
 Vue.component('navigation-menu', NamvigationMenu)
+import CartModal from '@cart/vue/CartModal.vue'
+Vue.component('cart-modal', CartModal)
 
 
 /**
@@ -73,6 +75,9 @@ import EditArticle from "@article/vue/Edit"
 import Articles from "@article/vue/Articles"
 import Products from "@catalog/vue/Products"
 import EditCatalog from "@catalog/vue/Edit"
+
+import { mapActions } from 'vuex'
+import { ACTIONS } from '@cart/constants'
 
 const routes = [
     {path: '/', name: 'products', component: Products},
@@ -153,11 +158,13 @@ const app = new Vue({
             }
         },
         addCart(id) {
-            this.$store.dispatch('cart/add', { id })
+            const count = 1
+            this.addCartItem({id, count})
         },
         changeSlide(val) {
             this.$store.dispatch('sliderFullPage/change',val)
-        }
+        },
+        ...mapActions('cart',{addCartItem: ACTIONS.ADD_CART})
     }
 });
 
