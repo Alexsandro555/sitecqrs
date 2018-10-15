@@ -3,7 +3,7 @@
         <td class="center">
             <img :src="cartItem.options.filename" height="40px"/>
         </td>
-        <td>
+        <td style="max-width: 100px;">
             <span>{{cartItem.options.type}}</span><br>
             {{cartItem.name}}
         </td>

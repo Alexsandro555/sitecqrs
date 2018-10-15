@@ -39677,7 +39677,7 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("td", [
+    _c("td", { staticStyle: { "max-width": "100px" } }, [
       _c("span", [_vm._v(_vm._s(_vm.cartItem.options.type))]),
       _c("br"),
       _vm._v("\n        " + _vm._s(_vm.cartItem.name) + "\n    ")
