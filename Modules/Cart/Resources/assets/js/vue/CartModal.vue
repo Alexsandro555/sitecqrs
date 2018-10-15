@@ -23,11 +23,11 @@
                 </tbody>
                 <tfoot>
                 <tr valign="middle">
-                    <td colspan="2"></td>
+                    <td colspan="1"></td>
                     <td colspan="3" align="right">
                         Общая стоимость с НДС 18%:
                     </td>
-                    <td align="center">{{totalCart}}₽</td>
+                    <td colspan="2" align="center">{{totalCart}}₽</td>
                 </tr>
                 </tfoot>
             </table>

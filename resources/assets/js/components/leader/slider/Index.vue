@@ -9,8 +9,7 @@
                     <div class="special-product__img">
                         <v-layout aligin-center row wrap>
                             <a href="#" class="img-shadow">
-                                <img v-if="item.file" :src="'/storage/'+item.file.medium.filename" />
-                                <img v-else src="/images/no-image.png" width="150px"/>
+                                <img :src="getImage(item.files)"/>
                             </a>
                         </v-layout>
                     </div>
@@ -21,7 +20,7 @@
                             <span>{{Math.floor(item.price)}}</span> руб.
                         </v-flex>
                         <v-flex xs4 class="special-product__cart">
-                            <img @click.prevent="addCart(6)" src="/images/product-cart.png"/>
+                            <img @click="addCart(item.id)" src="/images/product-cart.png"/>
                         </v-flex>
                     </v-layout>
                 </div>
@@ -31,6 +30,8 @@
 </template>
 <script>
     import { Carousel, Slide } from 'vue-carousel';
+    import { mapActions } from 'vuex'
+    import { ACTIONS } from '@cart/constants'
 
     export default {
         props: {
@@ -70,7 +71,20 @@
               }
               url = url + item.url_key
               return url
-          }
+          },
+          addCart(id) {
+                const count = 1
+                this.addCartItem({id, count})
+          },
+          getImage(files) {
+            if(files.length>0) {
+                return '/storage/'+files[0].config.files.medium.filename
+            }
+            else {
+                return '/images/no-image-medium.png'
+            }
+          },
+          ...mapActions('cart',{ addCartItem: ACTIONS.ADD_CART })
         },
         components: {
             Carousel,

@@ -1,9 +1,9 @@
 <template>
     <tr>
         <td class="center">
-            <img :src="'/storage/'+cartItem.options.filename" height="40px"/>
+            <img :src="cartItem.options.filename" height="40px"/>
         </td>
-        <td class="center">
+        <td>
             <span>{{cartItem.options.type}}</span><br>
             {{cartItem.name}}
         </td>
@@ -14,7 +14,7 @@
                 <div @click="upQty(cartItem.rowId)" class="div-plus">+</div>
             </div>
         </td>
-        <td class="center">{{coursePrice}}</td>
+        <td class="center">{{cartItem.price}}</td>
         <td class="center">{{cartItem.options.article}}</td>
         <td class="center cart-table-del"><a href="#" @click.prevent="cartDelete(cartItem.rowId)"><img :src="'/../images/close.gif'"/></a></td>
     </tr>
@@ -29,11 +29,6 @@
         },
         data: function() {
             return {}
-        },
-        computed: {
-          coursePrice: function() {
-              return this.cartItem.price;
-          }
         },
         methods: {
             ...mapActions('cart',{ delete: ACTIONS.DELETE, upQty: ACTIONS.UP_QTY, downQty: ACTIONS.DOWN_QTY, cartDelete: ACTIONS.DELETE})

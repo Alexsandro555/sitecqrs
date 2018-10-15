@@ -78,7 +78,7 @@ class CartController extends Controller
           'article'=>$product->vendor,
           'type'=>$product->type_product->title,
           'slug'=>$product->url_key,
-          'filename'=>$filename!=""?$filename:"no-image.png"
+          'filename'=>$filename!=""?'/storage/'.$filename:"/images/no-image-small.png"
         ]
       );
       $total = Cart::subtotal();

@@ -3142,11 +3142,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {};
     },
-    computed: {
-        coursePrice: function coursePrice() {
-            return this.cartItem.price;
-        }
-    },
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('cart', { delete: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].DELETE, upQty: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].UP_QTY, downQty: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].DOWN_QTY, cartDelete: __WEBPACK_IMPORTED_MODULE_0__cart_constants__["a" /* ACTIONS */].DELETE }))
 });
 
@@ -5246,6 +5241,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_carousel__ = __webpack_require__("./node_modules/vue-carousel/dist/vue-carousel.min.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_carousel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cart_constants__ = __webpack_require__("./Modules/Cart/Resources/assets/js/constants.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -5276,7 +5275,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
+
 
 
 
@@ -5304,7 +5304,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-    methods: {
+    methods: _extends({
         getUrl: function getUrl(item) {
             var url = '/catalog/';
             if (item.type_product) {
@@ -5319,8 +5319,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             url = url + item.url_key;
             return url;
+        },
+        addCart: function addCart(id) {
+            var count = 1;
+            this.addCartItem({ id: id, count: count });
+        },
+        getImage: function getImage(files) {
+            if (files.length > 0) {
+                return '/storage/' + files[0].config.files.medium.filename;
+            } else {
+                return '/images/no-image-medium.png';
+            }
         }
-    },
+    }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])('cart', { addCartItem: __WEBPACK_IMPORTED_MODULE_2__cart_constants__["a" /* ACTIONS */].ADD_CART })),
     components: {
         Carousel: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Carousel"],
         Slide: __WEBPACK_IMPORTED_MODULE_0_vue_carousel__["Slide"]
@@ -10251,7 +10262,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    float: left;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Добавление размытия по-краям */\n.img-shadow {\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    float: left;\n}\n.img-shadow::before {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 8px 8px white inset;\n    -moz-box-shadow: 0 0 8px 8px white inset;\n    -webkit-box-shadow: 0 0 8px 8px white inset;\n}\n.img-shadow img {\n    float: left;\n}\n/* Конец добавления размытия по-краям */\n", ""]);
 
 // exports
 
@@ -39662,14 +39673,11 @@ var render = function() {
   return _c("tr", [
     _c("td", { staticClass: "center" }, [
       _c("img", {
-        attrs: {
-          src: "storage/" + _vm.cartItem.options.filename,
-          height: "40px"
-        }
+        attrs: { src: _vm.cartItem.options.filename, height: "40px" }
       })
     ]),
     _vm._v(" "),
-    _c("td", { staticClass: "center" }, [
+    _c("td", [
       _c("span", [_vm._v(_vm._s(_vm.cartItem.options.type))]),
       _c("br"),
       _vm._v("\n        " + _vm._s(_vm.cartItem.name) + "\n    ")
@@ -39711,7 +39719,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("td", { staticClass: "center" }, [_vm._v(_vm._s(_vm.coursePrice))]),
+    _c("td", { staticClass: "center" }, [_vm._v(_vm._s(_vm.cartItem.price))]),
     _vm._v(" "),
     _c("td", { staticClass: "center" }, [
       _vm._v(_vm._s(_vm.cartItem.options.article))
@@ -40112,7 +40120,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("tfoot", [
                     _c("tr", { attrs: { valign: "middle" } }, [
-                      _c("td", { attrs: { colspan: "2" } }),
+                      _c("td", { attrs: { colspan: "1" } }),
                       _vm._v(" "),
                       _c("td", { attrs: { colspan: "3", align: "right" } }, [
                         _vm._v(
@@ -40120,7 +40128,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("td", { attrs: { align: "center" } }, [
+                      _c("td", { attrs: { colspan: "2", align: "center" } }, [
                         _vm._v(_vm._s(_vm.totalCart) + "₽")
                       ])
                     ])
@@ -44214,18 +44222,9 @@ var render = function() {
                           "a",
                           { staticClass: "img-shadow", attrs: { href: "#" } },
                           [
-                            item.file
-                              ? _c("img", {
-                                  attrs: {
-                                    src: "/storage/" + item.file.medium.filename
-                                  }
-                                })
-                              : _c("img", {
-                                  attrs: {
-                                    src: "/images/no-image.png",
-                                    width: "150px"
-                                  }
-                                })
+                            _c("img", {
+                              attrs: { src: _vm.getImage(item.files) }
+                            })
                           ]
                         )
                       ]
@@ -44269,8 +44268,7 @@ var render = function() {
                           attrs: { src: "/images/product-cart.png" },
                           on: {
                             click: function($event) {
-                              $event.preventDefault()
-                              _vm.addCart(6)
+                              _vm.addCart(item.id)
                             }
                           }
                         })
